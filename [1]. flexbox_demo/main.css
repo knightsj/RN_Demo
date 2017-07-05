@@ -1,0 +1,410 @@
+
+
+.item{
+    width: 50px;
+    height:50px;
+}
+
+
+.item1{
+    background-color: cadetblue;
+}
+
+.item2{
+    background-color: aqua;
+}
+
+
+.item3{
+    background-color: green;
+}
+
+
+.item4{
+    background-color: chartreuse;
+}
+
+
+
+
+
+/* =============== flex-direction ===============*/
+
+.flex-container{
+    background-color: pink;
+
+    width: 300px;
+    height: 220px;
+
+    display: flex;
+}
+
+
+/* =============== flex-direction ===============*/
+/*主轴方向*/
+
+/*1234*/
+.flex-container{
+    /*flex-direction: row;*/
+}
+
+/*4321*/
+.flex-container{
+    /*flex-direction: row-reverse;*/
+}
+
+/*会超过高度*/
+/*1*/
+/*2*/
+/*3*/
+/*4*/
+.flex-container{
+    /*flex-direction: column;*/
+}
+
+/*4*/
+/*3*/
+/*2*/
+/*1*/
+.flex-container{
+    /*flex-direction: column-reverse;*/
+}
+
+
+/* =============== flex-wrap ===============*/
+
+
+.flex-container{
+    background-color: pink;
+    display: flex;
+    width: 180px;
+    height: 220px;
+
+}
+
+/*主轴方向空间不足的情况下，是否换行*/
+/*不换行 默认*/
+/*不换行，挤在一起*/
+.flex-container{
+    /*flex-wrap: nowrap;*/
+}
+
+/*换行，第一行在上方*/
+.flex-container{
+    /*flex-wrap: wrap;*/
+}
+
+/*换行，第一行在下方*/
+.flex-container{
+    /*flex-wrap: wrap-reverse;*/
+}
+
+
+/* =============== flex-flow ===============*/
+/*包含了上面两种情况*/
+
+.flex-container{
+    background-color: pink;
+    display: flex;
+    width: 180px;
+    height: 220px;
+}
+
+.flex-container {
+    /*flex-flow: row  nowrap;*/
+    /*flex-flow: row  wrap;*/
+    /*flex-flow: row  wrap-reverse;*/
+}
+
+
+/* =============== justify-content ===============*/
+/*伸缩项目沿主轴的对齐方式*/
+
+.flex-container{
+    background-color: pink;
+    display: flex;
+    width: 220px;
+    height: 220px;
+
+}
+
+.flex-container {
+    /*主轴起始位置对齐*/
+    /*justify-content: flex-start;*/
+
+    /*主轴末尾位置对齐*/
+    /*justify-content: flex-end;*/
+
+    /*居中*/
+    /*justify-content: center;*/
+
+    /*左右贴紧，中间间隔均分*/
+    /*justify-content: space-between;*/
+
+    /*均匀分布，两边一半距离*/
+    /*justify-content: space-around;*/
+}
+
+
+
+/* =============== align-items ===============*/
+/*伸缩项目在交叉轴方向的对齐方式*/
+
+/*.item1{*/
+    /*padding-top: 20px;*/
+/*}*/
+
+/*.item2{*/
+    /*padding-top: 15px;*/
+/*}*/
+
+
+/*.item3{*/
+    /*padding-top: 10px;*/
+/*}*/
+
+/*.item4{*/
+    /*padding-top: 5px;*/
+/*}*/
+
+
+
+.flex-container {
+    /*交叉轴开始位置对齐*/
+    /*align-items: flex-start;*/
+
+    /*交叉轴结束为止对齐*/
+    /*align-items: flex-end;*/
+
+    /*交叉轴中间位置对齐*/
+    /*align-items: center;*/
+
+    /*基线对齐*/
+    /*align-items: baseline;*/
+
+    /*交叉轴方向充满整个容器（不能设置高度）*/
+    /*align-items: stretch;*/
+
+}
+
+/*.item{*/
+    /*height: auto;*/
+/*}*/
+
+
+
+/* =============== align-content ===============*/
+/*伸缩项目换行后在交叉轴方向的对齐方式*/
+
+
+/*.flex-container{*/
+     /*background-color: pink;*/
+     /*display: flex;*/
+     /*width: 170px;*/
+     /*height: 220px;*/
+     /*flex-direction: row;*/
+
+     /*!*前提必须支持换行*!*/
+     /*flex-wrap: wrap;*/
+
+ /*}*/
+
+.flex-container{
+
+    /*交叉轴开始位置对齐*/
+    /*align-content: flex-start;*/
+
+    /*交叉轴结束为止对齐*/
+    /*align-content: flex-end;*/
+
+    /*交叉轴中间位置对齐*/
+    /*align-content: center;*/
+
+    /*交叉轴开始结束的地方贴紧，中间均匀分布*/
+    /*align-content: space-between;*/
+
+    /*均匀分布，两侧间距是中间的一半*/
+    /*align-content: space-around;*/
+
+    /*占据整个的空间，同样不能设置高度*/
+    /*align-content: stretch;*/
+
+}
+
+/*.item{*/
+/*height: auto;*/
+/*}*/
+
+
+/* ====================================== 华丽的分割线 ======================================*/
+
+/*伸缩项目属性*/
+
+/* =============== order ===============*/
+/*伸缩项目的排序，数字越小，排列越靠前*/
+/*.item4{*/
+    /*order: -1;*/
+/*}*/
+
+/*.item3{*/
+    /*order: -3;*/
+/*}*/
+
+/* =============== flex-grow ===============*/
+/*伸缩项目的放大比例，默认值为0，如果存在剩余空间，则不放大*/
+/*都设为1，则大小相等；如果其中一个是2，则为其他都二倍*/
+/*剩余空间的填补*/
+
+/*.flex-container{*/
+    /*background-color: pink;*/
+    /*display: flex;*/
+    /*width: 320px;*/
+    /*height: 220px;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+
+/*}*/
+
+/*.item1 {*/
+    /*flex-grow: 1;*/
+/*}*/
+
+/*.item2 {*/
+    /*flex-grow: 1;*/
+/*}*/
+
+/*.item3 {*/
+    /*flex-grow: 2;*/
+/*}*/
+
+/*.item4 {*/
+    /*flex-grow: 2;*/
+/*}*/
+
+/* =============== flex-shrink ===============*/
+/*伸缩项目的缩小比例，默认值为1*/
+/*总宽度>容器的宽度的时候*/
+
+
+/*.flex-container{*/
+    /*background-color: pink;*/
+    /*display: flex;*/
+    /*width: 120px;*/
+    /*height: 220px;*/
+
+/*}*/
+
+/*.item1 {*/
+/*flex-shrink: 1;*/
+/*}*/
+
+/*.item2 {*/
+    /*flex-shrink: 1;*/
+/*}*/
+
+/*.item3 {*/
+    /*flex-shrink: 2;*/
+/*}*/
+
+/*.item4 {*/
+    /*flex-shrink: 2;*/
+/*}*/
+
+/* =============== flex-basis ===============*/
+/*剩余的空间按比率进行伸缩*/
+
+
+/*.flex-container{*/
+    /*background-color: pink;*/
+    /*display: flex;*/
+    /*width: 170px;*/
+    /*height: 220px;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+/*}*/
+
+/*.item1 {*/
+    /*flex-basis: 140px;*/
+/*}*/
+
+
+/* =============== flex ===============*/
+/*flex-grow,flex-shrink,flex-basis 三个属性的缩写*/
+/*flex:none | flex-grow flex-shrink flex-basis*/
+
+.flex-container{
+    /*background-color: pink;*/
+    /*display: flex;*/
+    /*width: 270px;*/
+    /*height: 220px;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: wrap;*/
+}
+
+/*.item1 {*/
+ /**/
+   /*flex: 3 2 0px;*/
+/*}*/
+
+
+
+/* =============== align self ===============*/
+/*单独的伸缩项目在交叉轴上的对齐方式*/
+.flex-container{
+    background-color: pink;
+    display: flex;
+    width: 270px;
+    height: 220px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item2{
+    /*默认根据自身宽高*/
+    /*align-self: auto;*/
+
+    /*交叉轴的开始位置对齐*/
+    /*align-self: flex-start;*/
+
+    /*交叉轴的结束位置对齐*/
+    /*alignSelf: flex-end;*/
+
+}
+
+/*base-line*/
+/*按照前一个项目的基线*/
+
+.item{
+    /*align-self: baseline;*/
+}
+
+/*.item1{*/
+    /*font-size: 40px;*/
+/*}*/
+
+/*.item2{*/
+    /*font-size: 30px;*/
+/*}*/
+
+/*.item3{*/
+    /*font-size: 20px;*/
+/*}*/
+
+/*.item4{*/
+    /*font-size: 10px;*/
+/*}*/
+
+
+.item4{
+    /*还是要注意取消高度设置*/
+    align-self: stretch;
+    /*width: 50px;*/
+    height: auto;
+}
+
+.item3{
+    /*还是要注意取消高度设置*/
+    align-self: stretch;
+    /*width: 50px;*/
+    height: auto;
+}
