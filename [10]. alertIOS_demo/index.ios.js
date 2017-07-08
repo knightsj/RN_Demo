@@ -1,0 +1,99 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  AlertIOS,
+  // PixelRatio,
+} from 'react-native';
+
+
+
+var app = React.createClass({
+
+  // render负责渲染视图 返回一个JSX对象，只能包含一个节点中
+  render: function () {
+
+    return(
+
+        <View style={styles.container}>
+          <Text style={styles.item} onPress={this.tip}>提示对话框</Text>
+          <Text style={styles.item} onPress={this.input}>输入对话框</Text>
+        </View>
+    );
+  },
+
+    tip:function(){
+
+        AlertIOS.alert('提示','选择学习React Native',[
+          
+          {
+            text:'取消',
+            onPress:function(){
+              alert('你点击了取消按钮');
+            }
+          },
+
+          {
+            text:'确认',
+            onPress:function(){
+              alert('你点击了确认按钮');
+            }
+          },
+
+        ]);
+  },
+
+  input:function(){
+     AlertIOS.prompt('提示','使用React Native开发App',[
+       {
+         text:'取消',
+         onPress:function(){
+           alert('你点击了取消按钮');
+         }
+       },
+
+      {
+         text:'确认',
+         onPress:function(e){
+           alert(e);
+         }
+       },
+     ]);
+  }
+});
+
+// 创建了一个样式对象，建议一个组件使用一个StyleSheet对象
+// 建议使用外部样式而不是内联样式
+var styles  = StyleSheet.create({
+
+    container:{
+        flex:1,
+        marginTop:20
+    },
+
+     item:{
+       marginTop:10,
+       marginLeft:5,
+       marginRight:5,
+       height:30,
+       borderWidth:1,
+       padding:6,
+       borderColor:'#ddd'
+     },
+
+});
+
+
+
+// 入口组件，用来加载其他组件
+AppRegistry.registerComponent('component_demo', () => app);
+// 第一个参数是应用的名称
+// 第二个参数是入口组件对象
