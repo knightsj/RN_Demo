@@ -157,4 +157,4 @@ var styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('textInput_component', () => App);
+AppRegistry.registerComponent('component_demo', () => App);

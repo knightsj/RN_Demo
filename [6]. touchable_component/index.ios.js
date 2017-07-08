@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
    }
 });
 
-AppRegistry.registerComponent('touchable', () => App);
+AppRegistry.registerComponent('component_demo', () => App);

@@ -120,4 +120,4 @@ var styles = StyleSheet.create({
 
 
 
-AppRegistry.registerComponent('text_component', () => app);
+AppRegistry.registerComponent('component_demo', () => app);

@@ -101,6 +101,6 @@ var styles  = StyleSheet.create({
 
 
 // 入口组件，用来加载其他组件
-AppRegistry.registerComponent('view_component_1', () => app);
+AppRegistry.registerComponent('component_demo', () => app);
 // 第一个参数是应用的名称
 // 第二个参数是入口组件对象

@@ -79,4 +79,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('nav_component', () => NavBar);
+AppRegistry.registerComponent('component_demo', () => NavBar);
