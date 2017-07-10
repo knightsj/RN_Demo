@@ -15,6 +15,7 @@ import {
 
 
 
+
 var app = React.createClass({
 
   // render负责渲染视图 返回一个JSX对象，只能包含一个节点中
