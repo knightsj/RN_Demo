@@ -83,13 +83,14 @@ const styles = StyleSheet.create({
     wineInfoViewStyle:{
         
         backgroundColor:'white',
-        justifyContent:'center',
+        justifyContent:'space-around',
     },
 
     leftImageStyle:{
-      width:60,
-      height:60,
+      width:68,
+      height:68,
       marginRight:15,
+      marginLeft:15,
     },
 
     productNameStyle:{
