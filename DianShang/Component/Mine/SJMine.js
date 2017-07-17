@@ -3,20 +3,55 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
-export default class Mine extends Component {
-  render() {
+var MyCell = require('../Common/SJCommonImageCell')
+
+var Mine = React.createClass({
+   render(){
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          MinePage!
-        </Text>
+      <View style={styles.scrollBGViewStyle}>
+        <ScrollView
+          style={styles.scrollViewStyle}
+        >
+         <View style={styles.sectionViewStyle}>
+            <MyCell
+                    leftIconName="draft"
+                    leftTitle='钱包'
+                    rightTitle="账户余额 ¥12"
+            /> 
+
+            <MyCell
+                    leftIconName="like"
+                    leftTitle='抵用券'
+                    rightTitle="10张"
+            /> 
+         </View>
+           
+           <View style={styles.sectionViewStyle}>
+            <MyCell
+                    leftIconName="new_friend"
+                    leftTitle='今日推荐'
+                    rightIconName='me_new'
+            /> 
+          </View>
+
+          <View style={styles.sectionViewStyle}>
+            <MyCell
+                    leftIconName="pay"
+                    leftTitle='积分商城'
+                    rightTitle="轻松开店"
+            /> 
+          </View>
+
+        </ScrollView>
       </View>
+          
     );
   }
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -25,16 +60,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  scrollBGViewStyle:{
+     marginTop:20,
+     flex: 1,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    scrollViewStyle:{      
+      backgroundColor:'#e8e8e8'
+    },
+
+    sectionViewStyle:{
+      marginTop:20,
+    }
 });
 
 module.exports = Mine;
