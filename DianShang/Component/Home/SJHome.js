@@ -7,11 +7,18 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Platform
+  Platform,
+  ScrollView
 } from 'react-native';
 
 var Dimentions = require('Dimensions');
 var{width,height} = Dimentions.get('window');
+
+var TopView = require('./SJHomeTopView')
+var MiddleView = require('./SJHomeMiddleView')
+var MiddleBottomView = require('./SJHomeMiddleBottomView')
+var ShopCenter = require('./SJShopCenter')
+var ShopCenterDetail = require('./SJShopDetailView')
 
 var Home = React.createClass({
   render() {
@@ -19,9 +26,17 @@ var Home = React.createClass({
       <View style={styles.container}>
         {/* //首页的导航条 */}
         {this.renderNavBar()}
-        <Text style={styles.welcome}>
-          首页
-        </Text>
+        {/* 首页的主要内容 */}
+        <ScrollView>
+           {/* 头部的View */}
+           <TopView />    
+           <MiddleView />
+           <MiddleBottomView /> 
+           <ShopCenter 
+             popToHomeView ={(url) => this.popToShopCenterDetail(url)}
+           />
+        </ScrollView>
+        
       </View>
     );
   },
@@ -47,7 +62,22 @@ var Home = React.createClass({
            </View>
       </View>
     );
-  }
+  },
+
+   // 跳转到购物中心详情页
+    popToShopCenterDetail(url){
+
+       this.props.navigator.push(
+        {  
+               component: ShopCenterDetail, // 要跳转的版块
+               passProps:{'url':this.dealWidthUrl(url)} 
+        }
+       );
+    },
+
+    dealWidthUrl(url){
+       return url.replace('imeituan://www.meituan.com/web?url=','');
+    }
 });
 
 
@@ -56,7 +86,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#e8e8e8',
   },
 
   homeNavBarStyle:{

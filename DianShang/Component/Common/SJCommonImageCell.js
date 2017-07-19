@@ -74,7 +74,9 @@ const styles = StyleSheet.create({
     borderBottomColor:'#dddddd',
     borderBottomWidth:0.5,
     height:Platform.OS === 'ios'? 38 : 24, 
-
+    
+    borderBottomColor:'#e8e8e8',
+    borderBottomWidth:0.5
   },
 
   leftViewStyle:{
@@ -92,7 +94,8 @@ const styles = StyleSheet.create({
   },
 
   leftTitleStyle:{
-     
+     fontSize:17,
+      
   },
 
   rightViewSytle:{

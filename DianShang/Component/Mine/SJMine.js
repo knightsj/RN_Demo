@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 
 var MyCell = require('../Common/SJCommonImageCell')
+var HeaderView = require('./SJMineHeaderView');
+var MiddleView = require('./SJMineMiddleView')
+
 
 var Mine = React.createClass({
    render(){
@@ -15,7 +18,22 @@ var Mine = React.createClass({
       <View style={styles.scrollBGViewStyle}>
         <ScrollView
           style={styles.scrollViewStyle}
-        >
+          contentInset={{top:-200}}
+          contentOffset={{y:200}}>
+        
+        <HeaderView/> 
+        
+        <View style={styles.sectionViewStyle}>
+            <MyCell
+                    leftIconName="collect"
+                    leftTitle='我的订单'
+                    rightTitle="查看全部订单"
+            /> 
+             <MiddleView/>
+         
+            
+         </View>
+
          <View style={styles.sectionViewStyle}>
             <MyCell
                     leftIconName="draft"
@@ -61,7 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   scrollBGViewStyle:{
-     marginTop:20,
+    //  marginTop:20,
      flex: 1,
   },
     scrollViewStyle:{      
@@ -70,7 +88,12 @@ const styles = StyleSheet.create({
 
     sectionViewStyle:{
       marginTop:20,
-    }
+    },
+
+    middleViewStyle:{
+     flexDirection:'row'
+    },
+
 });
 
 module.exports = Mine;
