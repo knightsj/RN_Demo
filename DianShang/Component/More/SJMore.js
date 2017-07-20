@@ -17,6 +17,10 @@ var More = React.createClass({
  render() {
     return (
       <View style={styles.container}>
+        
+        <View style={[{height:Platform.OS === 'ios'? 20 : 0, 
+     backgroundColor:'rgba(255,96,0,1.0)',}]}></View>
+
         {this.renderNavBar()}
 
         <ScrollView>
@@ -84,11 +88,14 @@ var More = React.createClass({
 
   renderNavBar(){
      return(
-       <View style={styles.navBarViewStyle}>
-         <Text style={styles.navTextStyle}>更多</Text>
-         <TouchableOpacity onPress={()=>{alert('点了')}} style={styles.navRightViewStyle}>
-            <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle} />
-         </TouchableOpacity>
+       
+      <View >
+        <View style={styles.navBarViewStyle}>         
+          <Text style={styles.navTextStyle}>更多</Text>
+          <TouchableOpacity onPress={()=>{alert('点了')}} style={styles.navRightViewStyle}>
+              <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle} />
+          </TouchableOpacity>
+        </View>
        </View>
      )
   },
@@ -103,10 +110,10 @@ const styles = StyleSheet.create({
   },
    
   navBarViewStyle:{
-     height:Platform.OS === 'ios'? 64 : 44,
+     height:44,
      backgroundColor:'rgba(255,96,0,1.0)',
      flexDirection:'row',
-    //  alignItems:'center',
+     alignItems:'center',
      justifyContent:'center'
   },
 
@@ -125,9 +132,7 @@ const styles = StyleSheet.create({
      color:'white',
      fontSize:17,
      fontWeight:'bold',
-     marginTop:32,
   },
-
   scrollSectionViewStyle:{
      marginTop:16
   }

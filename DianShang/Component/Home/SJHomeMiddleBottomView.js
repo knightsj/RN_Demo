@@ -9,16 +9,31 @@ import {
 var data = require('../../LocalData/SJHome_D4.json')
 var CommonItemView = require('../Common/SJCommonItemView')
 
+ var dataArr0 = data.data;
+var itemData0 = dataArr0[0];
+
 var MiddleBottomView = React.createClass({
+  
+ 
+
   render() {
     return (
       <View style={styles.container}>
-        {/* <View style={styles.topViewStyle}>
 
-        </View> */}
-        {/* <View style={styles.bottomViewStyle}> */}
+        {/* <View style={styles.topViewStyle}>
+            <CommonItemView
+                title={itemData0.maintitle}
+                subTitle={itemData0.deputytitle}
+                rightIcon={this.dealWidthImgUrl(itemData0.imageurl)}
+                titleColor={itemData0.typeface_color}
+                tplurl={itemData0.tplurl}
+                clickCellCallBack={(data)=>this.popToTopView(data)}
+              />
+        </View>  */}
+
+         <View style={styles.bottomViewStyle}> 
             {this.renderBottomItems()}
-        {/* </View> */}
+         </View> 
       </View>
     );
   },
@@ -55,25 +70,30 @@ var MiddleBottomView = React.createClass({
 
 
 const styles = StyleSheet.create({
+
   container: {
-    // flex: 1,
+
     marginTop:10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white', 
+    // backgroundColor: 'white', 
     flexDirection:'row',
-    flexWrap:'wrap'
+    flexWrap:'wrap',
+    flex:1,
 
   },
   
   topViewStyle:{
-
+    // flex:1,
+    marginTop:0,
+    marginBottom:0,
   },
 
   bottomViewStyle:{
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     flexDirection:'row',
-    flexWrap:'wrap'
+    flexWrap:'wrap',
+    flex:1,
   }
 });
 

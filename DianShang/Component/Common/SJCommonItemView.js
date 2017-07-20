@@ -61,12 +61,14 @@ const styles = StyleSheet.create({
   },
   
   titleStyle:{
-     fontSize:18,
-     fontWeight:'bold'
+     fontSize:16,
+     fontWeight:'bold',
+     marginLeft:4
   },
 
   subTitleStyle:{
-     color:'gray'
+     color:'gray',
+     marginLeft:4
   },
 
   imageStyle:{

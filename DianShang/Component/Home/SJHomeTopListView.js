@@ -16,7 +16,7 @@ var{width,height} = Dimentions.get('window');
 
 
 var cols = 5;
-var cellWidth = Platform.OS == 'ios'?70:60
+var cellWidth = Platform.OS == 'ios'?64:56
 var cellHeight = 70
 var vMargin = (width - cellWidth*cols)/(cols+1);
 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   textStyle:{
-      fontSize:Platform.OS == 'ios'? 12:11,
+      fontSize:Platform.OS == 'ios'? 11:10,
       color:'gray'
   }
 });

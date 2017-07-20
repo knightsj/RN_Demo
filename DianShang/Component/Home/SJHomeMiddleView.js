@@ -19,9 +19,11 @@ var HomeMiddleView = React.createClass({
     return (
       <View style={styles.container}>
         {/* 左边 */}
-        {this.renderLeftView()}
-        {/* 右边 */}
         <View>
+         {this.renderLeftView()}
+        </View>
+        {/* 右边 */}
+        <View style={styles.rightViewStyle}>
          {this.renderRightView()}
         </View>
         
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
 
   leftViewStyle:{
     //   flexDirection:'row',
+      marginTop:-1,
       width:width*0.5,
       height:119,
       backgroundColor:'white',
@@ -111,6 +114,13 @@ const styles = StyleSheet.create({
       color:'orange',
        fontWeight:'bold',
        marginLeft:2
+  },
+
+  rightViewStyle:{
+    //  flexDirection:'row',
+    //  flexWrap:'wrap',
+    //  flex:1,
+        
   },
   
 });

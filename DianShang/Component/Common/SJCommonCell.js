@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomColor:'#dddddd',
     borderBottomWidth:0.5,        
-    height:Platform.OS === 'ios'? 38 : 24, 
+    height:Platform.OS === 'ios'? 40 : 38, 
 
     borderBottomColor:'#e8e8e8',
     borderBottomWidth:0.5
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
   },
 
   titleStyle:{
-     marginLeft:12
+     marginLeft:12,
+     fontSize:14,
   },
 
   switchStyle:{

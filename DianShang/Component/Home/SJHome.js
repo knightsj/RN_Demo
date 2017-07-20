@@ -24,6 +24,8 @@ var Home = React.createClass({
   render() {
     return (
       <View style={styles.container}>
+        <View style={[{height:Platform.OS === 'ios'? 20 : 0, 
+     backgroundColor:'rgba(255,96,0,1.0)',}]}></View>
         {/* //首页的导航条 */}
         {this.renderNavBar()}
         {/* 首页的主要内容 */}
@@ -43,24 +45,29 @@ var Home = React.createClass({
 
   renderNavBar(){
     return(
-      <View style={styles.homeNavBarStyle}>    
-          <TouchableOpacity onPress={()=>{alert('点击了')}}>
-            <Text style={styles.homeNavRegionStyle}>广州</Text>
-          </TouchableOpacity>       
-          
-           <TextInput
-             placeholder="输入商家，品类，商圈"
-             style={styles.homeNavInputStyle}
-           />
-           <View style={styles.homeNavRightViewStyle}>
-             <TouchableOpacity onPress={()=>{alert('点击了')}}>
-               <Image source={{uri:'icon_homepage_message'}} style={styles.homeNavRightImageStyle}/>
-             </TouchableOpacity>  
-             <TouchableOpacity onPress={()=>{alert('点击了')}}>
-              <Image source={{uri:'icon_homepage_scan'}} style={styles.homeNavRightImageStyle}/>
-             </TouchableOpacity>  
-           </View>
+      <View style={styles.naviBarStyle}>
+        <View style={styles.homeNavBarStyle}>    
+            <TouchableOpacity onPress={()=>{alert('点击了')}}>
+              <Text style={styles.homeNavRegionStyle}>广州</Text>
+            </TouchableOpacity>       
+            
+            <TextInput
+              placeholder="输入商家，品类，商圈"
+              style={styles.homeNavInputStyle}
+              underlineColorAndroid="transparent"
+              
+            />
+            <View style={styles.homeNavRightViewStyle}>
+              <TouchableOpacity onPress={()=>{alert('点击了')}}>
+                <Image source={{uri:'icon_homepage_message'}} style={styles.homeNavRightImageStyle}/>
+              </TouchableOpacity>  
+              <TouchableOpacity onPress={()=>{alert('点击了')}}>
+                <Image source={{uri:'icon_homepage_scan'}} style={styles.homeNavRightImageStyle}/>
+              </TouchableOpacity>  
+            </View>
+        </View>
       </View>
+      
     );
   },
 
@@ -90,26 +97,29 @@ const styles = StyleSheet.create({
   },
 
   homeNavBarStyle:{
-     height:Platform.OS === 'ios'? 64 : 44,
+     height:'ios'? 44 : 54,
+    //  height:54,
      backgroundColor:'rgba(255,96,0,1.0)',
      flexDirection:'row',
-     justifyContent:'space-around'
+     justifyContent:'space-around',
+     alignItems:'center',
   },
 
   homeNavRegionStyle:{
     color:'white',
-     marginTop:28
   },
 
   homeNavInputStyle:{
      //设置输入框
      width:width*0.7,
-     height:'ios'? 30 : 26,
+     height:'ios'? 30 : 28,
      backgroundColor:'white',
-     marginTop:22,
-     borderRadius:'ios'? 16 : 0,
-     paddingLeft:8,
-
+     borderRadius:16,
+     padding:0,
+     marginTop:'ios'? 6 : 2,
+     paddingLeft:'ios'? 8 : 6,
+     paddingBottom:'ios'? 0 : 6,
+     
   },
 
   homeNavRightImageStyle:{
@@ -123,7 +133,6 @@ const styles = StyleSheet.create({
       height:64,
       marginTop:4
   },
-  
 });
 
 module.exports = Home;

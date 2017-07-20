@@ -40,17 +40,23 @@ var ShopDetailView = React.createClass({
 
   renderNavBar(){
      return(
-       <View style={styles.navBarViewStyle}>
-         <TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.navLeftViewStyle}>
+       <View >
+        <View style={styles.statusBarStyle}></View>
+        <View style={styles.navBarViewStyle}> 
+          <TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.navLeftViewStyle}>
             <Image source={{uri:'icon_camera_back_normal'}} style={styles.navImageStyle} />
-         </TouchableOpacity>
-         <Text style={styles.navTextStyle}>商家详情</Text>
-         <TouchableOpacity onPress={()=>{alert('点了')}} style={styles.navRightViewStyle}>
-            <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle} />
-         </TouchableOpacity>
+         </TouchableOpacity>        
+          <Text style={styles.navTextStyle}>购物中心详情</Text>
+          <TouchableOpacity onPress={()=>{alert('点了')}} style={styles.navRightViewStyle}>
+              <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle} />
+          </TouchableOpacity>
+        </View>
        </View>
-     )
+      )
   },
+  
+
+     
 })
 
 
@@ -59,23 +65,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-     navBarViewStyle:{
-     height:Platform.OS === 'ios'? 64 : 44,
+    navBarViewStyle:{
+     height:44,
      backgroundColor:'rgba(255,96,0,1.0)',
      flexDirection:'row',
-    //  alignItems:'center',
+     alignItems:'center',
      justifyContent:'center'
   },
 
   navImageStyle:{
      width:Platform.OS === 'ios'? 28 : 24, 
      height:Platform.OS === 'ios'? 28 : 24,     
-  },
-
-  navLeftViewStyle:{
-    position:'absolute',
-    left:10,
-    bottom:10,
   },
 
   navRightViewStyle:{
@@ -88,7 +88,16 @@ const styles = StyleSheet.create({
      color:'white',
      fontSize:17,
      fontWeight:'bold',
-     marginTop:32,
+  },
+
+  navLeftViewStyle:{
+    position:'absolute',
+    left:10,
+    bottom:10,
+  },
+
+  statusBarStyle:{
+     height:Platform.OS === 'ios'? 20 : 0, 
   },
 });
 

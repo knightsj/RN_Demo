@@ -61,7 +61,7 @@ var GridView = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    height:50, 
+    height:60, 
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent:'space-around',
@@ -77,8 +77,8 @@ const gridViewStyle = StyleSheet.create({
     },
 
     gridIconStyle:{
-        width:30,
-        height:24
+        width:32,
+        height:28
     },
 
     gridTitleStyle:{

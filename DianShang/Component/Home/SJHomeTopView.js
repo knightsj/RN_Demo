@@ -75,7 +75,7 @@ var TopView = React.createClass({
         for(var i = 0; i<2;i++){
              style = (i=== this.state.activePage)?{color:'orange'}:{color:'gray'}
              indicatorsArr.push(
-                 <Text  key={i}  style={[{fontSize:25},style]}>&bull;</Text>
+                 <Text  key={i}  style={[{fontSize:24},style]}>&bull;</Text>
              );
          }
         return indicatorsArr;
