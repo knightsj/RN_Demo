@@ -64,8 +64,8 @@ var ShopCenter = React.createClass({
    },
 
    popToHome(url){
+     
       if(this.props.popToHomeView == null) return;
-
       this.props.popToHomeView(url)
    }
 })

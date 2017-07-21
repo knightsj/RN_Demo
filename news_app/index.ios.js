@@ -18,9 +18,10 @@ export default class news_app extends Component {
   render() {
     return (
       <Main/>
+      // <Text>dgsdgsg</Text>
     );
   }
 }
 
-
+// news_app
 AppRegistry.registerComponent('news_app', () => news_app);

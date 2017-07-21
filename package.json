@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "navigator": "^1.0.1",
-    "react-native-tab-navigator": "^0.3.3"
-  }
-}

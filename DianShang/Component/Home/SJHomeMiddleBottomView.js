@@ -14,7 +14,11 @@ var itemData0 = dataArr0[0];
 
 var MiddleBottomView = React.createClass({
   
- 
+    getDefaultProps(){
+      return{
+          popToHomeView:null
+      }
+    },
 
   render() {
     return (
@@ -52,7 +56,7 @@ var MiddleBottomView = React.createClass({
                 rightIcon={this.dealWidthImgUrl(itemData.imageurl)}
                 titleColor={itemData.typeface_color}
                 tplurl={itemData.tplurl}
-                clickCellCallBack={(data)=>this.popToTopView(data)}
+                clickCellCallBack={(url)=>this.popToTopView(url)}
               />
           )
       }
@@ -65,7 +69,12 @@ var MiddleBottomView = React.createClass({
       }else{
           return url.replace('w.h','80.80')
       }
-  }
+  },
+
+  popToTopView(url){
+     if(this.props.popToHomeView == null) return;
+     this.props.popToHomeView(url);
+  },
 })
 
 

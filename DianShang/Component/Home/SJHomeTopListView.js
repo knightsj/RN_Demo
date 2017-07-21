@@ -55,7 +55,7 @@ var TopListView = React.createClass({
                 <Image source={{uri:rowData.image}} style={styles.imageStyle}/>
                 <Text style={styles.textStyle}>{rowData.title}</Text>
             </View>
-        // </TouchableOpacity>
+       
       );
   }
 })

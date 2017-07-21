@@ -19,6 +19,7 @@ var MiddleView = require('./SJHomeMiddleView')
 var MiddleBottomView = require('./SJHomeMiddleBottomView')
 var ShopCenter = require('./SJShopCenter')
 var ShopCenterDetail = require('./SJShopDetailView')
+var ActivityDetail = require('./SJActivityDetailView')
 
 var Home = React.createClass({
   render() {
@@ -32,8 +33,12 @@ var Home = React.createClass({
         <ScrollView>
            {/* 头部的View */}
            <TopView />    
-           <MiddleView />
-           <MiddleBottomView /> 
+           <MiddleView 
+             popToHomeView = {(url)=>this.popToActivityDetailView(url)}
+            />
+           <MiddleBottomView 
+             popToHomeView = {(url)=>this.popToActivityDetailView(url)}
+           /> 
            <ShopCenter 
              popToHomeView ={(url) => this.popToShopCenterDetail(url)}
            />
@@ -81,6 +86,18 @@ var Home = React.createClass({
         }
        );
     },
+
+    popToActivityDetailView(url){
+      this.props.navigator.push(
+        {
+            component: ActivityDetail, // 要跳转的版块
+            passProps:{'url':this.dealWidthUrl(url)} 
+          
+        }
+           
+      );
+    },
+
 
     dealWidthUrl(url){
        return url.replace('imeituan://www.meituan.com/web?url=','');

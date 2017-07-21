@@ -15,6 +15,16 @@ var CommonItemView = require('../Common/SJCommonItemView')
 var MiddleData = require('../../LocalData/HomeTopMiddleLeft.json')
 
 var HomeMiddleView = React.createClass({
+
+
+  getDefaultProps(){
+
+    return{
+      popToHomeView:null
+    }
+
+  },
+
   render() {
     return (
       <View style={styles.container}>
@@ -65,11 +75,20 @@ var HomeMiddleView = React.createClass({
              subTitle={itemData.subTitle}
              rightIcon={itemData.rightImage}
              titleColor={itemData.titleColor}
+             clickCellCallBack={(url)=>this.popToTopView(url)}
             />
         )
     }
     return itemArr;
 
+  },
+
+  popToTopView(url){
+    
+     if(url==null)return;
+     if(this.props.popToHomeView == null)return;
+
+     this.props.popToHomeView(url)
   }
 
 })
@@ -77,7 +96,7 @@ var HomeMiddleView = React.createClass({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:16,
+    marginTop:14,
     flexDirection:'row',
     flex: 1,
     justifyContent: 'center',

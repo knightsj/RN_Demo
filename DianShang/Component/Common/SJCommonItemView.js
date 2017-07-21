@@ -42,8 +42,9 @@ var CommonItemView = React.createClass({
   },
 
    clickCell(url){
-       alert(url);
-       this.props.clickCellCallBack(url);
+       if(this.props.tplurl == null) return;
+       
+       this.props.clickCellCallBack(url)
    }
 })
 

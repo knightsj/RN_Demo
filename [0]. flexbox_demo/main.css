@@ -59,7 +59,7 @@
 /*3*/
 /*4*/
 .flex-container{
-    /*flex-direction: column;*/
+    flex-direction: column;
 }
 
 /*4*/
@@ -351,12 +351,12 @@
 /* =============== align self ===============*/
 /*单独的伸缩项目在交叉轴上的对齐方式*/
 .flex-container{
-    background-color: pink;
+/*    background-color: pink;
     display: flex;
     width: 270px;
     height: 220px;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap;*/
 }
 
 .item2{
@@ -397,14 +397,14 @@
 
 .item4{
     /*还是要注意取消高度设置*/
-    align-self: stretch;
+    /*align-self: stretch;*/
     /*width: 50px;*/
-    height: auto;
+    /*height: auto;*/
 }
 
 .item3{
     /*还是要注意取消高度设置*/
-    align-self: stretch;
+    /*align-self: stretch;*/
     /*width: 50px;*/
-    height: auto;
+    /*height: auto;*/
 }

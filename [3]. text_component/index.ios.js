@@ -14,7 +14,7 @@ import {
 
 
 //导航
-var Header = require('./header');//加载了Header组件
+// var Header = require('./header');//加载了Header组件
 
 //新闻列表
 var List = React.createClass({
@@ -64,12 +64,13 @@ var app = React.createClass({
       '1、刘慈欣《三体》获“雨果奖”为中国作家首次',
       '2、京津冀协同发展定位明确：北京无经济中心表述',
       '3、好奇宝宝第一次淋雨，父亲用镜头记录了下来',
-      '4、京津冀协同发展定位明确：:北京无经济中心表述+好奇宝宝第一次淋雨，父亲用镜头记录了下来'
+      '4、京津冀协同发展定位明确：:父亲用镜头记录了下来'
     ];
 
     return (
         <View style={styles.flex}>
-          <Header></Header>
+          {/* <Header></Header> */}
+          <Text>新闻列表</Text>
           <List title='宇航员在太空宣布“三体”获奖'></List>
           <List title='NASA发短片纪念火星征程50年'></List>
           <List title='男生连续做一周苦瓜吃吐女友'></List>
@@ -82,7 +83,8 @@ var app = React.createClass({
 
 var styles = StyleSheet.create({
   flex:{
-    flex:1
+    flex:1,
+    marginTop:20,
   },
 
   list_item:{

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -11,7 +12,7 @@ import {
 } from 'react-native';
 
 
-var ShopDetailView = React.createClass({
+var ActivityDetail = React.createClass({
   
   getInitialState(){
       return{
@@ -46,10 +47,7 @@ var ShopDetailView = React.createClass({
           <TouchableOpacity onPress={()=>{this.props.navigator.pop()}} style={styles.navLeftViewStyle}>
             <Image source={{uri:'icon_camera_back_normal'}} style={styles.navImageStyle} />
          </TouchableOpacity>        
-          <Text style={styles.navTextStyle}>购物中心详情</Text>
-          <TouchableOpacity onPress={()=>{alert('点了')}} style={styles.navRightViewStyle}>
-              <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle} />
-          </TouchableOpacity>
+          <Text style={styles.navTextStyle}>活动详情</Text>
         </View>
        </View>
       )
@@ -101,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = ShopDetailView;
+module.exports = ActivityDetail;
