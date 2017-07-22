@@ -1,8 +1,103 @@
 ## WebStorm
  引入版本控制工具：VCS enableversioncontrol git
  
+ 
+  yarn add react-native-tab-navigator
 
 
+## 配色方案
+
+http://color-themes.com/?view=index
+
+
+## 引入安装的包
+
+import TabNavigator from 'react-native-tab-navigator';
+import TabNavigator from 'react-native-tab-navigator';
+
+
+```
+<TabNavigator>
+  <TabNavigator.Item
+    selected={this.state.selectedTab === 'home'}
+    title="Home"
+    renderIcon={() => <Image source={...} />}
+    renderSelectedIcon={() => <Image source={...} />}
+    badgeText="1"
+    onPress={() => this.setState({ selectedTab: 'home' })}>
+    {homeView}
+  </TabNavigator.Item>
+  <TabNavigator.Item
+    selected={this.state.selectedTab === 'profile'}
+    title="Profile"
+    renderIcon={() => <Image source={...} />}
+    renderSelectedIcon={() => <Image source={...} />}
+    renderBadge={() => <CustomBadgeView />}
+    onPress={() => this.setState({ selectedTab: 'profile' })}>
+    {profileView}
+  </TabNavigator.Item>
+</TabNavigator>
+```
+
+
+## state
+
+```
+constructor(props){   super(props);   this.state = {     selectedTab:'home',   } }
+```
+
+```js
+
+import React, { Component } from 'react'; import {     AppRegistry,     StyleSheet,     Text,     View,     Image } from 'react-native';   class Demo extends Component{          constructor(props){         super(props);         this.state = {             word:''         }     }           render(){         return(             <View style={styles.container}>                 <Text>Page</Text>             </View>         )     }  }  const styles = StyleSheet.create({     container:{         flex:1,         backgroundColor:'gray',         justifyContent:'center',     }, })
+
+```
+
+## navigator
+
+```js
+       <TabNavigator>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'tb_popular'}
+            selectedTitleStyle={{color:'red'}}
+            title="最热"
+            renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('./res/images/ic_polular.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'red'}]} source={require('./res/images/ic_polular.png')} />}
+            badgeText="1"
+            onPress={() => this.setState({ selectedTab: 'tb_popular' })}>
+            <View style={styles.page1}></View>
+          </TabNavigator.Item>
+
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'tb_profile'}
+            selectedTitleStyle={{color:'yellow'}}
+            title="趋势"
+            renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('./res/images/ic_trending.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'yellow'}]}  source={require('./res/images/ic_trending.png')} />}
+            onPress={() => this.setState({ selectedTab: 'tb_profile' })}>
+            <View style={styles.page2}></View>
+          </TabNavigator.Item>
+
+          <TabNavigator.Item
+              selected={this.state.selectedTab === 'tb_favorite'}
+              selectedTitleStyle={{color:'blue'}}
+              title="收藏"
+              renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('./res/images/ic_trending.png')} />}
+              renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'blue'}]}  source={require('./res/images/ic_trending.png')} />}
+              onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
+            <View style={styles.page2}></View>
+          </TabNavigator.Item>
+
+          <TabNavigator.Item
+              selected={this.state.selectedTab === 'tb_my'}
+              selectedTitleStyle={{color:'green'}}
+              title="我的"
+              renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('./res/images/ic_trending.png')} />}
+              renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'green'}]}  source={require('./res/images/ic_trending.png')} />}
+              onPress={() => this.setState({ selectedTab: 'tb_my' })}>
+            <View style={styles.page2}></View>
+          </TabNavigator.Item>
+        </TabNavigator>
+```
 
 ## 新建项目
 
