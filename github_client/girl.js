@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import Boy from './boy'
-import NavigationBar from './NavigationBar'
+import NavigationBar from './js/common/NavigationBar'
 
 export default class Girl extends Component{
 

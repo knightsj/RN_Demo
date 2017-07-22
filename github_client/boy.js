@@ -9,7 +9,7 @@ import {
 
 
 import Girl from './girl'
-import NavigationBar from './NavigationBar'
+import NavigationBar from './js/common/NavigationBar'
 
 export default class Boy extends  Component{
 

@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native';
 
-import NavigationBar from './NavigationBar'
+import NavigationBar from './js/common/NavigationBar'
 import HttpUtls from './HttpUtls'
 
 export default class FetchTest extends Component{
