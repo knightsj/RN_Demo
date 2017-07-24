@@ -4,13 +4,16 @@ import {
     StyleSheet,
     Text,
     View,
-    Navigator,
-    Image
+    Image,
+    Navigator
 } from 'react-native';
 
 
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
+import MyPage from './MyPage/MyPage'
+import CustomKeyPage from './MyPage/CustomKeyPage'
+
 import AyncStoryageTest from '../../AyncStorageTest'
 
 export default class HomePage extends Component {
@@ -19,7 +22,6 @@ export default class HomePage extends Component {
         super(props);
         this.state = {
             selectedTab:'tb_popular',
-
         }
     }
 
@@ -27,7 +29,6 @@ export default class HomePage extends Component {
         return (
             <View style={styles.container}>
                 <TabNavigator>
-
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'tb_popular'}
                         selectedTitleStyle={{color:'#6495ED'}}
@@ -35,7 +36,18 @@ export default class HomePage extends Component {
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_polular.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#6495ED'}]} source={require('../../res/images/ic_polular.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_popular' })}>
-                        <PopularPage/>
+
+                        <Navigator.Navigator
+                            initialRoute={{name:'tb_popular',component:PopularPage}}
+                            configureScene={()=>{
+                                return Navigator.SceneConfigs.PushFromRight;
+                            }}
+
+                            renderScene={(route,navigator)=>{
+                                let Component = route.component;
+                                return<Component {...route.passProps} navigator={navigator}/>;
+                            }}
+                        />
                     </TabNavigator.Item>
 
                     <TabNavigator.Item
@@ -45,7 +57,18 @@ export default class HomePage extends Component {
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'yellow'}]}  source={require('../../res/images/ic_trending.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_profile' })}>
-                        <AyncStoryageTest/>
+
+                        <Navigator.Navigator
+                            initialRoute={{name:'tb_profile',component:AyncStoryageTest}}
+                            configureScene={()=>{
+                                return Navigator.SceneConfigs.PushFromRight;
+                            }}
+
+                            renderScene={(route,navigator)=>{
+                                let Component = route.component;
+                                return<Component {...route.passProps} navigator={navigator}/>;
+                            }}
+                        />
                     </TabNavigator.Item>
 
                     <TabNavigator.Item
@@ -55,7 +78,18 @@ export default class HomePage extends Component {
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'blue'}]}  source={require('../../res/images/ic_trending.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
-                        <View style={styles.page2}></View>
+
+                        <Navigator.Navigator
+                            initialRoute={{name:'tb_favorite',component:MyPage}}
+                            configureScene={()=>{
+                                return Navigator.SceneConfigs.PushFromRight;
+                            }}
+
+                            renderScene={(route,navigator)=>{
+                                let Component = route.component;
+                                return<Component {...route.passProps} navigator={navigator}/>;
+                            }}
+                        />
                     </TabNavigator.Item>
 
                     <TabNavigator.Item
@@ -65,7 +99,18 @@ export default class HomePage extends Component {
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'green'}]}  source={require('../../res/images/ic_trending.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_my' })}>
-                        <View style={styles.page2}></View>
+
+                        <Navigator.Navigator
+                            initialRoute={{name:'tb_my',component:MyPage}}
+                            configureScene={()=>{
+                                return Navigator.SceneConfigs.PushFromRight;
+                            }}
+
+                            renderScene={(route,navigator)=>{
+                                let Component = route.component;
+                                return<Component {...route.passProps} navigator={navigator}/>;
+                            }}
+                        />
                     </TabNavigator.Item>
                 </TabNavigator>
             </View>

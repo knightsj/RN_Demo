@@ -11,24 +11,52 @@ import {
 } from 'react-native';
 
 import NavigationBar from './js/common/NavigationBar'
-const KEY ='test'
+import Toast,{DURATION} from 'react-native-easy-toast'
+const KEY ='test';
 
 export default class AyncStorageTest extends Component {
 
     saveData(){
-        AsyncStorage.setItem('KEY',this.text,(error)=>{
+
+        AsyncStorage.setItem(KEY,this.text,(error)=>{
             if(!error){
-                
+
+                this.toast.show('保存成功',DURATION.LENGTH_LONG)
+            }else {
+
+                this.toast.show('保存失败',DURATION.LENGTH_LONG)
             }
         })
     }
 
     removeData(){
+        AsyncStorage.removeItem(KEY,(error)=>{
+            if(!error){
 
+                this.toast.show('移除成功',DURATION.LENGTH_LONG)
+            }else {
+
+                this.toast.show('移除失败',DURATION.LENGTH_LONG)
+            }
+        })
     }
 
     fetchData(){
+        AsyncStorage.getItem(KEY,(error,result)=>{
+            if(!error){
 
+                if (result!=='' && result!==null){
+                    this.toast.show('取出的内容为:'+result)
+                }else {
+                    this.toast.show('取出的内容不存在')
+                }
+
+
+            }else {
+
+                this.toast.show('提取失败',DURATION.LENGTH_LONG)
+            }
+        })
     }
 
     render() {
@@ -38,21 +66,18 @@ export default class AyncStorageTest extends Component {
                     title={'AsyncStorage的使用'}
                     style={{backgroundColor:'#2196F3'}}
                 />
-                <TextInput style={styles.inputStyle}></TextInput>
+                <TextInput
+                    style={styles.inputStyle}
+                    onChangeText={text=>this.text=text}
+                ></TextInput>
                 <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity>
+
                         <Text style={styles.tips} onPress={()=>this.saveData()}>保存</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
                         <Text style={styles.tips} onPress={()=>this.removeData()}>移除</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
                         <Text style={styles.tips} onPress={()=>this.fetchData()}>取出</Text>
-                    </TouchableOpacity>
-
                 </View>
+                <Toast ref={toast=>this.toast=toast}/>
+
 
             </View>
         );
