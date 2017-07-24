@@ -7,15 +7,16 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"react": "15.4.2",
-		"react-native": "0.39.2",
+		"react": "16.0.0-alpha.6",
+		"react-native": "0.44.0",
+		"react-native-scrollable-tab-view": "^0.6.7",
 		"react-native-tab-navigator": "^0.3.3"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
 		"babel-preset-react-native": "2.1.0",
 		"jest": "20.0.4",
-		"react-test-renderer": "15.4.2"
+		"react-test-renderer": "16.0.0-alpha.6"
 	},
 	"jest": {
 		"preset": "react-native"

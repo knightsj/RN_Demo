@@ -10,11 +10,11 @@ import {
     StyleSheet,
     Text,
     View,
-    Navigator,
     Image
 } from 'react-native';
 
-import Setup from './js/pages/Setup'
+// import Setup from './js/pages/Setup'
 
+import HomePage from './js/pages/HomPage'
 
-AppRegistry.registerComponent('github_client', () => Setup);
+AppRegistry.registerComponent('github_client', () => HomePage);

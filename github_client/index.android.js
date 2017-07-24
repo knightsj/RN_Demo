@@ -12,9 +12,6 @@ import {
   View
 } from 'react-native';
 
-import Setup from './js/pages/Setup'
-
-
 export default class github_client extends Component {
   render() {
     return (
@@ -53,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('github_client', () => Setup);
+AppRegistry.registerComponent('github_client', () => github_client);

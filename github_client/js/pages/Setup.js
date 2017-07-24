@@ -18,10 +18,11 @@ function setup () {
         }
 
         render(){
-            return <Navigator
-               initialRoute={{component:WelcomePage}}
-               renderScene={(route, navigator)=>this.renderScene(route,navigator)}
-            />
+            // return<Navigator
+            //    initialRoute={{component:WelcomePage}}
+            //    renderScene={(route, navigator)=>this.renderScene(route,navigator)}
+            // />
+            return <View></View>
         }
     }
     return <Root/>

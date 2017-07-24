@@ -173,7 +173,7 @@ class NavBarButton extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: '#4caf50',
+        backgroundColor: '#2196F3',
     },
 
     navBar: {
