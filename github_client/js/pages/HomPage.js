@@ -5,7 +5,6 @@ import {
     Text,
     View,
     Image,
-    Navigator
 } from 'react-native';
 
 
@@ -13,6 +12,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import MyPage from './MyPage/MyPage'
 import CustomKeyPage from './MyPage/CustomKeyPage'
+import Navigator from 'react-native-deprecated-custom-components';
 
 import AyncStoryageTest from '../../AyncStorageTest'
 
@@ -40,7 +40,7 @@ export default class HomePage extends Component {
                         <Navigator.Navigator
                             initialRoute={{name:'tb_popular',component:PopularPage}}
                             configureScene={()=>{
-                                return Navigator.SceneConfigs.PushFromRight;
+                                return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
 
                             renderScene={(route,navigator)=>{
@@ -61,7 +61,7 @@ export default class HomePage extends Component {
                         <Navigator.Navigator
                             initialRoute={{name:'tb_profile',component:AyncStoryageTest}}
                             configureScene={()=>{
-                                return Navigator.SceneConfigs.PushFromRight;
+                                return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
 
                             renderScene={(route,navigator)=>{
@@ -82,7 +82,7 @@ export default class HomePage extends Component {
                         <Navigator.Navigator
                             initialRoute={{name:'tb_favorite',component:MyPage}}
                             configureScene={()=>{
-                                return Navigator.SceneConfigs.PushFromRight;
+                                return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
 
                             renderScene={(route,navigator)=>{
@@ -103,7 +103,7 @@ export default class HomePage extends Component {
                         <Navigator.Navigator
                             initialRoute={{name:'tb_my',component:MyPage}}
                             configureScene={()=>{
-                                return Navigator.SceneConfigs.PushFromRight;
+                                return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
 
                             renderScene={(route,navigator)=>{

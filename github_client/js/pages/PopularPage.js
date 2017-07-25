@@ -20,29 +20,66 @@ import RespositoryCell from '../common/RespositoryCell'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
 
-export default class HomePage extends Component {
+import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+
+export default class PopularPage extends Component {
+
+    constructor(props){
+        super(props);
+        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
+        this.state ={
+            languages:[]
+        }
+    }
+
+    loadData(){
+        this.languageDao.fetch()
+            .then(result=>{
+                this.setState({
+                    languages:result
+                })
+            })
+            .catch(error=>{
+                console.log(error);
+            });
+    }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    // renderTabItems(array){
+    //    for(var i=0; i<array.length;i++){
+    //        var itemData =  array[i];
+    //        return itemData.checked? <PopularTabPage  tabLabel={itemData.name}>iOS</PopularTabPage>:null;
+    //    }
+    // }
+
+
 
     render() {
+        let content = this.state.languages.length>0?
+            <ScrollableTableView
+            tabBarBackgroundColor="#2196F3"
+            tabBarInactiveTextColor="mintcream"
+            tabBarActiveTextColor="white"
+            tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
+            renderTabBar={()=><ScrollableTabBar/>}
+        >
+                {this.state.languages.map((result,i,arr)=>{
+                    let item = arr[i];
+                return item.checked? <PopularTabPage  tabLabel={item.name}>iOS</PopularTabPage>:null;
+                })}
+            </ScrollableTableView>:null;
+
         return (
             <View style={styles.container}>
                 <NavigationBar
                     title={'最热'}
                     style={{backgroundColor:'#2196F3'}}
+                    statusBar={{backgroundColor:'red'}}
                 />
-                <ScrollableTableView
-                    tabBarBackgroundColor="#2196F3"
-                    tabBarInactiveTextColor="mintcream"
-                    tabBarActiveTextColor="white"
-                    tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
-                    renderTabBar={()=><ScrollableTabBar/>}
-
-                >
-                    <PopularTabPage tabLabel="Java">Java</PopularTabPage>
-                    <PopularTabPage tabLabel="iOS">iOS</PopularTabPage>
-                    <PopularTabPage tabLabel="Android">iOS</PopularTabPage>
-                    <PopularTabPage tabLabel="JavaScript">JavaScript</PopularTabPage>
-                    <PopularTabPage tabLabel="Golang">Go</PopularTabPage>
-                </ScrollableTableView>
+                {content}
             </View>
         );
     }

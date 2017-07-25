@@ -32,7 +32,7 @@ export default class MyPage extends Component {
     }
     
     jump(){
-        this.props.navigation.push({
+        this.props.navigator.push({
             component:CustomKeyPage,
             params:{...this.props}
         })

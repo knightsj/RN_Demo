@@ -1,114 +1,200 @@
+/**
+ * NavigationBar
+ * @flow
+ */
 import React, {Component, PropTypes} from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Platform,
-    StatusBar,
-    Alert,
-    TouchableOpacity,
-} from 'react-native';
 
-const NAV_BAR_HEIGHT_ANDROID = 50;
+import {
+    StyleSheet,
+    Navigator,
+    Platform,
+    TouchableOpacity,
+    Image,
+    StatusBar,
+    Text,
+    View
+} from 'react-native'
+
+
 const NAV_BAR_HEIGHT_IOS = 44;
-const STATE_BAR_HEIGHT = 20;
-var Dimensions = require('Dimensions');
-var Swidth = Dimensions.get('window').width;
-const StatusBarShap = {
-    backgroundColor: PropTypes.string,
-    barStyle: PropTypes.oneOf(['default', 'light-content', 'dark-content']),
+  const NAV_BAR_HEIGHT_ANDROID = 50; 
+const STATUS_BAR_HEIGHT = 20;
+
+const ButtonShape = {
+    title: PropTypes.string.isRequired,
+    style: PropTypes.any,
+    handler: PropTypes.func,
+};
+
+const StatusBarShape = {
+    barStyle: PropTypes.oneOf(['light-content', 'default',]),
+    networkActivityIndicatorVisible: PropTypes.bool,
+    showHideTransition:PropTypes.oneOf(['fade', 'slide']),
     hidden: PropTypes.bool,
-}
-export default class NavigatorBar extends Component {
-    //定义属性
-    static proTypes = {
+    translucent: PropTypes.bool,
+    backgroundColor: PropTypes.string,
+    animated:PropTypes.bool
+};
+
+export default class NavigationBar extends Component {
+    static propTypes = {
         style: View.propTypes.style,
+        titleLayoutStyle:View.propTypes.style,
+        navigator: PropTypes.object,
+        leftButtonTitle: PropTypes.string,
+        popEnabled: PropTypes.bool,
+        onLeftButtonClick: PropTypes.func,
         title: PropTypes.string,
-        titleStyle: View.propTypes.style,
-        statusBarOutViewStyle: View.propTypes.style,
         titleView: PropTypes.element,
-        hide: PropTypes.boolean,
-        leftButton: PropTypes.element,
-        rightButton: PropTypes.element,
-        statusBar: PropTypes.shape(StatusBarShap),
-        leftButtonOnPress: PropTypes.func,
-        rightButtonOnPress: PropTypes.func,
+        hide: PropTypes.bool,
+        statusBar: PropTypes.shape(StatusBarShape),
+        rightButton: PropTypes.oneOfType([
+            PropTypes.shape(ButtonShape),
+            PropTypes.element,
+        ]),
+        leftButton: PropTypes.oneOfType([
+            PropTypes.shape(ButtonShape),
+            PropTypes.element,
+        ]),
+
     }
     static defaultProps = {
         statusBar: {
-            barStyle: 'light-content',
+            barStyle: 'default',
             hidden: false,
-        }
+            translucent:false,
+            animated:false,
+        },
     }
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            title: '',
+            popEnabled: true,
+            hide: false
+        };
+    }
+    leftView() {
+        var leftView = this.props.leftButtonTitle ?
+            <Text style={styles.title}>{this.props.leftButtonTitle}</Text> : null;
+        return (
+            <TouchableOpacity
+                onPress={()=>this.onLeftButtonClick()}>
+                <View style={{width: 50, alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+                    {this.props.leftView ? this.props.leftView : leftView}
+                </View>
+            </TouchableOpacity>
+        )
     }
 
-    render() {
-        let statusbar = <View
-            style={[styles.statusBarStyle, this.props.statusBarOutViewStyle]}><StatusBar {...this.props.statusBar}/></View>
-        let TitleView = this.props.titleView ? this.props.titleView :
-            <Text style={[styles.titleStyle, this.props.titleStyle]}>{this.props.title}</Text>
-        let content = <View style={styles.nabar}>
-            <TouchableOpacity onPress={() => {
-                if (this.props.leftButtonOnPress !== null) {
-                    this.props.leftButtonOnPress();
-                }
-            }
-            }>
-                {this.props.leftButton}
-            </TouchableOpacity>
-            <View style={styles.titleViewStyle}>
-                {TitleView}
-            </View>
-            <TouchableOpacity onPress={() => {
-                if (this.props.rightButtonOnPress) {
-                    this.props.rightButtonOnPress();
-                }
-            }}>
-                {this.props.rightButton}
-            </TouchableOpacity>
-        </View>
+    onLeftButtonClick() {
+        if (this.props.navigator && this.props.popEnabled)this.props.navigator.pop();
+        if (this.props.onLeftButtonClick)this.props.onLeftButtonClick();
+    }
+
+    getButtonElement(data = {}, style) {
         return (
-            <View style={[styles.container, this.props.style]}>
-                {statusbar}
-                {content}
+            <View style={styles.navBarButton}>
+                {(!!data.props) ? data : (
+                    <NavBarButton
+                        title={data.title}
+                        style={[data.style, style,]}
+                        tintColor={data.tintColor}
+                        handler={data.handler}/>
+                )}
             </View>
         );
     }
 
+    render() {
+        let statusBar = !this.props.statusBar.hidden ?
+            <View style={styles.statusBar}>
+                <StatusBar {...this.props.statusBar} barStyle="light-content" style={styles.statusBar}/>
+            </View>: null;
+
+        let titleView = this.props.titleView ? this.props.titleView :
+            <Text style={styles.title} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>;
+
+        let content = this.props.hide ? null :
+            <View style={styles.navBar}>
+                {/*{this.leftView()}*/}
+                {this.getButtonElement(this.props.leftButton)}
+                <View style={[styles.navBarTitleContainer,this.props.titleLayoutStyle]}>
+                    {titleView}
+                </View>
+                {/*{this.rightView()}*/}
+                {this.getButtonElement(this.props.rightButton, {marginRight: 8,})}
+            </View>;
+        return (
+            <View style={[styles.container, this.props.style]}>
+                {statusBar}
+                {content}
+            </View>
+        )
+    }
 }
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-    },
-    nabar: {
-        flexDirection: 'row',
-        height: Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID,
-        width: Swidth,
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    titleViewStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        left: 40,
-        right: 40,
-        top: 0,
-        bottom: 0,
-    },
-    titleStyle: {
-        color: "gray",
-        fontSize: 20,
-    },
-    statusBarStyle: {
-        height: Platform.OS === 'ios' ? STATE_BAR_HEIGHT : 0,
+class NavBarButton extends Component {
+    render() {
+        const {style, tintColor, margin, title, handler} = this.props;
+
+        return (
+            <TouchableOpacity style={styles.navBarButton} onPress={handler}>
+                <View style={style}>
+                    <Text style={[styles.title, {color: tintColor,},]}>{title}</Text>
+                </View>
+            </TouchableOpacity>
+        );
     }
 
+    static propTypes = {
+        style: PropTypes.oneOfType([
+            PropTypes.object,
+            PropTypes.array,
+        ]),
+        tintColor: PropTypes.string,
+        title: PropTypes.string,
+        handler: PropTypes.func,
+    };
 
-});
-module.exports = NavigatorBar;
+    static defaultProps = {
+        style: {},
+        title: '',
+        tintColor: '#0076FF',
+        onPress: () => ({}),
+    };
+}
+
+const styles = StyleSheet.create({
+
+    container: {
+
+    },
+
+    navBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID,
+    },
+    navBarTitleContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        left: 40,
+        top: 0,
+        right: 40,
+        bottom: 0,
+    },
+    title: {
+        fontSize: 20,
+        color: 'white',
+    },
+    navBarButton: {
+        alignItems: 'center',
+    },
+    statusBar: {
+        height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT:0,
+
+    },
+})
