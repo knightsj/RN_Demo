@@ -5,11 +5,13 @@
     "short_name": "ALL",
     "checked": true
   },
+
   {
     "path": "Android",
     "name": "Android",
     "checked": true
   },
+
   {
     "path": "iOS",
     "name": "iOS",
@@ -23,21 +25,21 @@
   {
     "path": "MySQL",
     "name": "MySQL",
-    "checked": false
+    "checked": true
   },
   {
     "path": " AngularJS",
     "name": " AngularJS",
-    "checked": false
+    "checked": true
   },
   {
     "path": " jQuery",
     "name": " jQuery",
-    "checked": false
+    "checked": true
   },
   {
     "path": " react",
     "name": " React",
-    "checked": false
+    "checked": true
   }
 ]

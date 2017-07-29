@@ -9,6 +9,7 @@ import {
 
 import NavigationBar from '../../common/NavigationBar'
 import CustomKeyPage from './CustomKeyPage'
+import SortPage from '../SortKeyPage'
 
 export default class MyPage extends Component {
 
@@ -26,15 +27,42 @@ export default class MyPage extends Component {
                 />
                 <Text
                     style={styles.tips}
-                    onPress={()=>this.jump()}
+                    onPress={()=>this.jump1()}
                 >自定义标签</Text>
+
+                <Text
+                style={styles.tips}
+                onPress={()=>this.jump2()}
+                >标签排序1</Text>
+
+                <Text
+                    style={styles.tips}
+                    onPress={()=>this.jump3()}
+                >删除排序</Text>
             </View>)
     }
     
-    jump(){
+    jump1(){
         this.props.navigator.push({
             component:CustomKeyPage,
             params:{...this.props}
+        })
+    }
+
+    jump2(){
+        this.props.navigator.push({
+            component:SortPage,
+            params:{...this.props}
+        })
+    }
+
+    jump3(){
+        this.props.navigator.push({
+            component:CustomKeyPage,
+            params:{
+                ...this.props,
+                isRemoveKeyPage:true
+            }
         })
     }
 }

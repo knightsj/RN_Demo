@@ -7,12 +7,14 @@ import {
     Image,
     TextInput,
     ListView,
-    RefreshControl
+    RefreshControl,
+    DeviceEventEmitter
 } from 'react-native';
 
 
 import DataRepository from '../expand/dao/DataRepository'
 import NavigationBar from '../common/NavigationBar'
+import DetailPage from './RepositoryDetailPage'
 
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
 import RespositoryCell from '../common/RespositoryCell'
@@ -48,15 +50,6 @@ export default class PopularPage extends Component {
         this.loadData();
     }
 
-    // renderTabItems(array){
-    //    for(var i=0; i<array.length;i++){
-    //        var itemData =  array[i];
-    //        return itemData.checked? <PopularTabPage  tabLabel={itemData.name}>iOS</PopularTabPage>:null;
-    //    }
-    // }
-
-
-
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
@@ -68,7 +61,7 @@ export default class PopularPage extends Component {
         >
                 {this.state.languages.map((result,i,arr)=>{
                     let item = arr[i];
-                return item.checked? <PopularTabPage  tabLabel={item.name}>iOS</PopularTabPage>:null;
+                return item.checked? <PopularTabPage  tabLabel={item.name} {...this.props} />:null;
                 })}
             </ScrollableTableView>:null;
 
@@ -102,8 +95,24 @@ class PopularTabPage extends Component{
         this.loadData();
     }
 
+    onSelect(item){
+        this.props.navigator.push({
+             component:DetailPage,
+             params:{
+                 item:item,
+                 ...this.props
+             }
+        })
+    }
+
+
+
     renderRow(data){
-        return <RespositoryCell data={data}/>
+        return <RespositoryCell
+            onSelect = {(item)=>this.onSelect(item)}
+            key = {data.id}
+            data={data}
+        />
      }
 
     render(){
@@ -123,17 +132,36 @@ class PopularTabPage extends Component{
             />
         </View>
     }
+
     loadData(){
         this.setState({
             isLoading:true
         })
         let url = URL + this.props.tabLabel + QUERY_STR;
-        this.dataRepository.fetchNetRepository(url)
+        this.dataRepository.fetchRespository(url)
             .then(result=>{
+                let items = result&&result.items?result.items:result?result:[];
                 this.setState({
-                    dataSource:this.state.dataSource.cloneWithRows(result.items),
+                    dataSource:this.state.dataSource.cloneWithRows(items),
                     isLoading:false
                 })
+
+                if(result && result.update_date && this.dataRepository.checkData(result.update_date)){
+                    DeviceEventEmitter.emit('showToast','缓存数据过时');
+                    return this.dataRepository.fetchNetRepository(url);
+                }else {
+                    DeviceEventEmitter.emit('showToast','显示缓存数据');
+                }
+            })
+
+            .then(items => {
+                if(!items || items.length===0)return;
+                this.setState({
+                    dataSource:this.state.dataSource.cloneWidthRows(items),
+                    isLoading:false
+                })
+                DeviceEventEmitter.emit('showToast','显示网络数据');
+
             })
             .catch(error=>{
                 this.setState({

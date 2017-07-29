@@ -22,6 +22,7 @@ export default class NewPage extends Component {
         super(props);
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key)
         this.changeValues = [];
+        this.isRemoveKeyPage = this.props.isRemoveKeyPage?true:false;
         this.state={
             changed:false
         }
@@ -44,17 +45,28 @@ export default class NewPage extends Component {
     }
 
     onSave(){
+
         if(this.changeValues.length === 0) {
             this.props.navigator.pop();
             return;
         }
-        this.languageDao.save(this.state.dataArray);
+
+        if (this.props.isRemoveKeyPage){
+            for(let i=0,l=this.changeValues.length;i<l;i++){
+                ArrayUtls.remove(this.state.dataArray,this.changeValues[i]);
+            }
+        }else {
+            this.languageDao.save(this.state.dataArray);
+        }
+
         this.props.navigator.pop();
     }
 
     goBack(){
+
         if(this.changeValues.length===0){
             this.props.navigator.pop();
+
         }else{
             Alert.alert(
                 '提示',
@@ -72,6 +84,7 @@ export default class NewPage extends Component {
     }
 
     renderCheckBox(data){
+
         let leftText = data.name;
 
         return(
@@ -92,7 +105,7 @@ export default class NewPage extends Component {
 
 
     onClick(data){
-        data.checked =!data.checked;
+        if(!this.isRemoveKeyPage)data.checked =!data.checked;
         ArrayUtls.updateArray(this.changeValues,data);
         this.setState({
             changed:true
@@ -129,18 +142,19 @@ export default class NewPage extends Component {
     }
 
     render(){
-
+        let title = this.isRemoveKeyPage?'标签移除':'自定义标签'
+        let rightButtonTitle = this.isRemoveKeyPage?'移除':'保存'
         let rightButton=<TouchableOpacity
             onPress={()=>this.onSave()}
         >
             <View style={{margin:10}}>
-                <Text style={styles.title}>保存</Text>
+                <Text style={styles.title}>{rightButtonTitle}</Text>
             </View>
         </TouchableOpacity>
 
         return <View style={styles.container}>
             <NavigationBar
-                title={'我的'}
+                title={title}
                 style={{backgroundColor:'#6495ED'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={rightButton}

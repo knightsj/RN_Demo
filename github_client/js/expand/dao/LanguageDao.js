@@ -37,9 +37,10 @@ export default class LanguageDao{
         })
     }
 
-    save(data){
-        AsyncStorage.setItem(this.flag,JSON.stringify(data),(error)=>{
+    save(objectData){
+        var stringData=JSON.stringify(objectData);
+        AsyncStorage.setItem(this.flag,stringData,(error,result)=>{
 
-        })
+        });
     }
 }

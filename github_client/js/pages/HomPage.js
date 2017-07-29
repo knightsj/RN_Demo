@@ -5,14 +5,15 @@ import {
     Text,
     View,
     Image,
+    DeviceEventEmitter
 } from 'react-native';
 
-
+import WebViewTestPage from '../../WebViewTest'
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import MyPage from './MyPage/MyPage'
-import CustomKeyPage from './MyPage/CustomKeyPage'
 import Navigator from 'react-native-deprecated-custom-components';
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 import AyncStoryageTest from '../../AyncStorageTest'
 
@@ -23,6 +24,16 @@ export default class HomePage extends Component {
         this.state = {
             selectedTab:'tb_popular',
         }
+    }
+
+    componentDidMount() {
+        this.listener = DeviceEventEmitter.addListener('showToast',(text)=>{
+            this.toast.show(text,DURATION.LENGTH_LONG);
+        })
+    }
+
+    componentWillUnmount() {
+        this.listener&&this.listener.remove();
     }
 
     render() {
@@ -45,7 +56,7 @@ export default class HomePage extends Component {
 
                             renderScene={(route,navigator)=>{
                                 let Component = route.component;
-                                return<Component {...route.passProps} navigator={navigator}/>;
+                                return <Component {...route.passProps} navigator={navigator}/>;
                             }}
                         />
                     </TabNavigator.Item>
@@ -56,7 +67,7 @@ export default class HomePage extends Component {
                         title="趋势"
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
                         renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'yellow'}]}  source={require('../../res/images/ic_trending.png')} />}
-                        onPress={() => this.setState({ selectedTab: 'tb_profile' })}>
+                        onPress={() => this.setState({ selectedTab: 'tb_proile' })}>
 
                         <Navigator.Navigator
                             initialRoute={{name:'tb_profile',component:AyncStoryageTest}}
@@ -80,7 +91,7 @@ export default class HomePage extends Component {
                         onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
 
                         <Navigator.Navigator
-                            initialRoute={{name:'tb_favorite',component:MyPage}}
+                            initialRoute={{name:'tb_favorite',component:WebViewTestPage}}
                             configureScene={()=>{
                                 return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
@@ -113,6 +124,7 @@ export default class HomePage extends Component {
                         />
                     </TabNavigator.Item>
                 </TabNavigator>
+                <Toast ref={toast=>this.toast=toast}/>
             </View>
         );
     }
