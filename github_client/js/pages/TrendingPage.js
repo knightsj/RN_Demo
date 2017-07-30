@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -17,18 +16,18 @@ import NavigationBar from '../common/NavigationBar'
 import DetailPage from './RepositoryDetailPage'
 
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
-import RespositoryCell from '../common/RespositoryCell'
+import TrendingCell from '../common/TrendingCell'
 
-const URL = 'https://api.github.com/search/repositories?q='
-const QUERY_STR = '&sort=starts'
+const API_URL = 'https://github.com/trending/'
+
 
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 
-export default class PopularPage extends Component {
+export default class TrendingPage extends Component {
 
     constructor(props){
         super(props);
-        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
+        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_language);
         this.state ={
             languages:[]
         }
@@ -53,15 +52,15 @@ export default class PopularPage extends Component {
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
-            tabBarBackgroundColor="#2196F3"
-            tabBarInactiveTextColor="mintcream"
-            tabBarActiveTextColor="white"
-            tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
-            renderTabBar={()=><ScrollableTabBar/>}
-        >
+                tabBarBackgroundColor="#2196F3"
+                tabBarInactiveTextColor="mintcream"
+                tabBarActiveTextColor="white"
+                tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
+                renderTabBar={()=><ScrollableTabBar/>}
+            >
                 {this.state.languages.map((result,i,arr)=>{
                     let item = arr[i];
-                return item.checked? <PopularTabPage key={i} tabLabel={item.name} {...this.props} />:null;
+                    return item.checked? <TrendingTabPage key={i} tabLabel={item.name} {...this.props} />:null;
                 })}
             </ScrollableTableView>:null;
 
@@ -79,10 +78,10 @@ export default class PopularPage extends Component {
 }
 
 
-class PopularTabPage extends Component{
+class TrendingTabPage extends Component{
     constructor(props){
         super(props);
-        this.dataRepository = new DataRepository(Flag_STORAGE.flag_popular);
+        this.dataRepository = new DataRepository(Flag_STORAGE.flag_trending);
         this.state={
             result:'',
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
@@ -97,23 +96,23 @@ class PopularTabPage extends Component{
 
     onSelect(item){
         this.props.navigator.push({
-             component:DetailPage,
-             params:{
-                 item:item,
-                 ...this.props
-             }
+            component:DetailPage,
+            params:{
+                item:item,
+                ...this.props
+            }
         })
     }
 
 
 
     renderRow(data){
-        return <RespositoryCell
+        return <TrendingCell
             onSelect = {()=>this.onSelect(data)}
             key = {data.id}
             data={data}
         />
-     }
+    }
 
     render(){
         return <View style={{flex:1}}>
@@ -122,22 +121,27 @@ class PopularTabPage extends Component{
                 renderRow={(data)=>this.renderRow(data)}
                 refreshControl={
                     <RefreshControl
-                       refreshing={this.state.isLoading}
-                       onRefresh={()=>this.loadData()}
-                       colors={['#2196F3']}
-                       tintColor={['#2196F3']}
-                       titleColor={['#2196F3']}
-                       title={'Loading'}
+                        refreshing={this.state.isLoading}
+                        onRefresh={()=>this.loadData()}
+                        colors={['#2196F3']}
+                        tintColor={['#2196F3']}
+                        titleColor={['#2196F3']}
+                        title={'Loading'}
                     />}
             />
         </View>
+    }
+
+    getFetchURL(timeSpan,category){
+        return API_URL + category + timeSpan.searchText;
     }
 
     loadData(){
         this.setState({
             isLoading:true
         })
-        let url = URL + this.props.tabLabel + QUERY_STR;
+
+        let url = this.getFetchURL('?since=daily',this.props.tabLabel);
 
         this.dataRepository.fetchRespository(url)
 

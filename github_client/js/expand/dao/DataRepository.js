@@ -2,30 +2,40 @@ import {
     AsyncStorage
 } from 'react-native'
 
-
-
+import GitHubTrending from 'GitHubTrending'
+export var Flag_STORAGE = {flag_popular:'popular',flag_trending:'trending'};
 
 export default class  DataRepository{
 
-    //获取离线缓存
+    constructor(flag){
+        this.flag = flag;
+        if(flag === Flag_STORAGE.flag_trending)this.trending = new GitHubTrending();
+    }
+    //获取数据
     fetchRespository(url) {
 
         return new Promise((resolve, reject) =>{
+
             this.fetchLocalRespository(url)
-            .then(result=> {
-                if (result) {
-                    resolve(result);
+                .then((wrapData)=> {
+
+                if (wrapData) {
+
+                    resolve(wrapData,true);
+
                 } else {
+
                     this.fetchNetRepository(url)
-                        .then(result => {
-                            resolve(result);
+
+                        .then((data) => {
+                            resolve(data);
                         })
                         .catch(e=> {
-                            resolve(e);
+                            reject(e);
                         })
                 }
-            })
-                .catch(e=> {
+            }).catch(e=> {
+
                     this.fetchNetRepository(url)
                         .then(result => {
                             resolve(result);
@@ -38,22 +48,34 @@ export default class  DataRepository{
     }
 
 
-
     fetchNetRepository(url){
         return new  Promise((resolve,reject)=>{
-            fetch(url)
-                .then(response=>response.json())
-                .then(result=>{
-                    if(!result){
-                        reject(new Error('responseData is null'));
-                        return;
-                    }
-                    resolve(result.items);
-                    this.saveRespository(url,result.items)
-                })
-                .catch(error=>{
-                    reject(error);
-                })
+            if (this.flag === Flag_STORAGE.flag_trending){
+                this.trending.fetchTrending(url)
+                    .then(result=>{
+                        if(!result){
+                            reject(new Error('responseData is null'));
+                            return;
+                        }
+                        this.saveRespository(url,result);
+                        resolve(result);
+                    })
+            }else {
+
+                fetch(url)
+                    .then(response=>response.json())
+                    .catch((error)=>{
+                        reject(error);
+                    }).then((responseData)=>{
+                        if(!responseData || !responseData.items){
+                            reject(new Error('responseData is null'));
+                            return;
+                        }
+                        resolve(responseData.items);
+                        this.saveRespository(url,responseData.items);
+                }).done();
+            }
+
         })
     }
 

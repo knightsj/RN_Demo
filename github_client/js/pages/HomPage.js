@@ -11,6 +11,8 @@ import {
 import TempPage from '../../temp'
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
+import TrendingPage from './TrendingPage'
+
 import MyPage from './MyPage/MyPage'
 import Navigator from 'react-native-deprecated-custom-components';
 import Toast, {DURATION} from 'react-native-easy-toast'
@@ -62,15 +64,15 @@ export default class HomePage extends Component {
                     </TabNavigator.Item>
 
                     <TabNavigator.Item
-                        selected={this.state.selectedTab === 'tb_profile'}
-                        selectedTitleStyle={{color:'yellow'}}
+                        selected={this.state.selectedTab === 'tb_trending'}
+                        selectedTitleStyle={{color:'#6495ED'}}
                         title="趋势"
                         renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
-                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'yellow'}]}  source={require('../../res/images/ic_trending.png')} />}
-                        onPress={() => this.setState({ selectedTab: 'tb_proile' })}>
+                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#6495ED'}]}  source={require('../../res/images/ic_trending.png')} />}
+                        onPress={() => this.setState({ selectedTab: 'tb_trending' })}>
 
                         <Navigator.Navigator
-                            initialRoute={{name:'tb_profile',component:AyncStoryageTest}}
+                            initialRoute={{name:'tb_trending',component:TrendingPage}}
                             configureScene={()=>{
                                 return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
