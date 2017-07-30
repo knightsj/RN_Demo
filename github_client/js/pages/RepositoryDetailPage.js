@@ -13,15 +13,15 @@ import {
 import NavigationBar from '../common/NavigationBar'
 import ViewUtils from '../Util/ViewUtils'
 
-const URL = 'https://www.baidu.com'
-
-export default class WebViewTest extends Component {
+export default class RepositoryDetailPage extends Component {
 
     constructor(props){
         super(props);
+        let url = this.props.item.html_url;
+        let title = this.props.item.full_name;
         this.state={
-            url:URL,
-            title:'',
+            url:url,
+            title:title,
             canGoBack:false
         }
     }
@@ -30,7 +30,7 @@ export default class WebViewTest extends Component {
         if(this.state.canGoBack){
             this.webView.goBack();
         }else {
-            this.props.navigatior.pop();
+            this.props.navigator.pop();
         }
 
     }
@@ -43,7 +43,6 @@ export default class WebViewTest extends Component {
     onNavigationStateChange(e){
         this.setState({
             canGoBack:e.canGoBack,
-            title:e.title
         })
 
     }
@@ -55,33 +54,15 @@ export default class WebViewTest extends Component {
     render(){
         return <View style={styles.container}>
             <NavigationBar
-                title='WebView的使用'
+                title={this.state.title}
                 style={{backgroundColor:'#6495ED'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
             />
-            <View style={styles.row}>
-                <Text
-                    style={styles.tips}
-                    onPress={()=>{
-                        this.goBack();
-                    }}
-                >返回</Text>
-                <TextInput
-                    style={styles.input}
-                    defaultValue={URL}
-                    onChangeText={text=>this.text=text}
-                />
-                <Text
-                    style={styles.tips}
-                    onPress={()=>{
-                        this.go();
-                    }}
-                >前往</Text>
-            </View>
             <WebView
                 ref = {webView=>this.webView=webView}
                 source={{uri:this.state.url}}
                 onNavigationStateChange={(e)=>this.onNavigationStateChange(e)}
+                startInLoadingState={true}
             />
         </View>
     }

@@ -81,7 +81,6 @@ export default class  DataRepository{
     }
 
     checkData(longTime){
-        return false;
         let cDate = new Date();
         let tDate = new Date();
         tDate.setTime(longTime);
@@ -89,6 +88,5 @@ export default class  DataRepository{
         if (cDate.getDay() !== tDate.getDay()) return false;
         if (cDate.getHours() - tDate.getHours() > 4) return false;
         return true;
-
     }
 }

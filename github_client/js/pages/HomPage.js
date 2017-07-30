@@ -8,7 +8,7 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import WebViewTestPage from '../../WebViewTest'
+import TempPage from '../../temp'
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import MyPage from './MyPage/MyPage'
@@ -56,7 +56,7 @@ export default class HomePage extends Component {
 
                             renderScene={(route,navigator)=>{
                                 let Component = route.component;
-                                return <Component {...route.passProps} navigator={navigator}/>;
+                                return <Component {...route.params} navigator={navigator}/>;
                             }}
                         />
                     </TabNavigator.Item>
@@ -77,7 +77,7 @@ export default class HomePage extends Component {
 
                             renderScene={(route,navigator)=>{
                                 let Component = route.component;
-                                return<Component {...route.passProps} navigator={navigator}/>;
+                                return<Component {...route.params} navigator={navigator}/>;
                             }}
                         />
                     </TabNavigator.Item>
@@ -91,14 +91,14 @@ export default class HomePage extends Component {
                         onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
 
                         <Navigator.Navigator
-                            initialRoute={{name:'tb_favorite',component:WebViewTestPage}}
+                            initialRoute={{name:'tb_favorite',component:TempPage}}
                             configureScene={()=>{
                                 return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
 
                             renderScene={(route,navigator)=>{
                                 let Component = route.component;
-                                return<Component {...route.passProps} navigator={navigator}/>;
+                                return<Component {...route.params} navigator={navigator}/>;
                             }}
                         />
                     </TabNavigator.Item>
@@ -119,7 +119,7 @@ export default class HomePage extends Component {
 
                             renderScene={(route,navigator)=>{
                                 let Component = route.component;
-                                return<Component {...route.passProps} navigator={navigator}/>;
+                                return<Component {...route.params} navigator={navigator}/>;
                             }}
                         />
                     </TabNavigator.Item>

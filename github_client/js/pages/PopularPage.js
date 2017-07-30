@@ -61,7 +61,7 @@ export default class PopularPage extends Component {
         >
                 {this.state.languages.map((result,i,arr)=>{
                     let item = arr[i];
-                return item.checked? <PopularTabPage  tabLabel={item.name} {...this.props} />:null;
+                return item.checked? <PopularTabPage key={i} tabLabel={item.name} {...this.props} />:null;
                 })}
             </ScrollableTableView>:null;
 
@@ -109,7 +109,7 @@ class PopularTabPage extends Component{
 
     renderRow(data){
         return <RespositoryCell
-            onSelect = {(item)=>this.onSelect(item)}
+            onSelect = {()=>this.onSelect(data)}
             key = {data.id}
             data={data}
         />
@@ -138,16 +138,18 @@ class PopularTabPage extends Component{
             isLoading:true
         })
         let url = URL + this.props.tabLabel + QUERY_STR;
+
         this.dataRepository.fetchRespository(url)
-            .then(result=>{
-                let items = result&&result.items?result.items:result?result:[];
+
+            .then((wrapData)=>{
+                let items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
                 this.setState({
                     dataSource:this.state.dataSource.cloneWithRows(items),
                     isLoading:false
                 })
 
                 if(result && result.update_date && this.dataRepository.checkData(result.update_date)){
-                    DeviceEventEmitter.emit('showToast','缓存数据过时');
+                    // DeviceEventEmitter.emit('showToast','缓存数据过时');
                     return this.dataRepository.fetchNetRepository(url);
                 }else {
                     DeviceEventEmitter.emit('showToast','显示缓存数据');
@@ -157,12 +159,13 @@ class PopularTabPage extends Component{
             .then(items => {
                 if(!items || items.length===0)return;
                 this.setState({
-                    dataSource:this.state.dataSource.cloneWidthRows(items),
+                    dataSource:this.state.dataSource.cloneWithRows(items),
                     isLoading:false
                 })
                 DeviceEventEmitter.emit('showToast','显示网络数据');
 
             })
+
             .catch(error=>{
                 this.setState({
                     result:JSON.stringify(error)
