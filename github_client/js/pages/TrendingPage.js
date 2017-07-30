@@ -67,7 +67,7 @@ export default class TrendingPage extends Component {
         return (
             <View style={styles.container}>
                 <NavigationBar
-                    title={'最热'}
+                    title={'趋势'}
                     style={{backgroundColor:'#2196F3'}}
                     statusBar={{backgroundColor:'red'}}
                 />

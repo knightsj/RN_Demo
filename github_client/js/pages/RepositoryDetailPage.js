@@ -13,12 +13,14 @@ import {
 import NavigationBar from '../common/NavigationBar'
 import ViewUtils from '../Util/ViewUtils'
 
+const TRENDING_URL = 'https://github.com/'
+
 export default class RepositoryDetailPage extends Component {
 
     constructor(props){
         super(props);
-        let url = this.props.item.html_url;
-        let title = this.props.item.full_name;
+        let url = this.props.item.html_url?this.props.item.html_url:TRENDING_URL+this.props.item.fullName;
+        let title = this.props.item.full_name?this.props.item.full_name:this.props.item.fullName;
         this.state={
             url:url,
             title:title,
@@ -55,7 +57,7 @@ export default class RepositoryDetailPage extends Component {
         return <View style={styles.container}>
             <NavigationBar
                 title={this.state.title}
-                style={{backgroundColor:'#6495ED'}}
+                style={{backgroundColor:'#2196F3'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
             />
             <WebView

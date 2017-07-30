@@ -8,8 +8,11 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import HTMLView from 'react-native-htmlview'
+
 export default class TrendingCell extends Component{
     render(){
+        let description = '<p>' + this.props.data.description + '</p>'
         return<TouchableOpacity
             onPress={this.props.onSelect}
             style={styles.container}
@@ -17,8 +20,14 @@ export default class TrendingCell extends Component{
             <View style={styles.cell_container}>
 
                 <Text style={styles.title}>{this.props.data.fullName}</Text>
-
-                <Text style={styles.description}>{this.props.data.description}</Text>
+                <HTMLView
+                    value={description}
+                    onLinkPress = {(url)=>{}}
+                    stylesheet={{
+                        p:styles.description,
+                        a:styles.description
+                    }}
+                />
                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -82,7 +91,8 @@ const styles =StyleSheet.create({
     avatarImageStyle:{
         // borderRadius:8,
         width:16,
-        height:16
+        height:16,
+        marginRight:6
 
     },
 
