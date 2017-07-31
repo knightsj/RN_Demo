@@ -9,16 +9,52 @@ import {
 } from 'react-native';
 
 export default class RespositoryCell extends Component{
+
+    constructor(props){
+        super(props);
+        this.state={
+            isFavorite:this.props.projectModel.isFavorite,
+            favoriteIcon:this.props.projectModel.isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
+        }
+    }
+
+    setFavoriteState(isFavorite){
+        this.setState({
+            isFavorite:isFavorite,
+            favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
+        })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setFavoriteState(nextProps.projectModel.isFavorite);
+    }
+
+    onPressFavorite(){
+        this.setFavoriteState(!this.state.isFavorite);
+        //回传给页面，记录状态
+        this.props.onFavorite(this.props.projectModel.item,!this.state.isFavorite)
+    }
+
     render(){
+        let item = this.props.projectModel.item?this.props.projectModel.item:this.props.projectModel;
+        let favoriteButton = <TouchableOpacity
+            onPress={()=>this.onPressFavorite()}
+        >
+            <Image
+                style={[{width:18,height:18} ,{tintColor:'#2196F3'}]}
+                source={this.state.favoriteIcon}
+            />
+        </TouchableOpacity>
+
         return<TouchableOpacity
             onPress={this.props.onSelect}
             style={styles.container}
         >
             <View style={styles.cell_container}>
 
-                <Text style={styles.title}>{this.props.data.full_name}</Text>
+                <Text style={styles.title}>{item.full_name}</Text>
 
-                <Text style={styles.description}>{this.props.data.description}</Text>
+                <Text style={styles.description}>{item.description}</Text>
 
                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 
@@ -26,16 +62,15 @@ export default class RespositoryCell extends Component{
                         <Text style={styles.bottomTextStyle}>Author:</Text>
                         <Image
                             style={styles.avatarImageStyle}
-                            source={{uri:this.props.data.owner.avatar_url}}
+                            source={{uri:item.owner.avatar_url}}
                         />
                     </View>
 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={styles.bottomTextStyle}>Starts:</Text>
-                        <Text style={styles.bottomTextStyle}>{this.props.data.stargazers_count}</Text>
+                        <Text style={styles.bottomTextStyle}>{item.stargazers_count}</Text>
                     </View>
-
-                    <Image style={styles.starImageStyle} source={require('../../res/images/ic_star.png')}/>
+                    {favoriteButton}
                 </View>
             </View>
         </TouchableOpacity>

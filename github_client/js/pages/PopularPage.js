@@ -15,14 +15,17 @@ import {
 import DataRepository,{Flag_STORAGE} from '../expand/dao/DataRepository'
 import NavigationBar from '../common/NavigationBar'
 import DetailPage from './RepositoryDetailPage'
-
+import ProjectModel from '../model/ProjectModel'
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
 import RespositoryCell from '../common/RespositoryCell'
-
+import FavoriteDao from '../expand/dao/FavoriteDao'
+import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import Utils from '../Util/FavoriteUtils'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
+var favoriteDao = new FavoriteDao(Flag_STORAGE.flag_popular)
 
-import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+
 
 export default class PopularPage extends Component {
 
@@ -86,8 +89,8 @@ class PopularTabPage extends Component{
         this.state={
             result:'',
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
-            isLoading:false
-
+            isLoading:false,
+            favoriteKeys:[]
         }
     }
 
@@ -95,25 +98,34 @@ class PopularTabPage extends Component{
         this.loadData();
     }
 
-    onSelect(item){
+    onSelect(projectModel){
         this.props.navigator.push({
+             title:projectModel.item.full_name,
              component:DetailPage,
              params:{
-                 item:item,
+                 projectModel:projectModel,
                  ...this.props
              }
         })
     }
 
-
-
-    renderRow(data){
+    renderRow(projectModel){
         return <RespositoryCell
-            onSelect = {()=>this.onSelect(data)}
-            key = {data.id}
-            data={data}
-        />
+            onSelect = {()=>this.onSelect(projectModel)}
+            key = {projectModel.item.id}
+            projectModel={projectModel}
+            onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
      }
+
+    onFavorite(item,isFavorite){
+        if(isFavorite){
+
+            favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
+        }else {
+
+            favoriteDao.removeFavoriteItem(item.id.toString());
+        }
+    }
 
     render(){
         return <View style={{flex:1}}>
@@ -133,6 +145,41 @@ class PopularTabPage extends Component{
         </View>
     }
 
+    //跟新project item的 favorite状态
+    flushFavoriteState(){
+        let projectModels = [];
+        let items = this.items;
+        for (var i=0,len=items.length;i<len;i++){
+            projectModels.push(new ProjectModel(items[i],Utils.checkFavoriteItemExistance(items[i],this.state.favoriteKeys)));
+        }
+        this.updateState({
+            isLoading:false,
+            dataSource:this.getDataSource(projectModels)
+        })
+    }
+
+    getDataSource(items) {
+        return this.state.dataSource.cloneWithRows(items);
+    }
+
+    getFavoriteKeys(){
+        favoriteDao.getFavoriteKeys()
+            .then(keys=>{
+                if (keys){
+                    this.updateState({favoriteKeys:keys})
+                }
+                this.flushFavoriteState();
+            })
+            .catch(e=>{
+                this.flushFavoriteState();
+            })
+    }
+
+    updateState(dict){
+        if(!this)return;
+        this.setState(dict)
+    }
+
     loadData(){
         this.setState({
             isLoading:true
@@ -142,33 +189,23 @@ class PopularTabPage extends Component{
         this.dataRepository.fetchRespository(url)
 
             .then((wrapData)=>{
-                let items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
-                this.setState({
-                    dataSource:this.state.dataSource.cloneWithRows(items),
-                    isLoading:false
-                })
-
-                if(result && result.update_date && this.dataRepository.checkData(result.update_date)){
-                    // DeviceEventEmitter.emit('showToast','缓存数据过时');
+                this.items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
+                this.getFavoriteKeys();
+                if(result && result.update_date && this.dataRepository.checkData(result.update_date)) {
                     return this.dataRepository.fetchNetRepository(url);
-                }else {
-                    DeviceEventEmitter.emit('showToast','显示缓存数据');
                 }
             })
 
             .then(items => {
                 if(!items || items.length===0)return;
-                this.setState({
-                    dataSource:this.state.dataSource.cloneWithRows(items),
-                    isLoading:false
-                })
-                DeviceEventEmitter.emit('showToast','显示网络数据');
+                this.items = items;
+                this.getFavoriteKeys();
 
             })
 
             .catch(error=>{
-                this.setState({
-                    result:JSON.stringify(error)
+                this.updateState({
+                    isLoading:false
                 })
             })
     }
