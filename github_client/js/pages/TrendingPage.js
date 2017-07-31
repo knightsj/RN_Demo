@@ -24,6 +24,11 @@ const API_URL = 'https://github.com/trending/'
 import Popover from '../common/Popover'
 import TimeSpan from '../model/TimeSpan'
 
+import FavoriteDao from '../expand/dao/FavoriteDao'
+import ProjectModel from '../model/ProjectModel'
+var favoriteDao = new FavoriteDao(Flag_STORAGE.flag_popular)
+import Utils from '../Util/FavoriteUtils'
+
 var timeSpanTextArr = [
     new TimeSpan('今 天','since=daily'),
     new TimeSpan('本 周','since=weekly'),
@@ -31,6 +36,8 @@ var timeSpanTextArr = [
 
 
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+
+var dataRepository = new DataRepository(Flag_STORAGE.flag_trending);
 
 export default class TrendingPage extends Component {
 
@@ -159,11 +166,11 @@ export default class TrendingPage extends Component {
 class TrendingTabPage extends Component{
     constructor(props){
         super(props);
-        this.dataRepository = new DataRepository(Flag_STORAGE.flag_trending);
         this.state={
             result:'',
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
-            isLoading:false
+            isLoading:false,
+            favoriteKeys:[]
 
         }
     }
@@ -177,23 +184,63 @@ class TrendingTabPage extends Component{
         this.loadData(this.props.timeSpan,true);
     }
 
-    onSelect(item){
+    onSelect(projectModel){
         this.props.navigator.push({
+            title:projectModel.item.fullName,
             component:DetailPage,
             params:{
-                item:item,
+                projectModel:projectModel,
+                parentComponent:this,
+                flag:Flag_STORAGE.flag_trending,
                 ...this.props
             }
         })
     }
 
+    onFavorite(item,isFavorite){
+        if(isFavorite){
+
+            favoriteDao.saveFavoriteItem(item.fullName,JSON.stringify(item));
+        }else {
+
+            favoriteDao.removeFavoriteItem(item.fullName);
+        }
+    }
 
 
-    renderRow(data){
+    //跟新project item的 favorite状态
+    flushFavoriteState(){
+        let projectModels = [];
+        let items = this.items;
+        for (var i=0,len=items.length;i<len;i++){
+            projectModels.push(new ProjectModel(items[i],Utils.checkFavoriteItemExistance(items[i],this.state.favoriteKeys)));
+        }
+        this.updateState({
+            isLoading:false,
+            dataSource:this.getDataSource(projectModels)
+        })
+    }
+
+
+    getFavoriteKeys(){
+        favoriteDao.getFavoriteKeys()
+            .then(keys=>{
+                if (keys){
+                    this.updateState({favoriteKeys:keys})
+                }
+                this.flushFavoriteState();
+            })
+            .catch(e=>{
+                this.flushFavoriteState();
+            })
+    }
+
+    renderRow(projectModel){
         return <TrendingCell
-            onSelect = {()=>this.onSelect(data)}
-            key = {data.id}
-            data={data}
+            onSelect = {()=>this.onSelect(projectModel)}
+            key = {projectModel.item.fullName}
+            projectModel={projectModel}
+            onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}
         />
     }
 
@@ -230,6 +277,17 @@ class TrendingTabPage extends Component{
         return API_URL + category + '?' + timeSpan.searchText;
     }
 
+    getDataSource(items) {
+        return this.state.dataSource.cloneWithRows(items);
+    }
+
+
+    updateState(dict){
+        if(!this)return;
+        this.setState(dict)
+    }
+
+
     loadData(timeSpan,isRefresh){
         this.updateState({
             isLoading:true
@@ -237,18 +295,14 @@ class TrendingTabPage extends Component{
 
         let url = this.getFetchURL(timeSpan,this.props.tabLabel);
 
-        this.dataRepository.fetchRespository(url)
+        dataRepository.fetchRespository(url)
 
             .then((wrapData)=>{
-                let items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
-                this.updateState({
-                    dataSource:this.state.dataSource.cloneWithRows(items),
-                    isLoading:false
-                })
-
-                if(result && result.update_date && this.dataRepository.checkData(result.update_date)){
+                this.items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
+                this.getFavoriteKeys();
+                if(result && result.update_date && dataRepository.checkData(result.update_date)){
                     // DeviceEventEmitter.emit('showToast','缓存数据过时');
-                    return this.dataRepository.fetchNetRepository(url);
+                    return dataRepository.fetchNetRepository(url);
                 }else {
                     DeviceEventEmitter.emit('showToast','显示缓存数据');
                 }
@@ -256,17 +310,14 @@ class TrendingTabPage extends Component{
 
             .then(items => {
                 if(!items || items.length===0)return;
-                this.updateState({
-                    dataSource:this.state.dataSource.cloneWithRows(items),
-                    isLoading:false
-                })
+                this.getFavoriteKeys();
                 DeviceEventEmitter.emit('showToast','显示网络数据');
 
             })
 
             .catch(error=>{
-                this.setState({
-                    result:JSON.stringify(error)
+                this.updateState({
+                    isLoading:false
                 })
             })
     }

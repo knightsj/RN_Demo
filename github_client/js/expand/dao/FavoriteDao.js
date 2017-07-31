@@ -37,7 +37,6 @@ export default class FavoriteDao{
                 }
                 var index=favoriteKeys.indexOf(key);
                 if(isAdd){
-                    alert('add1');
                     if (index===-1)favoriteKeys.push(key);
                 }else {
                     if (index!==-1)favoriteKeys.splice(index, 1);
