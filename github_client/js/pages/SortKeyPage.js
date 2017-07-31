@@ -29,7 +29,7 @@ export default class NewPage extends Component {
     }
 
     componentDidMount() {
-        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
+        this.languageDao = new LanguageDao(this.props.flag);
         this.loadData();
     }
 
@@ -39,7 +39,7 @@ export default class NewPage extends Component {
                 this.getCheckedItems(result);
             })
             .catch(error=>{
-
+                console.log(error);
             })
     }
 
@@ -60,7 +60,7 @@ export default class NewPage extends Component {
 
     goBack(){
 
-        if(ArrayUtils.isEqual(this.originalCheckedArray,this.state.checkedArray)){
+        if(!ArrayUtils.isEqual(this.originalCheckedArray,this.state.checkedArray)){
             this.props.navigator.pop();
             return;
         }else {
@@ -71,7 +71,10 @@ export default class NewPage extends Component {
                     {text:'不保存',onPress:()=>{
                         this.props.navigator.pop();
                     },style:'cancel'},
-                    {text:'保存',onPress:()=>{this.onSave(true)}}
+
+                    {text:'保存',onPress:()=>{
+                        this.onSave(true);
+                    }}
                 ]
             )
         }
@@ -92,24 +95,22 @@ export default class NewPage extends Component {
         for(let i =0,l=this.originalCheckedArray.length;i<l;i++){
             let item = this.originalCheckedArray[i];
             let index = this.dataArray.indexOf(item);
-            this.sortResultArray.splice(index,1,this.state.checkedArray);
-
+            this.sortResultArray.splice(index,1,this.state.checkedArray[i]);
         }
     }
 
     render(){
 
-        let rightButton=<TouchableOpacity
-            onPress={()=>this.onSave()}
-        >
-            <View style={{margin:10}}>
-                <Text style={styles.title}></Text>
-            </View>
-        </TouchableOpacity>
+        let title = this.props.flag === FLAG_LANGUAGE.flag_language?'语言排序':'标签排序';
+        let rightButton = {
+            title: 'Save',
+            handler:()=>this.onSave(),
+            tintColor:'white',
+        };
 
         return <View style={styles.container}>
             <NavigationBar
-                title={'排序'}
+                title={title}
                 style={{backgroundColor:'#6495ED'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={rightButton}

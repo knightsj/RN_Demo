@@ -34,7 +34,12 @@ export default class MyPage extends Component {
                 <Text
                 style={styles.tips}
                 onPress={()=>this.jump2()}
-                >标签排序1</Text>
+                >标签排序</Text>
+
+                <Text
+                    style={styles.tips}
+                    onPress={()=>this.jump5()}
+                >语言排序</Text>
 
                 <Text
                     style={styles.tips}
@@ -62,7 +67,10 @@ export default class MyPage extends Component {
     jump2(){
         this.props.navigator.push({
             component:SortPage,
-            params:{...this.props}
+            params:{
+                ...this.props,
+                flag:FLAG_LANGUAGE.flag_key
+            }
         })
     }
 
@@ -79,6 +87,16 @@ export default class MyPage extends Component {
     jump4(){
         this.props.navigator.push({
             component:CustomKeyPage,
+            params:{
+                ...this.props,
+                flag:FLAG_LANGUAGE.flag_language
+            }
+        })
+    }
+
+    jump5(){
+        this.props.navigator.push({
+            component:SortPage,
             params:{
                 ...this.props,
                 flag:FLAG_LANGUAGE.flag_language
