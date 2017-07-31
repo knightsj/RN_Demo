@@ -7,7 +7,8 @@ import {
     TextInput,
     ListView,
     RefreshControl,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    TouchableOpacity
 } from 'react-native';
 
 
@@ -20,6 +21,14 @@ import TrendingCell from '../common/TrendingCell'
 
 const API_URL = 'https://github.com/trending/'
 
+import Popover from '../common/Popover'
+import TimeSpan from '../model/TimeSpan'
+
+var timeSpanTextArr = [
+    new TimeSpan('今 天','since=daily'),
+    new TimeSpan('本 周','since=weekly'),
+    new TimeSpan('本 月','since=monthly')];
+
 
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 
@@ -29,6 +38,9 @@ export default class TrendingPage extends Component {
         super(props);
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_language);
         this.state ={
+            isVisible: false,
+            buttonRect: {},
+            timeSpan: timeSpanTextArr[0],
             languages:[]
         }
     }
@@ -49,6 +61,47 @@ export default class TrendingPage extends Component {
         this.loadData();
     }
 
+    renderTitleView(){
+        return <View>
+            <TouchableOpacity
+                ref = 'button'
+                onPress={()=>this.showPopover()}
+            >
+                <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={{fontSize:18,color:'white',fontWeight:'400'}}>趋势  {this.state.timeSpan.showText}</Text>
+                    <Image
+                        style={{width:14,height:14,marginLeft:6}}
+                        source={require('../../res/images/ic_spinner_triangle.png')}/>
+                </View>
+            </TouchableOpacity>
+        </View>
+    }
+
+
+
+    showPopover() {
+        this.refs.button.measure((ox, oy, width, height, px, py) => {
+            this.setState({
+                isVisible: true,
+                buttonRect: {x: px, y: py, width: width, height: height}
+            });
+        });
+    }
+
+    closePopover(){
+        this.setState({
+            isVisible:false,
+        })
+    }
+
+    onSelectTimeSpan(timeSpan){
+        this.setState({
+            timeSpan:timeSpan,
+            isVisible:false,
+        })
+    }
+
+
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
@@ -60,18 +113,43 @@ export default class TrendingPage extends Component {
             >
                 {this.state.languages.map((result,i,arr)=>{
                     let item = arr[i];
-                    return item.checked? <TrendingTabPage key={i} tabLabel={item.name} {...this.props} />:null;
+                    return item.checked? <TrendingTabPage key={i} tabLabel={item.name} timeSpan={this.state.timeSpan} {...this.props} />:null;
                 })}
             </ScrollableTableView>:null;
+
+        let timeSpanView =
+            <Popover
+                isVisible = {this.state.isVisible}
+                fromRect = {this.state.buttonRect}
+                placement="bottom"
+                onClose = {()=>this.closePopover()}
+                contentStyle={{backgroundColor:'#343434',opacity:0.82}}
+            >
+                {timeSpanTextArr.map((result,i,arr)=>{
+                    return <TouchableOpacity
+                        key={i}
+                        underlayColor='transparent={}'
+                        onPress={()=>this.onSelectTimeSpan(arr[i])}
+                    >
+                        <View>
+                            <Text
+                                style={{fontSize:15,color:'white',fontWeight:'400',paddingTop:2,paddingLeft:6,paddingRight:6}}
+                            >{arr[i].showText}</Text>
+                        </View>
+
+                    </TouchableOpacity>
+                })}
+            </Popover>
 
         return (
             <View style={styles.container}>
                 <NavigationBar
-                    title={'趋势'}
+                    titleView = {this.renderTitleView()}
                     style={{backgroundColor:'#2196F3'}}
                     statusBar={{backgroundColor:'red'}}
                 />
                 {content}
+                {timeSpanView}
             </View>
         );
     }
@@ -90,8 +168,13 @@ class TrendingTabPage extends Component{
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.timeSpan !== this.props.timeSpan){
+            this.loadData(nextProps.timeSpan)
+        }
+    }
     componentDidMount() {
-        this.loadData();
+        this.loadData(this.props.timeSpan,true);
     }
 
     onSelect(item){
@@ -114,6 +197,10 @@ class TrendingTabPage extends Component{
         />
     }
 
+    onRefresh(){
+        this.loadData(this.props.timeSpan);
+    }
+
     render(){
         return <View style={{flex:1}}>
             <ListView
@@ -122,7 +209,7 @@ class TrendingTabPage extends Component{
                 refreshControl={
                     <RefreshControl
                         refreshing={this.state.isLoading}
-                        onRefresh={()=>this.loadData()}
+                        onRefresh={()=>this.onRefresh()}
                         colors={['#2196F3']}
                         tintColor={['#2196F3']}
                         titleColor={['#2196F3']}
@@ -132,22 +219,29 @@ class TrendingTabPage extends Component{
         </View>
     }
 
-    getFetchURL(timeSpan,category){
-        return API_URL + category + timeSpan.searchText;
+
+    updateState(dict){
+        if(!this)return;
+        this.setState(dict)
     }
 
-    loadData(){
-        this.setState({
+
+    getFetchURL(timeSpan,category){
+        return API_URL + category + '?' + timeSpan.searchText;
+    }
+
+    loadData(timeSpan,isRefresh){
+        this.updateState({
             isLoading:true
         })
 
-        let url = this.getFetchURL('?since=daily',this.props.tabLabel);
+        let url = this.getFetchURL(timeSpan,this.props.tabLabel);
 
         this.dataRepository.fetchRespository(url)
 
             .then((wrapData)=>{
                 let items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
-                this.setState({
+                this.updateState({
                     dataSource:this.state.dataSource.cloneWithRows(items),
                     isLoading:false
                 })
@@ -162,7 +256,7 @@ class TrendingTabPage extends Component{
 
             .then(items => {
                 if(!items || items.length===0)return;
-                this.setState({
+                this.updateState({
                     dataSource:this.state.dataSource.cloneWithRows(items),
                     isLoading:false
                 })

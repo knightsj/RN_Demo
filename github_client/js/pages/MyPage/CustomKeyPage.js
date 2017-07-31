@@ -20,7 +20,7 @@ export default class NewPage extends Component {
 
     constructor(props){
         super(props);
-        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key)
+        this.languageDao = new LanguageDao(this.props.flag);
         this.changeValues = [];
         this.isRemoveKeyPage = this.props.isRemoveKeyPage?true:false;
         this.state={
@@ -143,6 +143,7 @@ export default class NewPage extends Component {
 
     render(){
         let title = this.isRemoveKeyPage?'标签移除':'自定义标签'
+        title=this.props.flag === FLAG_LANGUAGE.flag_language?'自定义语言':title;
         let rightButtonTitle = this.isRemoveKeyPage?'移除':'保存'
         let rightButton=<TouchableOpacity
             onPress={()=>this.onSave()}
