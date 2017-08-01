@@ -297,22 +297,17 @@ class TrendingTabPage extends Component{
 
         dataRepository.fetchRespository(url)
 
-            .then((wrapData)=>{
-                this.items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
+            .then((result)=>{
+                this.items = result&&result.items?result.items:result?result:[];
                 this.getFavoriteKeys();
-                if(result && result.update_date && dataRepository.checkData(result.update_date)){
-                    // DeviceEventEmitter.emit('showToast','缓存数据过时');
+                if(!this.items && result && result.update_date && dataRepository.checkData(result.update_date)){
                     return dataRepository.fetchNetRepository(url);
-                }else {
-                    DeviceEventEmitter.emit('showToast','显示缓存数据');
                 }
             })
 
             .then(items => {
                 if(!items || items.length===0)return;
                 this.getFavoriteKeys();
-                DeviceEventEmitter.emit('showToast','显示网络数据');
-
             })
 
             .catch(error=>{

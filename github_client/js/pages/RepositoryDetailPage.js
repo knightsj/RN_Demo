@@ -7,7 +7,8 @@ import {
     Image,
     WebView,
     TextInput,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    TouchableOpacity
 } from 'react-native';
 
 import NavigationBar from '../common/NavigationBar'
@@ -15,16 +16,21 @@ import ViewUtils from '../Util/ViewUtils'
 
 const TRENDING_URL = 'https://github.com/'
 
+import FavoriteDao from '../expand/dao/FavoriteDao'
+
 export default class RepositoryDetailPage extends Component {
 
     constructor(props){
         super(props);
         let url = this.props.projectModel.item.html_url?this.props.projectModel.item.html_url:TRENDING_URL+this.props.projectModel.item.fullName;
         let title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.item.fullName;
+        this.favoriteDao = new FavoriteDao(this.flag);
         this.state={
             url:url,
             title:title,
-            canGoBack:false
+            canGoBack:false,
+            isFavorite:this.props.projectModel.isFavorite,
+            favoriteIcon:this.props.projectModel.isFavorite?require('../../res/images/ic_add.png'):require('../../res/images/ic_unstar_navbar.png')
         }
     }
 
@@ -52,6 +58,35 @@ export default class RepositoryDetailPage extends Component {
 
     }
 
+    onRightButtonClick(){
+        var projectModel = this.props.projectModel;
+        this.setFavoriteState(projectModel.isFavorite =!projectModel.isFavorite);
+        var key = projectModel.item.fullName?projectModel.fullName:projectModel.item.id.toString();
+        if(projectModel.isFavorite){
+            this.favoriteDao.saveFavoriteItem(key,JSON.stringify(projectModel.item));
+        }else {
+            this.favoriteDao.removeFavoriteItem(key);
+        }
+    }
+
+    setFavoriteState(isFavorite){
+        this.setState({
+            isFavorite:isFavorite,
+            favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_star_navbar.png')
+        })
+    }
+
+    renderRightButton(){
+        return <TouchableOpacity
+            onPress={()=>this.onRightButtonClick()}
+        >
+            <Image
+                style={{width:20,height:20,marginRight :12}}
+                source = {this.state.favoriteIcon}
+            />
+        </TouchableOpacity>
+    }
+
 
     render(){
         return <View style={styles.container}>
@@ -59,6 +94,7 @@ export default class RepositoryDetailPage extends Component {
                 title={this.state.title}
                 style={{backgroundColor:'#2196F3'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
+                rightButton={this.renderRightButton()}
             />
             <WebView
                 ref = {webView=>this.webView=webView}

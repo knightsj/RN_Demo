@@ -98,7 +98,7 @@ class PopularTabPage extends Component{
         this.loadData();
     }
 
-    onSelect(projectModel){
+    onSelectRepository(projectModel){
         this.props.navigator.push({
              title:projectModel.item.full_name,
              component:DetailPage,
@@ -111,7 +111,7 @@ class PopularTabPage extends Component{
 
     renderRow(projectModel){
         return <RespositoryCell
-            onSelect = {()=>this.onSelect(projectModel)}
+            onSelect = {()=>this.onSelectRepository(projectModel)}
             key = {projectModel.item.id}
             projectModel={projectModel}
             onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
@@ -119,10 +119,8 @@ class PopularTabPage extends Component{
 
     onFavorite(item,isFavorite){
         if(isFavorite){
-
             favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
         }else {
-
             favoriteDao.removeFavoriteItem(item.id.toString());
         }
     }
