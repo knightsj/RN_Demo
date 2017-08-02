@@ -24,7 +24,7 @@ export default class RepositoryDetailPage extends Component {
         super(props);
         let url = this.props.projectModel.item.html_url?this.props.projectModel.item.html_url:TRENDING_URL+this.props.projectModel.item.fullName;
         let title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.item.fullName;
-        this.favoriteDao = new FavoriteDao(this.flag);
+        this.favoriteDao = new FavoriteDao(this.props.flag);
         this.state={
             url:url,
             title:title,

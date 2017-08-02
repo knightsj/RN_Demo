@@ -99,6 +99,7 @@ class PopularTabPage extends Component{
     }
 
     onSelectRepository(projectModel){
+        alert(projectModel.isFavorite);
         this.props.navigator.push({
              title:projectModel.item.full_name,
              component:DetailPage,
@@ -119,10 +120,15 @@ class PopularTabPage extends Component{
 
     onFavorite(item,isFavorite){
         if(isFavorite){
+            alert(isFavorite)
             favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
         }else {
+            alert(isFavorite)
             favoriteDao.removeFavoriteItem(item.id.toString());
         }
+        //替换当前的数组呀
+
+
     }
 
     render(){
