@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-import DataRepository,{Flag_STORAGE} from '../expand/dao/DataRepository'
+import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
 import NavigationBar from '../common/NavigationBar'
 import DetailPage from './RepositoryDetailPage'
 
@@ -26,7 +26,7 @@ import TimeSpan from '../model/TimeSpan'
 
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import ProjectModel from '../model/ProjectModel'
-var favoriteDao = new FavoriteDao(Flag_STORAGE.flag_popular)
+var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 import Utils from '../Util/FavoriteUtils'
 
 var timeSpanTextArr = [
@@ -37,7 +37,7 @@ var timeSpanTextArr = [
 
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 
-var dataRepository = new DataRepository(Flag_STORAGE.flag_trending);
+var dataRepository = new DataRepository(FlAG_STORAGE.flag_trending);
 
 export default class TrendingPage extends Component {
 
@@ -175,13 +175,28 @@ class TrendingTabPage extends Component{
         }
     }
 
+    componentDidMount() {
+        this.loadData(this.props.timeSpan,true);
+        this.listener = DeviceEventEmitter.addListener('favoriteChanged_trending',()=> {
+            this.isFavoriteChanged = true;
+        })
+    }
+
+
+
     componentWillReceiveProps(nextProps) {
         if(nextProps.timeSpan !== this.props.timeSpan){
             this.loadData(nextProps.timeSpan)
+        }else if(this.isFavoriteChanged){
+            this.isFavoriteChanged = false
+            this.getFavoriteKeys();
         }
     }
-    componentDidMount() {
-        this.loadData(this.props.timeSpan,true);
+
+    componentWillUnmount() {
+        if(this.listener){
+            this.listener.remove();
+        }
     }
 
     onSelect(projectModel){
@@ -191,7 +206,7 @@ class TrendingTabPage extends Component{
             params:{
                 projectModel:projectModel,
                 parentComponent:this,
-                flag:Flag_STORAGE.flag_trending,
+                flag:FlAG_STORAGE.flag_trending,
                 ...this.props
             }
         })

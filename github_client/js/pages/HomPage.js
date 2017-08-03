@@ -16,6 +16,7 @@ import TrendingPage from './TrendingPage'
 import MyPage from './MyPage/MyPage'
 import Navigator from 'react-native-deprecated-custom-components';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import FavoritePage from './FavoritePage'
 
 import AyncStoryageTest from '../../AyncStorageTest'
 
@@ -118,7 +119,7 @@ export default class HomePage extends Component {
                         onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
 
                         <Navigator.Navigator
-                            initialRoute={{name:'tb_favorite',component:TempPage}}
+                            initialRoute={{name:'tb_favorite',component:FavoritePage}}
                             configureScene={()=>{
                                 return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}

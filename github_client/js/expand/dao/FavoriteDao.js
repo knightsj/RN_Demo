@@ -84,7 +84,9 @@ export default class FavoriteDao{
                                 let value = store[i][1];
                                 if (value)items.push(JSON.parse(value));
                             });
+
                             resolve(items);
+
                         } catch (e) {
                             reject(e);
                         }

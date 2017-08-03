@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-import DataRepository,{Flag_STORAGE} from '../expand/dao/DataRepository'
+import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
 import NavigationBar from '../common/NavigationBar'
 import DetailPage from './RepositoryDetailPage'
 import ProjectModel from '../model/ProjectModel'
@@ -23,18 +23,22 @@ import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import Utils from '../Util/FavoriteUtils'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
-var favoriteDao = new FavoriteDao(Flag_STORAGE.flag_popular)
-
+var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 
 
 export default class PopularPage extends Component {
 
     constructor(props){
         super(props);
+
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.state ={
             languages:[]
         }
+    }
+
+    componentDidMount() {
+        this.loadData();
     }
 
     loadData(){
@@ -49,9 +53,6 @@ export default class PopularPage extends Component {
             });
     }
 
-    componentDidMount() {
-        this.loadData();
-    }
 
     render() {
         let content = this.state.languages.length>0?
@@ -83,23 +84,42 @@ export default class PopularPage extends Component {
 
 
 class PopularTabPage extends Component{
+
     constructor(props){
         super(props);
-        this.dataRepository = new DataRepository(Flag_STORAGE.flag_popular);
+        this.isFavoriteChanged = false;
+        this.dataRepository = new DataRepository(FlAG_STORAGE.flag_popular);
         this.state={
-            result:'',
+
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
             isLoading:false,
-            favoriteKeys:[]
+            favoriteKeys:[],
+            projectModelsArr:[]
         }
     }
 
     componentDidMount() {
         this.loadData();
+        this.listener = DeviceEventEmitter.addListener('favoriteChanged_popular',()=> {
+            this.isFavoriteChanged = true;
+        })
+    }
+
+    componentWillReceiveProps(){
+
+        if(this.isFavoriteChanged){
+            this.getFavoriteKeys1();
+            this.isFavoriteChanged = false
+        }
+    }
+
+    componentWillUnmount() {
+        if(this.listener){
+            this.listener.remove();
+        }
     }
 
     onSelectRepository(projectModel){
-        alert(projectModel.isFavorite);
         this.props.navigator.push({
              title:projectModel.item.full_name,
              component:DetailPage,
@@ -120,14 +140,10 @@ class PopularTabPage extends Component{
 
     onFavorite(item,isFavorite){
         if(isFavorite){
-            alert(isFavorite)
             favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
         }else {
-            alert(isFavorite)
             favoriteDao.removeFavoriteItem(item.id.toString());
         }
-        //替换当前的数组呀
-
 
     }
 
@@ -149,7 +165,7 @@ class PopularTabPage extends Component{
         </View>
     }
 
-    //跟新project item的 favorite状态
+    //跟新project item的 收藏的状态
     flushFavoriteState(){
         let projectModels = [];
         let items = this.items;
@@ -158,15 +174,19 @@ class PopularTabPage extends Component{
         }
         this.updateState({
             isLoading:false,
-            dataSource:this.getDataSource(projectModels)
+            projectModelsArr:projectModels,
+            dataSource:this.getDataSource(projectModels),
+
         })
     }
 
-    getDataSource(items) {
-        return this.state.dataSource.cloneWithRows(items);
+    getDataSource(projectModels) {
+        return this.state.dataSource.cloneWithRows(projectModels);
     }
 
-    getFavoriteKeys(){
+
+
+    getFavoriteKeys1(){
         favoriteDao.getFavoriteKeys()
             .then(keys=>{
                 if (keys){
@@ -194,7 +214,7 @@ class PopularTabPage extends Component{
 
             .then((wrapData)=>{
                 this.items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
-                this.getFavoriteKeys();
+                this.getFavoriteKeys1();
                 if(result && result.update_date && this.dataRepository.checkData(result.update_date)) {
                     return this.dataRepository.fetchNetRepository(url);
                 }
@@ -203,7 +223,7 @@ class PopularTabPage extends Component{
             .then(items => {
                 if(!items || items.length===0)return;
                 this.items = items;
-                this.getFavoriteKeys();
+                this.getFavoriteKeys1();
 
             })
 

@@ -30,7 +30,7 @@ export default class RepositoryDetailPage extends Component {
             title:title,
             canGoBack:false,
             isFavorite:this.props.projectModel.isFavorite,
-            favoriteIcon:this.props.projectModel.isFavorite?require('../../res/images/ic_add.png'):require('../../res/images/ic_unstar_navbar.png')
+            favoriteIcon:this.props.projectModel.isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_star_navbar.png')
         }
     }
 

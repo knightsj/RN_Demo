@@ -18,21 +18,9 @@ export default class RespositoryCell extends Component{
         }
     }
 
-    setFavoriteState(isFavorite){
-        this.setState({
-            isFavorite:isFavorite,
-            favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
-        })
-    }
 
     componentWillReceiveProps(nextProps) {
         this.setFavoriteState(nextProps.projectModel.isFavorite);
-    }
-
-    onPressFavorite(){
-        this.setFavoriteState(!this.state.isFavorite);
-        //回传给页面，记录状态
-        this.props.onFavorite(this.props.projectModel.item,!this.state.isFavorite)
     }
 
     render(){
@@ -47,7 +35,7 @@ export default class RespositoryCell extends Component{
         </TouchableOpacity>
 
         return<TouchableOpacity
-            onPress={this.props.onSelect()}
+            onPress={this.props.onSelect}
             style={styles.container}
         >
             <View style={styles.cell_container}>
@@ -75,6 +63,20 @@ export default class RespositoryCell extends Component{
             </View>
         </TouchableOpacity>
 
+    }
+
+    onPressFavorite(){
+        this.setFavoriteState(!this.state.isFavorite);
+        //回传给页面，记录状态
+        this.props.onFavorite(this.props.projectModel.item,!this.state.isFavorite)
+    }
+
+
+    setFavoriteState(isFavorite){
+        this.setState({
+            isFavorite:isFavorite,
+            favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
+        })
     }
 }
 
