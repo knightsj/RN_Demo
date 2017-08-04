@@ -23,6 +23,7 @@ import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import Utils from '../Util/FavoriteUtils'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
+
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 
 
@@ -88,7 +89,7 @@ class PopularTabPage extends Component{
     constructor(props){
         super(props);
         this.isFavoriteChanged = false;
-        this.dataRepository = new DataRepository(FlAG_STORAGE.flag_popular);
+        this.dataRepository1 = new DataRepository(FlAG_STORAGE.flag_popular);
         this.state={
 
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
@@ -100,6 +101,7 @@ class PopularTabPage extends Component{
 
     componentDidMount() {
         this.loadData();
+
         this.listener = DeviceEventEmitter.addListener('favoriteChanged_popular',()=> {
             this.isFavoriteChanged = true;
         })
@@ -125,6 +127,7 @@ class PopularTabPage extends Component{
              component:DetailPage,
              params:{
                  projectModel:projectModel,
+                 flag:FlAG_STORAGE.flag_popular,
                  ...this.props
              }
         })
@@ -132,13 +135,15 @@ class PopularTabPage extends Component{
 
     renderRow(projectModel){
         return <RespositoryCell
-            onSelect = {()=>this.onSelectRepository(projectModel)}
             key = {projectModel.item.id}
             projectModel={projectModel}
+            onSelect = {()=>this.onSelectRepository(projectModel)}
             onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
      }
 
+     //收藏按钮的回调函数
     onFavorite(item,isFavorite){
+        //写进数据库，使用string
         if(isFavorite){
             favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
         }else {
@@ -165,18 +170,17 @@ class PopularTabPage extends Component{
         </View>
     }
 
-    //跟新project item的 收藏的状态
+    //更新里的items的收藏的状态并刷新列表
     flushFavoriteState(){
         let projectModels = [];
         let items = this.items;
         for (var i=0,len=items.length;i<len;i++){
-            projectModels.push(new ProjectModel(items[i],Utils.checkFavoriteItemExistance(items[i],this.state.favoriteKeys)));
+            projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));
         }
         this.updateState({
             isLoading:false,
             projectModelsArr:projectModels,
             dataSource:this.getDataSource(projectModels),
-
         })
     }
 
@@ -190,11 +194,13 @@ class PopularTabPage extends Component{
         favoriteDao.getFavoriteKeys()
             .then(keys=>{
                 if (keys){
-                    this.updateState({favoriteKeys:keys})
+                    //更新当前保存的所有收藏项目的key的集合
+                    this.updateState({favoriteKeys:keys});
                 }
                 this.flushFavoriteState();
             })
             .catch(e=>{
+                console.log(e);
                 this.flushFavoriteState();
             })
     }
@@ -210,24 +216,25 @@ class PopularTabPage extends Component{
         })
         let url = URL + this.props.tabLabel + QUERY_STR;
 
-        this.dataRepository.fetchRespository(url)
+        this.dataRepository1.fetchRespository(url)
 
-            .then((wrapData)=>{
-                this.items = wrapData&&wrapData.items?wrapData.items:wrapData?wrapData:[];
+            .then((result)=>{
+                this.items = result&&result.items?result.items:result?result:[];
                 this.getFavoriteKeys1();
-                if(result && result.update_date && this.dataRepository.checkData(result.update_date)) {
-                    return this.dataRepository.fetchNetRepository(url);
+                if(result && result.update_date && this.dataRepository1.checkData(result.update_date)) {
+                    return this.dataRepository1.fetchNetRepository(url);
                 }
             })
 
-            .then(items => {
-                if(!items || items.length===0)return;
+            .then( (items) => {
+                if(!items || items.length === 0)return;
                 this.items = items;
                 this.getFavoriteKeys1();
 
             })
 
             .catch(error=>{
+                console.log(error);
                 this.updateState({
                     isLoading:false
                 })

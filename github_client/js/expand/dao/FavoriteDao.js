@@ -17,6 +17,9 @@ export default class FavoriteDao{
         this.favoriteKey=FAVORITE_KEY_PREFIX+flag;
     }
 
+    //收藏项目，保存收藏的项目
+    //key:项目id或名称
+    //value:收藏的项目
     saveFavoriteItem(key,vaule,callback) {
         AsyncStorage.setItem(key,vaule,(error)=>{
             if (!error) {//更新Favorite的key
@@ -24,45 +27,9 @@ export default class FavoriteDao{
             }
         });
     }
-    /**
-     * 更新Favorite key集合
-     * @param isAdd true 添加,false 删除
-     * **/
-    updateFavoriteKeys(key,isAdd){
-        AsyncStorage.getItem(this.favoriteKey,(error,result)=>{
-            if (!error) {
-                var favoriteKeys=[];
-                if (result) {
-                    favoriteKeys=JSON.parse(result);
-                }
-                var index=favoriteKeys.indexOf(key);
-                if(isAdd){
-                    if (index===-1)favoriteKeys.push(key);
-                }else {
-                    if (index!==-1)favoriteKeys.splice(index, 1);
-                }
-                AsyncStorage.setItem(this.favoriteKey,JSON.stringify(favoriteKeys));
-            }
-        });
-    }
 
-    getFavoriteKeys(){
-        //获取收藏的Respository对应的key
 
-        return new Promise((resolve,reject)=>{
-            AsyncStorage.getItem(this.favoriteKey,(error,result)=>{
-                if (!error) {
-                    try {
-                        resolve(JSON.parse(result));
-                    } catch (e) {
-                        reject(error);
-                    }
-                }else {
-                    reject(error);
-                }
-            });
-        });
-    }
+    //移除已经收藏的项目
     removeFavoriteItem(key) {
         AsyncStorage.removeItem(key,(error)=>{
             if (!error) {
@@ -70,6 +37,52 @@ export default class FavoriteDao{
             }
         });
     }
+
+    /**
+     * 更新Favorite key集合
+     * @param isAdd true 添加,false 删除
+     * **/
+    updateFavoriteKeys(key,isAdd){
+        //用户收藏的所有项目拿出来
+        AsyncStorage.getItem(this.favoriteKey,(error,result)=>{
+            if (!error) {
+                var favoriteKeys=[];
+                if (result) {
+                    favoriteKeys=JSON.parse(result);
+                }
+                //当前这个key在数组中的index
+                var index=favoriteKeys.indexOf(key);
+                if(isAdd){
+                    //添加操作，并且当前key不在数组中
+                    if (index===-1)favoriteKeys.push(key);
+                }else {
+                    //删除操作，并且当前key存在于数组中
+                    if (index!==-1)favoriteKeys.splice(index, 1);
+                }
+                AsyncStorage.setItem(this.favoriteKey,JSON.stringify(favoriteKeys));
+            }
+        });
+    }
+
+    //获取所有收藏的项目的key的数组
+    getFavoriteKeys(){
+
+        return new Promise((resolve,reject)=>{
+            AsyncStorage.getItem(this.favoriteKey,(error,result)=>{
+                if (!error) {
+                    try {
+                        resolve(JSON.parse(result));
+                    } catch (e) {
+                        reject(e);
+                    }
+                }else {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+
 
     getAllItems() {
         return new Promise((resolve,reject)=> {

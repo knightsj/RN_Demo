@@ -13,7 +13,9 @@ export default class RespositoryCell extends Component{
     constructor(props){
         super(props);
         this.state={
+            //是否被选中收藏：是由popular页面传递过来的
             isFavorite:this.props.projectModel.isFavorite,
+            //收藏的图标
             favoriteIcon:this.props.projectModel.isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
         }
     }
@@ -24,6 +26,7 @@ export default class RespositoryCell extends Component{
     }
 
     render(){
+
         let item = this.props.projectModel.item?this.props.projectModel.item:this.props.projectModel;
         let favoriteButton = <TouchableOpacity
             onPress={()=>this.onPressFavorite()}
@@ -41,11 +44,8 @@ export default class RespositoryCell extends Component{
             <View style={styles.cell_container}>
 
                 <Text style={styles.title}>{item.full_name}</Text>
-
                 <Text style={styles.description}>{item.description}</Text>
-
                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                         <Text style={styles.bottomTextStyle}>Author:</Text>
                         <Image
@@ -65,14 +65,17 @@ export default class RespositoryCell extends Component{
 
     }
 
+    //按钮被点击了
     onPressFavorite(){
+        //取反
         this.setFavoriteState(!this.state.isFavorite);
-        //回传给页面，记录状态
+        //回传给popular页面，记录状态
         this.props.onFavorite(this.props.projectModel.item,!this.state.isFavorite)
     }
 
 
     setFavoriteState(isFavorite){
+        this.props.projectModel.isFavorite = isFavorite;
         this.setState({
             isFavorite:isFavorite,
             favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')

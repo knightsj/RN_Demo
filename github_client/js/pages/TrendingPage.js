@@ -20,13 +20,10 @@ import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-
 import TrendingCell from '../common/TrendingCell'
 
 const API_URL = 'https://github.com/trending/'
-
 import Popover from '../common/Popover'
 import TimeSpan from '../model/TimeSpan'
-
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import ProjectModel from '../model/ProjectModel'
-var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 import Utils from '../Util/FavoriteUtils'
 
 var timeSpanTextArr = [
@@ -37,6 +34,7 @@ var timeSpanTextArr = [
 
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 
+var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_trending)
 var dataRepository = new DataRepository(FlAG_STORAGE.flag_trending);
 
 export default class TrendingPage extends Component {
@@ -164,14 +162,13 @@ export default class TrendingPage extends Component {
 
 
 class TrendingTabPage extends Component{
+
     constructor(props){
         super(props);
         this.state={
-            result:'',
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
             isLoading:false,
             favoriteKeys:[]
-
         }
     }
 
@@ -181,7 +178,6 @@ class TrendingTabPage extends Component{
             this.isFavoriteChanged = true;
         })
     }
-
 
 
     componentWillReceiveProps(nextProps) {
@@ -199,9 +195,10 @@ class TrendingTabPage extends Component{
         }
     }
 
-    onSelect(projectModel){
+    onSelectRepository(projectModel){
+        var item = projectModel.item;
         this.props.navigator.push({
-            title:projectModel.item.fullName,
+            title:item.fullName,
             component:DetailPage,
             params:{
                 projectModel:projectModel,
@@ -214,7 +211,6 @@ class TrendingTabPage extends Component{
 
     onFavorite(item,isFavorite){
         if(isFavorite){
-
             favoriteDao.saveFavoriteItem(item.fullName,JSON.stringify(item));
         }else {
 
@@ -228,7 +224,7 @@ class TrendingTabPage extends Component{
         let projectModels = [];
         let items = this.items;
         for (var i=0,len=items.length;i<len;i++){
-            projectModels.push(new ProjectModel(items[i],Utils.checkFavoriteItemExistance(items[i],this.state.favoriteKeys)));
+            projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));
         }
         this.updateState({
             isLoading:false,
@@ -252,8 +248,8 @@ class TrendingTabPage extends Component{
 
     renderRow(projectModel){
         return <TrendingCell
-            onSelect = {()=>this.onSelect(projectModel)}
             key = {projectModel.item.fullName}
+            onSelect = {()=>this.onSelectRepository(projectModel)}
             projectModel={projectModel}
             onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}
         />
@@ -304,6 +300,7 @@ class TrendingTabPage extends Component{
 
 
     loadData(timeSpan,isRefresh){
+
         this.updateState({
             isLoading:true
         })
@@ -322,10 +319,12 @@ class TrendingTabPage extends Component{
 
             .then(items => {
                 if(!items || items.length===0)return;
+                this.items = items;
                 this.getFavoriteKeys();
             })
 
             .catch(error=>{
+                console.log(error);
                 this.updateState({
                     isLoading:false
                 })

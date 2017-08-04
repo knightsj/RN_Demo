@@ -8,7 +8,7 @@ import {
     WebView,
     TextInput,
     DeviceEventEmitter,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 import NavigationBar from '../common/NavigationBar'
@@ -17,16 +17,17 @@ import ViewUtils from '../Util/ViewUtils'
 const TRENDING_URL = 'https://github.com/'
 
 import FavoriteDao from '../expand/dao/FavoriteDao'
+import {FlAG_STORAGE} from '../expand/dao/DataRepository'
 
 export default class RepositoryDetailPage extends Component {
 
     constructor(props){
         super(props);
-        let url = this.props.projectModel.item.html_url?this.props.projectModel.item.html_url:TRENDING_URL+this.props.projectModel.item.fullName;
-        let title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.item.fullName;
-        this.favoriteDao = new FavoriteDao(this.props.flag);
+        this.url = this.props.projectModel.item.html_url?this.props.projectModel.item.html_url:TRENDING_URL+this.props.projectModel.item.fullName;
+        var title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.projectModel.item.fullName;
+        this.favoriteDao1 = new FavoriteDao(this.props.flag);
         this.state={
-            url:url,
+            url:this.url,
             title:title,
             canGoBack:false,
             isFavorite:this.props.projectModel.isFavorite,
@@ -58,18 +59,30 @@ export default class RepositoryDetailPage extends Component {
 
     }
 
+
     onRightButtonClick(){
+
         var projectModel = this.props.projectModel;
         this.setFavoriteState(projectModel.isFavorite =!projectModel.isFavorite);
-        var key = projectModel.item.fullName?projectModel.fullName:projectModel.item.id.toString();
+        var key = projectModel.item.fullName?projectModel.item.fullName:projectModel.item.id.toString();
         if(projectModel.isFavorite){
-            this.favoriteDao.saveFavoriteItem(key,JSON.stringify(projectModel.item));
+            this.favoriteDao1.saveFavoriteItem(key,JSON.stringify(projectModel.item));
         }else {
-            this.favoriteDao.removeFavoriteItem(key);
+            this.favoriteDao1.removeFavoriteItem(key);
         }
+
+        if (this.props.flag === FlAG_STORAGE.flag_popular){
+            DeviceEventEmitter.emit('favoriteChanged_popular');
+        }else if (this.props.flag === FlAG_STORAGE.flag_trending){
+            DeviceEventEmitter.emit('favoriteChanged_trending');
+        }else {
+            //没有符合的页面，不发送通知
+        }
+
     }
 
     setFavoriteState(isFavorite){
+        this.props.projectModel.isFavorite = isFavorite;
         this.setState({
             isFavorite:isFavorite,
             favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_star_navbar.png')
@@ -92,6 +105,7 @@ export default class RepositoryDetailPage extends Component {
         return <View style={styles.container}>
             <NavigationBar
                 title={this.state.title}
+                popEnabled={false}
                 style={{backgroundColor:'#2196F3'}}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={this.renderRightButton()}

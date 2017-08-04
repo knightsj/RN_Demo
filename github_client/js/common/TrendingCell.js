@@ -21,6 +21,7 @@ export default class TrendingCell extends Component{
     }
 
     setFavoriteState(isFavorite){
+        this.props.projectModel.isFavorite = isFavorite;
         this.setState({
             isFavorite:isFavorite,
             favoriteIcon:isFavorite?require('../../res/images/ic_star.png'):require('../../res/images/ic_unstar_transparent.png')
