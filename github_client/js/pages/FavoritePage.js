@@ -155,7 +155,6 @@ class FavoriteTabPage extends Component{
     render(){
         return <View style={{flex:1}}>
             <ListView
-
                 renderRow={(data)=>this.renderRow(data)}
                 enableEmptySections={true}
                 dataSource={this.state.dataSource}

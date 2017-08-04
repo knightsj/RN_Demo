@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import NavigationBar from '../../common/NavigationBar'
-import CustomKeyPage from './CustomKeyPage'
+import CustomKeyPage from '../CustomKeyPage'
 import SortPage from '../SortKeyPage'
 import {FLAG_LANGUAGE} from '../../expand/dao/LanguageDao'
 

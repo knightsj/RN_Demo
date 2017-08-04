@@ -10,11 +10,11 @@ import {
     Alert
 } from 'react-native';
 
-import NavigationBar from '../../common/NavigationBar'
-import ViewUtils from '../../Util/ViewUtils'
-import LanguageDao ,{FLAG_LANGUAGE}from '../../expand/dao/LanguageDao'
+import NavigationBar from '../common/NavigationBar'
+import ViewUtils from '../Util/ViewUtils'
+import LanguageDao ,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
 import CheckBox from 'react-native-check-box'
-import ArrayUtls from '../../Util/ArrayUtls'
+import ArrayUtls from '../Util/ArrayUtls'
 
 export default class NewPage extends Component {
 
@@ -95,10 +95,10 @@ export default class NewPage extends Component {
                 isChecked={data.checked}
                 unCheckedImage={<Image
                     style={{tintColor:'#6495ED'}}
-                    source={require('../../../res/images/img_my_page/ic_check_box_outline_blank.png')}/>}
+                    source={require('../../res/images/img_my_page/ic_check_box_outline_blank.png')}/>}
                 checkedImage={<Image
                     style={{tintColor:'#6495ED'}}
-                    source={require('../../../res/images/img_my_page/ic_check_box.png')}/>}
+                    source={require('../../res/images/img_my_page/ic_check_box.png')}/>}
             />
         )
     }

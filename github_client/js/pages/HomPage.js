@@ -12,6 +12,7 @@ import TempPage from '../../temp'
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import TrendingPage from './TrendingPage'
+import MinePage from './MinePage'
 
 import MyPage from './MyPage/MyPage'
 import Navigator from 'react-native-deprecated-custom-components';
@@ -114,8 +115,8 @@ export default class HomePage extends Component {
                         selected={this.state.selectedTab === 'tb_favorite'}
                         selectedTitleStyle={{color:'#2196F3'}}
                         title="收藏"
-                        renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
-                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_trending.png')} />}
+                        renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_favorite.png')} />}
+                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_favorite.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
 
                         <Navigator.Navigator
@@ -135,12 +136,12 @@ export default class HomePage extends Component {
                         selected={this.state.selectedTab === 'tb_my'}
                         selectedTitleStyle={{color:'#2196F3'}}
                         title="我的"
-                        renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
-                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_trending.png')} />}
+                        renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_my.png')} />}
+                        renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_my.png')} />}
                         onPress={() => this.setState({ selectedTab: 'tb_my' })}>
 
                         <Navigator.Navigator
-                            initialRoute={{name:'tb_my',component:MyPage}}
+                            initialRoute={{name:'tb_my',component:MinePage}}
                             configureScene={()=>{
                                 return Navigator.Navigator.SceneConfigs.PushFromRight;
                             }}
