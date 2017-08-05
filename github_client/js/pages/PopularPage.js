@@ -121,17 +121,7 @@ class PopularTabPage extends Component{
         }
     }
 
-    onSelectRepository(projectModel){
-        this.props.navigator.push({
-             title:projectModel.item.full_name,
-             component:DetailPage,
-             params:{
-                 projectModel:projectModel,
-                 flag:FlAG_STORAGE.flag_popular,
-                 ...this.props
-             }
-        })
-    }
+
 
     renderRow(projectModel){
         return <RespositoryCell
@@ -150,6 +140,19 @@ class PopularTabPage extends Component{
             favoriteDao.removeFavoriteItem(item.id.toString());
         }
 
+    }
+
+
+    onSelectRepository(projectModel){
+        this.props.navigator.push({
+            title:projectModel.item.full_name,
+            component:DetailPage,
+            params:{
+                projectModel:projectModel,
+                flag:FlAG_STORAGE.flag_popular,
+                ...this.props
+            }
+        })
     }
 
     render(){

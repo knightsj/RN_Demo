@@ -12,7 +12,6 @@ const {height, width} = Dimensions.get('window');
 module.exports ={
 
     cellBottomLineStyle: {
-        flex: 1,
         height: 0.4,
         opacity:0.5,
         backgroundColor: 'darkgray',

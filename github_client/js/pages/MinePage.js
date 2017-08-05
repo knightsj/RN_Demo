@@ -14,6 +14,7 @@ import {MORE_MENU} from '../common/MoreMenu'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import ViewUtil from '../Util/ViewUtils'
 import LanguageDao,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
+import AboutPage from './AboutPage'
 
 import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
@@ -70,7 +71,7 @@ export default class MinePage extends Component {
                 break;
 
             case MORE_MENU.About:
-                alert('关于');
+                TargetComponent = AboutPage;
                 break;
 
         }
@@ -95,7 +96,7 @@ export default class MinePage extends Component {
             />
             <ScrollView>
                 <TouchableHighlight
-                    onPress={()=>this.onClick()}
+                    onPress={()=>this.onClick(MORE_MENU.About)}
                 >
                     <View style={styles.item}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>

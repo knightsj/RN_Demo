@@ -4,7 +4,7 @@ import {
 
 import GitHubTrending from 'GitHubTrending'
 
-export var FlAG_STORAGE = {flag_popular:'popular',flag_trending:'trending'};
+export var FlAG_STORAGE = {flag_popular:'popular',flag_trending:'trending',flag_mine:'mine'};
 
 export default class  DataRepository{
 
@@ -103,13 +103,4 @@ export default class  DataRepository{
         AsyncStorage.setItem(url,JSON.stringify(wrapData),callBack);
     }
 
-    checkData(longTime){
-        let cDate = new Date();
-        let tDate = new Date();
-        tDate.setTime(longTime);
-        if (cDate.getMonth() !== tDate.getMonth()) return false;
-        if (cDate.getDay() !== tDate.getDay()) return false;
-        if (cDate.getHours() - tDate.getHours() > 4) return false;
-        return true;
-    }
 }
