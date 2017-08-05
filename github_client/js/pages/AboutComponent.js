@@ -27,22 +27,43 @@ import {FlAG_STORAGE} from '../expand/dao/DataRepository'
 import FavoriteUtils from '../Util/FavoriteUtils'
 import RepositoryCell from '../common/RespositoryCell'
 import DetailPage from './RepositoryDetailPage'
-
+import RepositoryUtil from '../Util/RepositoryUtil'
 
 export var FLAG_ABOUT = {flag_about:'about',flag_about_me:'flag_about_me'}
 
 export default class AboutComponent {
 
-    constructor(props,flag_about,updateState) {
+    constructor(props,flag_about,updateState,config) {
         this.props = props;
         this.updateState = updateState;
         this.flag_about = flag_about;
+        this.config = config;
         this.repositories = [];
         this.favoriteKeys = null;
         this.favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular);
+        this.repositoryUtil = new RepositoryUtil(this);
     }
 
-    onNotifyDataChanged(itmes){
+    componentDidMount() {
+        
+        if(this.flag_about === FLAG_ABOUT.flag_about){
+
+            this.repositoryUtil.fetchRepository(this.config.info.currentRepoUrl);
+
+        }else if (this.flag_about === FLAG_ABOUT.flag_about_me){
+            var urls = [];
+            var items = this.config.items;
+            for (var i = 0, l = items.length; i <l;i++){
+                urls.push(this.config.info.url + items[i]);
+            }
+            this.repositoryUtil.fetchRepositorys(urls);
+
+        }else {
+
+        }
+    }
+
+    onNotifyDataChanged(items){
         this.updateFavorite(items);
     }
 
@@ -53,11 +74,10 @@ export default class AboutComponent {
             this.favoriteKeys = await this.favoriteDao.getFavoriteKeys();
         }
         let projectModels = [];
-        let items = this.items;
         for (var i=0,len=this.repositories.length;i<len;i++){
             var data = this.repositories[i];
             projectModels.push({
-                isFavorite: this.favoriteKeys ? this.favoriteKeys:[],
+                isFavorite: FavoriteUtils.checkFavorite(this.repositories[i],this.favoriteKeys?this.favoriteKeys:null),
                 item: data.item ? data.item : data,
             });
         }
@@ -71,9 +91,9 @@ export default class AboutComponent {
     onFavorite(item,isFavorite){
         //写进数据库，使用string
         if(isFavorite){
-            favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
+            this.favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
         }else {
-            favoriteDao.removeFavoriteItem(item.id.toString());
+            this.favoriteDao.removeFavoriteItem(item.id.toString());
         }
 
     }
@@ -91,11 +111,15 @@ export default class AboutComponent {
         })
     }
 
+    //创建项目视图
     renderRepository(projectModels){
-        if(!projectModels || projectModels.length===0)return null;
+        if(!projectModels || projectModels.length===0){
+            return null;
+        }
+
         let views = [];
         for (let i=0,l=projectModels.length;i<l;i++){
-            let proejctModel = projectModels[i];
+            let projectModel = projectModels[i];
             views.push(
                 <RepositoryCell
                     key = {projectModel.item.id}
@@ -104,6 +128,7 @@ export default class AboutComponent {
                     onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
             )
         }
+        return views;
     }
 
     createParallaxRenderConfig(params){

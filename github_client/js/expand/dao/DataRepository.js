@@ -51,7 +51,25 @@ export default class  DataRepository{
 
     fetchNetRepository(url){
         return new  Promise((resolve,reject)=>{
-            if (this.flag === FlAG_STORAGE.flag_trending){
+
+            if (this.flag !== FlAG_STORAGE.flag_trending){
+                fetch(url)
+                    .then(response=>response.json())
+                    .catch((error)=>{
+                        reject(error);
+                    }).then((responseData)=>{
+                    if (this.flag === FlAG_STORAGE.flag_mine && responseData){
+                        this.saveRespository(url,responseData);
+                        resolve(responseData);
+                    }else if (responseData && responseData.items){
+                        this.saveRespository(url,responseData.items);
+                    }else{
+                        reject(new Error('responseData is null'));
+                    }
+
+                });
+            }else {
+
                 this.trending.fetchTrending(url)
                     .then(result=>{
                         if(!result){
@@ -60,21 +78,10 @@ export default class  DataRepository{
                         }
                         this.saveRespository(url,result);
                         resolve(result);
-                    })
-            }else {
-
-                fetch(url)
-                    .then(response=>response.json())
-                    .catch((error)=>{
+                    }).catch((error)=>{
                         reject(error);
-                    }).then((responseData)=>{
-                        if(!responseData || !responseData.items){
-                            reject(new Error('responseData is null'));
-                            return;
-                        }
-                        resolve(responseData.items);
-                        this.saveRespository(url,responseData.items);
-                }).done();
+                })
+
             }
 
         })
@@ -99,7 +106,12 @@ export default class  DataRepository{
 
     saveRespository(url, items, callBack){
         if(!url || !items) return;
-        let wrapData = {items:items, update_date:new Date().getTime()};
+        let wrapData;
+        if (this.flag === FlAG_STORAGE.flag_mine){
+            wrapData = {item:items, update_date:new Date().getTime()};
+        }else {
+            wrapData = {items:items, update_date:new Date().getTime()};
+        }
         AsyncStorage.setItem(url,JSON.stringify(wrapData),callBack);
     }
 

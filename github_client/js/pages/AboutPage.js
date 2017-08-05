@@ -24,12 +24,19 @@ import {MORE_MENU} from '../common/MoreMenu'
 import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import WebViewPage from './WebViewPage'
+import config from '../../res/data/Config.json'
 
 export default class AboutPage extends Component{
-
     constructor(props) {
         super(props);
-        this.aboutComponent = new AboutComponent(props,(dic=>this.updateState(dic)),FLAG_ABOUT.flag_about)
+        this.aboutComponent = new AboutComponent(props,FLAG_ABOUT.flag_about,(dic=>this.updateState(dic)),config)
+        this.state={
+            projectModels:[],
+        }
+    }
+
+    componentDidMount() {
+        this.aboutComponent.componentDidMount();
     }
 
     updateState(dic){
@@ -74,6 +81,7 @@ export default class AboutPage extends Component{
 
     render(){
         let contentView = <View>
+            {this.aboutComponent.renderRepository(this.state.projectModels)}
             {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Website),require('../../res/images/ic_computer.png'),MORE_MENU.Website,{tintColor:'#2196F3'})}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
 

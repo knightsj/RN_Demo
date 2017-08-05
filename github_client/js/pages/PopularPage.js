@@ -21,6 +21,7 @@ import RespositoryCell from '../common/RespositoryCell'
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import Utils from '../Util/FavoriteUtils'
+import TimeUtil from '../Util/TimeUtil'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
 
@@ -224,7 +225,7 @@ class PopularTabPage extends Component{
             .then((result)=>{
                 this.items = result&&result.items?result.items:result?result:[];
                 this.getFavoriteKeys1();
-                if(result && result.update_date && this.dataRepository1.checkData(result.update_date)) {
+                if(result && result.update_date && !TimeUtil.checkDate(result.update_date)) {
                     return this.dataRepository1.fetchNetRepository(url);
                 }
             })

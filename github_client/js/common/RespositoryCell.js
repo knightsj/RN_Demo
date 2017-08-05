@@ -84,15 +84,11 @@ export default class RespositoryCell extends Component{
 }
 
 const styles =StyleSheet.create({
-    container:{
-        flex:1
-    },
 
     title:{
         fontSize:15,
         marginBottom:2,
         color:'#212121',
-
     },
 
     bottomTextStyle:{
