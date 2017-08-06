@@ -8,7 +8,8 @@ import {
     TextInput,
     ListView,
     RefreshControl,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    TouchableOpacity
 } from 'react-native';
 
 
@@ -24,6 +25,7 @@ import Utils from '../Util/FavoriteUtils'
 import TimeUtil from '../Util/TimeUtil'
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
+import SearchPage from './SearchPage'
 
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 
@@ -56,6 +58,29 @@ export default class PopularPage extends Component {
     }
 
 
+    renderNavRightButton(){
+        return <View>
+            <TouchableOpacity
+
+                onPress={()=>{
+                    this.props.navigator.push({
+                        component:SearchPage,
+                        params:{
+                            ...this.props
+                        }
+                    })
+                }}
+            >
+                <View>
+                    <Image
+                        style={{width:24,height:24,marginRight:10}}
+                        source = {require('../../res/images/ic_search_white_48pt.png')}
+                    />
+                </View>
+            </TouchableOpacity>
+        </View>
+    }
+
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
@@ -76,7 +101,8 @@ export default class PopularPage extends Component {
                 <NavigationBar
                     title={'最热'}
                     style={{backgroundColor:'#2196F3'}}
-                    statusBar={{backgroundColor:'red'}}
+                    rightButton={this.renderNavRightButton()}
+
                 />
                 {content}
             </View>
