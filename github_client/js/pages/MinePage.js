@@ -18,6 +18,7 @@ import AboutPage from './AboutPage'
 
 import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
+import AboutMePage from './AboutMePage'
 
 export default class MinePage extends Component {
 
@@ -68,6 +69,7 @@ export default class MinePage extends Component {
 
             case MORE_MENU.About_Author:
 
+                TargetComponent =  AboutMePage;
                 break;
 
             case MORE_MENU.About:

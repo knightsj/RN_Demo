@@ -28,6 +28,7 @@ import FavoriteUtils from '../Util/FavoriteUtils'
 import RepositoryCell from '../common/RespositoryCell'
 import DetailPage from './RepositoryDetailPage'
 import RepositoryUtil from '../Util/RepositoryUtil'
+import ActionUtils from '../Util/ActionUtils'
 
 export var FLAG_ABOUT = {flag_about:'about',flag_about_me:'flag_about_me'}
 
@@ -97,6 +98,7 @@ export default class AboutComponent {
         }
 
     }
+
 
 
     onSelectRepository(projectModel){

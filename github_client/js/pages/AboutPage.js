@@ -25,6 +25,8 @@ import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import WebViewPage from './WebViewPage'
 import config from '../../res/data/Config.json'
+import AboutMePage from './AboutMePage'
+
 
 export default class AboutPage extends Component{
     constructor(props) {
@@ -32,6 +34,7 @@ export default class AboutPage extends Component{
         this.aboutComponent = new AboutComponent(props,FLAG_ABOUT.flag_about,(dic=>this.updateState(dic)),config)
         this.state={
             projectModels:[],
+            author:config.author
         }
     }
 
@@ -45,10 +48,10 @@ export default class AboutPage extends Component{
 
     onClick(tab){
         let TargetComponent,params = {...this.props,menuType:tab}
+
         switch (tab){
-
             case MORE_MENU.About_Author:
-
+                TargetComponent = AboutMePage;
                 break;
 
             case MORE_MENU.Website:
@@ -93,10 +96,10 @@ export default class AboutPage extends Component{
             <View style={GlobalStyles.cellBottomLineStyle}></View>
         </View>
         return this.aboutComponent.render(contentView,{
-            'name':'J_Knight_',
-            'description':'一个正在学React Native的iOS开发',
-            'avatar':'http://upload.jianshu.io/users/upload_avatars/859001/9114777aca32?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240',
-            'backgroundImage':'http://www.devio.org/io/GitHubPopular/img/for_githubpopular_about_me.jpg'
+            'name':'GitHub Popular',
+            'description':'This is a GitHub most popular repositories and trending repositories viewer with React Native.',
+            'avatar':this.state.author.avatar1,
+            'backgroundImage':this.state.author.backgroundImg1,
         });
     }
 }
