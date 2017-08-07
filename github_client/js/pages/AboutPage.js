@@ -65,7 +65,7 @@ export default class AboutPage extends Component{
                 var url = 'mailto://ssjlife0111@163.com';
                 Linking.canOpenURL(url).then(supported=>{
                     if(!supported){
-                        console.log('Can\'t handle url:' + url);
+                        console.log('Can not handle url:' + url);
                     }else {
                         return Linking.openURL(url);
                     }

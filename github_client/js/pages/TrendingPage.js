@@ -27,6 +27,9 @@ import ProjectModel from '../model/ProjectModel'
 import Utils from '../Util/FavoriteUtils'
 import TimeUtil from '../Util/TimeUtil'
 import ActionUtils from '../Util/ActionUtils'
+import ViewUtils from '../Util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
+import {FLAG_TAB} from './HomPage'
 
 var timeSpanTextArr = [
     new TimeSpan('今 天','since=daily'),
@@ -108,6 +111,22 @@ export default class TrendingPage extends Component {
         })
     }
 
+    renderNavRightButton(){
+        return <View style={{flexDirection:'row'}}>
+            {ViewUtils.createMoreButton(()=>this.refs.moreMenu.open())}
+        </View>
+    }
+
+    renderMoreView(){
+        let params = {...this.props,fromPage:FLAG_TAB.flag_popularTab}
+        return <MoreMenu
+            ref = "moreMenu"
+            {...params}
+            menus={[MORE_MENU.Custom_Language,MORE_MENU.Sort_Language,MORE_MENU.About]}
+            anchorView={this.refs.moreMenuButton}
+        />
+    }
+
 
     render() {
         let content = this.state.languages.length>0?
@@ -154,9 +173,11 @@ export default class TrendingPage extends Component {
                     titleView = {this.renderTitleView()}
                     style={{backgroundColor:'#2196F3'}}
                     statusBar={{backgroundColor:'red'}}
+                    rightButton={this.renderNavRightButton()}
                 />
                 {content}
                 {timeSpanView}
+                {this.renderMoreView()}
             </View>
         );
     }

@@ -7,7 +7,8 @@ import {
     Image,
     TouchableHighlight,
     TouchableOpacity,
-    Alert
+    Alert,
+    DeviceEventEmitter
 } from 'react-native';
 
 import LanguageDao ,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
@@ -15,6 +16,7 @@ import ArrayUtils from '../Util/ArrayUtls'
 import SortableListView from 'react-native-sortable-listview'
 import NavigationBar from '../common/NavigationBar'
 import ViewUtils from '../Util/ViewUtils'
+import {ACTION_HOME,FLAG_TAB} from './HomPage'
 
 export default class NewPage extends Component {
 
@@ -87,7 +89,12 @@ export default class NewPage extends Component {
         }
         this.getSortResult();
         this.languageDao.save(this.sortResultArray);
+
+        //为什么不需要这个呢？
         this.props.navigator.pop();
+
+        var jumpToTab = this.props.flag == FLAG_LANGUAGE.flag_key?FLAG_TAB.flag_popularTab:FLAG_TAB.flag_trendingTab;
+        DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,jumpToTab)
     }
 
     getSortResult(){

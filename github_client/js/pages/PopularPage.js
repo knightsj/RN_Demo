@@ -25,6 +25,9 @@ import Utils from '../Util/FavoriteUtils'
 import TimeUtil from '../Util/TimeUtil'
 import ActionUtils from '../Util/ActionUtils'
 import SearchPage from './SearchPage'
+import ViewUtils from '../Util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
+import {FLAG_TAB} from './HomPage'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
@@ -62,7 +65,7 @@ export default class PopularPage extends Component {
 
 
     renderNavRightButton(){
-        return <View>
+        return <View style={{flexDirection:'row'}}>
             <TouchableOpacity
 
                 onPress={()=>{
@@ -80,8 +83,20 @@ export default class PopularPage extends Component {
                         source = {require('../../res/images/ic_search_white_48pt.png')}
                     />
                 </View>
+
             </TouchableOpacity>
+            {ViewUtils.createMoreButton(()=>this.refs.moreMenu.open())}
         </View>
+    }
+
+    renderMoreView(){
+        let params = {...this.props,fromPage:FLAG_TAB.flag_popularTab}
+        return <MoreMenu
+            ref = "moreMenu"
+            {...params}
+            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Key,MORE_MENU.Sort_Language,MORE_MENU.About]}
+            anchorView={this.refs.moreMenuButton}
+        />
     }
 
     render() {
@@ -108,6 +123,7 @@ export default class PopularPage extends Component {
 
                 />
                 {content}
+                {this.renderMoreView()}
             </View>
         );
     }

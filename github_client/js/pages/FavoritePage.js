@@ -8,6 +8,7 @@ import {
     TextInput,
     ListView,
     RefreshControl,
+    TouchableOpacity,
     DeviceEventEmitter
 } from 'react-native';
 
@@ -22,8 +23,10 @@ import TrendingCell from '../common/TrendingCell'
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import ArrayUtils from '../Util/ArrayUtls'
 import ActionUtils from '../Util/ActionUtils'
-
-
+import ViewUtils from '../Util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
+import {FLAG_TAB} from './HomPage'
+import SearchPage from './SearchPage'
 
 export default class FavoritePage extends Component {
 
@@ -31,6 +34,22 @@ export default class FavoritePage extends Component {
         super(props);
         this.state ={
         }
+    }
+
+    renderNavRightButton(){
+        return <View style={{flexDirection:'row'}}>
+            {ViewUtils.createMoreButton(()=>this.refs.moreMenu.open())}
+        </View>
+    }
+
+    renderMoreView(){
+        let params = {...this.props,fromPage:FLAG_TAB.flag_popularTab}
+        return <MoreMenu
+            ref = "moreMenu"
+            {...params}
+            menus={[MORE_MENU.Custom_Theme,MORE_MENU.About_Author,MORE_MENU.About]}
+            anchorView={this.refs.moreMenuButton}
+        />
     }
 
     render() {
@@ -53,8 +72,11 @@ export default class FavoritePage extends Component {
                 <NavigationBar
                     title={'收藏'}
                     style={{backgroundColor:'#2196F3'}}
+                    rightButton={this.renderNavRightButton()}
                 />
                 {content}
+                {this.renderMoreView()}
+
             </View>
         );
     }
@@ -149,6 +171,7 @@ class FavoriteTabPage extends Component{
         }
 
     }
+
 
     render(){
         return <View style={{flex:1}}>
