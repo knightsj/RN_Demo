@@ -1,6 +1,6 @@
 
 import RepositoryDetail from '../../js/pages/RepositoryDetailPage'
-
+import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
 export default class ActionUtils {
 
     //跳转到详情页面
@@ -12,6 +12,23 @@ export default class ActionUtils {
                 ...props
             }
         })
+    }
+
+    static onFavorite(favoriteDao,item,isFavorite,flag){
+        //写进数据库，使用string
+        let key = null;
+        if (flag === FlAG_STORAGE.flag_popular){
+            key =  item.id.toString();
+        }else if (flag === FlAG_STORAGE.flag_trending){
+            key = item.fullName;
+        }else {
+            key = '';
+        }
+        if(isFavorite){
+            favoriteDao.saveFavoriteItem(key,JSON.stringify(item));
+        }else {
+            favoriteDao.removeFavoriteItem(key);
+        }
     }
 
 }

@@ -21,6 +21,8 @@ import RespositoryCell from '../common/RespositoryCell'
 import TrendingCell from '../common/TrendingCell'
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import ArrayUtils from '../Util/ArrayUtls'
+import ActionUtils from '../Util/ActionUtils'
+
 
 
 export default class FavoritePage extends Component {
@@ -67,7 +69,7 @@ class FavoriteTabPage extends Component{
         this.favoriteDao1 = new FavoriteDao(this.props.flag);
         this.unFavoriteItems = [];
         this.state={
-            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
+            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
             isLoading:false,
         }
     }
@@ -131,12 +133,8 @@ class FavoriteTabPage extends Component{
     }
 
     onFavorite(item,isFavorite){
-        var key = this.props.flag === FlAG_STORAGE.flag_popular?item.id.toString():item.fullName;
-        if(isFavorite){
-            this.favoriteDao1.saveFavoriteItem(key,JSON.stringify(item));
-        }else {
-            this.favoriteDao1.removeFavoriteItem(key);
-        }
+
+        ActionUtils.onFavorite(this.favoriteDao1,item,isFavorite,this.props.flag);
 
         ArrayUtils.updateArray(this.unFavoriteItems,item);
 

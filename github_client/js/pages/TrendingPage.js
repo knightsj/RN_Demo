@@ -26,6 +26,7 @@ import FavoriteDao from '../expand/dao/FavoriteDao'
 import ProjectModel from '../model/ProjectModel'
 import Utils from '../Util/FavoriteUtils'
 import TimeUtil from '../Util/TimeUtil'
+import ActionUtils from '../Util/ActionUtils'
 
 var timeSpanTextArr = [
     new TimeSpan('今 天','since=daily'),
@@ -167,7 +168,7 @@ class TrendingTabPage extends Component{
     constructor(props){
         super(props);
         this.state={
-            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
+            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
             isLoading:false,
             favoriteKeys:[]
         }
@@ -210,14 +211,6 @@ class TrendingTabPage extends Component{
         })
     }
 
-    onFavorite(item,isFavorite){
-        if(isFavorite){
-            favoriteDao.saveFavoriteItem(item.fullName,JSON.stringify(item));
-        }else {
-
-            favoriteDao.removeFavoriteItem(item.fullName);
-        }
-    }
 
 
     //跟新project item的 favorite状态
@@ -252,7 +245,7 @@ class TrendingTabPage extends Component{
             key = {projectModel.item.fullName}
             onSelect = {()=>this.onSelectRepository(projectModel)}
             projectModel={projectModel}
-            onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}
+            onFavorite={(item,isFavorite)=>ActionUtils.onFavorite(favoriteDao,item,isFavorite,FlAG_STORAGE.flag_trending)}
         />
     }
 

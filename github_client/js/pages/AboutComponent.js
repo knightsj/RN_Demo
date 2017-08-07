@@ -127,7 +127,7 @@ export default class AboutComponent {
                     key = {projectModel.item.id}
                     projectModel={projectModel}
                     onSelect = {()=>this.onSelectRepository(projectModel)}
-                    onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
+                    onFavorite={(item,isFavorite)=>ActionUtils.onFavorite( this.favoriteDao, item,isFavorite,FlAG_STORAGE.flag_popular)}/>
             )
         }
         return views;

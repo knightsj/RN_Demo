@@ -23,9 +23,12 @@ import FavoriteDao from '../expand/dao/FavoriteDao'
 import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import Utils from '../Util/FavoriteUtils'
 import TimeUtil from '../Util/TimeUtil'
+import ActionUtils from '../Util/ActionUtils'
+import SearchPage from './SearchPage'
+
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
-import SearchPage from './SearchPage'
+
 
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 
@@ -119,7 +122,7 @@ class PopularTabPage extends Component{
         this.dataRepository1 = new DataRepository(FlAG_STORAGE.flag_popular);
         this.state={
 
-            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
+            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
             isLoading:false,
             favoriteKeys:[],
             projectModelsArr:[]
@@ -155,19 +158,8 @@ class PopularTabPage extends Component{
             key = {projectModel.item.id}
             projectModel={projectModel}
             onSelect = {()=>this.onSelectRepository(projectModel)}
-            onFavorite={(item,isFavorite)=>this.onFavorite(item,isFavorite)}/>
+            onFavorite={(item,isFavorite)=>ActionUtils.onFavorite(favoriteDao, item,isFavorite,FlAG_STORAGE.flag_popular)}/>
      }
-
-     //收藏按钮的回调函数
-    onFavorite(item,isFavorite){
-        //写进数据库，使用string
-        if(isFavorite){
-            favoriteDao.saveFavoriteItem(item.id.toString(),JSON.stringify(item));
-        }else {
-            favoriteDao.removeFavoriteItem(item.id.toString());
-        }
-
-    }
 
 
     onSelectRepository(projectModel){
