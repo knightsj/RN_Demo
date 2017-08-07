@@ -8,7 +8,8 @@ import {
     Platform,
     TextInput,
     TouchableOpacity,
-    ListView
+    ListView,
+    ActivityIndicator
 } from 'react-native';
 
 import ViewUtils from '../Util/ViewUtils'
@@ -34,6 +35,7 @@ export default class SearchPage extends Component {
             this.state={
             isLoading:false,
             rightButtonText:'搜索',
+                showBottomButton:false,
                 dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
 
         }
@@ -146,6 +148,9 @@ export default class SearchPage extends Component {
                 } 
                 this.items = responseData.items; 
                 this.getFavoriteKeys(); 
+                this.updateState({
+                    showBottomButton:true
+                })
             }) 
             .catch(e=>{ 
                 this.updateState({ 
@@ -181,15 +186,36 @@ export default class SearchPage extends Component {
             statusBar = <View style={styles.statusBarStyle}/>
         }
 
-        let listView = <ListView
+        let listView = !this.state.isLoading? <ListView
             dataSource = {this.state.dataSource}
             renderRow = {projectModel=>this.renderRow(projectModel)}
-        />
+        />:null;
+
+        let indicatorView = this.state.isLoading?
+            <ActivityIndicator
+                style={styles.centering}
+                size='large'
+                animating={this.state.isLoading}
+            />:null;
+
+        let resultView = <View style={{flex:1}}>
+            {listView}
+            {indicatorView}
+        </View>
+
+        let bottomButton = this.state.showBottomButton? <TouchableOpacity
+            style={styles.bottomButtonViewStyle}
+        >
+                <View style={{justifyContent:'center'}}>
+                    <Text style={styles.bottomButtonTitleStyle}>添加标签</Text>
+                </View>
+            </TouchableOpacity>:null;
 
         return <View style={styles.container}>
             {statusBar}
             {this.renderNavigationBar()}
-            {listView}
+            {resultView}
+            {bottomButton}
             <Toast ref={toast=>this.toast=toast}/>
         </View>
     }
@@ -235,5 +261,29 @@ const styles = StyleSheet.create({
         fontSize:17,
         fontWeight:'500',
         color:'white'
+    },
+
+    centering:{
+        alignItems:'center',
+        justifyContent:'center',
+        flex:1
+    },
+
+    bottomButtonTitleStyle:{
+        fontSize:18,
+        color:'white',
+        fontWeight:'500'
+    },
+
+    bottomButtonViewStyle:{
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'#2196F3',
+        opacity:0.9,
+        height:40,
+        // position:'absolute',
+        // left:10,
+        // right:10,
+        // top:GlobalStyle.window_height - 40 - 10
     }
 });

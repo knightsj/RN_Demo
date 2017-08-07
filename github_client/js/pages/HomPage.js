@@ -8,13 +8,11 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import TempPage from '../../temp'
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import TrendingPage from './TrendingPage'
 import MinePage from './MinePage'
 
-import MyPage from './MyPage/MyPage'
 import Navigator from 'react-native-deprecated-custom-components';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import FavoritePage from './FavoritePage'
