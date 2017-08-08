@@ -1,31 +1,35 @@
-import React, { Component } from 'react';
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    Navigator,
-} from 'react-native';
 
-import WelcomePage from './Welcome'
+import React,{Component} from 'react'
 
-function setup () {
-    class Root extends Component{
-        renderScene(route,navigator){
-            let Component=route.component;
-            return <Component {...route.params} navigator={navigator}/>
+import Navigator from 'react-native-deprecated-custom-components';
+
+import WelComePage from './Welcome'
+
+export default class WelcomePage extends Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {
+            };
         }
 
-        render(){
-            // return<Navigator
-            //    initialRoute={{component:WelcomePage}}
-            //    renderScene={(route, navigator)=>this.renderScene(route,navigator)}
-            // />
-            return <View></View>
+        _renderScene(route, navigator) {
+            let Component = route.component;
+            return (
+                <Component {...route.params} navigator={navigator}/>
+            );
         }
-    }
-    return <Root/>
+
+        render() {
+            return (
+                <Navigator.Navigator
+                    initialRoute={{
+                        name: 'WelcomePage',
+                        component:WelComePage
+                    }}
+                    renderScene={(e, i)=>this._renderScene(e, i)}
+                />
+            );
+        }
 }
 
-module.exports=setup;

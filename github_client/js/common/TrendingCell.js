@@ -46,7 +46,7 @@ export default class TrendingCell extends Component{
             onPress={()=>this.onPressFavorite()}
         >
             <Image
-                style={[{width:18,height:18} ,{tintColor:'#2196F3'}]}
+                style={[{width:18,height:18}]}
                 source={this.state.favoriteIcon}
             />
         </TouchableOpacity>

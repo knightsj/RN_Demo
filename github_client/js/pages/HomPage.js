@@ -33,8 +33,10 @@ export default class HomePage extends Component {
     constructor(props){
         super(props);
         let selectedTab = this.props.selectedTab?this.props.selectedTab:'tb_popular'
+
         this.state = {
             selectedTab:selectedTab,
+            theme:this.props.theme
         }
     }
 
@@ -67,30 +69,6 @@ export default class HomePage extends Component {
         this.listener&&this.listener.remove();
     }
 
-    renderTabBarItem(Component,tabName,title,icon){
-        return <TabNavigator.Item
-            selected={this.state.selectedTab === tabName}
-            selectedTitleStyle={{color:'#2196F3'}}
-            title={title}
-            renderIcon={() => <Image style={styles.tabItemImageStyle} source={icon} />}
-            renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]} source={icon} />}
-            onPress={() => this.setState({ selectedTab: tabName })}>
-
-            <Navigator.Navigator
-                initialRoute={{name:tabName,component:Component}}
-                configureScene={()=>{
-                    return Navigator.Navigator.SceneConfigs.PushFromRight;
-                }}
-
-                renderScene={(route,navigator)=>{
-                    let Component = route.component;
-                    return <Component {...route.params} navigator={navigator} />;
-                }}
-            />
-        </TabNavigator.Item>;
-
-    }
-
     onSelected(object) {
         // if (this.updateFavorite && 'popularTab' === object)this.updateFavorite(object);
 
@@ -100,39 +78,12 @@ export default class HomePage extends Component {
 
     }
 
-    // _renderTab(Component, selectedTab, title, renderIcon) {
-    //     return (
-    //         <TabNavigator.Item
-    //             selected={this.state.selectedTab === selectedTab}
-    //             title={title}
-    //             selectedTitleStyle={{color:'#2196F3'}}
-    //             renderIcon={() => <Image style={styles.tabItemImageStyle}
-    //                                      source={renderIcon}/>}
-    //             renderSelectedIcon={() => <Image
-    //                 style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}
-    //                 source={renderIcon}/>}
-    //             onPress={() => this.onSelected(selectedTab)}>
-    //
-    //             <Navigator.Navigator
-    //                 initialRoute={{name:{selectedTab},component:Component}}
-    //                                    configureScene={()=>{
-    //                                          return Navigator.Navigator.SceneConfigs.PushFromRight;
-    //                                      }}
-    //
-    //                                      renderScene={(route,navigator)=>{
-    //                                         let Component = route.component;
-    //                                         return <Component {...route.params} navigator={navigator}/>;
-    //                                    }}/>
-    //         </TabNavigator.Item>
-    //     )
-    // }
-
     _renderTab(Component, selectedTab, title, renderIcon) {
         return (
             <TabNavigator.Item
                 selected={this.state.selectedTab === selectedTab}
                 title={title}
-                selectedTitleStyle={{color:'#2196F3'}}
+                selectedTitleStyle={this.state.theme.styles.selectedTitleStyle}
                 renderIcon={() => <Image style={styles.tabItemImageStyle}
                                          source={renderIcon}/>}
                 renderSelectedIcon={() => <Image

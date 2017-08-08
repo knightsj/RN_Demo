@@ -19,12 +19,14 @@ import AboutPage from './AboutPage'
 import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
 import AboutMePage from './AboutMePage'
+import CustomThemePage from './CustomThemePage'
 
 export default class MinePage extends Component {
 
     constructor(props){
         super(props);
         this.state={
+            customThemeVisible:false
         }
     }
 
@@ -64,7 +66,9 @@ export default class MinePage extends Component {
                 break;
 
             case MORE_MENU.Custom_Theme:
-
+                this.setState({
+                    customThemeVisible:true
+                })
                 break;
 
             case MORE_MENU.About_Author:
@@ -84,6 +88,17 @@ export default class MinePage extends Component {
                 params:params
             })
         }
+    }
+
+    renderCustomTheme(){
+        return (
+            <CustomThemePage
+                visible={this.state.customThemeVisible}
+                {...this.props}
+                onClose = {()=>this.setState({customThemeVisible:false})}
+            />
+
+        )
     }
 
     createSettingItem(tag,icon,text){
@@ -145,6 +160,7 @@ export default class MinePage extends Component {
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
             </ScrollView>
+            {this.renderCustomTheme()}
         </View>
     }
 }

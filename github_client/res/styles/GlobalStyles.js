@@ -40,6 +40,11 @@ module.exports ={
         backgroundColor: '#f3f3f4',
     },
 
+    listView_container:{
+        flex: 1,
+        backgroundColor: '#f3f3f4',
+    },
+
     backgroundColor: '#f3f3f4',
     listView_height:(height-(20+40)),
     window_height:height,
