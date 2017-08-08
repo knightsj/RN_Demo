@@ -20,8 +20,10 @@ import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
 import AboutMePage from './AboutMePage'
 import CustomThemePage from './CustomThemePage'
+import BaseComponent from './BaseComponent'
 
-export default class MinePage extends Component {
+
+export default class MinePage extends BaseComponent {
 
     constructor(props){
         super(props);
@@ -29,10 +31,6 @@ export default class MinePage extends Component {
             customThemeVisible:false,
             theme:this.props.theme
         }
-    }
-
-    componentDidMount() {
-
     }
 
     onClick(tab){

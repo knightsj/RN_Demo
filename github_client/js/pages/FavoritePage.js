@@ -26,14 +26,16 @@ import ActionUtils from '../Util/ActionUtils'
 import ViewUtils from '../Util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
 import {FLAG_TAB} from './HomPage'
-import SearchPage from './SearchPage'
+import BaseComponent from './BaseComponent'
+import CustomThemePage from './CustomThemePage'
 
-export default class FavoritePage extends Component {
+export default class FavoritePage extends BaseComponent {
 
     constructor(props){
         super(props);
         this.state ={
-            theme:this.props.theme
+            theme:this.props.theme,
+            customThemeVisible:false,
         }
     }
 
@@ -50,7 +52,25 @@ export default class FavoritePage extends Component {
             {...params}
             menus={[MORE_MENU.Custom_Theme,MORE_MENU.About_Author,MORE_MENU.About]}
             anchorView={this.refs.moreMenuButton}
+            onMoreMenuSelect={e=>{
+                if (e=== MORE_MENU.Custom_Theme){
+                    this.setState({
+                        customThemeVisible:true,
+                    })
+                }
+            }}
         />
+    }
+
+    renderCustomTheme(){
+        return (
+            <CustomThemePage
+                visible={this.state.customThemeVisible}
+                {...this.props}
+                onClose = {()=>this.setState({customThemeVisible:false})}
+            />
+
+        )
     }
 
     render() {
@@ -77,6 +97,7 @@ export default class FavoritePage extends Component {
                 />
                 {content}
                 {this.renderMoreView()}
+                {this.renderCustomTheme()}
 
             </View>
         );

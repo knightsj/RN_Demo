@@ -8,12 +8,15 @@ import {
     Modal,
     ScrollView,
     TouchableHighlight,
-    Platform
+    Platform,
+    DeviceEventEmitter
 } from 'react-native';
 
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import ThemeFactory,{ThemeFlags} from  '../../res/styles/ThemeFactory'
 import ThemeDao from '../expand/dao/ThemeDao'
+import {ACTION_HOME} from './HomPage'
+
 export default class CustomThemePage extends Component {
 
 
@@ -29,7 +32,9 @@ export default class CustomThemePage extends Component {
 
         this.themeDao.save(ThemeFlags[themeKey]);
         this.props.onClose();
-        // this.props.homeComponent.onThemeChange(ThemeFactory.createTheme(ThemeFlags[themeKey]));
+        DeviceEventEmitter.emit('ACTION_BASE',ACTION_HOME.A_THEME,ThemeFactory.createTheme(
+            ThemeFlags[themeKey]
+        ))
     }
 
 

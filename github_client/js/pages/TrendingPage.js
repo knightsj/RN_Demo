@@ -30,6 +30,8 @@ import ActionUtils from '../Util/ActionUtils'
 import ViewUtils from '../Util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
 import {FLAG_TAB} from './HomPage'
+import BaseComponent from './BaseComponent'
+import CustomThemePage from './CustomThemePage'
 
 var timeSpanTextArr = [
     new TimeSpan('今 天','since=daily'),
@@ -42,7 +44,7 @@ import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_trending)
 var dataRepository = new DataRepository(FlAG_STORAGE.flag_trending);
 
-export default class TrendingPage extends Component {
+export default class TrendingPage extends BaseComponent {
 
     constructor(props){
         super(props);
@@ -54,6 +56,7 @@ export default class TrendingPage extends Component {
             languages:[],
             theme:this.props.theme
         }
+        this.loadData();
     }
 
     loadData(){
@@ -66,10 +69,6 @@ export default class TrendingPage extends Component {
             .catch(error=>{
                 console.log(error);
             });
-    }
-
-    componentDidMount() {
-        this.loadData();
     }
 
     renderTitleView(){
@@ -123,11 +122,28 @@ export default class TrendingPage extends Component {
         return <MoreMenu
             ref = "moreMenu"
             {...params}
-            menus={[MORE_MENU.Custom_Language,MORE_MENU.Sort_Language,MORE_MENU.About]}
+            menus={[MORE_MENU.Custom_Language,MORE_MENU.Sort_Language,MORE_MENU.Custom_Theme,MORE_MENU.About]}
             anchorView={this.refs.moreMenuButton}
+            onMoreMenuSelect={e=>{
+                if (e=== MORE_MENU.Custom_Theme){
+                    this.setState({
+                        customThemeVisible:true,
+                    })
+                }
+            }}
         />
     }
 
+    renderCustomTheme(){
+        return (
+            <CustomThemePage
+                visible={this.state.customThemeVisible}
+                {...this.props}
+                onClose = {()=>this.setState({customThemeVisible:false})}
+            />
+
+        )
+    }
 
     render() {
         let content = this.state.languages.length>0?
@@ -179,6 +195,7 @@ export default class TrendingPage extends Component {
                 {content}
                 {timeSpanView}
                 {this.renderMoreView()}
+                {this.renderCustomTheme()}
             </View>
         );
     }
@@ -210,6 +227,14 @@ class TrendingTabPage extends Component{
         }else if(this.isFavoriteChanged){
             this.isFavoriteChanged = false
             this.getFavoriteKeys();
+
+        }else if (nextProps!==this.state.theme){
+
+            this.updateState({theme:nextProps.theme})
+            this.flushFavoriteState();
+
+        }else {
+
         }
     }
 

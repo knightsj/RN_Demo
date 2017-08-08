@@ -16,9 +16,9 @@ import MinePage from './MinePage'
 import Navigator from 'react-native-deprecated-custom-components';
 import {DURATION} from 'react-native-easy-toast'
 import FavoritePage from './FavoritePage'
+import BaseComponent from './BaseComponent'
 
-
-export const ACTION_HOME = {A_SHOW_TOAST:'showToast',A_RESTART:'restart'};
+export const ACTION_HOME = {A_SHOW_TOAST:'showToast',A_RESTART:'restart',A_THEME:'theme'};
 
 export var FLAG_TAB = {
     flag_popularTab: 'flag_popularTab',
@@ -27,7 +27,7 @@ export var FLAG_TAB = {
     flag_myTab: 'flag_myTab'
 }
 
-export default class HomePage extends Component {
+export default class HomePage extends BaseComponent {
 
     constructor(props){
         super(props);
@@ -40,6 +40,7 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         // this.listener = DeviceEventEmitter.addListener('ACTION_HOME',(action,params)=>this.onAction(action,params));
         this.listener = DeviceEventEmitter.addListener('showToast',(text)=>{
             this.toast.show(text,DURATION.LENGTH_LONG);
@@ -65,7 +66,10 @@ export default class HomePage extends Component {
         })
     }
     componentWillUnmount() {
-        this.listener&&this.listener.remove();
+        super.componentWillUnmount();
+        if(this.listener){
+            this.listener.remove();
+        }
     }
 
     onSelected(object) {

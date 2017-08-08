@@ -28,15 +28,18 @@ import SearchPage from './SearchPage'
 import ViewUtils from '../Util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
 import {FLAG_TAB} from './HomPage'
+import BaseComponent from './BaseComponent'
+import CustomThemePage from './CustomThemePage'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
 
 
+
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_popular)
 
 
-export default class PopularPage extends Component {
+export default class PopularPage extends BaseComponent {
 
     constructor(props){
         super(props);
@@ -44,11 +47,9 @@ export default class PopularPage extends Component {
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.state ={
             languages:[],
+            customThemeVisible:false,
             theme:this.props.theme
         }
-    }
-
-    componentDidMount() {
         this.loadData();
     }
 
@@ -64,6 +65,16 @@ export default class PopularPage extends Component {
             });
     }
 
+    renderCustomTheme(){
+        return (
+            <CustomThemePage
+                visible={this.state.customThemeVisible}
+                {...this.props}
+                onClose = {()=>this.setState({customThemeVisible:false})}
+            />
+
+        )
+    }
 
     renderNavRightButton(){
         return <View style={{flexDirection:'row'}}>
@@ -95,8 +106,15 @@ export default class PopularPage extends Component {
         return <MoreMenu
             ref = "moreMenu"
             {...params}
-            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Key,MORE_MENU.Sort_Language,MORE_MENU.About]}
+            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Key,MORE_MENU.Sort_Language,MORE_MENU.Custom_Theme,MORE_MENU.About]}
             anchorView={this.refs.moreMenuButton}
+            onMoreMenuSelect={e=>{
+                if (e=== MORE_MENU.Custom_Theme){
+                    this.setState({
+                        customThemeVisible:true,
+                    })
+                }
+            }}
         />
     }
 
@@ -126,6 +144,7 @@ export default class PopularPage extends Component {
                 />
                 {content}
                 {this.renderMoreView()}
+                {this.renderCustomTheme()}
             </View>
         );
     }
@@ -156,11 +175,16 @@ class PopularTabPage extends Component{
         })
     }
 
-    componentWillReceiveProps(){
+    componentWillReceiveProps(nextProps){
 
         if(this.isFavoriteChanged){
             this.getFavoriteKeys1();
             this.isFavoriteChanged = false
+        }else if (nextProps!==this.state.theme){
+            this.updateState({theme:nextProps.theme})
+            this.flushFavoriteState();
+        }else {
+
         }
     }
 
