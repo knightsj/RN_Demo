@@ -98,10 +98,10 @@ export default class NewPage extends Component {
                 leftText={leftText}
                 isChecked={data.checked}
                 unCheckedImage={<Image
-                    style={{tintColor:'#6495ED'}}
+                    style={this.props.theme.styles.tabBarSelectedIcon}
                     source={require('../../res/images/img_my_page/ic_check_box_outline_blank.png')}/>}
                 checkedImage={<Image
-                    style={{tintColor:'#6495ED'}}
+                    style={this.props.theme.styles.tabBarSelectedIcon}
                     source={require('../../res/images/img_my_page/ic_check_box.png')}/>}
             />
         )
@@ -160,7 +160,7 @@ export default class NewPage extends Component {
         return <View style={styles.container}>
             <NavigationBar
                 title={title}
-                style={{backgroundColor:'#6495ED'}}
+                style={this.props.theme.styles.navBar}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={rightButton}
             />

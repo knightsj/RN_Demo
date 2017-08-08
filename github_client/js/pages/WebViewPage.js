@@ -28,7 +28,6 @@ export default class WebViewPage extends Component {
             url: this.props.url,
             canGoBack: false,
             title: this.props.title,
-            // theme: this.props.theme
         }
     }
 

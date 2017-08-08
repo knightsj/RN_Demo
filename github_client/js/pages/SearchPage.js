@@ -41,8 +41,9 @@ export default class SearchPage extends Component {
             this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key),
             this.isKeyChanged = false,
             this.state={
-            isLoading:false,
-            rightButtonText:'搜索',
+                theme:this.props.theme,
+                isLoading:false,
+                rightButtonText:'搜索',
                 showBottomButton:false,
                 dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
 
@@ -122,7 +123,7 @@ export default class SearchPage extends Component {
             </View>
 
         </TouchableOpacity>
-        return <View style={styles.navBarStyle}>
+        return <View style={[styles.navBarStyle,{  backgroundColor:this.state.theme.themeColor}]}>
             {backButton}
             {inputView}
             {rightButton}
@@ -228,6 +229,7 @@ export default class SearchPage extends Component {
 
     renderRow(projectModel) {
         return <RespositoryCell
+            theme={this.props.theme}
             key={projectModel.item.id}
             projectModel={projectModel}
             onSelect={()=>this.onSelectRepository(projectModel)}
@@ -237,7 +239,7 @@ export default class SearchPage extends Component {
 
         let statusBar = null;
         if (Platform.OS === 'ios'){
-            statusBar = <View style={styles.statusBarStyle}/>
+            statusBar = <View style={[styles.statusBarStyle,{backgroundColor: this.state.theme.themeColor}]}/>
         }
 
         let listView = !this.state.isLoading? <ListView
@@ -259,7 +261,7 @@ export default class SearchPage extends Component {
         </View>
 
         let bottomButton = this.state.showBottomButton? <TouchableOpacity
-            style={styles.bottomButtonViewStyle}
+            style={[styles.bottomButtonViewStyle,{backgroundColor:this.state.theme.themeColor}]}
             onPress={()=>this.saveKey()}
         >
                 <View style={{justifyContent:'center'}}>
@@ -287,13 +289,11 @@ const styles = StyleSheet.create({
     },
 
     statusBarStyle:{
-       backgroundColor:'#2196F3',
         height:20
     },
 
     navBarStyle:{
         height:(Platform.OS === 'ios')?GlobalStyle.nav_bar_height_ios:GlobalStyle.nav_bar_height_android,
-        backgroundColor:'#2196F3',
         alignItems:'center',
         flexDirection:'row'
     },
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     },
 
     bottomButtonTitleStyle:{
-        fontSize:18,
+        fontSize:17,
         color:'white',
         fontWeight:'500'
     },
@@ -334,9 +334,9 @@ const styles = StyleSheet.create({
     bottomButtonViewStyle:{
         alignItems:'center',
         justifyContent:'center',
-        backgroundColor:'#2196F3',
+
         opacity:0.8,
-        height:30,
+        height:40,
         position:'absolute',
         left:10,
         right:10,

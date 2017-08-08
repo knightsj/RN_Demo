@@ -85,13 +85,13 @@ export default class AboutPage extends Component{
     render(){
         let contentView = <View>
             {this.aboutComponent.renderRepository(this.state.projectModels)}
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Website),require('../../res/images/ic_computer.png'),MORE_MENU.Website,{tintColor:'#2196F3'})}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Website),require('../../res/images/ic_computer.png'),MORE_MENU.Website,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
 
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.About_Author),require('../../res/images/ic_insert_emoticon.png'),MORE_MENU.About_Author,{tintColor:'#2196F3'})}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.About_Author),require('../../res/images/ic_insert_emoticon.png'),MORE_MENU.About_Author,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
 
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Feedback),require('../../res/images/ic_feedback.png'),MORE_MENU.Feedback,{tintColor:'#2196F3'})}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Feedback),require('../../res/images/ic_feedback.png'),MORE_MENU.Feedback,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             <View style={GlobalStyles.cellBottomLineStyle}></View>
         </View>

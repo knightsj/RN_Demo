@@ -118,7 +118,7 @@ export default class NewPage extends Component {
         return <View style={styles.container}>
             <NavigationBar
                 title={title}
-                style={{backgroundColor:'#6495ED'}}
+                style={this.props.theme.styles.navBar}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={rightButton}
             />
@@ -144,7 +144,7 @@ class SortCell extends Component{
             {...this.props.sortHandlers}
         >
         <View style={styles.row}>
-            <Image style={styles.imageStyle} source={require('../../res/images/ic_sort.png')}></Image>
+            <Image style={[styles.imageStyle,this.props.theme.styles.tabBarSelectedIcon]} source={require('../../res/images/ic_sort.png')}></Image>
             <Text>{this.props.data.name}</Text>
         </View>
         </TouchableHighlight>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     },
 
     imageStyle:{
-        tintColor:'#2196F3',
+
         width:18,
         height:18,
         marginRight:10

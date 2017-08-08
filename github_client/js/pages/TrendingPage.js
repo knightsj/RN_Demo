@@ -51,7 +51,8 @@ export default class TrendingPage extends Component {
             isVisible: false,
             buttonRect: {},
             timeSpan: timeSpanTextArr[0],
-            languages:[]
+            languages:[],
+            theme:this.props.theme
         }
     }
 
@@ -131,7 +132,7 @@ export default class TrendingPage extends Component {
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
-                tabBarBackgroundColor="#2196F3"
+                tabBarBackgroundColor={this.state.theme.themeColor}
                 tabBarInactiveTextColor="mintcream"
                 tabBarActiveTextColor="white"
                 tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
@@ -171,7 +172,7 @@ export default class TrendingPage extends Component {
             <View style={styles.container}>
                 <NavigationBar
                     titleView = {this.renderTitleView()}
-                    style={{backgroundColor:'#2196F3'}}
+                    style={this.state.theme.styles.navBar}
                     statusBar={{backgroundColor:'red'}}
                     rightButton={this.renderNavRightButton()}
                 />
@@ -266,6 +267,7 @@ class TrendingTabPage extends Component{
             key = {projectModel.item.fullName}
             onSelect = {()=>this.onSelectRepository(projectModel)}
             projectModel={projectModel}
+            theme={this.props.theme}
             onFavorite={(item,isFavorite)=>ActionUtils.onFavorite(favoriteDao,item,isFavorite,FlAG_STORAGE.flag_trending)}
         />
     }
@@ -283,9 +285,9 @@ class TrendingTabPage extends Component{
                     <RefreshControl
                         refreshing={this.state.isLoading}
                         onRefresh={()=>this.onRefresh()}
-                        colors={['#2196F3']}
-                        tintColor={['#2196F3']}
-                        titleColor={['#2196F3']}
+                        colors={[this.props.theme.themeColor]}
+                        tintColor={[this.props.theme.themeColor]}
+                        titleColor={[this.props.theme.themeColor]}
                         title={'Loading'}
                     />}
             />

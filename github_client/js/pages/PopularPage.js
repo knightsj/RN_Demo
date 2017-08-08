@@ -43,7 +43,8 @@ export default class PopularPage extends Component {
 
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key);
         this.state ={
-            languages:[]
+            languages:[],
+            theme:this.props.theme
         }
     }
 
@@ -67,12 +68,12 @@ export default class PopularPage extends Component {
     renderNavRightButton(){
         return <View style={{flexDirection:'row'}}>
             <TouchableOpacity
-
                 onPress={()=>{
                     this.props.navigator.push({
                         component:SearchPage,
                         params:{
-                            ...this.props
+                            theme:this.state.theme,
+                            ...this.props,
                         }
                     })
                 }}
@@ -102,7 +103,7 @@ export default class PopularPage extends Component {
     render() {
         let content = this.state.languages.length>0?
             <ScrollableTableView
-            tabBarBackgroundColor="#2196F3"
+            tabBarBackgroundColor={this.state.theme.themeColor}
             tabBarInactiveTextColor="mintcream"
             tabBarActiveTextColor="white"
             tabBarUnderlineStyle={{backgroundColor:'#e7e7e7',height:2}}
@@ -114,11 +115,12 @@ export default class PopularPage extends Component {
                 })}
             </ScrollableTableView>:null;
 
+
         return (
             <View style={styles.container}>
                 <NavigationBar
                     title={'最热'}
-                    style={{backgroundColor:'#2196F3'}}
+                    style={this.state.theme.styles.navBar}
                     rightButton={this.renderNavRightButton()}
 
                 />
@@ -141,12 +143,13 @@ class PopularTabPage extends Component{
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}),
             isLoading:false,
             favoriteKeys:[],
-            projectModelsArr:[]
+            projectModelsArr:[],
+            theme:this.props.theme
         }
     }
 
     componentDidMount() {
-        this.loadData();
+        this.loadData( );
 
         this.listener = DeviceEventEmitter.addListener('favoriteChanged_popular',()=> {
             this.isFavoriteChanged = true;
@@ -172,6 +175,7 @@ class PopularTabPage extends Component{
     renderRow(projectModel){
         return <RespositoryCell
             key = {projectModel.item.id}
+            theme={this.props.theme}
             projectModel={projectModel}
             onSelect = {()=>this.onSelectRepository(projectModel)}
             onFavorite={(item,isFavorite)=>ActionUtils.onFavorite(favoriteDao, item,isFavorite,FlAG_STORAGE.flag_popular)}/>
@@ -199,9 +203,9 @@ class PopularTabPage extends Component{
                     <RefreshControl
                        refreshing={this.state.isLoading}
                        onRefresh={()=>this.loadData()}
-                       colors={['#2196F3']}
-                       tintColor={['#2196F3']}
-                       titleColor={['#2196F3']}
+                       colors={[this.props.theme.themeColor]}
+                       tintColor={this.props.theme.themeColor}
+                       titleColor={this.props.theme.themeColor}
                        title={'Loading'}
                     />}
             />

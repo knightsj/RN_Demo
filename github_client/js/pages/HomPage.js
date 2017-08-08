@@ -14,10 +14,9 @@ import TrendingPage from './TrendingPage'
 import MinePage from './MinePage'
 
 import Navigator from 'react-native-deprecated-custom-components';
-import Toast, {DURATION} from 'react-native-easy-toast'
+import {DURATION} from 'react-native-easy-toast'
 import FavoritePage from './FavoritePage'
 
-import AyncStoryageTest from '../../AyncStorageTest'
 
 export const ACTION_HOME = {A_SHOW_TOAST:'showToast',A_RESTART:'restart'};
 
@@ -87,9 +86,9 @@ export default class HomePage extends Component {
                 renderIcon={() => <Image style={styles.tabItemImageStyle}
                                          source={renderIcon}/>}
                 renderSelectedIcon={() => <Image
-                    style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}
+                    style={[styles.tabItemImageStyle,this.state.theme.styles.tabBarSelectedIcon]}
                     source={renderIcon}/>}
-                onPress={() => this.onSelected(selectedTab)}>
+                    onPress={() => this.onSelected(selectedTab)}>
 
                 <Navigator.Navigator
                     initialRoute={{name:{selectedTab},component:Component}}
@@ -99,7 +98,7 @@ export default class HomePage extends Component {
 
                     renderScene={(route,navigator)=>{
                         let Component = route.component;
-                        return <Component {...route.params} navigator={navigator} homeComponent={this}/>;
+                        return <Component {...route.params} theme={this.state.theme} navigator={navigator} homeComponent={this}/>;
                     }}/>
             </TabNavigator.Item>
         )

@@ -27,6 +27,7 @@ export default class RepositoryDetailPage extends Component {
         var title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.projectModel.item.fullName;
         this.favoriteDao1 = new FavoriteDao(this.props.flag);
         this.state={
+            theme:this.props.theme,
             url:this.url,
             title:title,
             canGoBack:false,
@@ -106,7 +107,7 @@ export default class RepositoryDetailPage extends Component {
             <NavigationBar
                 title={this.state.title}
                 popEnabled={false}
-                style={{backgroundColor:'#2196F3'}}
+                style={this.state.theme.styles.navBar}
                 leftButton={ViewUtils.getLeftButton(()=>this.goBack())}
                 rightButton={this.renderRightButton()}
             />

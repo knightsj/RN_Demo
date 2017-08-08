@@ -26,7 +26,8 @@ export default class MinePage extends Component {
     constructor(props){
         super(props);
         this.state={
-            customThemeVisible:false
+            customThemeVisible:false,
+            theme:this.props.theme
         }
     }
 
@@ -102,14 +103,14 @@ export default class MinePage extends Component {
     }
 
     createSettingItem(tag,icon,text){
-        return ViewUtil.createSettingItem(()=>this.onClick(tag),icon,text,{tintColor:'#2196F3'},null);
+        return ViewUtil.createSettingItem(()=>this.onClick(tag),icon,text,this.state.theme.styles.tabBarSelectedIcon,null);
     }
 
     render(){
         return <View style={GlobalStyles.listViewContainerStyle}>
             <NavigationBar
                 title={'我的'}
-                style={{backgroundColor:'#2196F3'}}
+                style={this.state.theme.styles.navBar}
             />
             <ScrollView>
                 <TouchableHighlight
@@ -118,12 +119,12 @@ export default class MinePage extends Component {
                     <View style={styles.item}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
                             <Image source={require('../../res/images/ic_trending.png')}
-                                   style={[{width:40,height:40,marginRight:10},{tintColor:'#2196F3'}]}
+                                   style={[{width:40,height:40,marginRight:10},this.state.theme.styles.tabBarSelectedIcon]}
                             />
                             <Text>GitHub Popular</Text>
                         </View>
                         <Image source={require('../../res/images/ic_tiaozhuan.png')}
-                            style={[{height:22,width:22},{tintColor:'#2196F3'}]}
+                            style={[{height:22,width:22},this.state.theme.styles.tabBarSelectedIcon]}
                         />
                     </View>
 

@@ -124,6 +124,7 @@ export default class AboutComponent {
             let projectModel = projectModels[i];
             views.push(
                 <RepositoryCell
+                    theme = {this.props.theme}
                     key = {projectModel.item.id}
                     projectModel={projectModel}
                     onSelect = {()=>this.onSelectRepository(projectModel)}
@@ -183,7 +184,7 @@ export default class AboutComponent {
         let config = this.createParallaxRenderConfig(params);
         return (
             <ParallaxScrollView
-                backgroundColor="#2196F3"
+                backgroundColor={this.props.theme.themeColor}
                 headerBackgroundColor="#333"
                 stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
                 parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }

@@ -184,7 +184,7 @@ export default class AboutPage extends Component{
             let title = isShowAccount? dict[i].title + ' : ' + dict[i].account:dict[i].title;
             views.push(
                 <View key = {i}>
-                    {ViewUtils.createSettingItem(()=>this.onClick(dict[i]),'',title,{tintColor:'#2196F3'})}
+                    {ViewUtils.createSettingItem(()=>this.onClick(dict[i]),'',title,this.props.theme.styles.tabBarSelectedIcon)}
                     <View style={GlobalStyles.cellBottomLineStyle}></View>
                 </View>
             )
@@ -194,20 +194,20 @@ export default class AboutPage extends Component{
 
     render(){
         let contentView = <View>
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.BLOG),require('../../res/images/ic_computer.png'),FLAG.BLOG.name,{tintColor:'#2196F3'},this.getClickIcon(this.state.showBlog))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.BLOG),require('../../res/images/ic_computer.png'),FLAG.BLOG.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showBlog))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showBlog?this.renderItems(FLAG.BLOG.items,false):null}
 
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.REPOSITORY),require('../../res/images/ic_code.png'),FLAG.REPOSITORY,{tintColor:'#2196F3'},this.getClickIcon(this.state.showRepository))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.REPOSITORY),require('../../res/images/ic_code.png'),FLAG.REPOSITORY,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showRepository))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showRepository?this.aboutComponent.renderRepository(this.state.projectModels):null}
 
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.QQ),require('../../res/images/ic_computer.png'),FLAG.QQ.name,{tintColor:'#2196F3'},this.getClickIcon(this.state.showQQ))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.QQ),require('../../res/images/ic_computer.png'),FLAG.QQ.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showQQ))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showQQ?this.renderItems(FLAG.QQ.items,true):null}
 
             <View style={GlobalStyles.cellBottomLineStyle}></View>
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.CONTACT),require('../../res/images/ic_contacts.png'),FLAG.CONTACT.name,{tintColor:'#2196F3'},this.getClickIcon(this.state.showContact))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.CONTACT),require('../../res/images/ic_contacts.png'),FLAG.CONTACT.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showContact))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showContact?this.renderItems(FLAG.CONTACT.items,true):null}
         </View>

@@ -32,7 +32,7 @@ export default class RespositoryCell extends Component{
             onPress={()=>this.onPressFavorite()}
         >
             <Image
-                style={[{width:18,height:18}]}
+                style={[{width:18,height:18},this.props.theme.styles.tabBarSelectedIcon]}
                 source={this.state.favoriteIcon}
             />
         </TouchableOpacity>
