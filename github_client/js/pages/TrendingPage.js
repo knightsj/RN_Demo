@@ -263,12 +263,11 @@ class TrendingTabPage extends Component{
     flushFavoriteState(){
 
         let projectModels = [];
-
-        if (this.items.length == 0){
+        let items = this.items;
+        //fix修正了item为空时候的bug
+        if (!items){
             return;
         }
-
-        let items = this.items;
         for (var i=0,len=items.length;i<len;i++){
             projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));
         }
