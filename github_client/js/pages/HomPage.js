@@ -92,17 +92,7 @@ export default class HomePage extends BaseComponent {
                     style={[styles.tabItemImageStyle,this.state.theme.styles.tabBarSelectedIcon]}
                     source={renderIcon}/>}
                     onPress={() => this.onSelected(selectedTab)}>
-
-                <Navigator.Navigator
-                    initialRoute={{name:{selectedTab},component:Component}}
-                    configureScene={()=>{
-                        return Navigator.Navigator.SceneConfigs.PushFromRight;
-                    }}
-
-                    renderScene={(route,navigator)=>{
-                        let Component = route.component;
-                        return <Component {...route.params} theme={this.state.theme} navigator={navigator} homeComponent={this}/>;
-                    }}/>
+                <Component {...this.props} theme={this.state.theme} homeComponent={this}/>
             </TabNavigator.Item>
         )
     }
