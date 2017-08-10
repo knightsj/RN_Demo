@@ -26,7 +26,8 @@ export default class NewPage extends Component {
         this.sortResultArray=[];
         this.originalCheckedArray =[];
         this.state={
-            checkedArray:[]
+            checkedArray:[],
+            hasSorted:false
         }
     }
 
@@ -62,13 +63,15 @@ export default class NewPage extends Component {
 
     goBack(){
 
-        if(!ArrayUtils.isEqual(this.originalCheckedArray,this.state.checkedArray)){
+        //判断两个数组的元素是否都一致（即使是排序过的）
+        if(ArrayUtils.isEqual(this.originalCheckedArray,this.state.checkedArray)){
             this.props.navigator.pop();
             return;
+
         }else {
             Alert.alert(
                 '提示',
-                '是否保存修改？',
+                '排序已经改变，是否保存修改？',
                 [
                     {text:'不保存',onPress:()=>{
                         this.props.navigator.pop();
@@ -128,6 +131,9 @@ export default class NewPage extends Component {
                 onRowMoved={(e) => {
                     this.state.checkedArray.splice(e.to, 0, this.state.checkedArray.splice(e.from, 1)[0]);
                     this.forceUpdate();
+                    this.setState({
+                        hasSorted:true,
+                    })
                 }}
                 renderRow={row => <SortCell data={row} {...this.props}/>}
             />

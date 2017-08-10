@@ -22,6 +22,16 @@ export default class ArrayUtls{
         return newArray;
     }
 
+    static deepCopy(arr){
+        if(!arr)return [];
+        let newArray=[];
+        for (let i=0,len=arr.length;i<len;i++){
+            newArray.push(arr[i])
+        }
+        return newArray;
+    }
+
+
 
     static isEqual(arr1,arr2){
         if(!(arr1&&arr2))return false;

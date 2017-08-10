@@ -106,7 +106,7 @@ export default class PopularPage extends BaseComponent {
         return <MoreMenu
             ref = "moreMenu"
             {...params}
-            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Theme,MORE_MENU.About]}
+            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Theme]}
             anchorView={this.refs.moreMenuButton}
             onMoreMenuSelect={e=>{
                 if (e=== MORE_MENU.Custom_Theme){
@@ -137,7 +137,7 @@ export default class PopularPage extends BaseComponent {
         return (
             <View style={styles.container}>
                 <NavigationBar
-                    title={'最热'}
+                    title={'最热标签'}
                     style={this.state.theme.styles.navBar}
                     rightButton={this.renderNavRightButton()}
 
@@ -240,14 +240,18 @@ class PopularTabPage extends Component{
     flushFavoriteState(){
         let projectModels = [];
         let items = this.items;
-        for (var i=0,len=items.length;i<len;i++){
-            projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));
+        //fix修正了item为空时候的bug
+        if (items){
+            for (var i=0,len=items.length;i<len;i++){
+                projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));
+            }
+            this.updateState({
+                isLoading:false,
+                projectModelsArr:projectModels,
+                dataSource:this.getDataSource(projectModels),
+            })
         }
-        this.updateState({
-            isLoading:false,
-            projectModelsArr:projectModels,
-            dataSource:this.getDataSource(projectModels),
-        })
+
     }
 
     getDataSource(projectModels) {

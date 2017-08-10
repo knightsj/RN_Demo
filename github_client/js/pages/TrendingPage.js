@@ -78,7 +78,7 @@ export default class TrendingPage extends BaseComponent {
                 onPress={()=>this.showPopover()}
             >
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={{fontSize:18,color:'white',fontWeight:'400'}}>趋势  {this.state.timeSpan.showText}</Text>
+                    <Text style={{fontSize:18,color:'white',fontWeight:'400'}}>语言趋势  {this.state.timeSpan.showText}</Text>
                     <Image
                         style={{width:14,height:14,marginLeft:6}}
                         source={require('../../res/images/ic_spinner_triangle.png')}/>
@@ -122,7 +122,7 @@ export default class TrendingPage extends BaseComponent {
         return <MoreMenu
             ref = "moreMenu"
             {...params}
-            menus={[MORE_MENU.Custom_Language,MORE_MENU.Sort_Language,MORE_MENU.Custom_Theme,MORE_MENU.About]}
+            menus={[MORE_MENU.Custom_Language,MORE_MENU.Sort_Language,MORE_MENU.Custom_Theme]}
             anchorView={this.refs.moreMenuButton}
             onMoreMenuSelect={e=>{
                 if (e=== MORE_MENU.Custom_Theme){
@@ -220,7 +220,6 @@ class TrendingTabPage extends Component{
         })
     }
 
-
     componentWillReceiveProps(nextProps) {
         if(nextProps.timeSpan !== this.props.timeSpan){
             this.loadData(nextProps.timeSpan)
@@ -262,7 +261,13 @@ class TrendingTabPage extends Component{
 
     //跟新project item的 favorite状态
     flushFavoriteState(){
+
         let projectModels = [];
+
+        if (this.items.length == 0){
+            return;
+        }
+
         let items = this.items;
         for (var i=0,len=items.length;i<len;i++){
             projectModels.push(new ProjectModel(items[i],Utils.checkFavorite(items[i],this.state.favoriteKeys)));

@@ -23,9 +23,11 @@ export default class NewPage extends Component {
     constructor(props){
         super(props);
         this.languageDao = new LanguageDao(this.props.flag);
-        this.changeValues = [];
         this.isRemoveKeyPage = this.props.isRemoveKeyPage?true:false;
+
+        this.changeValues = [];
         this.state={
+            originalCheckedArray:[],
             changed:false
         }
     }
@@ -36,14 +38,41 @@ export default class NewPage extends Component {
 
     loadData(){
         this.languageDao.fetch()
-            .then(result=>{
+
+            .then(resultArr=>{
+                // var arr = ArrayUtls.deepCopy(resultArr);
+                // var arr = resultArr.slice(0);
+                var arr = JSON.parse(JSON.stringify(resultArr))
+                if (this.isRemoveKeyPage){
+                    for(let i = 0; i<arr.length; i++){
+                        var data = arr[i];
+                        data.checked = false;
+                    }
+                }
                 this.setState({
-                    dataArray:result
+                    dataArray:arr,
+                    originalCheckedArray:resultArr
                 })
             })
             .catch(error=>{
                 console.log(error);
             });
+    }
+
+    removeItem(item){
+        if(!item)return;
+        var removeIndex = -1;
+        for (let i=0,l=this.state.originalCheckedArray.length;i<l;i++){
+            var originalItem = this.state.originalCheckedArray[i];
+            if (item.name === originalItem.name){
+                removeIndex = i;
+            }
+        }
+
+        if (removeIndex > -1){
+            this.state.originalCheckedArray.splice(removeIndex,1);
+        }
+
     }
 
     onSave(){
@@ -54,16 +83,21 @@ export default class NewPage extends Component {
         }
 
         if (this.props.isRemoveKeyPage){
+
             for(let i=0,l=this.changeValues.length;i<l;i++){
-                ArrayUtls.remove(this.state.dataArray,this.changeValues[i]);
+               this.removeItem(this.changeValues[i]);
             }
+            this.languageDao.save(this.state.originalCheckedArray);
         }else {
             this.languageDao.save(this.state.dataArray);
         }
 
-        this.props.navigator.pop();
-        var jumpToTab = this.props.flag == FLAG_LANGUAGE.flag_key?FLAG_TAB.flag_popularTab:FLAG_TAB.flag_trendingTab;
+        //jumpToTab用于区分是最热页面还是趋势页面，这个页面是home重启之后展示的页面
+        var jumpToTab = this.props.flag === FLAG_LANGUAGE.flag_key?FLAG_TAB.flag_popularTab:FLAG_TAB.flag_trendingTab;
         DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,jumpToTab)
+        // DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,{jumpToTab})注意：keyvalue形式
+        this.props.navigator.pop();
+
     }
 
     goBack(){
@@ -109,7 +143,7 @@ export default class NewPage extends Component {
 
 
     onClick(data){
-        if(!this.isRemoveKeyPage)data.checked =!data.checked;
+        data.checked =!data.checked;
         ArrayUtls.updateArray(this.changeValues,data);
         this.setState({
             changed:true
@@ -202,10 +236,4 @@ const styles = StyleSheet.create({
         padding:10,
 
     },
-
-    checkBoxImageStyle:{
-        tintColor:'#6495ED',
-        width:22,
-        height:22,
-    }
 });

@@ -31,7 +31,7 @@ export default class HomePage extends BaseComponent {
 
     constructor(props){
         super(props);
-        let selectedTab = this.props.selectedTab?this.props.selectedTab:'tb_popular'
+        let selectedTab = this.props.selectedTab?this.props.selectedTab:FLAG_TAB.flag_popularTab
 
         this.state = {
             selectedTab:selectedTab,
@@ -40,24 +40,24 @@ export default class HomePage extends BaseComponent {
     }
 
     componentDidMount() {
+
         super.componentDidMount();
-        // this.listener = DeviceEventEmitter.addListener('ACTION_HOME',(action,params)=>this.onAction(action,params));
-        this.listener = DeviceEventEmitter.addListener('showToast',(text)=>{
-            this.toast.show(text,DURATION.LENGTH_LONG);
-        })
+        this.listener = DeviceEventEmitter.addListener('ACTION_HOME',(action,params)=>this.onAction(action,params));
 
     }
 
     onAction(action,params){
-        if (action === ACTION_HOME.A_RESTART){
-            // this.onRestart(FLAG_TAB.flag_popularTab);
+        if (action === ACTION_HOME.A_RESTART ){
+            this.onRestart(params);
         }else if (action === ACTION_HOME.A_SHOW_TOAST ){
             this.toast.show(params.text,DURATION.LENGTH_LONG);
+        }else{
+
         }
     }
 
-    onReStart(jumpToTap){
-        this.props.navigator.navigator.resetTo({
+    onRestart(jumpToTap){
+        this.props.navigator.resetTo({
             component:HomePage,
             params:{
                 ...this.props,
@@ -73,7 +73,6 @@ export default class HomePage extends BaseComponent {
     }
 
     onSelected(object) {
-        // if (this.updateFavorite && 'popularTab' === object)this.updateFavorite(object);
 
         this.setState({
             selectedTab: object,
@@ -116,108 +115,15 @@ export default class HomePage extends BaseComponent {
                     tabBarStyle={{opacity: 0.9,}}
                     sceneStyle={{paddingBottom: 0}}
                 >
-                    {this._renderTab(PopularPage, 'tb_popular', '最热', require('../../res/images/ic_polular.png'))}
-                    {this._renderTab(TrendingPage, 'tb_trending', '趋势', require('../../res/images/ic_trending.png'))}
-                    {this._renderTab(FavoritePage, 'tb_favorite', '收藏', require('../../res/images/ic_favorite.png'))}
-                    {this._renderTab(MinePage, 'tb_my', 'My', require('../../res/images/ic_my.png'))}
+                    {this._renderTab(PopularPage, FLAG_TAB.flag_popularTab, '最热', require('../../res/images/ic_polular.png'))}
+                    {this._renderTab(TrendingPage, FLAG_TAB.flag_trendingTab, '趋势', require('../../res/images/ic_trending.png'))}
+                    {this._renderTab(FavoritePage, FLAG_TAB.flag_favoriteTab, '收藏', require('../../res/images/ic_favorite.png'))}
+                    {this._renderTab(MinePage, FLAG_TAB.flag_myTab, '我的', require('../../res/images/ic_my.png'))}
                 </TabNavigator>
             </View>
         )
     }
 
-    // render() {
-    //     return (
-    //         <View style={styles.container}>
-    //             <TabNavigator>
-    //                 {/*{this.renderTabBarItem(PopularPage,'tb_popular',"最热",require('../../res/images/ic_polular.png'))};*/}
-    //                 <TabNavigator.Item
-    //                     selected={this.state.selectedTab === 'tb_popular'}
-    //                     selectedTitleStyle={{color:'#2196F3'}}
-    //                     title="最热"
-    //                     renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_polular.png')} />}
-    //                     renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]} source={require('../../res/images/ic_polular.png')} />}
-    //                     onPress={() => this.setState({ selectedTab: 'tb_popular' })}>
-    //
-    //                     <Navigator.Navigator
-    //                         initialRoute={{name:'tb_popular',component:PopularPage}}
-    //                         configureScene={()=>{
-    //                             return Navigator.Navigator.SceneConfigs.PushFromRight;
-    //                         }}
-    //
-    //                         renderScene={(route,navigator)=>{
-    //                             let Component = route.component;
-    //                             return <Component {...route.params} navigator={navigator}/>;
-    //                         }}
-    //                     />
-    //                 </TabNavigator.Item>
-    //
-    //                 <TabNavigator.Item
-    //                     selected={this.state.selectedTab === 'tb_trending'}
-    //                     selectedTitleStyle={{color:'#2196F3'}}
-    //                     title="趋势"
-    //                     renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_trending.png')} />}
-    //                     renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_trending.png')} />}
-    //                     onPress={() => this.setState({ selectedTab: 'tb_trending' })}>
-    //
-    //                     <Navigator.Navigator
-    //                         initialRoute={{name:'tb_trending',component:TrendingPage}}
-    //                         configureScene={()=>{
-    //                             return Navigator.Navigator.SceneConfigs.PushFromRight;
-    //                         }}
-    //
-    //                         renderScene={(route,navigator)=>{
-    //                             let Component = route.component;
-    //                             return<Component {...route.params} navigator={navigator}/>;
-    //                         }}
-    //                     />
-    //                 </TabNavigator.Item>
-    //
-    //                 <TabNavigator.Item
-    //                     selected={this.state.selectedTab === 'tb_favorite'}
-    //                     selectedTitleStyle={{color:'#2196F3'}}
-    //                     title="收藏"
-    //                     renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_favorite.png')} />}
-    //                     renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_favorite.png')} />}
-    //                     onPress={() => this.setState({ selectedTab: 'tb_favorite' })}>
-    //
-    //                     <Navigator.Navigator
-    //                         initialRoute={{name:'tb_favorite',component:FavoritePage}}
-    //                         configureScene={()=>{
-    //                             return Navigator.Navigator.SceneConfigs.PushFromRight;
-    //                         }}
-    //
-    //                         renderScene={(route,navigator)=>{
-    //                             let Component = route.component;
-    //                             return<Component {...route.params} navigator={navigator}/>;
-    //                         }}
-    //                     />
-    //                 </TabNavigator.Item>
-    //
-    //                 <TabNavigator.Item
-    //                     selected={this.state.selectedTab === 'tb_my'}
-    //                     selectedTitleStyle={{color:'#2196F3'}}
-    //                     title="我的"
-    //                     renderIcon={() => <Image style={styles.tabItemImageStyle} source={require('../../res/images/ic_my.png')} />}
-    //                     renderSelectedIcon={() => <Image style={[styles.tabItemImageStyle,{tintColor:'#2196F3'}]}  source={require('../../res/images/ic_my.png')} />}
-    //                     onPress={() => this.setState({ selectedTab: 'tb_my' })}>
-    //
-    //                     <Navigator.Navigator
-    //                         initialRoute={{name:'tb_my',component:MinePage}}
-    //                         configureScene={()=>{
-    //                             return Navigator.Navigator.SceneConfigs.PushFromRight;
-    //                         }}
-    //
-    //                         renderScene={(route,navigator)=>{
-    //                             let Component = route.component;
-    //                             return<Component {...route.params} navigator={navigator}/>;
-    //                         }}
-    //                     />
-    //                 </TabNavigator.Item>
-    //             </TabNavigator>
-    //             <Toast ref={toast=>this.toast=toast}/>
-    //         </View>
-    //     );
-    // }
 }
 
 const styles = StyleSheet.create({

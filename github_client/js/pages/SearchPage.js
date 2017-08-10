@@ -29,7 +29,7 @@ import {FLAG_TAB} from './HomPage'
 
 const API_URL = 'https://api.github.com/search/repositories?q=' 
 const QUERY_STR = '&sort=starts'
-
+import {ACTION_HOME} from './HomPage'
 
 export default class SearchPage extends Component {
 
@@ -57,7 +57,7 @@ export default class SearchPage extends Component {
 
     componentWillUnmount() {
         if (this.isKeyChanged){
-            // DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART);
+            DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,FLAG_TAB.flag_popularTab);
             // this.props.homeComponent.onReStart(FLAG_TAB.flag_popularTab);
         }
         this.cancelRequest && this.cancelRequest.cancel();
