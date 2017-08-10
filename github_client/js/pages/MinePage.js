@@ -71,13 +71,13 @@ export default class MinePage extends BaseComponent {
                 break;
 
             case MORE_MENU.About_Author:
-
                 TargetComponent =  AboutMePage;
                 break;
 
             case MORE_MENU.About:
                 TargetComponent = AboutPage;
                 break;
+
 
         }
 
@@ -112,6 +112,7 @@ export default class MinePage extends BaseComponent {
             />
             <ScrollView>
                 <TouchableHighlight
+                    underlayColor= 'transparent'
                     onPress={()=>this.onClick(MORE_MENU.About)}
                 >
                     <View style={styles.item}>
@@ -119,7 +120,7 @@ export default class MinePage extends BaseComponent {
                             <Image source={require('../../res/images/ic_trending.png')}
                                    style={[{width:40,height:40,marginRight:10},this.state.theme.styles.tabBarSelectedIcon]}
                             />
-                            <Text>GitHub Popular</Text>
+                            <Text>GitHub Popular 项目信息</Text>
                         </View>
                         <Image source={require('../../res/images/ic_tiaozhuan.png')}
                             style={[{height:22,width:22},this.state.theme.styles.tabBarSelectedIcon]}
@@ -128,7 +129,6 @@ export default class MinePage extends BaseComponent {
 
                 </TouchableHighlight>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-
 
                 <Text style={styles.groupTitleStyle}>趋势管理</Text>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
@@ -153,9 +153,6 @@ export default class MinePage extends BaseComponent {
                 {/*自定义主题*/}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 {this.createSettingItem(MORE_MENU.Custom_Theme,require('../../res/images/ic_view_quilt.png'),'自定义主题')}
-                <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {/*关于作者*/}
-                {this.createSettingItem(MORE_MENU.About_Author,require('../../res/images/ic_insert_emoticon.png'),'关于作者')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
             </ScrollView>

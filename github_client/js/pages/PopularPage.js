@@ -106,7 +106,7 @@ export default class PopularPage extends BaseComponent {
         return <MoreMenu
             ref = "moreMenu"
             {...params}
-            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Key,MORE_MENU.Sort_Language,MORE_MENU.Custom_Theme,MORE_MENU.About]}
+            menus={[MORE_MENU.Custom_Key,MORE_MENU.Sort_Key,MORE_MENU.Remove_Key,MORE_MENU.Custom_Theme,MORE_MENU.About]}
             anchorView={this.refs.moreMenuButton}
             onMoreMenuSelect={e=>{
                 if (e=== MORE_MENU.Custom_Theme){

@@ -3087,6 +3087,10 @@ react-native-sortable-listview@^0.2.2:
   dependencies:
     react-timer-mixin "^0.13.3"
 
+react-native-splash-screen@^2.1.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/react-native-splash-screen/download/react-native-splash-screen-2.1.0.tgz#4e0a5e4e8c32974fe7a3cdb4d9a226d06d9daf4f"
+
 react-native-tab-navigator@^0.3.3:
   version "0.3.3"
   resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.3.tgz#b222bad21fbe773c8d28f9a0de30ce62b08724d3"

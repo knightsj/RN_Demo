@@ -24,16 +24,25 @@ export default class ViewUtils{
     }
 
     static createSettingItem(callBack,icon,text,tintColor,expandableIcon){
+
+        //警告
+        let image = null;
+        if (icon){
+            image = <Image
+                source={icon}
+                resizeMode='stretch'
+                style={[{width:18,height:18,marginRight:10},tintColor]}
+            />
+        }
         return (
             <View style={{backgroundColor:'white'}}>
                 <TouchableHighlight
                     onPress={callBack}
+                    underlayColor= 'transparent'
                 >
                     <View style={styles.settingItemContainerStyle}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <Image source={icon} resizeMode='stretch'
-                                   style={[{width:18,height:18,marginRight:10},tintColor]}
-                            />
+                            {image}
                             <Text>{text}</Text>
                         </View>
                         <Image source={expandableIcon?expandableIcon:require('../../res/images/ic_tiaozhuan.png')}

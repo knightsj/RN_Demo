@@ -16,18 +16,19 @@ import {
 } from 'react-native'
 
 import NavigationBar from '../common/NavigationBar'
-import GlobalStyles from '../../res/styles/GlobalStyles'
 import ViewUtils from '../Util/ViewUtils'
 const WEBVIEW_REF = 'webview';
 
 
 export default class WebViewPage extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             url: this.props.url,
             canGoBack: false,
             title: this.props.title,
+            theme:this.props.theme
         }
     }
 
@@ -52,7 +53,7 @@ export default class WebViewPage extends Component {
                 <NavigationBar
                     navigator={this.props.navigator}
                     popEnabled={false}
-                    style={{backgroundColor:'#2196F3'}}
+                    style={this.state.theme.styles.navBar}
                     leftButton={ViewUtils.getLeftButton(()=>this.onBackPress())}
                     title={this.state.title}
                 />

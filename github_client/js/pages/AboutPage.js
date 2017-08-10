@@ -33,8 +33,9 @@ export default class AboutPage extends Component{
         super(props);
         this.aboutComponent = new AboutComponent(props,FLAG_ABOUT.flag_about,(dic=>this.updateState(dic)),config)
         this.state={
+            theme:this.props.theme,
             projectModels:[],
-            author:config.author
+            project:config.project,
         }
     }
 
@@ -58,7 +59,7 @@ export default class AboutPage extends Component{
                 TargetComponent = WebViewPage;
                 params.url = 'http://coding.imooc.com/class/89.html';
                 params.title = '慕课网实战：GitHub客户端';
-
+                params.theme = this.state.theme;
                 break;
 
             case MORE_MENU.Feedback:
@@ -96,10 +97,10 @@ export default class AboutPage extends Component{
             <View style={GlobalStyles.cellBottomLineStyle}></View>
         </View>
         return this.aboutComponent.render(contentView,{
-            'name':'GitHub Popular',
-            'description':'This is a GitHub most popular repositories and trending repositories viewer with React Native.',
-            'avatar':this.state.author.avatar1,
-            'backgroundImage':this.state.author.backgroundImg1,
+            'name':this.state.project.name,
+            'description':this.state.project.description,
+            'avatar':this.state.project.icon,
+            'backgroundImage':this.state.project.backgroundImage,
         });
     }
 }

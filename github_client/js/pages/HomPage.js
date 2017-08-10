@@ -116,9 +116,9 @@ export default class HomePage extends BaseComponent {
                     tabBarStyle={{opacity: 0.9,}}
                     sceneStyle={{paddingBottom: 0}}
                 >
-                    {this._renderTab(PopularPage, 'tb_popular', 'Popular', require('../../res/images/ic_polular.png'))}
-                    {this._renderTab(TrendingPage, 'tb_trending', 'Trending', require('../../res/images/ic_trending.png'))}
-                    {this._renderTab(FavoritePage, 'tb_favorite', 'Favorite', require('../../res/images/ic_favorite.png'))}
+                    {this._renderTab(PopularPage, 'tb_popular', '最热', require('../../res/images/ic_polular.png'))}
+                    {this._renderTab(TrendingPage, 'tb_trending', '趋势', require('../../res/images/ic_trending.png'))}
+                    {this._renderTab(FavoritePage, 'tb_favorite', '收藏', require('../../res/images/ic_favorite.png'))}
                     {this._renderTab(MinePage, 'tb_my', 'My', require('../../res/images/ic_my.png'))}
                 </TabNavigator>
             </View>

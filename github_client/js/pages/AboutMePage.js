@@ -20,28 +20,26 @@ import {
 } from 'react-native';
 
 
-
 const FLAG = {
     REPOSITORY: '开源项目',
     BLOG: {
         name: '技术博客',
         items: {
-
-            JIANSHU: {
-                title: '简书',
-                url: 'http://www.jianshu.com/u/3dd433cb3ea1',
-            },
-            JUEJIN: {
-                title: '掘金',
-                url: 'https://juejin.im/user/57f8ffda2e958a005581e3c0',
-            },
             PERSONAL_BLOG: {
                 title: '个人博客',
-                url: 'https://knightsj.github.io/#blog',
+                url: 'http://jiapenghui.com',
+            },
+            CSDN: {
+                title: 'CSDN',
+                url: 'http://blog.csdn.net/fengyuzhengfan',
+            },
+            JIANSHU: {
+                title: '简书',
+                url: 'http://www.jianshu.com/users/ca3943a4172a/latest_articles',
             },
             GITHUB: {
                 title: 'GitHub',
-                url: 'https://github.com/knightsj',
+                url: 'https://github.com/crazycodeboy',
             },
         }
     },
@@ -50,15 +48,14 @@ const FLAG = {
         items: {
             QQ: {
                 title: 'QQ',
-                account: '1037741530',
+                account: '1586866509',
             },
             Email: {
                 title: 'Email',
-                account: 'ssjlife0111@163.com',
+                account: 'crazycodeboy@gmail.com',
             },
         }
     },
-
     QQ: {
         name: '技术交流群',
         items: {
@@ -76,7 +73,6 @@ const FLAG = {
 };
 
 import ViewUtils from '../Util/ViewUtils'
-import {MORE_MENU} from '../common/MoreMenu'
 import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import WebViewPage from './WebViewPage'
