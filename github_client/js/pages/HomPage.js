@@ -61,10 +61,20 @@ export default class HomePage extends BaseComponent {
             component:HomePage,
             params:{
                 ...this.props,
+                theme:this.state.theme,
                 selectedTab:jumpToTap
             }
         })
     }
+
+    componentWillReceiveProps(nextProps){
+
+        // if (nextProps!==this.state.theme){
+        //     this.setState({theme:nextProps.theme})
+        // }
+    }
+
+
     componentWillUnmount() {
         super.componentWillUnmount();
         if(this.listener){
