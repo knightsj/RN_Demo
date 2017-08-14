@@ -51,11 +51,13 @@ export default class AboutComponent {
             this.repositoryUtil.fetchRepository(this.config.info.currentRepoUrl);
 
         }else if (this.flag_about === FLAG_ABOUT.flag_about_me){
+
             var urls = [];
             var items = this.config.items;
             for (var i = 0, l = items.length; i <l;i++){
                 urls.push(this.config.info.url + items[i]);
             }
+
             this.repositoryUtil.fetchRepositorys(urls);
 
         }else {

@@ -25,7 +25,9 @@ export default class RepositoryUtil{
 
     //获取指定url下的数据
     fetchRepository(url){
+
         this.dataRespository.fetchRespository(url)
+
             .then(result=>{
                 if (result){
                     this.updateData(url,result);
@@ -33,13 +35,16 @@ export default class RepositoryUtil{
                         return this.dataRespository.fetchNetRepository(url);
                     }
                 }
-            }).then((item)=>{
+            })
+
+            .then((item)=>{
                 if(item){
                     this.updateData(url,item);
-                }
-        }).catch(e=>{
+                }})
 
-        })
+            .catch(e=>{
+                reject(e);
+            })
     }
 
     //批量获取url对应的数据
