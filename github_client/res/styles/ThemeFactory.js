@@ -1,8 +1,3 @@
-/**
- * 主题
- * @flow
- */
-
 
 import {
     StyleSheet,
@@ -33,10 +28,6 @@ export const ThemeFlags = {
 }
 
 export default class ThemeFactory {
-    // constructor(themeFlag) {
-    //     this.themeFlag = themeFlag;
-    //     this.theme = this.createTheme();
-    // }
 
     static createTheme(themeFlag) {
         return {

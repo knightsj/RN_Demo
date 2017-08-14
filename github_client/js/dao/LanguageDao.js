@@ -5,8 +5,8 @@ import {
 } from 'react-native'
 
 
-import keysData from '../../../res/data/keys.json'
-import langsData from '../../../res/data/langs.json'
+import keysData from '../../res/data/keys.json'
+import langsData from '../../res/data/langs.json'
 
 export var FLAG_LANGUAGE ={flag_language:'flag_language_language',flag_key:'flag_language_key'}
 

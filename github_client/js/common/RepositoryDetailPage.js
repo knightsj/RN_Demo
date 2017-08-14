@@ -11,10 +11,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import NavigationBar from '../common/NavigationBar'
-import ViewUtils from '../Util/ViewUtils'
-import FavoriteDao from '../expand/dao/FavoriteDao'
-import {FlAG_STORAGE} from '../expand/dao/DataRepository'
+import NavigationBar from './NavigationBar'
+import ViewUtils from '../util/ViewUtils'
+import FavoriteDao from '../dao/FavoriteDao'
+import {FlAG_STORAGE} from '../dao/RepositoryDao'
 const TRENDING_URL = 'https://github.com/'
 
 export default class RepositoryDetailPage extends Component {

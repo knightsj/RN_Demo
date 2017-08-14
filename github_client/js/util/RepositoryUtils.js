@@ -2,8 +2,8 @@ import {
     AsyncStorage
 } from 'react-native'
 
-import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
-import TimeUtil from '../Util/TimeUtil'
+import DataRepository,{FlAG_STORAGE} from '../dao/RepositoryDao'
+import TimeUtil from './TimeUtils'
 
 
 export default class RepositoryUtil{

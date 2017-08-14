@@ -13,21 +13,21 @@ import {
 } from 'react-native';
 
 
-import ProjectModel from '../model/ProjectModel'
-import {FlAG_STORAGE} from '../expand/dao/DataRepository'
-import NavigationBar from '../common/NavigationBar'
-import DetailPage from './RepositoryDetailPage'
+import ProjectModel from '../../model/ProjectModel'
+import {FlAG_STORAGE} from '../../dao/RepositoryDao'
+import NavigationBar from '../../common/NavigationBar'
+import DetailPage from '../../common/RepositoryDetailPage'
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
-import RespositoryCell from '../common/RespositoryCell'
-import TrendingCell from '../common/TrendingCell'
-import FavoriteDao from '../expand/dao/FavoriteDao'
-import ArrayUtils from '../Util/ArrayUtls'
-import ActionUtils from '../Util/ActionUtils'
-import ViewUtils from '../Util/ViewUtils'
-import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
-import {FLAG_TAB} from './HomPage'
-import BaseComponent from './BaseComponent'
-import CustomThemePage from './CustomThemePage'
+import RespositoryCell from '../../common/RespositoryCell'
+import TrendingCell from '../../common/TrendingCell'
+import FavoriteDao from '../../dao/FavoriteDao'
+import ArrayUtils from '../../util/ArrayUtls'
+import ActionUtils from '../../util/ActionUtils'
+import ViewUtils from '../../util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
+import {FLAG_TAB} from '../Entry/HomePage'
+import BaseComponent from '../../common/BaseCommon'
+import CustomThemePage from '../Mine/CustomThemePage'
 
 export default class FavoritePage extends BaseComponent {
 

@@ -72,11 +72,11 @@ const FLAG = {
 
 };
 
-import ViewUtils from '../Util/ViewUtils'
-import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
-import GlobalStyles from '../../res/styles/GlobalStyles'
-import WebViewPage from './WebViewPage'
-import Config from '../../res/data/Config.json'
+import ViewUtils from '../../util/ViewUtils'
+import AboutComponent,{FLAG_ABOUT} from '../../common/BaseAboutComponent'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
+import WebViewPage from '../../common/WebViewPage'
+import Config from '../../../res/data/Config.json'
 import Toast from 'react-native-easy-toast'
 
 export default class AboutPage extends Component{
@@ -170,7 +170,7 @@ export default class AboutPage extends Component{
 
     //获取item右侧图标
     getClickIcon(isShow){
-        return isShow?require('../../res/images/ic_tiaozhuan_up.png'):require('../../res/images/ic_tiaozhuan_down.png');
+        return isShow?require('../../../res/images/ic_tiaozhuan_up.png'):require('../../../res/images/ic_tiaozhuan_down.png');
     }
     
     //显示列表数据
@@ -191,20 +191,20 @@ export default class AboutPage extends Component{
 
     render(){
         let contentView = <View>
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.BLOG),require('../../res/images/ic_computer.png'),FLAG.BLOG.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showBlog))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.BLOG),require('../../../res/images/ic_computer.png'),FLAG.BLOG.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showBlog))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showBlog?this.renderItems(FLAG.BLOG.items,false):null}
 
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.REPOSITORY),require('../../res/images/ic_code.png'),FLAG.REPOSITORY,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showRepository))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.REPOSITORY),require('../../../res/images/ic_code.png'),FLAG.REPOSITORY,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showRepository))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showRepository?this.aboutComponent.renderRepository(this.state.projectModels):null}
 
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.QQ),require('../../res/images/ic_computer.png'),FLAG.QQ.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showQQ))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.QQ),require('../../../res/images/ic_computer.png'),FLAG.QQ.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showQQ))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showQQ?this.renderItems(FLAG.QQ.items,true):null}
 
             <View style={GlobalStyles.cellBottomLineStyle}></View>
-            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.CONTACT),require('../../res/images/ic_contacts.png'),FLAG.CONTACT.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showContact))}
+            {ViewUtils.createSettingItem(()=>this.onClick(FLAG.CONTACT),require('../../../res/images/ic_contacts.png'),FLAG.CONTACT.name,this.props.theme.styles.tabBarSelectedIcon,this.getClickIcon(this.state.showContact))}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             {this.state.showContact?this.renderItems(FLAG.CONTACT.items,true):null}
         </View>

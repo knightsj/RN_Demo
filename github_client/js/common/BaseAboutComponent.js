@@ -20,14 +20,14 @@ import {
 } from 'react-native';
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
-import ViewUtils from '../Util/ViewUtils'
-import FavoriteDao from '../expand/dao/FavoriteDao'
-import {FlAG_STORAGE} from '../expand/dao/DataRepository'
-import FavoriteUtils from '../Util/FavoriteUtils'
-import RepositoryCell from '../common/RespositoryCell'
+import ViewUtils from '../util/ViewUtils'
+import FavoriteDao from '../dao/FavoriteDao'
+import {FlAG_STORAGE} from '../dao/RepositoryDao'
+import FavoriteUtils from '../util/FavoriteUtils'
+import RepositoryCell from './RespositoryCell'
 import DetailPage from './RepositoryDetailPage'
-import RepositoryUtil from '../Util/RepositoryUtil'
-import ActionUtils from '../Util/ActionUtils'
+import RepositoryUtil from '../util/RepositoryUtils'
+import ActionUtils from '../util/ActionUtils'
 
 export var FLAG_ABOUT = {flag_about:'about',flag_about_me:'flag_about_me'}
 

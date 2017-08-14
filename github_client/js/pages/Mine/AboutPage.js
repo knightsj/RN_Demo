@@ -19,12 +19,12 @@ import {
 } from 'react-native';
 
 
-import ViewUtils from '../Util/ViewUtils'
-import {MORE_MENU} from '../common/MoreMenu'
-import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
-import GlobalStyles from '../../res/styles/GlobalStyles'
-import WebViewPage from './WebViewPage'
-import config from '../../res/data/Config.json'
+import ViewUtils from '../../util/ViewUtils'
+import {MORE_MENU} from '../../common/MoreMenu'
+import AboutComponent,{FLAG_ABOUT} from '../../common/BaseAboutComponent'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
+import WebViewPage from '../../common/WebViewPage'
+import config from '../../../res/data/Config.json'
 import AboutMePage from './AboutMePage'
 
 
@@ -86,13 +86,13 @@ export default class AboutPage extends Component{
     render(){
         let contentView = <View>
             {this.aboutComponent.renderRepository(this.state.projectModels)}
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Website),require('../../res/images/ic_computer.png'),MORE_MENU.Website,this.props.theme.styles.tabBarSelectedIcon)}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Website),require('../../../res/images/ic_computer.png'),MORE_MENU.Website,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
 
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.About_Author),require('../../res/images/ic_insert_emoticon.png'),MORE_MENU.About_Author,this.props.theme.styles.tabBarSelectedIcon)}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.About_Author),require('../../../res/images/ic_insert_emoticon.png'),MORE_MENU.About_Author,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
 
-            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Feedback),require('../../res/images/ic_feedback.png'),MORE_MENU.Feedback,this.props.theme.styles.tabBarSelectedIcon)}
+            {ViewUtils.createSettingItem(()=>this.onClick(MORE_MENU.Feedback),require('../../../res/images/ic_feedback.png'),MORE_MENU.Feedback,this.props.theme.styles.tabBarSelectedIcon)}
             <View style={GlobalStyles.cellBottomLineStyle}></View>
             <View style={GlobalStyles.cellBottomLineStyle}></View>
         </View>

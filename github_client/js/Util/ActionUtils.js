@@ -1,6 +1,6 @@
 
-import RepositoryDetail from '../../js/pages/RepositoryDetailPage'
-import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
+import RepositoryDetail from '../common/RepositoryDetailPage'
+import DataRepository,{FlAG_STORAGE} from '../dao/RepositoryDao'
 export default class ActionUtils {
 
     //跳转到详情页面

@@ -9,18 +9,18 @@ import {
     TouchableHighlight,
 } from 'react-native';
 
-import NavigationBar from '../common/NavigationBar'
-import {MORE_MENU} from '../common/MoreMenu'
-import GlobalStyles from '../../res/styles/GlobalStyles'
-import ViewUtil from '../Util/ViewUtils'
-import LanguageDao,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
+import NavigationBar from '../../common/NavigationBar'
+import {MORE_MENU} from '../../common/MoreMenu'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
+import ViewUtil from '../../util/ViewUtils'
+import {FLAG_LANGUAGE}from '../../dao/LanguageDao'
 import AboutPage from './AboutPage'
 
 import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
 import AboutMePage from './AboutMePage'
 import CustomThemePage from './CustomThemePage'
-import BaseComponent from './BaseComponent'
+import BaseComponent from '../../common/BaseCommon'
 
 
 export default class MinePage extends BaseComponent {
@@ -117,12 +117,12 @@ export default class MinePage extends BaseComponent {
                 >
                     <View style={styles.item}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <Image source={require('../../res/images/ic_trending.png')}
+                            <Image source={require('../../../res/images/ic_trending.png')}
                                    style={[{width:40,height:40,marginRight:10},this.state.theme.styles.tabBarSelectedIcon]}
                             />
                             <Text>GitHub Popular 项目信息</Text>
                         </View>
-                        <Image source={require('../../res/images/ic_tiaozhuan.png')}
+                        <Image source={require('../../../res/images/ic_tiaozhuan.png')}
                             style={[{height:22,width:22},this.state.theme.styles.tabBarSelectedIcon]}
                         />
                     </View>
@@ -132,27 +132,27 @@ export default class MinePage extends BaseComponent {
 
                 <Text style={styles.groupTitleStyle}>趋势管理</Text>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Custom_Language,require('../../res/images/ic_custom_language.png'),'自定义语言')}
+                {this.createSettingItem(MORE_MENU.Custom_Language,require('../../../res/images/ic_custom_language.png'),'自定义语言')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Sort_Language,require('../../res/images/ic_swap_vert.png'),'语言排序')}
+                {this.createSettingItem(MORE_MENU.Sort_Language,require('../../../res/images/ic_swap_vert.png'),'语言排序')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
                 <Text style={styles.groupTitleStyle}>标签管理</Text>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Custom_Key,require('../../res/images/ic_custom_language.png'),'自定义标签')}
+                {this.createSettingItem(MORE_MENU.Custom_Key,require('../../../res/images/ic_custom_language.png'),'自定义标签')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Sort_Key,require('../../res/images/ic_swap_vert.png'),'标签排序')}
+                {this.createSettingItem(MORE_MENU.Sort_Key,require('../../../res/images/ic_swap_vert.png'),'标签排序')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Remove_Key,require('../../res/images/ic_remove.png'),'标签移除')}
+                {this.createSettingItem(MORE_MENU.Remove_Key,require('../../../res/images/ic_remove.png'),'标签移除')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
                 <Text style={styles.groupTitleStyle}>设置</Text>
 
                 {/*自定义主题*/}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                {this.createSettingItem(MORE_MENU.Custom_Theme,require('../../res/images/ic_view_quilt.png'),'自定义主题')}
+                {this.createSettingItem(MORE_MENU.Custom_Theme,require('../../../res/images/ic_view_quilt.png'),'自定义主题')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
             </ScrollView>

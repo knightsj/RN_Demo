@@ -3,7 +3,7 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import {ACTION_HOME} from './HomPage'
+import {ACTION_HOME} from '../pages/Entry/HomePage'
 
 export default class BaseComponent extends Component {
 

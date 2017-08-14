@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
-import PopularPage from './PopularPage'
-import TrendingPage from './TrendingPage'
-import MinePage from './MinePage'
+import PopularPage from '../Popular/PopularPage'
+import TrendingPage from '../Trending/TrendingPage'
+import MinePage from '../Mine/MinePage'
 import {DURATION} from 'react-native-easy-toast'
-import FavoritePage from './FavoritePage'
-import BaseComponent from './BaseComponent'
+import FavoritePage from '../Favorite/FavoritePage'
+import BaseComponent from '../../common/BaseCommon'
 
 export const ACTION_HOME = {A_SHOW_TOAST:'showToast',A_RESTART:'restart',A_THEME:'theme'};
 
@@ -103,10 +103,10 @@ export default class HomePage extends BaseComponent {
                     tabBarStyle={{opacity: 0.9,}}
                     sceneStyle={{paddingBottom: 0}}
                 >
-                    {this._renderTab(PopularPage, FLAG_TAB.flag_popularTab, '最热', require('../../res/images/ic_polular.png'))}
-                    {this._renderTab(TrendingPage, FLAG_TAB.flag_trendingTab, '趋势', require('../../res/images/ic_trending.png'))}
-                    {this._renderTab(FavoritePage, FLAG_TAB.flag_favoriteTab, '收藏', require('../../res/images/ic_favorite.png'))}
-                    {this._renderTab(MinePage, FLAG_TAB.flag_myTab, '我的', require('../../res/images/ic_my.png'))}
+                    {this._renderTab(PopularPage, FLAG_TAB.flag_popularTab, '最热', require('../../../res/images/ic_polular.png'))}
+                    {this._renderTab(TrendingPage, FLAG_TAB.flag_trendingTab, '趋势', require('../../../res/images/ic_trending.png'))}
+                    {this._renderTab(FavoritePage, FLAG_TAB.flag_favoriteTab, '收藏', require('../../../res/images/ic_favorite.png'))}
+                    {this._renderTab(MinePage, FLAG_TAB.flag_myTab, '我的', require('../../../res/images/ic_my.png'))}
                 </TabNavigator>
             </View>
         )

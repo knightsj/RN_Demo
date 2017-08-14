@@ -12,26 +12,26 @@ import {
 } from 'react-native';
 
 
-import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
-import NavigationBar from '../common/NavigationBar'
-import DetailPage from './RepositoryDetailPage'
+import DataRepository,{FlAG_STORAGE} from '../../dao/RepositoryDao'
+import NavigationBar from '../../common/NavigationBar'
+import DetailPage from '../../common/RepositoryDetailPage'
 
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
-import TrendingCell from '../common/TrendingCell'
+import TrendingCell from '../../common/TrendingCell'
 
 const API_URL = 'https://github.com/trending/'
-import Popover from '../common/Popover'
-import TimeSpan from '../model/TimeSpan'
-import FavoriteDao from '../expand/dao/FavoriteDao'
-import ProjectModel from '../model/ProjectModel'
-import Utils from '../Util/FavoriteUtils'
-import TimeUtil from '../Util/TimeUtil'
-import ActionUtils from '../Util/ActionUtils'
-import ViewUtils from '../Util/ViewUtils'
-import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
-import {FLAG_TAB} from './HomPage'
-import BaseComponent from './BaseComponent'
-import CustomThemePage from './CustomThemePage'
+import Popover from '../../common/Popover'
+import TimeSpan from '../../model/TimeSpan'
+import FavoriteDao from '../../dao/FavoriteDao'
+import ProjectModel from '../../model/ProjectModel'
+import Utils from '../../util/FavoriteUtils'
+import TimeUtil from '../../util/TimeUtils'
+import ActionUtils from '../../util/ActionUtils'
+import ViewUtils from '../../util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
+import {FLAG_TAB} from '../Entry/HomePage'
+import BaseComponent from '../../common/BaseCommon'
+import CustomThemePage from '../Mine/CustomThemePage'
 
 var timeSpanTextArr = [
     new TimeSpan('今 天','since=daily'),
@@ -39,7 +39,7 @@ var timeSpanTextArr = [
     new TimeSpan('本 月','since=monthly')];
 
 
-import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import LanguageDao ,{FLAG_LANGUAGE} from '../../dao/LanguageDao'
 
 var favoriteDao = new FavoriteDao(FlAG_STORAGE.flag_trending)
 var dataRepository = new DataRepository(FlAG_STORAGE.flag_trending);
@@ -81,7 +81,7 @@ export default class TrendingPage extends BaseComponent {
                     <Text style={{fontSize:18,color:'white',fontWeight:'400'}}>语言趋势  {this.state.timeSpan.showText}</Text>
                     <Image
                         style={{width:14,height:14,marginLeft:6}}
-                        source={require('../../res/images/ic_spinner_triangle.png')}/>
+                        source={require('../../../res/images/ic_spinner_triangle.png')}/>
                 </View>
             </TouchableOpacity>
         </View>

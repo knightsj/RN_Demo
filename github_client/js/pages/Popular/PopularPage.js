@@ -13,23 +13,23 @@ import {
 } from 'react-native';
 
 
-import DataRepository,{FlAG_STORAGE} from '../expand/dao/DataRepository'
-import NavigationBar from '../common/NavigationBar'
-import DetailPage from './RepositoryDetailPage'
-import ProjectModel from '../model/ProjectModel'
+import DataRepository,{FlAG_STORAGE} from '../../dao/RepositoryDao'
+import NavigationBar from '../../common/NavigationBar'
+import DetailPage from '../../common/RepositoryDetailPage'
+import ProjectModel from '../../model/ProjectModel'
 import ScrollableTableView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
-import RespositoryCell from '../common/RespositoryCell'
-import FavoriteDao from '../expand/dao/FavoriteDao'
-import LanguageDao ,{FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
-import Utils from '../Util/FavoriteUtils'
-import TimeUtil from '../Util/TimeUtil'
-import ActionUtils from '../Util/ActionUtils'
+import RespositoryCell from '../../common/RespositoryCell'
+import FavoriteDao from '../../dao/FavoriteDao'
+import LanguageDao ,{FLAG_LANGUAGE} from '../../dao/LanguageDao'
+import Utils from '../../util/FavoriteUtils'
+import TimeUtil from '../../util/TimeUtils'
+import ActionUtils from '../../util/ActionUtils'
 import SearchPage from './SearchPage'
-import ViewUtils from '../Util/ViewUtils'
-import MoreMenu,{MORE_MENU} from '../common/MoreMenu'
-import {FLAG_TAB} from './HomPage'
-import BaseComponent from './BaseComponent'
-import CustomThemePage from './CustomThemePage'
+import ViewUtils from '../../util/ViewUtils'
+import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
+import {FLAG_TAB} from '../Entry/HomePage'
+import BaseComponent from '../../common/BaseCommon'
+import CustomThemePage from '../Mine/CustomThemePage'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=starts'
@@ -125,7 +125,7 @@ export default class PopularPage extends BaseComponent {
                 <View>
                     <Image
                         style={{width:24,height:24,marginRight:10}}
-                        source = {require('../../res/images/ic_search_white_48pt.png')}
+                        source = {require('../../../res/images/ic_search_white_48pt.png')}
                     />
                 </View>
 
@@ -169,7 +169,9 @@ class PopularTabPage extends Component{
     }
 
     componentDidMount() {
+
         this.loadData(true);
+        console.disableYellowBox = true;
         this.listener = DeviceEventEmitter.addListener('favoriteChanged_popular',()=> {
             this.isFavoriteChanged = true;
         })

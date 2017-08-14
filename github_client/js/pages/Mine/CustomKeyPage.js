@@ -11,12 +11,12 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import NavigationBar from '../common/NavigationBar'
-import ViewUtils from '../Util/ViewUtils'
-import LanguageDao ,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
+import NavigationBar from '../../common/NavigationBar'
+import ViewUtils from '../../util/ViewUtils'
+import LanguageDao ,{FLAG_LANGUAGE}from '../../dao/LanguageDao'
 import CheckBox from 'react-native-check-box'
-import ArrayUtls from '../Util/ArrayUtls'
-import {ACTION_HOME,FLAG_TAB} from './HomPage'
+import ArrayUtls from '../../util/ArrayUtls'
+import {ACTION_HOME,FLAG_TAB} from '../Entry/HomePage'
 
 export default class NewPage extends Component {
 
@@ -133,10 +133,10 @@ export default class NewPage extends Component {
                 isChecked={data.checked}
                 unCheckedImage={<Image
                     style={this.props.theme.styles.tabBarSelectedIcon}
-                    source={require('../../res/images/img_my_page/ic_check_box_outline_blank.png')}/>}
+                    source={require('../../../res/images/img_my_page/ic_check_box_outline_blank.png')}/>}
                 checkedImage={<Image
                     style={this.props.theme.styles.tabBarSelectedIcon}
-                    source={require('../../res/images/img_my_page/ic_check_box.png')}/>}
+                    source={require('../../../res/images/img_my_page/ic_check_box.png')}/>}
             />
         )
     }

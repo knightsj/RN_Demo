@@ -15,8 +15,8 @@ import {
     View,
 } from 'react-native'
 
-import NavigationBar from '../common/NavigationBar'
-import ViewUtils from '../Util/ViewUtils'
+import NavigationBar from './NavigationBar'
+import ViewUtils from '../util/ViewUtils'
 const WEBVIEW_REF = 'webview';
 
 

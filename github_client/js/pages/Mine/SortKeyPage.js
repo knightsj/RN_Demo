@@ -11,12 +11,12 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import LanguageDao ,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
-import ArrayUtils from '../Util/ArrayUtls'
+import LanguageDao ,{FLAG_LANGUAGE}from '../../dao/LanguageDao'
+import ArrayUtils from '../../util/ArrayUtls'
 import SortableListView from 'react-native-sortable-listview'
-import NavigationBar from '../common/NavigationBar'
-import ViewUtils from '../Util/ViewUtils'
-import {ACTION_HOME,FLAG_TAB} from './HomPage'
+import NavigationBar from '../../common/NavigationBar'
+import ViewUtils from '../../util/ViewUtils'
+import {ACTION_HOME,FLAG_TAB} from '../Entry/HomePage'
 
 export default class NewPage extends Component {
 
@@ -150,7 +150,7 @@ class SortCell extends Component{
             {...this.props.sortHandlers}
         >
         <View style={styles.row}>
-            <Image style={[styles.imageStyle,this.props.theme.styles.tabBarSelectedIcon]} source={require('../../res/images/ic_sort.png')}></Image>
+            <Image style={[styles.imageStyle,this.props.theme.styles.tabBarSelectedIcon]} source={require('../../../res/images/ic_sort.png')}></Image>
             <Text>{this.props.data.name}</Text>
         </View>
         </TouchableHighlight>

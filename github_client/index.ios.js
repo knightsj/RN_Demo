@@ -13,6 +13,6 @@ import {
     Image
 } from 'react-native';
 
-import Setup from './js/pages/Setup'
+import Setup from './js/pages/Entry/Setup'
 
 AppRegistry.registerComponent('github_client', () => Setup);

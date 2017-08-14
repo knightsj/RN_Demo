@@ -13,23 +13,23 @@ import {
     DeviceEventEmitter,
 } from 'react-native';
 
-import ViewUtils from '../Util/ViewUtils'
-import GlobalStyle from '../../res/styles/GlobalStyles'
-import RespositoryCell from '../common/RespositoryCell'
+import ViewUtils from '../../util/ViewUtils'
+import GlobalStyle from '../../../res/styles/GlobalStyles'
+import RespositoryCell from '../../common/RespositoryCell'
 import Toast,{DURATION} from 'react-native-easy-toast'
- import FavoriteDao  from '../expand/dao/FavoriteDao'
- import Utils from '../Util/FavoriteUtils'
- import {FlAG_STORAGE} from '../expand/dao/DataRepository'
- import DetailPage from './RepositoryDetailPage'
-import ProjectModel from '../model/ProjectModel'
-import ActionUtils from '../Util/ActionUtils'
-import LanguageDao,{FLAG_LANGUAGE}from '../expand/dao/LanguageDao'
-import RequestUtils from '../Util/RequestUtls'
-import {FLAG_TAB} from './HomPage'
+ import FavoriteDao  from '../../dao/FavoriteDao'
+ import Utils from '../../util/FavoriteUtils'
+ import {FlAG_STORAGE} from '../../dao/RepositoryDao'
+ import DetailPage from '../../common/RepositoryDetailPage'
+import ProjectModel from '../../model/ProjectModel'
+import ActionUtils from '../../util/ActionUtils'
+import LanguageDao,{FLAG_LANGUAGE}from '../../dao/LanguageDao'
+import RequestUtils from '../../util/RequestUtls'
+import {FLAG_TAB} from '../Entry/HomePage'
 
 const API_URL = 'https://api.github.com/search/repositories?q=' 
 const QUERY_STR = '&sort=starts'
-import {ACTION_HOME} from './HomPage'
+import {ACTION_HOME} from '../Entry/HomePage'
 
 export default class SearchPage extends Component {
 

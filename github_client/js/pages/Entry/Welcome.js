@@ -10,9 +10,9 @@ import {
     InteractionManager,
     Platform,
 } from 'react-native'
-import HomePage from './HomPage'
-import ThemeDao from '../expand/dao/ThemeDao'
-import SplashScreen from 'react-native-splash-screen'
+import HomePage from './HomePage'
+import ThemeDao from '../../dao/ThemeDao'
+
 
 export default class WelcomePage extends Component {
 
@@ -26,7 +26,6 @@ export default class WelcomePage extends Component {
 
         this.timer = setTimeout(() => {
             InteractionManager.runAfterInteractions(() => {
-                SplashScreen.hide();
                 navigator.resetTo({
                     component: HomePage,
                     name: 'HomePage',

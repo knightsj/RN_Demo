@@ -16,12 +16,12 @@ import {
 } from 'react-native'
 
 import Popover from "../common/Popover";
-import CustomKeyPage from "../pages/CustomKeyPage"
-import SortKeyPagePage from "../pages/SortKeyPage"
-import AboutPage from "../pages/AboutPage"
-import AboutMePage from "../pages/AboutMePage"
-import FavoritePage from "../pages/FavoritePage"
-import {FLAG_LANGUAGE}  from '../../js/expand/dao/LanguageDao'
+import CustomKeyPage from "../pages/Mine/CustomKeyPage"
+import SortKeyPagePage from "../pages/Mine/SortKeyPage"
+import AboutPage from "../pages/Mine/AboutPage"
+import AboutMePage from "../pages/Mine/AboutMePage"
+import FavoritePage from "../pages/Favorite/FavoritePage"
+import {FLAG_LANGUAGE}  from '../dao/LanguageDao'
 
 
 export const MORE_MENU = {

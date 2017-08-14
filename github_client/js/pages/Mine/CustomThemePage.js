@@ -12,10 +12,10 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import GlobalStyles from '../../res/styles/GlobalStyles'
-import ThemeFactory,{ThemeFlags} from  '../../res/styles/ThemeFactory'
-import ThemeDao from '../expand/dao/ThemeDao'
-import {ACTION_HOME} from './HomPage'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
+import ThemeFactory,{ThemeFlags} from  '../../../res/styles/ThemeFactory'
+import ThemeDao from '../../dao/ThemeDao'
+import {ACTION_HOME} from '../Entry/HomePage'
 
 export default class CustomThemePage extends Component {
 
