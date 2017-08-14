@@ -3,7 +3,7 @@
     "path": "stars:>1",
     "name": "ALL",
     "short_name": "ALL",
-    "checked": true
+    "checked": false
   },
 
   {
@@ -20,26 +20,26 @@
   {
     "path": "react-native",
     "name": "React Native",
-    "checked": false
+    "checked": true
   },
   {
     "path": "MySQL",
     "name": "MySQL",
-    "checked": true
+    "checked": false
   },
   {
     "path": " AngularJS",
     "name": " AngularJS",
-    "checked": true
+    "checked": false
   },
   {
     "path": " jQuery",
     "name": " jQuery",
-    "checked": true
+    "checked": false
   },
   {
     "path": " react",
     "name": " React",
-    "checked": true
+    "checked": false
   }
 ]

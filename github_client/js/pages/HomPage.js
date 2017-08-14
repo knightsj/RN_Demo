@@ -12,8 +12,6 @@ import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage'
 import TrendingPage from './TrendingPage'
 import MinePage from './MinePage'
-
-import Navigator from 'react-native-deprecated-custom-components';
 import {DURATION} from 'react-native-easy-toast'
 import FavoritePage from './FavoritePage'
 import BaseComponent from './BaseComponent'
@@ -67,14 +65,6 @@ export default class HomePage extends BaseComponent {
         })
     }
 
-    componentWillReceiveProps(nextProps){
-
-        // if (nextProps!==this.state.theme){
-        //     this.setState({theme:nextProps.theme})
-        // }
-    }
-
-
     componentWillUnmount() {
         super.componentWillUnmount();
         if(this.listener){
@@ -82,12 +72,10 @@ export default class HomePage extends BaseComponent {
         }
     }
 
-    onSelected(object) {
-
+    onSelected(selectedTab) {
         this.setState({
-            selectedTab: object,
+            selectedTab: selectedTab,
         })
-
     }
 
     _renderTab(Component, selectedTab, title, renderIcon) {

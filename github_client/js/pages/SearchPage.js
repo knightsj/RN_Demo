@@ -36,12 +36,12 @@ export default class SearchPage extends Component {
     constructor(props){
         super(props);
         this.favoriteDao1 = new FavoriteDao(FlAG_STORAGE.flag_popular),
-            this.favoriteKeys=[],
             this.keys = [],
             this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key),
             this.isKeyChanged = false,
             this.state={
                 theme:this.props.theme,
+                favoriteKeys:[],
                 isLoading:false,
                 rightButtonText:'搜索',
                 showBottomButton:false,
@@ -162,8 +162,8 @@ export default class SearchPage extends Component {
                 this.flushFavoriteState();
             })
             .catch(e=>{
-                console.log(e);
                 this.flushFavoriteState();
+                console.log(e);
             })
     }
 
@@ -176,7 +176,6 @@ export default class SearchPage extends Component {
         }
         this.updateState({
             isLoading:false,
-            projectModelsArr:projectModels,
             dataSource:this.getDataSource(projectModels),
             rightButtonText:'搜索'
         })
@@ -188,7 +187,8 @@ export default class SearchPage extends Component {
 
     loadData(){ 
         this.updateState({ 
-            isLoading:true, 
+            isLoading:true,
+            showBottomButton: false,
         })  
 
         this.cancelRequest = RequestUtils(fetch(this.getFetchUrl(this.inputKey) ));
@@ -203,8 +203,6 @@ export default class SearchPage extends Component {
                 this.getFavoriteKeys();
                 if(!this.checkKeyIsExsist(this.keys,this.inputKey)){
                     this.updateState({showBottomButton:true})
-                }else {
-
                 }
             }) 
             .catch(e=>{ 
@@ -340,7 +338,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         left:10,
         right:10,
-        top:GlobalStyle.window_height - 40 - 60,
+        top:GlobalStyle.window_height - 40 - 20,
         borderRadius:4
     }
 });
