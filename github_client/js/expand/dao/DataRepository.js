@@ -58,11 +58,13 @@ export default class  DataRepository{
                     .catch((error)=>{
                         reject(error);
                     }).then((responseData)=>{
+
                     if (this.flag === FlAG_STORAGE.flag_mine && responseData){
                         this.saveRespository(url,responseData);
                         resolve(responseData);
                     }else if (responseData && responseData.items){
                         this.saveRespository(url,responseData.items);
+                        resolve(responseData.items);
                     }else{
                         reject(new Error('responseData is null'));
                     }
@@ -71,13 +73,13 @@ export default class  DataRepository{
             }else {
 
                 this.trending.fetchTrending(url)
-                    .then(result=>{
-                        if(!result){
+                    .then(items=>{
+                        if(!items){
                             reject(new Error('responseData is null'));
                             return;
                         }
-                        this.saveRespository(url,result);
-                        resolve(result);
+                        resolve(items);
+                        this.saveRespository(url,items);
                     }).catch((error)=>{
                         reject(error);
                 })
@@ -113,6 +115,12 @@ export default class  DataRepository{
             wrapData = {items:items, update_date:new Date().getTime()};
         }
         AsyncStorage.setItem(url,JSON.stringify(wrapData),callBack);
+    }
+
+    removeRepository(url) {
+        AsyncStorage.removeItem(url, (error, result)=> {
+            if(error)console.log(error);
+        });
     }
 
 }
