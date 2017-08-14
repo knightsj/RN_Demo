@@ -180,7 +180,6 @@ class FavoriteTabPage extends Component{
     onFavorite(item,isFavorite){
 
         ActionUtils.onFavorite(this.favoriteDao1,item,isFavorite,this.props.flag);
-
         ArrayUtils.updateArray(this.unFavoriteItems,item);
 
         // this.loadData();
@@ -190,6 +189,8 @@ class FavoriteTabPage extends Component{
                 DeviceEventEmitter.emit('favoriteChanged_popular');
             }else if (this.props.flag === FlAG_STORAGE.trending){
                 DeviceEventEmitter.emit('favoriteChanged_trending');
+            }else {
+
             }
         }
 

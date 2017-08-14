@@ -13,15 +13,14 @@ import {
 
 import NavigationBar from '../common/NavigationBar'
 import ViewUtils from '../Util/ViewUtils'
-
-const TRENDING_URL = 'https://github.com/'
-
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import {FlAG_STORAGE} from '../expand/dao/DataRepository'
+const TRENDING_URL = 'https://github.com/'
 
 export default class RepositoryDetailPage extends Component {
 
     constructor(props){
+
         super(props);
         this.url = this.props.projectModel.item.html_url?this.props.projectModel.item.html_url:TRENDING_URL+this.props.projectModel.item.fullName;
         var title = this.props.projectModel.item.full_name?this.props.projectModel.item.full_name:this.props.projectModel.item.fullName;
@@ -44,6 +43,7 @@ export default class RepositoryDetailPage extends Component {
         }
 
     }
+
     go(){
         this.setState({
             url:this.text
@@ -56,10 +56,6 @@ export default class RepositoryDetailPage extends Component {
         })
 
     }
-    componentDidMount() {
-
-    }
-
 
     onRightButtonClick(){
 

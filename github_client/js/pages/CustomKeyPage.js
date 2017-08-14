@@ -94,7 +94,7 @@ export default class NewPage extends Component {
 
         //jumpToTab用于区分是最热页面还是趋势页面，这个页面是home重启之后展示的页面
         var jumpToTab = this.props.flag === FLAG_LANGUAGE.flag_key?FLAG_TAB.flag_popularTab:FLAG_TAB.flag_trendingTab;
-        DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,jumpToTab)
+        DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,jumpToTab);
         // DeviceEventEmitter.emit('ACTION_HOME',ACTION_HOME.A_RESTART,{jumpToTab})注意：keyvalue形式
         this.props.navigator.pop();
 

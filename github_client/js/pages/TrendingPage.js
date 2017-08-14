@@ -222,15 +222,18 @@ class TrendingTabPage extends Component{
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.timeSpan !== this.props.timeSpan){
+
             this.loadData(nextProps.timeSpan)
+
         }else if(this.isFavoriteChanged){
+
             this.isFavoriteChanged = false
             this.getFavoriteKeys();
 
         }else if (nextProps!==this.state.theme){
 
             this.updateState({theme:nextProps.theme})
-            this.flushFavoriteState();
+            this.getFavoriteKeys();
 
         }else {
 
