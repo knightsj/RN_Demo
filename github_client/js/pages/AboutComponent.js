@@ -21,7 +21,6 @@ import {
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import ViewUtils from '../Util/ViewUtils'
-import GlobalStyles from '../../res/styles/GlobalStyles'
 import FavoriteDao from '../expand/dao/FavoriteDao'
 import {FlAG_STORAGE} from '../expand/dao/DataRepository'
 import FavoriteUtils from '../Util/FavoriteUtils'
@@ -77,9 +76,10 @@ export default class AboutComponent {
         let projectModels = [];
         for (var i=0,len=this.repositories.length;i<len;i++){
             var data = this.repositories[i];
+            var item =  data.item ? data.item : data;
             projectModels.push({
                 isFavorite: FavoriteUtils.checkFavorite(this.repositories[i],this.favoriteKeys?this.favoriteKeys:null),
-                item: data.item ? data.item : data,
+                item:item,
             });
         }
         this.updateState({
@@ -118,7 +118,6 @@ export default class AboutComponent {
         if(!projectModels || projectModels.length===0){
             return null;
         }
-
         let views = [];
         for (let i=0,l=projectModels.length;i<l;i++){
             let projectModel = projectModels[i];

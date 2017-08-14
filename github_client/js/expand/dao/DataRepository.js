@@ -42,7 +42,7 @@ export default class  DataRepository{
                             resolve(result);
                         })
                         .catch(e=> {
-                            resolve(e);
+                            reject(e);
                         })
                 })
         })

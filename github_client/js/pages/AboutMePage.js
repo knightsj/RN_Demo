@@ -76,16 +76,16 @@ import ViewUtils from '../Util/ViewUtils'
 import AboutComponent,{FLAG_ABOUT} from './AboutComponent'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import WebViewPage from './WebViewPage'
-import config from '../../res/data/Config.json'
-import Toast ,{DURATION}from 'react-native-easy-toast'
+import Config from '../../res/data/Config.json'
+import Toast from 'react-native-easy-toast'
 
 export default class AboutPage extends Component{
     constructor(props) {
         super(props);
-        this.aboutComponent = new AboutComponent(props,FLAG_ABOUT.flag_about_me,(dic=>this.updateState(dic)),config)
+        this.aboutComponent = new AboutComponent(props,FLAG_ABOUT.flag_about_me,(dic=>this.updateState(dic)),Config)
         this.state={
             projectModels:[],
-            author:config.author,
+            author:Config.author,
             showRepository:false,
             showBlog:false,
             showQQ:false,
@@ -96,6 +96,7 @@ export default class AboutPage extends Component{
 
     componentDidMount() {
         this.aboutComponent.componentDidMount();
+
     }
 
     updateState(dic){
