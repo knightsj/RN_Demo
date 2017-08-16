@@ -27,41 +27,47 @@ export default class RespositoryCell extends Component{
 
     render(){
 
+        //获取当前cell的数据
         let item = this.props.projectModel.item?this.props.projectModel.item:this.props.projectModel;
+
+        //收藏按钮
         let favoriteButton = <TouchableOpacity
             onPress={()=>this.onPressFavorite()}
         >
             <Image
-                style={[{width:18,height:18},this.props.theme.styles.tabBarSelectedIcon]}
+                style={[styles.favoriteImageStyle,this.props.theme.styles.tabBarSelectedIcon]}
                 source={this.state.favoriteIcon}
             />
         </TouchableOpacity>
 
-        return<TouchableOpacity
-            onPress={this.props.onSelect}
-            style={styles.container}
-        >
-            <View style={styles.cell_container}>
+        return(
+            <TouchableOpacity
+                 onPress={this.props.onSelect}
+                 style={styles.container}
+            >
 
-                <Text style={styles.title}>{item.full_name}</Text>
-                <Text style={styles.description}>{item.description}</Text>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Text style={styles.bottomTextStyle}>Author:</Text>
-                        <Image
-                            style={styles.avatarImageStyle}
-                            source={{uri:item.owner.avatar_url}}
-                        />
-                    </View>
+                <View style={styles.cellContainerViewStyle}>
+                    <Text style={styles.title}>{item.full_name}</Text>
+                    <Text style={styles.description}>{item.description}</Text>
+                    <View style={styles.bottomContainerViewStyle}>
+                        <View style={styles.authorContainerViewStyle}>
+                            <Text style={styles.bottomTextStyle}>Author:</Text>
+                            <Image
+                                style={styles.authorAvatarImageStyle}
+                                source={{uri:item.owner.avatar_url}}
+                             />
+                        </View>
 
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Text style={styles.bottomTextStyle}>Starts:</Text>
-                        <Text style={styles.bottomTextStyle}>{item.stargazers_count}</Text>
-                    </View>
-                    {favoriteButton}
-                </View>
-            </View>
-        </TouchableOpacity>
+                        <View style={styles.starContainerViewStyle}>
+                            <Text style={styles.bottomTextStyle}>Starts:</Text>
+                            <Text style={styles.bottomTextStyle}>{item.stargazers_count}</Text>
+                        </View>
+
+
+                        {favoriteButton}
+                     </View>
+                 </View>
+            </TouchableOpacity>)
 
     }
 
@@ -91,6 +97,21 @@ const styles =StyleSheet.create({
         color:'#212121',
     },
 
+    bottomContainerViewStyle:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+
+    authorContainerViewStyle:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+
+    starContainerViewStyle: {
+        flexDirection:'row',
+        alignItems:'center'
+    },
+
     bottomTextStyle:{
        fontSize:11,
     },
@@ -101,7 +122,7 @@ const styles =StyleSheet.create({
         color:'#757575'
     },
 
-    cell_container:{
+    cellContainerViewStyle:{
 
         backgroundColor:'white',
         padding:10,
@@ -112,25 +133,22 @@ const styles =StyleSheet.create({
         borderWidth:0.3,
         borderColor:'#dddddd',
         borderRadius:1,
+        //iOS的阴影
         shadowColor:'#b5b5b5',
         shadowOffset:{width:3,height:2},
         shadowOpacity:0.4,
         shadowRadius:1,
+        //Android的阴影
         elevation:2
     },
 
-    avatarImageStyle:{
-        // borderRadius:8,
+    authorAvatarImageStyle:{
         width:16,
         height:16
-
     },
-
-    starImageStyle:{
-
-        width:16,
-        height:16
-
+    favoriteImageStyle:{
+        width:18,
+        height:18
     }
 
 })

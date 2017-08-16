@@ -30,7 +30,7 @@ import ActionUtils from '../../util/ActionUtils'
 import ViewUtils from '../../util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
 import {FLAG_TAB} from '../Entry/HomePage'
-import BaseComponent from '../../common/BaseCommon'
+import BaseComponent from '../../base/BaseCommon'
 import CustomThemePage from '../Mine/CustomThemePage'
 
 var timeSpanTextArr = [

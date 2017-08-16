@@ -73,7 +73,7 @@ const FLAG = {
 };
 
 import ViewUtils from '../../util/ViewUtils'
-import AboutComponent,{FLAG_ABOUT} from '../../common/BaseAboutComponent'
+import AboutComponent,{FLAG_ABOUT} from '../../base/BaseAboutComponent'
 import GlobalStyles from '../../../res/styles/GlobalStyles'
 import WebViewPage from '../../common/WebViewPage'
 import Config from '../../../res/data/Config.json'

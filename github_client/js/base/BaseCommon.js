@@ -24,7 +24,6 @@ export default class BaseComponent extends Component {
         }
     }
 
-
     changeThemeAction(action,params){
         if (ACTION_HOME.A_THEME === action){
             this.onThemeChange(params);

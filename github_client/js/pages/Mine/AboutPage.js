@@ -21,7 +21,7 @@ import {
 
 import ViewUtils from '../../util/ViewUtils'
 import {MORE_MENU} from '../../common/MoreMenu'
-import AboutComponent,{FLAG_ABOUT} from '../../common/BaseAboutComponent'
+import AboutComponent,{FLAG_ABOUT} from '../../base/BaseAboutComponent'
 import GlobalStyles from '../../../res/styles/GlobalStyles'
 import WebViewPage from '../../common/WebViewPage'
 import config from '../../../res/data/Config.json'

@@ -28,7 +28,7 @@ import SearchPage from './SearchPage'
 import ViewUtils from '../../util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
 import {FLAG_TAB} from '../Entry/HomePage'
-import BaseComponent from '../../common/BaseCommon'
+import BaseComponent from '../../base/BaseCommon'
 import CustomThemePage from '../Mine/CustomThemePage'
 
 const URL = 'https://api.github.com/search/repositories?q='

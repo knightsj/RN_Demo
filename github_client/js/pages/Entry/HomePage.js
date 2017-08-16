@@ -9,16 +9,18 @@ import {
 } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
+
 import PopularPage from '../Popular/PopularPage'
 import TrendingPage from '../Trending/TrendingPage'
-import MinePage from '../Mine/MinePage'
-import {DURATION} from 'react-native-easy-toast'
 import FavoritePage from '../Favorite/FavoritePage'
-import BaseComponent from '../../common/BaseCommon'
+import MinePage from '../Mine/MinePage'
 
+import BaseComponent from '../../base/BaseCommon'
+import {DURATION} from 'react-native-easy-toast'
+
+//需要导出的常量
 export const ACTION_HOME = {A_SHOW_TOAST:'showToast',A_RESTART:'restart',A_THEME:'theme'};
-
-export var FLAG_TAB = {
+export const FLAG_TAB = {
     flag_popularTab: 'flag_popularTab',
     flag_trendingTab: 'flag_trendingTab',
     flag_favoriteTab: 'flag_favoriteTab',
@@ -78,6 +80,7 @@ export default class HomePage extends BaseComponent {
         })
     }
 
+
     _renderTab(Component, selectedTab, title, renderIcon) {
         return (
             <TabNavigator.Item
@@ -121,18 +124,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
 
-    page1:{
-        flex:1,
-        backgroundColor:'red',
-    },
-
-    page2:{
-        flex:1,
-        backgroundColor:'yellow',
-    },
-
     tabItemImageStyle:{
-        width:22,
-        height:22
+        width:24,
+        height:24
     }
 });

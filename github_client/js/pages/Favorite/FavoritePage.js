@@ -26,7 +26,7 @@ import ActionUtils from '../../util/ActionUtils'
 import ViewUtils from '../../util/ViewUtils'
 import MoreMenu,{MORE_MENU} from '../../common/MoreMenu'
 import {FLAG_TAB} from '../Entry/HomePage'
-import BaseComponent from '../../common/BaseCommon'
+import BaseComponent from '../../base/BaseCommon'
 import CustomThemePage from '../Mine/CustomThemePage'
 
 export default class FavoritePage extends BaseComponent {
@@ -146,7 +146,8 @@ class FavoriteTabPage extends Component{
             });
         }
 
-        this.favoriteDao1.getAllItems().then((items)=> {
+        this.favoriteDao1.getAllItems()
+            .then((items)=> {
 
             var resultData = [];
             for (var i = 0, len = items.length; i < len; i++) {

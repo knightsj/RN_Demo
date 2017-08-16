@@ -20,7 +20,7 @@ import CustomKeyPage from './CustomKeyPage'
 import SortPage from './SortKeyPage'
 import AboutMePage from './AboutMePage'
 import CustomThemePage from './CustomThemePage'
-import BaseComponent from '../../common/BaseCommon'
+import BaseComponent from '../../base/BaseCommon'
 
 
 export default class MinePage extends BaseComponent {
