@@ -20,17 +20,14 @@ export default class RespositoryCell extends Component{
         }
     }
 
-
     componentWillReceiveProps(nextProps) {
         this.setFavoriteState(nextProps.projectModel.isFavorite);
     }
 
     render(){
 
-        //获取当前cell的数据
         let item = this.props.projectModel.item?this.props.projectModel.item:this.props.projectModel;
 
-        //收藏按钮
         let favoriteButton = <TouchableOpacity
             onPress={()=>this.onPressFavorite()}
         >
@@ -45,7 +42,6 @@ export default class RespositoryCell extends Component{
                  onPress={this.props.onSelect}
                  style={styles.container}
             >
-
                 <View style={styles.cellContainerViewStyle}>
                     <Text style={styles.title}>{item.full_name}</Text>
                     <Text style={styles.description}>{item.description}</Text>
@@ -71,11 +67,8 @@ export default class RespositoryCell extends Component{
 
     }
 
-    //按钮被点击了
     onPressFavorite(){
-        //取反
         this.setFavoriteState(!this.state.isFavorite);
-        //回传给popular页面，记录状态
         this.props.onFavorite(this.props.projectModel.item,!this.state.isFavorite)
     }
 
