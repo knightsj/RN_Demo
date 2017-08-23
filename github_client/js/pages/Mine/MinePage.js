@@ -111,11 +111,13 @@ export default class MinePage extends BaseComponent {
                 style={this.state.theme.styles.navBar}
             />
             <ScrollView>
+
+                {/*=============项目信息Section=============*/}
                 <TouchableHighlight
                     underlayColor= 'transparent'
                     onPress={()=>this.onClick(MORE_MENU.About)}
                 >
-                    <View style={styles.item}>
+                    <View style={styles.itemInfoItemStyle}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
                             <Image source={require('../../../res/images/ic_trending.png')}
                                    style={[{width:40,height:40,marginRight:10},this.state.theme.styles.tabBarSelectedIcon]}
@@ -126,37 +128,47 @@ export default class MinePage extends BaseComponent {
                             style={[{height:22,width:22},this.state.theme.styles.tabBarSelectedIcon]}
                         />
                     </View>
-
                 </TouchableHighlight>
+                {/*分割线*/}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
+                {/*=============趋势管理Section=============*/}
                 <Text style={styles.groupTitleStyle}>趋势管理</Text>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
+                {/*自定义语言*/}
                 {this.createSettingItem(MORE_MENU.Custom_Language,require('../../../res/images/ic_custom_language.png'),'自定义语言')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
+
+                {/*语言排序*/}
                 {this.createSettingItem(MORE_MENU.Sort_Language,require('../../../res/images/ic_swap_vert.png'),'语言排序')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
+                {/*=============标签管理Section=============*/}
                 <Text style={styles.groupTitleStyle}>标签管理</Text>
+
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
+                {/*自定义标签*/}
                 {this.createSettingItem(MORE_MENU.Custom_Key,require('../../../res/images/ic_custom_language.png'),'自定义标签')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
+                {/*标签排序*/}
                 {this.createSettingItem(MORE_MENU.Sort_Key,require('../../../res/images/ic_swap_vert.png'),'标签排序')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
+                {/*标签移除*/}
                 {this.createSettingItem(MORE_MENU.Remove_Key,require('../../../res/images/ic_remove.png'),'标签移除')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
+                {/*=============设置Section=============*/}
                 <Text style={styles.groupTitleStyle}>设置</Text>
-
                 {/*自定义主题*/}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
                 {this.createSettingItem(MORE_MENU.Custom_Theme,require('../../../res/images/ic_view_quilt.png'),'自定义主题')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
 
+                {/*展示自定义主题页面*/}
+                {this.renderCustomTheme()}
             </ScrollView>
-            {this.renderCustomTheme()}
         </View>
     }
 }
@@ -164,11 +176,7 @@ export default class MinePage extends BaseComponent {
 
 const styles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-    },
-
-    item:{
+    itemInfoItemStyle:{
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
