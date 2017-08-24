@@ -17,30 +17,35 @@ export default class  DataRepository{
 
         return new Promise((resolve, reject) =>{
 
+            //首先获取本地缓存
             this.fetchLocalRespository(url)
                 .then((wrapData)=> {
-
+                    //本地缓存获取成功
                 if (wrapData) {
-
+                    //缓存对象存在
                     resolve(wrapData,true);
-
                 } else {
-
+                    //缓存对象不存在，进行网络请求
                     this.fetchNetRepository(url)
 
+                        //网路请求成功
                         .then((data) => {
                             resolve(data);
                         })
+                        //网路请求失败
                         .catch(e=> {
                             reject(e);
                         })
                 }
             }).catch(e=> {
-
+                    //本地缓存获取失败，进行网络请求
                     this.fetchNetRepository(url)
+
+                        //网路请求成功
                         .then(result => {
                             resolve(result);
                         })
+                        //网路请求失败
                         .catch(e=> {
                             reject(e);
                         })
@@ -48,6 +53,18 @@ export default class  DataRepository{
         })
     }
 
+
+    fetchNetRepository(url){
+        return new  Promise((resolve,reject)=>{
+            fetch(url)
+                .then(response=>response.json())
+                .catch((error)=>{
+                    reject(error);
+                }).then((responseData)=>{
+                    resolve(responseData);
+                 })
+             })
+    }
 
     fetchNetRepository(url){
         return new  Promise((resolve,reject)=>{
@@ -89,16 +106,21 @@ export default class  DataRepository{
         })
     }
 
+    //获取本地缓存
     fetchLocalRespository(url){
         return new Promise((resolve,reject)=>{
+            // 获取本地存储
             AsyncStorage.getItem(url, (error, result)=>{
                 if (!error){
                     try {
+                        //必须使用parse解析成对象
                         resolve(JSON.parse(result));
                     }catch (e){
+                        //解析失败
                         reject(e);
                     }
                 }else {
+                    //获取缓存失败
                     reject(error);
                 }
             })
