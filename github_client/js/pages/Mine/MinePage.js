@@ -106,10 +106,12 @@ export default class MinePage extends BaseComponent {
 
     render(){
         return <View style={GlobalStyles.listViewContainerStyle}>
+            {/*导航栏*/}
             <NavigationBar
                 title={'我的'}
                 style={this.state.theme.styles.navBar}
             />
+            {/*滚动视图*/}
             <ScrollView>
 
                 {/*=============项目信息Section=============*/}
@@ -138,7 +140,7 @@ export default class MinePage extends BaseComponent {
                 {/*自定义语言*/}
                 {this.createSettingItem(MORE_MENU.Custom_Language,require('../../../res/images/ic_custom_language.png'),'自定义语言')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                <View style={GlobalStyles.cellBottomLineStyle}></View>
+
 
                 {/*语言排序*/}
                 {this.createSettingItem(MORE_MENU.Sort_Language,require('../../../res/images/ic_swap_vert.png'),'语言排序')}
@@ -154,7 +156,7 @@ export default class MinePage extends BaseComponent {
                 {/*标签排序*/}
                 {this.createSettingItem(MORE_MENU.Sort_Key,require('../../../res/images/ic_swap_vert.png'),'标签排序')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
-                <View style={GlobalStyles.cellBottomLineStyle}></View>
+
                 {/*标签移除*/}
                 {this.createSettingItem(MORE_MENU.Remove_Key,require('../../../res/images/ic_remove.png'),'标签移除')}
                 <View style={GlobalStyles.cellBottomLineStyle}></View>
