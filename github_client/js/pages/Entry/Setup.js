@@ -3,7 +3,7 @@ import React,{Component} from 'react'
 
 import Navigator from 'react-native-deprecated-custom-components';
 
-import WelComePage from './Welcome'
+import WelComePage from './WelcomePage'
 
 export default class WelcomePage extends Component {
 

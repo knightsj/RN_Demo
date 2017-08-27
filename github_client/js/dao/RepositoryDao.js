@@ -54,7 +54,7 @@ export default class  DataRepository{
     }
 
 
-    fetchNetRepository(url){
+    fetchNetRepository1(url){
         return new  Promise((resolve,reject)=>{
             fetch(url)
                 .then(response=>response.json())
@@ -67,6 +67,7 @@ export default class  DataRepository{
     }
 
     fetchNetRepository(url){
+
         return new  Promise((resolve,reject)=>{
 
             if (this.flag !== FlAG_STORAGE.flag_trending){

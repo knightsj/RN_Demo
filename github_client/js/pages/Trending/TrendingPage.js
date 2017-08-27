@@ -21,7 +21,7 @@ import TrendingCell from '../../common/TrendingCell'
 
 const API_URL = 'https://github.com/trending/'
 import Popover from '../../common/Popover'
-import TimeSpan from '../../model/TimeSpan'
+import TimeSpan from '../../model/TimeSpanModel'
 import FavoriteDao from '../../dao/FavoriteDao'
 import ProjectModel from '../../model/ProjectModel'
 import Utils from '../../util/FavoriteUtils'
