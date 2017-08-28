@@ -189,7 +189,7 @@ export default class TrendingPage extends BaseComponent {
                 <NavigationBar
                     titleView = {this.renderTitleView()}
                     style={this.state.theme.styles.navBar}
-                    statusBar={{backgroundColor:'red'}}
+                    statusBar={{backgroundColor:this.state.theme.themeColor}}
                     rightButton={this.renderNavRightButton()}
                 />
                 {content}

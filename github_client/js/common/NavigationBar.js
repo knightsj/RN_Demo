@@ -17,7 +17,7 @@ import {
 
 
 const NAV_BAR_HEIGHT_IOS = 44;
-  const NAV_BAR_HEIGHT_ANDROID = 50; 
+  const NAV_BAR_HEIGHT_ANDROID = 60; 
 const STATUS_BAR_HEIGHT = 20;
 
 const ButtonShape = {

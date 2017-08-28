@@ -93,6 +93,7 @@ export default class FavoritePage extends BaseComponent {
                 <NavigationBar
                     title={'收藏'}
                     style={this.state.theme.styles.navBar}
+                    statusBar={{backgroundColor:this.state.theme.themeColor}}
                     rightButton={this.renderNavRightButton()}
                 />
                 {content}

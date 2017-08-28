@@ -110,6 +110,7 @@ export default class MinePage extends BaseComponent {
             <NavigationBar
                 title={'我的'}
                 style={this.state.theme.styles.navBar}
+                statusBar={{backgroundColor:this.state.theme.themeColor}}
             />
             {/*滚动视图*/}
             <ScrollView>
