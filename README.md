@@ -16,4 +16,7 @@ RN的demo，其中的index.ios.js文件可以被替换
 ## [23] news_app
 一个新闻类app，只有首页和详情页
 
+## [24]. Utils
+工具类集合
+
 
