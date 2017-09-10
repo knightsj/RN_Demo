@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import <React/RCTRootView.h>
 
 @interface HomeViewController ()
 
@@ -25,6 +26,16 @@
 }
 - (IBAction)goToAdVC:(UIButton *)sender {
     NSLog(@"点击去广告页面");
+    
+    NSURL *jsCodeLocation = [NSURL
+                             URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+    RCTRootView *rootView =
+    [[RCTRootView alloc] initWithBundleURL:jsCodeLocation moduleName:@"Scores" initialProperties:nil launchOptions:nil];
+    
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view = rootView;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 /*

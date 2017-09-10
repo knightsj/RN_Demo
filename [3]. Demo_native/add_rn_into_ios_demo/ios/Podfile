@@ -1,9 +1,18 @@
 target 'add_rn_into_ios_demo' do
 pod 'React', :path => ‘../node_modules/react-native', :subspecs => [
- 'Core',
- 'RCTText',
- 'RCTNetwork',
- 'RCTWebSocket',
+ 	'Core',
+        'ART',
+        'RCTActionSheet',
+        'RCTAdSupport',
+        'RCTGeolocation',
+        'RCTImage',
+        'RCTNetwork',
+        'RCTPushNotification',
+        'RCTSettings',
+        'RCTText',
+        'RCTVibration',
+        'RCTWebSocket',
+        'RCTLinkingIOS',
 ]
 
 pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
