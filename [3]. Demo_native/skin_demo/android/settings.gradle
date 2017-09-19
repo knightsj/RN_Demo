@@ -1,0 +1,3 @@
+rootProject.name = 'skin_demo'
+
+include ':app'
