@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GQt-UI-VbX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Skin View Controller-->
+        <scene sceneID="4hN-Lm-wOS">
+            <objects>
+                <viewController id="dgA-bv-0iG" customClass="SkinViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="apg-rk-Ey7"/>
+                        <viewControllerLayoutGuide type="bottom" id="hey-3Z-A72"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KXO-Af-JoM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHG-Gb-9D6">
+                                <rect key="frame" x="172" y="277" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="blue"/>
+                                <connections>
+                                    <action selector="blueSkin:" destination="dgA-bv-0iG" eventType="touchUpInside" id="c0e-rE-4IQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79i-di-c7a">
+                                <rect key="frame" x="172" y="333" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="red"/>
+                                <connections>
+                                    <action selector="redSkin:" destination="dgA-bv-0iG" eventType="touchUpInside" id="daa-xf-JiT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="3ez-7F-y89"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Xj-hA-iXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489" y="475"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="XOS-j6-hat">
+            <objects>
+                <viewController id="YbJ-2Y-HAf" customClass="HomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="57w-Dz-5wn"/>
+                        <viewControllerLayoutGuide type="bottom" id="T1F-Pe-kAQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OMW-0L-lSe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="bB1-rF-wJ0" customClass="H"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Od-jS-3u5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489" y="-180"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="CxD-7p-gQT">
+            <objects>
+                <tabBarController id="GQt-UI-VbX" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="RmR-be-goW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="YbJ-2Y-HAf" kind="relationship" relationship="viewControllers" id="B6A-GZ-aqh"/>
+                        <segue destination="dgA-bv-0iG" kind="relationship" relationship="viewControllers" id="bcf-rv-1Yq"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QHL-VE-Uco" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-463" y="147"/>
+        </scene>
+    </scenes>
+</document>
