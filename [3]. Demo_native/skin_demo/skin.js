@@ -48,10 +48,9 @@ export default class skinPage extends Component {
     }
 
     changeSkin(skinInfo){
-        alert(skinInfo.skinName)
-        this.state={
-            skin:skinInfo.skinName,
-        }
+        this.setState({
+            skin:skinInfo.skinName
+        })
     }
 
 
@@ -72,7 +71,7 @@ export default class skinPage extends Component {
                     </Text>
                 </TouchableOpacity>
                 <Text style={styles.instructions}>
-                   {this.state.skin}
+                   Current skin: {this.state.skin}
                 </Text>
             </View>
         );
