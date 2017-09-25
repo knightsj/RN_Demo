@@ -4,15 +4,19 @@
 <dict>
 	<key>blue</key>
 	<dict>
-		<key>color</key>
-		<string>#FB5C89</string>
+		<key>color_2</key>
+		<string>#456589</string>
+		<key>color_1</key>
+		<string>#6B89A6</string>
 		<key>local_path</key>
 		<string>bundle</string>
 	</dict>
 	<key>red</key>
 	<dict>
-		<key>color</key>
-		<string>#FB5C89</string>
+		<key>color_1</key>
+		<string>#EC6E55</string>
+		<key>color_2</key>
+		<string>#E44347</string>
 		<key>local_path</key>
 		<string>bundle</string>
 	</dict>

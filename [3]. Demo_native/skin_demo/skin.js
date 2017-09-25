@@ -26,6 +26,8 @@ export default class skinPage extends Component {
         super(props);
         this.state={
             skin:'',
+            bgColor:'yellow',
+            navColor:'blue'
         }
     }
 
@@ -41,6 +43,11 @@ export default class skinPage extends Component {
     }
 
 
+    componentDidMount() {
+
+
+    }
+
     componentWillUnmount() {
         if(this.listener){
             this.listener.remove();
@@ -48,9 +55,21 @@ export default class skinPage extends Component {
     }
 
     changeSkin(skinInfo){
-        this.setState({
-            skin:skinInfo.skinName
-        })
+
+        // 单个转换
+        // SkinModule.getColor("bgColor","color_1",(result) =>this.setState(result));
+        // SkinModule.getColor("navColor","color_2",(result) =>this.setState(result));
+
+        //批量转换:数组
+        SkinModule.getColors(["bgColor","navColor"],["color_1","color_2"],(result) =>this.setState(result));
+
+        // this.setState({
+        //     skin:skinInfo.skinName,
+        //
+        // })
+
+        //批量转换:字典
+        SkinModule.getColorsWithDict({"bgColor":"color_1","navColor":"color_2"},(result) =>this.setState(result));
     }
 
 
@@ -58,21 +77,30 @@ export default class skinPage extends Component {
         return (
             <View style={styles.container}>
 
-                <TouchableOpacity onPress={()=>this.changeIntoSkin('blue')}>
-                    <Text style={styles.instructions}>
-                        Click to change into blue color!
+                <View style={[styles.navigationBarStyle,{backgroundColor: this.state.navColor}]}>
+                    <Text style={styles.navTextStyle}>
+                        我是导航栏
                     </Text>
-                </TouchableOpacity>
+                </View>
+
+                <View style={[{flex: 1},{backgroundColor: this.state.bgColor}]}>
+
+                    <TouchableOpacity onPress={()=>this.changeIntoSkin('blue')}>
+                        <Text style={styles.instructions}>
+                            Click to change into blue skin!
+                        </Text>
+                    </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={()=>this.changeIntoSkin('red')}>
+                    <TouchableOpacity onPress={()=>this.changeIntoSkin('red')}>
+                        <Text style={styles.instructions}>
+                            Click to change into red skin!
+                        </Text>
+                    </TouchableOpacity>
                     <Text style={styles.instructions}>
-                        Click to change into red color!
+                        Current skin: {this.state.skin}
                     </Text>
-                </TouchableOpacity>
-                <Text style={styles.instructions}>
-                   Current skin: {this.state.skin}
-                </Text>
+                </View>
             </View>
         );
     }
@@ -81,16 +109,26 @@ export default class skinPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
     },
+
+    navTextStyle:{
+        fontSize: 23,
+        color:'white'
+
+    },
+    navigationBarStyle:{
+         height:80,
+         justifyContent:'center',
+         alignItems:'center',
+    },
+
     welcome: {
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
     },
     instructions: {
+        marginTop:40,
         textAlign: 'center',
         color: '#333333',
         marginBottom: 5,
