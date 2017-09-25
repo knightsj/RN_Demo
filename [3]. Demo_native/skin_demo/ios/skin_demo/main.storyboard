@@ -21,20 +21,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHG-Gb-9D6">
-                                <rect key="frame" x="172" y="277" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-fK-jWC">
+                                <rect key="frame" x="148" y="284" width="79" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="blue"/>
+                                <state key="normal" title="skin setting"/>
                                 <connections>
-                                    <action selector="blueSkin:" destination="dgA-bv-0iG" eventType="touchUpInside" id="c0e-rE-4IQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79i-di-c7a">
-                                <rect key="frame" x="172" y="333" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="red"/>
-                                <connections>
-                                    <action selector="redSkin:" destination="dgA-bv-0iG" eventType="touchUpInside" id="daa-xf-JiT"/>
+                                    <action selector="jumpToSkinSettingPage:" destination="dgA-bv-0iG" eventType="touchUpInside" id="LE6-Pv-71T"/>
                                 </connections>
                             </button>
                         </subviews>

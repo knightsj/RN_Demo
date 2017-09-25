@@ -7,20 +7,31 @@
 //
 
 #import "SkinViewController.h"
-#import "SkinManagerModule.h"
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
 
 @interface SkinViewController ()
-
-@property (nonatomic, strong) SkinManagerModule *skinModule;
 @end
 
 @implementation SkinViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-  self.skinModule = [[SkinManagerModule alloc] init];
+}
+- (IBAction)jumpToSkinSettingPage:(UIButton *)sender {
   
+  NSURL *jsCodeLocation;
+  
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"skin" fallbackResource:nil];
+  
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:@"skinPage"
+                                               initialProperties:nil
+                                                   launchOptions:nil];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+  UIViewController *vc = [[UIViewController alloc] init];
+  vc.view = rootView;
+  [self presentViewController:vc animated:YES completion:nil];
   
 }
 
@@ -29,22 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)blueSkin:(UIButton *)sender {
-    
-    //更换为蓝色皮肤
-  [self.skinModule changeSkinWithName:@"blue"];
-  
-  
-}
-
-
-- (IBAction)redSkin:(UIButton *)sender {
-    
-  //更换为红色皮肤
-  [self.skinModule changeSkinWithName:@"red"];
-  
-    
-}
 
 
 @end

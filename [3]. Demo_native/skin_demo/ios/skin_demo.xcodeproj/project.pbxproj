@@ -36,10 +36,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* skin_demoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* skin_demoTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEAA1F7818580078B9E9 /* SkinModule.m */; };
+		CB2BDEC71F78911A0078B9E9 /* NativeEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */; };
 		CBF22A241F73489F0090951F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A231F73489F0090951F /* HomeViewController.m */; };
 		CBF22A401F7348C10090951F /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A3F1F7348C10090951F /* SkinViewController.m */; };
 		CBF22A421F7348D20090951F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A411F7348D20090951F /* main.storyboard */; };
-		CBF22A451F735A5E0090951F /* SkinManagerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A441F735A5E0090951F /* SkinManagerModule.m */; };
 		CBF22A471F738EBA0090951F /* skin.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A461F738EBA0090951F /* skin.plist */; };
 /* End PBXBuildFile section */
 
@@ -260,13 +261,15 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CB2BDEA91F7818580078B9E9 /* SkinModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = skin_demo/SkinModule.h; sourceTree = "<group>"; };
+		CB2BDEAA1F7818580078B9E9 /* SkinModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = skin_demo/SkinModule.m; sourceTree = "<group>"; };
+		CB2BDEC51F78911A0078B9E9 /* NativeEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeEventEmitter.h; path = skin_demo/NativeEventEmitter.h; sourceTree = "<group>"; };
+		CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NativeEventEmitter.m; path = skin_demo/NativeEventEmitter.m; sourceTree = "<group>"; };
 		CBF22A221F73489F0090951F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = skin_demo/HomeViewController.h; sourceTree = "<group>"; };
 		CBF22A231F73489F0090951F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = skin_demo/HomeViewController.m; sourceTree = "<group>"; };
 		CBF22A3E1F7348C10090951F /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = skin_demo/SkinViewController.h; sourceTree = "<group>"; };
 		CBF22A3F1F7348C10090951F /* SkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinViewController.m; path = skin_demo/SkinViewController.m; sourceTree = "<group>"; };
 		CBF22A411F7348D20090951F /* main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = main.storyboard; path = skin_demo/main.storyboard; sourceTree = "<group>"; };
-		CBF22A431F735A5E0090951F /* SkinManagerModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinManagerModule.h; path = skin_demo/SkinManagerModule.h; sourceTree = "<group>"; };
-		CBF22A441F735A5E0090951F /* SkinManagerModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinManagerModule.m; path = skin_demo/SkinManagerModule.m; sourceTree = "<group>"; };
 		CBF22A461F738EBA0090951F /* skin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = skin.plist; path = skin_demo/skin.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -408,8 +411,6 @@
 				CBF22A221F73489F0090951F /* HomeViewController.h */,
 				CBF22A231F73489F0090951F /* HomeViewController.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				CBF22A431F735A5E0090951F /* SkinManagerModule.h */,
-				CBF22A441F735A5E0090951F /* SkinManagerModule.m */,
 				CBF22A461F738EBA0090951F /* skin.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -417,6 +418,10 @@
 				CBF22A3E1F7348C10090951F /* SkinViewController.h */,
 				CBF22A3F1F7348C10090951F /* SkinViewController.m */,
 				CBF22A411F7348D20090951F /* main.storyboard */,
+				CB2BDEA91F7818580078B9E9 /* SkinModule.h */,
+				CB2BDEAA1F7818580078B9E9 /* SkinModule.m */,
+				CB2BDEC51F78911A0078B9E9 /* NativeEventEmitter.h */,
+				CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -928,8 +933,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBF22A451F735A5E0090951F /* SkinManagerModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				CB2BDEC71F78911A0078B9E9 /* NativeEventEmitter.m in Sources */,
+				CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CBF22A241F73489F0090951F /* HomeViewController.m in Sources */,
 				CBF22A401F7348C10090951F /* SkinViewController.m in Sources */,
