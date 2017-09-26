@@ -7,11 +7,29 @@
 //
 
 #import "SkinModule.h"
+#import "SkinManager.h"
 
 @implementation SkinModule
 
 
 RCT_EXPORT_MODULE();
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"RNChangeSkin"];//有几个就写几个
+}
+
+-(void)emittChangeSkinEventSkinName:(NSString*)skinName
+{
+  NSLog(@"通知RN更换皮肤");
+  [self sendEventWithName:@"RNChangeSkin"
+                     body:@{@"skinName": skinName}];
+}
+
+- (dispatch_queue_t)methodQueue {
+  return dispatch_get_main_queue();
+}
+
 
 
 RCT_EXPORT_METHOD(currentSkinName:(RCTResponseSenderBlock)callback){
@@ -23,16 +41,20 @@ RCT_EXPORT_METHOD(currentSkinName:(RCTResponseSenderBlock)callback){
 
 
 RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
-  
-  //首先修改本地主题
-  [[NSUserDefaults standardUserDefaults] setValue:skinName forKey:@"current_skin"];
-  NSLog(@"修改皮肤为：%@",skinName);
+
+  NSString *lastSkinName = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_skin"];
+
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
   NSArray *keys = [dict allKeys];
   if ([keys containsObject:skinName]) {
-    NSLog(@"有当前皮肤");
-    //给RN发通知
+    
+    [SkinManager sharedManager].lastSkin = lastSkinName;
+    NSLog(@"保存上一个皮肤为：%@",lastSkinName);
+    
+    [[NSUserDefaults standardUserDefaults] setValue:skinName forKey:@"current_skin"];
+    NSLog(@"修改皮肤为：%@",skinName);
+    
     [self emittChangeSkinEventSkinName:skinName];
     
     //给原生换肤
@@ -44,6 +66,7 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
 }
 
 
+#pragma mark - Color bridge
 
 RCT_EXPORT_METHOD(getColor:(NSString *)stateName color:(NSString*)colorName callback:(RCTResponseSenderBlock)callback){
   
@@ -128,24 +151,29 @@ RCT_EXPORT_METHOD(getColorsWithDict:(NSDictionary *)stateAndColorNameDict callba
 }
 
 
-- (NSArray<NSString *> *)supportedEvents
-{
-  return @[@"RNChangeSkin"];//有几个就写几个
-}
+#pragma mark - Image bridge
 
--(void)emittChangeSkinEventSkinName:(NSString*)skinName
-{
-  [self sendEventWithName:@"RNChangeSkin"
-                     body:@{@"skinName": skinName}];
-}
+RCT_EXPORT_METHOD(getImage:(NSString *)stateName imageName:(NSString*)imageName callback:(RCTResponseSenderBlock)callback){
+  
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
+  NSMutableDictionary *configdict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+  
+  
 
-- (dispatch_queue_t)methodQueue {
-  return dispatch_get_main_queue();
 }
 
 
-
-
+//
+//- (NSDictionary *)returnImageStateDictWithStateName:(NSString *)stateName imageName:(NSString *)imageName inConfigureDict:(NSDictionary *)configdict{
+//
+//    NSString *current_skin = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_skin"];
+//    NSString *colorValue = nil;
+//    if (current_skin.length == 0) {
+//      current_skin = [SkinManager sharedManager].lastSkin;
+//    };
+//  
+//  
+//}
 
 
 

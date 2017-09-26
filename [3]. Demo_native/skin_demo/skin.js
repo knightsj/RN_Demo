@@ -12,7 +12,8 @@ import {
     View,
     TouchableOpacity,
     NativeModules,
-    NativeEventEmitter
+    NativeEventEmitter,
+    Image
 
 } from 'react-native';
 
@@ -61,15 +62,17 @@ export default class skinPage extends Component {
         // SkinModule.getColor("navColor","color_2",(result) =>this.setState(result));
 
         //批量转换:数组
-        SkinModule.getColors(["bgColor","navColor"],["color_1","color_2"],(result) =>this.setState(result));
+        // SkinModule.getColors(["bgColor","navColor"],["color_1","color_2"],(result) =>this.setState(result));
 
-        // this.setState({
-        //     skin:skinInfo.skinName,
-        //
-        // })
 
         //批量转换:字典
         SkinModule.getColorsWithDict({"bgColor":"color_1","navColor":"color_2"},(result) =>this.setState(result));
+
+        this.setState({
+            skin:skinInfo.skinName,
+
+        })
+
     }
 
 
@@ -100,6 +103,14 @@ export default class skinPage extends Component {
                     <Text style={styles.instructions}>
                         Current skin: {this.state.skin}
                     </Text>
+
+
+                    <View style={styles.imageBgView}>
+                        <Image style={styles.imageStyle} source={{uri: 'blue_title_before'}}></Image>
+                        <Image style={styles.imageStyle} source={{uri: 'blue_title_after'}}></Image>
+                        {/*<Image style={styles.imageStyle} source={{uri: '~/Documents/skin/red/red/red_title_before'}}></Image>*/}
+                    </View>
+
                 </View>
             </View>
         );
@@ -133,6 +144,18 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+
+    imageBgView:{
+        justifyContent:'center',
+        alignItems:'center',
+    },
+
+    imageStyle:{
+        marginTop:50,
+        width:20,
+        height:30,
+
+    }
 });
 
 AppRegistry.registerComponent('skinPage', () => skinPage);

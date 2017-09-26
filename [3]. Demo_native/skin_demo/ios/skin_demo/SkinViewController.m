@@ -9,6 +9,7 @@
 #import "SkinViewController.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "SkinManager.h"
 
 @interface SkinViewController ()
 @end
@@ -17,6 +18,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    [[SkinManager sharedManager] downloadZipAndUnachiveSkin:@"red" url:@"http://oih3a9o4n.bkt.clouddn.com/red.zip" success:^{
+       
+    } progress:^(NSProgress *progress) {
+      
+    } falure:^(NSError *error) {
+      
+    }];
+  
+  
 }
 - (IBAction)jumpToSkinSettingPage:(UIButton *)sender {
   
