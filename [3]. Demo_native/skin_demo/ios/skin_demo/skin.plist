@@ -11,14 +11,14 @@
 		<key>local_path</key>
 		<string>bundle</string>
 	</dict>
-	<key>red</key>
+	<key>pink</key>
 	<dict>
 		<key>color_1</key>
 		<string>#EC6E55</string>
 		<key>color_2</key>
 		<string>#E44347</string>
 		<key>local_path</key>
-		<string>~/Documents/skin/red</string>
+		<string>~/Documents/skin/pink</string>
 	</dict>
 </dict>
 </plist>

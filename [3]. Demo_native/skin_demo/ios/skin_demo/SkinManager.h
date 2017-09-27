@@ -26,4 +26,6 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 - (NSString *)getLastSkin;
 
+- (NSString *)getCurrentSkin;
+
 @end

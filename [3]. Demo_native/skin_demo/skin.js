@@ -28,7 +28,9 @@ export default class skinPage extends Component {
         this.state={
             skin:'',
             bgColor:'yellow',
-            navColor:'blue'
+            navColor:'blue',
+            image_1:'default',
+            image_2:'default',
         }
     }
 
@@ -57,6 +59,7 @@ export default class skinPage extends Component {
 
     changeSkin(skinInfo){
 
+        // ========== 转换颜色 ========
         // 单个转换
         // SkinModule.getColor("bgColor","color_1",(result) =>this.setState(result));
         // SkinModule.getColor("navColor","color_2",(result) =>this.setState(result));
@@ -64,9 +67,20 @@ export default class skinPage extends Component {
         //批量转换:数组
         // SkinModule.getColors(["bgColor","navColor"],["color_1","color_2"],(result) =>this.setState(result));
 
-
         //批量转换:字典
         SkinModule.getColorsWithDict({"bgColor":"color_1","navColor":"color_2"},(result) =>this.setState(result));
+
+        // ========== 转换颜色 ======== //
+        // 单个转换
+        // SkinModule.getImage("image_1","title_before",(result)=>this.setState(result));
+        // SkinModule.getImage("image_2","title_after",(result)=>this.setState(result));
+
+        //批量转换:数组
+        // SkinModule.getImages(["image_1","image_2"],["title_before","title_after"],(result) =>this.setState(result));
+
+
+        //批量转换:字典
+        SkinModule.getImagesDict({"image_1":"title_before","image_2":"title_after"},(result) =>this.setState(result));
 
         this.setState({
             skin:skinInfo.skinName,
@@ -95,9 +109,9 @@ export default class skinPage extends Component {
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity onPress={()=>this.changeIntoSkin('red')}>
+                    <TouchableOpacity onPress={()=>this.changeIntoSkin('pink')}>
                         <Text style={styles.instructions}>
-                            Click to change into red skin!
+                            Click to change into pink skin!
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.instructions}>
@@ -106,8 +120,16 @@ export default class skinPage extends Component {
 
 
                     <View style={styles.imageBgView}>
-                        <Image style={styles.imageStyle} source={{uri: 'blue_title_before'}}></Image>
-                        <Image style={styles.imageStyle} source={{uri: 'blue_title_after'}}></Image>
+                        <Text style={styles.instructions}>
+                            图片1：
+                        </Text>
+                        <Image style={styles.imageStyle} source={{uri: this.state.image_1}}></Image>
+                        <Text style={styles.instructions}>
+                            图片2：
+                        </Text>
+                        <Image style={styles.imageStyle} source={{uri: this.state.image_2}}></Image>
+                        {/*<Image style={styles.imageStyle} source={{uri: 'blue_title_before'}}></Image>*/}
+                        {/*<Image style={styles.imageStyle} source={{uri: 'blue_title_after'}}></Image>*/}
                         {/*<Image style={styles.imageStyle} source={{uri: '~/Documents/skin/red/red/red_title_before'}}></Image>*/}
                     </View>
 
@@ -151,7 +173,7 @@ const styles = StyleSheet.create({
     },
 
     imageStyle:{
-        marginTop:50,
+        marginTop:20,
         width:20,
         height:30,
 

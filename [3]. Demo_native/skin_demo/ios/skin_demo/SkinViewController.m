@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    [[SkinManager sharedManager] downloadZipAndUnachiveSkin:@"red" url:@"http://oih3a9o4n.bkt.clouddn.com/red.zip" success:^{
+    [[SkinManager sharedManager] downloadZipAndUnachiveSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
        
     } progress:^(NSProgress *progress) {
       

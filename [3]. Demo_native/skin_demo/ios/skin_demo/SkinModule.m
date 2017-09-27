@@ -157,23 +157,90 @@ RCT_EXPORT_METHOD(getImage:(NSString *)stateName imageName:(NSString*)imageName 
   
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
   NSMutableDictionary *configdict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-  
-  
-
+  NSDictionary *dict = [self returnImageStateDictWithStateName:stateName imageName:imageName inConfigureDict:configdict];
+  callback(@[dict]);
 }
 
 
-//
-//- (NSDictionary *)returnImageStateDictWithStateName:(NSString *)stateName imageName:(NSString *)imageName inConfigureDict:(NSDictionary *)configdict{
-//
-//    NSString *current_skin = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_skin"];
-//    NSString *colorValue = nil;
-//    if (current_skin.length == 0) {
-//      current_skin = [SkinManager sharedManager].lastSkin;
-//    };
-//  
-//  
-//}
+RCT_EXPORT_METHOD(getImages:(NSArray *)stateNames imageName:(NSArray *)imageNames callback:(RCTResponseSenderBlock)callback){
+  
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
+  NSMutableDictionary *configdict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
+  if ([stateNames count] == [imageNames count]) {
+    NSUInteger length = [stateNames count];
+    for (NSUInteger index = 0; index < length;  index++) {
+      
+      [dict addEntriesFromDictionary:[self returnImageStateDictWithStateName:stateNames[index] imageName:imageNames[index] inConfigureDict:configdict]];
+    }
+  }
+  
+  callback(@[dict]);
+}
+
+RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(RCTResponseSenderBlock)callback){
+  
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
+  NSMutableDictionary *configdict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+  NSArray *keys = [stateAndColorNameDict allKeys];
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
+ 
+    for (NSUInteger index = 0; index < [keys count];  index++) {
+      NSString *state = keys[index];
+      NSString *imageName = [stateAndColorNameDict objectForKey:state];
+      [dict addEntriesFromDictionary:[self returnImageStateDictWithStateName:state imageName:imageName inConfigureDict:configdict]];
+    }
+  
+  callback(@[dict]);
+}
+
+
+
+- (NSDictionary *)returnImageStateDictWithStateName:(NSString *)stateName imageName:(NSString *)imageName inConfigureDict:(NSDictionary *)configdict{
+
+  NSArray *keys = [configdict allKeys];
+  NSString *current_skin = [[NSUserDefaults standardUserDefaults] objectForKey:@"current_skin"];
+  NSString *imagePath = nil;
+  NSString *skinFolderPath = [self getSkinFolderPathWithSkinName:current_skin];
+  
+  //找到当前主题的配置
+  if ([keys containsObject:current_skin]) {
+    
+    //查看是内置的还是在沙盒中
+    NSDictionary *currentSkinDict = [configdict objectForKey:current_skin];
+    NSString *localPath = [currentSkinDict objectForKey:@"local_path"];
+    
+    if (localPath.length == 0) {
+      
+      
+    }else if ([localPath isEqualToString:@"bundle"]){
+      NSLog(@"即将获取bundle的皮肤资源");
+      imagePath = [NSString stringWithFormat:@"%@_%@",current_skin,imageName];
+      
+      
+    }else if ([localPath isEqualToString:skinFolderPath]){
+      
+      NSLog(@"即将获取沙盒中的皮肤资源");
+      imagePath = [NSString stringWithFormat:@"%@/%@",skinFolderPath,[NSString stringWithFormat:@"%@_%@",current_skin,imageName]];
+      
+    }else{
+      
+    }
+    
+  }else{
+    
+  }
+  
+  
+  NSDictionary *stateImageDict = @{stateName:imagePath};
+  NSLog(@"返回图片%@",stateImageDict);
+  return stateImageDict;
+  
+}
+
+- (NSString *)getSkinFolderPathWithSkinName:(NSString *)skinName{
+  return [NSString stringWithFormat:@"~/Documents/skin/%@",skinName];
+}
 
 
 

@@ -37,7 +37,6 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEAA1F7818580078B9E9 /* SkinModule.m */; };
-		CB2BDEC71F78911A0078B9E9 /* NativeEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */; };
 		CB3393F31F79D70C00A8CF99 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3393E71F79D70C00A8CF99 /* AFHTTPSessionManager.m */; };
 		CB3393F41F79D70C00A8CF99 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3393EA1F79D70C00A8CF99 /* AFNetworkReachabilityManager.m */; };
 		CB3393F51F79D70C00A8CF99 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3393EC1F79D70C00A8CF99 /* AFSecurityPolicy.m */; };
@@ -51,6 +50,7 @@
 		CB3394231F79D9E400A8CF99 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = CB33941E1F79D9E400A8CF99 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CB3394261F79DA0100A8CF99 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3394251F79DA0100A8CF99 /* libz.tbd */; };
 		CB3394291F79DA4200A8CF99 /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3394281F79DA4200A8CF99 /* SkinManager.m */; };
+		CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB42ABEA1F7B84E300234E28 /* CacheMudule.m */; };
 		CBF22A241F73489F0090951F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A231F73489F0090951F /* HomeViewController.m */; };
 		CBF22A401F7348C10090951F /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A3F1F7348C10090951F /* SkinViewController.m */; };
 		CBF22A421F7348D20090951F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A411F7348D20090951F /* main.storyboard */; };
@@ -276,8 +276,6 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CB2BDEA91F7818580078B9E9 /* SkinModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = skin_demo/SkinModule.h; sourceTree = "<group>"; };
 		CB2BDEAA1F7818580078B9E9 /* SkinModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = skin_demo/SkinModule.m; sourceTree = "<group>"; };
-		CB2BDEC51F78911A0078B9E9 /* NativeEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NativeEventEmitter.h; path = skin_demo/NativeEventEmitter.h; sourceTree = "<group>"; };
-		CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NativeEventEmitter.m; path = skin_demo/NativeEventEmitter.m; sourceTree = "<group>"; };
 		CB3393E61F79D70C00A8CF99 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		CB3393E71F79D70C00A8CF99 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		CB3393E81F79D70C00A8CF99 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -305,6 +303,8 @@
 		CB3394251F79DA0100A8CF99 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CB3394271F79DA4200A8CF99 /* SkinManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinManager.h; path = skin_demo/SkinManager.h; sourceTree = "<group>"; };
 		CB3394281F79DA4200A8CF99 /* SkinManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = skin_demo/SkinManager.m; sourceTree = "<group>"; };
+		CB42ABE91F7B84E300234E28 /* CacheMudule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheMudule.h; path = skin_demo/CacheMudule.h; sourceTree = "<group>"; };
+		CB42ABEA1F7B84E300234E28 /* CacheMudule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = skin_demo/CacheMudule.m; sourceTree = "<group>"; };
 		CBF22A221F73489F0090951F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = skin_demo/HomeViewController.h; sourceTree = "<group>"; };
 		CBF22A231F73489F0090951F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = skin_demo/HomeViewController.m; sourceTree = "<group>"; };
 		CBF22A3E1F7348C10090951F /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = skin_demo/SkinViewController.h; sourceTree = "<group>"; };
@@ -463,10 +463,10 @@
 				CBF22A411F7348D20090951F /* main.storyboard */,
 				CB2BDEA91F7818580078B9E9 /* SkinModule.h */,
 				CB2BDEAA1F7818580078B9E9 /* SkinModule.m */,
-				CB2BDEC51F78911A0078B9E9 /* NativeEventEmitter.h */,
-				CB2BDEC61F78911A0078B9E9 /* NativeEventEmitter.m */,
 				CB3394271F79DA4200A8CF99 /* SkinManager.h */,
 				CB3394281F79DA4200A8CF99 /* SkinManager.m */,
+				CB42ABE91F7B84E300234E28 /* CacheMudule.h */,
+				CB42ABEA1F7B84E300234E28 /* CacheMudule.m */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -1033,10 +1033,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				CB33941F1F79D9E400A8CF99 /* ioapi.c in Sources */,
 				CB3393F51F79D70C00A8CF99 /* AFSecurityPolicy.m in Sources */,
-				CB2BDEC71F78911A0078B9E9 /* NativeEventEmitter.m in Sources */,
 				CB3394201F79D9E400A8CF99 /* mztools.c in Sources */,
 				CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */,
 				CB3394211F79D9E400A8CF99 /* unzip.c in Sources */,
