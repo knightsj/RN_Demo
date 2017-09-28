@@ -76,6 +76,45 @@ RCT_EXPORT_METHOD(clearAllCache:(RCTResponseSenderBlock)callback){
   });
 }
 
+
+RCT_EXPORT_METHOD(calculateCacheSizeWithCompletionBlock:(RCTResponseSenderBlock)callback){
+  
+  NSURL *diskCacheURL = [NSURL fileURLWithPath:[self getCahcePath] isDirectory:YES];
+  
+  dispatch_async(iwant_cache_io_queue(), ^{
+    
+    NSUInteger fileCount = 0;
+    NSUInteger totalSize = 0;
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    
+    NSDirectoryEnumerator *fileEnumerator = [fileManager enumeratorAtURL:diskCacheURL
+                                               includingPropertiesForKeys:@[NSFileSize]
+                                                                  options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                             errorHandler:NULL];
+    
+    for (NSURL *fileURL in fileEnumerator) {
+      NSNumber *fileSize;
+      [fileURL getResourceValue:&fileSize forKey:NSURLFileSizeKey error:NULL];
+      totalSize += fileSize.unsignedIntegerValue;
+      fileCount += 1;
+    }
+    
+    NSString *sizeStr = nil;
+    if (totalSize <10000) {
+      sizeStr = [NSString stringWithFormat:@"%f kb",(totalSize * 1.0/1024)];
+    }else{
+      sizeStr = [NSString stringWithFormat:@"%f mb",totalSize * 1.0/(1024 *1024)];
+    }
+    if (callback) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        callback(@[totalSize]);
+      });
+    }
+  });
+  
+}
+
 - (NSString *)getCahcePath{
   
   NSArray* paths =NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES);
