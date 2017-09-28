@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
 
-@interface CacheMudule : NSObject
+@interface CacheMudule : NSObject<RCTBridgeModule>
 
 @end

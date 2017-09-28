@@ -16,7 +16,7 @@
 #endif
 
 
-static dispatch_queue_t wso_cache_io_queue() {
+static dispatch_queue_t iwant_cache_io_queue() {
   
   static dispatch_queue_t queue;
   static dispatch_once_t onceToken;
@@ -25,7 +25,7 @@ static dispatch_queue_t wso_cache_io_queue() {
     if (NSFoundationVersionNumber >= NSFoundationVersionNumber_With_QoS_Available) {
       attr = dispatch_queue_attr_make_with_qos_class(attr, QOS_CLASS_BACKGROUND, 0);
     }
-    queue = dispatch_queue_create("com.wso.caching.io", attr);
+    queue = dispatch_queue_create("com.iwant.caching.io", attr);
   });
   
   return queue;
@@ -33,60 +33,57 @@ static dispatch_queue_t wso_cache_io_queue() {
 
 @implementation CacheMudule
 
-- (void)clearAllCacheWithCompletionBlock:(WSOClearCacheCompletionBlock _Nullable)completionBlock{
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(clearAllCache:(RCTResponseSenderBlock)callback){
   
-  dispatch_async(wso_cache_io_queue(), ^{
+  dispatch_async(iwant_cache_io_queue(), ^{
     
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     
     NSError *removeCacheFolderError = nil;
     NSError *createCacheFolderError = nil;
-    [_fileManager removeItemAtPath:_cacheBasePath error:&removeCacheFolderError];
+    NSString *cachePath = [self getCahcePath];
+    [fileManager removeItemAtPath:cachePath error:&removeCacheFolderError];
     
     if (!removeCacheFolderError) {
       
-      [_fileManager createDirectoryAtPath:_cacheBasePath
+      [fileManager createDirectoryAtPath:cachePath
               withIntermediateDirectories:YES
                                attributes:nil
                                     error:&createCacheFolderError];
       
       if (!createCacheFolderError) {
         
-        if (_isDebugMode) {
-          WSOLog(@"=========== Clearing cache succeed");
-        }
-        if (completionBlock) {
-          dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock(YES);
-            return;
-          });
+        if (callback) {
+            callback(@[@1]);
         }
       }else{
         
-        if (_isDebugMode) {
-          WSOLog(@"=========== Clearing cache error: Failed to create cache folder after removing it");
-        }
-        if(completionBlock) {
-          dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock(NO);
+        if(callback) {
+            callback(@[@0]);
             return;
-          });
         }
       }
     }else{
-      
-      if (_isDebugMode) {
-        WSOLog(@"=========== Clearing cache error: Failed to remove cache folder");
-      }
-      if (completionBlock) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          completionBlock(NO);
+
+      if (callback) {
+          callback(@[@0]);
           return;
-        });
       }
       
     };
   });
+}
+
+- (NSString *)getCahcePath{
+  
+  NSArray* paths =NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES);
+  
+  NSString* cachesDirectory = [paths objectAtIndex:0];
+  
+  return cachesDirectory;
+
 }
 
 @end
