@@ -18,20 +18,24 @@ const {width, height} = Dimensions.get('window');
 const [aWidth] = [width];
 const [left, top] = [0, 0];
 const [middleLeft] = [(width - aWidth) / 2];
+const itemHeight = 44;
+const itemSeperateLineHeight = 1;
+const cancelSeperateLineHeight = 2;
+
 
 export default class AlertSelected extends Component {
 
     static propTypes = {
         title:PropTypes.string,
-        cancel:PropTypes.string,
+        cancelTitle:PropTypes.string,
     }
 
     constructor(props) {
         super(props);
         this.state = {
+            cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'取消',
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
-            title: this.props.title,
             choose0: "",
             choose1: "",
             hide: true,
@@ -81,18 +85,12 @@ export default class AlertSelected extends Component {
                             <View style={styles.content}>
                                     <View  style={styles.content}>
                                         <View style={styles.tipTitleView}>
-                                            <Text style={styles.tipTitleText}>{this.state.title}</Text>
+                                            <Text style={styles.tipTitleText}>{this.props.title}</Text>
                                         </View>
                                         {this.entityList.map((item, i) => this.renderItem(item, i))}
                                     </View>
 
-                                <TouchableHighlight
-                                    style={styles.button}
-                                    underlayColor={'#f0f0f0'}
-                                    onPress={this.cancel.bind(this)}
-                                >
-                                    <Text style={styles.buttonText}>取消</Text>
-                                </TouchableHighlight>
+                                {this.renderCancelItem()}
                             </View>
                     </Animated.View>
                 </View>
@@ -103,8 +101,8 @@ export default class AlertSelected extends Component {
 
     renderItem(item, i) {
         return (
-            <View style={styles.tipContentView}>
-                <View style={{height: 0.5, backgroundColor: '#a9a9a9', width: aWidth}}/>
+            <View style={styles.itemContentViewStyle}>
+                <View style={{height: itemSeperateLineHeight, backgroundColor: '#a9a9a9', width: aWidth}}/>
                 <TouchableOpacity
                     key={i}
                     onPress={this.choose.bind(this, i)}
@@ -119,6 +117,22 @@ export default class AlertSelected extends Component {
                 </TouchableOpacity>
             </View>
         );
+    }
+
+    renderCancelItem(){
+        return (
+
+            <TouchableOpacity
+                style={styles.cancelItemViewStyle}
+                underlayColor={'#f0f0f0'}
+                onPress={this.cancel.bind(this)}
+            >
+                <View >
+                    <View style={{height: cancelSeperateLineHeight, backgroundColor: '#a9a9a9', width: aWidth}}/>
+                    <Text style={styles.buttonText}>{this.state.cancelTitle}</Text>
+                </View>
+            </TouchableOpacity>
+            )
     }
 
     componentDidMount() {
@@ -199,7 +213,7 @@ export default class AlertSelected extends Component {
      * tipTextColor: 字体颜色
      * callback：回调方法
      */
-    show(title, entityList, tipTextColor, callback) {
+    show(entityList, tipTextColor, callback) {
         this.entityList = entityList;
         this.callback = callback;
 
@@ -207,9 +221,9 @@ export default class AlertSelected extends Component {
             if (entityList && entityList.length > 0) {
                 let len = entityList.length;
                 if (len === 1) {
-                    this.setState({title: title, choose0: entityList[0], hide: false, tipTextColor: tipTextColor, aHeight: 180}, this.in);
+                    this.setState({choose0: entityList[0], hide: false, tipTextColor: tipTextColor, aHeight: 180}, this.in);
                 } else if (len === 2) {
-                    this.setState({title: title, choose0: entityList[0], choose1: entityList[1], hide: false, tipTextColor: tipTextColor, aHeight: 236}, this.in);
+                    this.setState({choose0: entityList[0], choose1: entityList[1], hide: false, tipTextColor: tipTextColor, aHeight: 236}, this.in);
                 }
             }
         }
@@ -250,22 +264,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     // 分割线
-    tipContentView: {
+    itemContentViewStyle: {
         width: aWidth,
-        height: 56,
+        height: itemHeight + itemSeperateLineHeight,
         backgroundColor:'#fff',
         // borderBottomLeftRadius: 5,
         // borderBottomRightRadius: 5,
     },
     item:{
         width: aWidth,
-        height: 56,
+        height: itemHeight,
         backgroundColor:'#fff',
         justifyContent: 'center',
         // borderRadius: 5,
     },
     button: {
-        height: 57,
+        height: itemHeight + itemSeperateLineHeight,
         backgroundColor: '#fff',
         alignSelf: 'stretch',
         justifyContent: 'center',
@@ -277,6 +291,14 @@ const styles = StyleSheet.create({
         color: "black",
         textAlign: "center",
     },
+
+    cancelItemViewStyle:{
+        height: itemHeight + cancelSeperateLineHeight,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems:'center'
+    },
+
     content: {
         backgroundColor: '#fff',
         // borderRadius: 5,

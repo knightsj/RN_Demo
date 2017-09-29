@@ -27,7 +27,7 @@ export default class action_sheet extends Component {
   }
 
   showAlertSelected(){
-    this.dialog.show("请选择照片", selectedArr, '#333333', this.callbackSelected);
+    this.dialog.show(selectedArr, '#333333', this.callbackSelected);
   }
 
   callbackSelected(i){
@@ -62,9 +62,11 @@ export default class action_sheet extends Component {
             Welcome to React Native***
           </Text>
         </TouchableOpacity>
-        <ActionSheet ref={(dialog)=>{
-          this.dialog = dialog;
-        }} />
+        <ActionSheet
+            title = "请选择照片啊啊啊啊啊啊啊"
+            ref={(dialog)=>{
+              this.dialog = dialog;}}
+        />
       </View>
     );
   }
