@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+
+import React, {Component, PropTypes} from 'react';
 import {
     StyleSheet,
     View,
@@ -9,22 +10,28 @@ import {
     Easing,
     Dimensions,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-const [aWidth] = [width-20];
+const [aWidth] = [width];
 const [left, top] = [0, 0];
 const [middleLeft] = [(width - aWidth) / 2];
 
 export default class AlertSelected extends Component {
+
+    static propTypes = {
+        title:PropTypes.string,
+        cancel:PropTypes.string,
+    }
 
     constructor(props) {
         super(props);
         this.state = {
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
-            title: "",
+            title: this.props.title,
             choose0: "",
             choose1: "",
             hide: true,
@@ -36,11 +43,17 @@ export default class AlertSelected extends Component {
         };//回调方法
     }
 
+
     render() {
         if (this.state.hide) {
-            return (<View />)
+            return (<View/>)
         } else {
             return (
+                <TouchableWithoutFeedback
+                    onPress={()=>this.out()}
+                    underlayColor={'transparent'}
+                    style={styles.container}
+                >
                 <View style={styles.container}>
                     <Animated.View style={styles.mask}>
                     </Animated.View>
@@ -51,7 +64,7 @@ export default class AlertSelected extends Component {
                         left: middleLeft,
                         ...Platform.select({
                             ios:{
-                                bottom: - 20,
+                                bottom: - 40,
                             },
                         }),
                         alignItems: "center",
@@ -64,23 +77,26 @@ export default class AlertSelected extends Component {
                             }),
                         }]
                     }]}>
-                        <View style={styles.content}>
-                            <View style={styles.tipTitleView}>
-                                <Text style={styles.tipTitleText}>{this.state.title}</Text>
+
+                            <View style={styles.content}>
+                                    <View  style={styles.content}>
+                                        <View style={styles.tipTitleView}>
+                                            <Text style={styles.tipTitleText}>{this.state.title}</Text>
+                                        </View>
+                                        {this.entityList.map((item, i) => this.renderItem(item, i))}
+                                    </View>
+
+                                <TouchableHighlight
+                                    style={styles.button}
+                                    underlayColor={'#f0f0f0'}
+                                    onPress={this.cancel.bind(this)}
+                                >
+                                    <Text style={styles.buttonText}>取消</Text>
+                                </TouchableHighlight>
                             </View>
-                            {
-                                this.entityList.map((item, i) => this.renderItem(item, i))
-                            }
-                        </View>
-                        <TouchableHighlight
-                            style={styles.button}
-                            underlayColor={'#f0f0f0'}
-                            onPress={this.cancel.bind(this)}
-                        >
-                            <Text style={styles.buttonText}>取消</Text>
-                        </TouchableHighlight>
                     </Animated.View>
                 </View>
+                </TouchableWithoutFeedback>
             );
         }
     }
@@ -137,7 +153,6 @@ export default class AlertSelected extends Component {
         ]).start();
     }
 
-    //隐藏动画
     out() {
         Animated.parallel([
             Animated.timing(
@@ -162,8 +177,9 @@ export default class AlertSelected extends Component {
     //取消
     cancel(event) {
         if (!this.state.hide) {
-            this.out();
+                this.out();
         }
+
     }
 
     //选择
@@ -238,31 +254,31 @@ const styles = StyleSheet.create({
         width: aWidth,
         height: 56,
         backgroundColor:'#fff',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
+        // borderBottomLeftRadius: 5,
+        // borderBottomRightRadius: 5,
     },
     item:{
         width: aWidth,
         height: 56,
         backgroundColor:'#fff',
         justifyContent: 'center',
-        borderRadius: 5,
+        // borderRadius: 5,
     },
     button: {
         height: 57,
         backgroundColor: '#fff',
         alignSelf: 'stretch',
         justifyContent: 'center',
-        borderRadius: 5,
+        // borderRadius: 5,
     },
     // 取消按钮
     buttonText: {
         fontSize: 17,
-        color: "#0084ff",
+        color: "black",
         textAlign: "center",
     },
     content: {
         backgroundColor: '#fff',
-        borderRadius: 5,
+        // borderRadius: 5,
     }
 });
