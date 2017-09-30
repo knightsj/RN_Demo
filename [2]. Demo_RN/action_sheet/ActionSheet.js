@@ -41,6 +41,7 @@ export default class AlertSelected extends Component {
     }
 
     constructor(props) {
+
         super(props);
         this.state = {
 
@@ -68,9 +69,7 @@ export default class AlertSelected extends Component {
 
     }
 
-
-
-    render() {
+    componentWillMount() {
 
         //Calculate Items height
         if (!this.props.itemTitles){
@@ -86,7 +85,15 @@ export default class AlertSelected extends Component {
             this.real_titleHeight = titleHeight;
         }
 
-        let totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.state.cancelPartHeight;
+        this.totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.state.cancelPartHeight;
+
+    }
+
+
+
+    render() {
+
+
 
         if (this.state.hide) {
 
@@ -103,7 +110,7 @@ export default class AlertSelected extends Component {
                     <Animated.View style={styles.maskViewStyle}></Animated.View>
                     <Animated.View style={[{
                         width: width,
-                        height: totalHeight,
+                        height: this.totalHeight,
                         left: 0,
                         alignItems: "center",
                         justifyContent: "space-between",
@@ -111,13 +118,13 @@ export default class AlertSelected extends Component {
                         transform: [{
                             translateY: this.state.offset.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [height, (height - totalHeight)]
+                                outputRange: [height, (height - this.totalHeight)]
                             }),
                         }]
                     }]}>
                         <View>
                             {this.renderTitleItem()}
-                            {this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))}
+                            {this.renderItemsPart()}
                             {this.renderCancelItem()}
                         </View>
                     </Animated.View>
@@ -145,39 +152,27 @@ export default class AlertSelected extends Component {
 
     renderItemsPart(){
 
-        this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))
-        // if(this.real_itemsPartHeight === 0){
-        //     return null;
-        // }else {
-        //
-        //         // for (var i = 0; i< this.state.itemTitles.length;i++){
-        //         //      return this.renderMiddleItems(this.state.itemTitles[i],i);
-        //         // }
-        //     this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))
-        //
-        // }
-    }
+        var itemsArr = new Array();
 
-    //绘制选项
-    renderMiddleItems(item, i) {
-
-        return (
-            <View style={styles.itemContentViewStyle} key={i}>
-
-                {/*分割线*/}
-                <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor}}/>
-
-                {/*中间的选项*/}
-                <TouchableOpacity
-                    onPress={this.choose.bind(this, i)}
-                >
-                    <View style={styles.itemStyle}>
-                        <Text style={[styles.textStyle,{color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{item}</Text>
+            for (var i = 0; i< this.state.itemTitles.length;i++) {
+                let title = this.state.itemTitles[i];
+                let itemView = <View style={styles.itemContentViewStyle} key={i}>
+                    {/*分割线*/}
+                    <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor}}/>
+                            {/*中间的选项*/}
+                        <TouchableOpacity
+                            onPress={this.choose.bind(this, i)}
+                        >
+                            <View style={styles.itemStyle}>
+                                <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
-            </View>
-        );
+                    itemsArr.push(itemView);
+                }
+                return itemsArr;
     }
+
 
     //绘制取消按钮
     renderCancelItem(){
@@ -265,6 +260,8 @@ export default class AlertSelected extends Component {
             this.chooseTimer = setTimeout(()=>{
                 if(callback){
                     {callback()}
+                }else {
+                    alert('there is no callback in item line'+i);
                 }
             }, 200);
         }
