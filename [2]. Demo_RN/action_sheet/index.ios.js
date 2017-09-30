@@ -63,9 +63,10 @@ export default class action_sheet extends Component {
           </Text>
         </TouchableOpacity>
         <ActionSheet
-            title="真的要退出登录么?"
+            mainTitle="真的要退出登录么?"
             itemTitles={["退出登录"]}
-            itemCallbacks={[this.takePhoto,this.pickMultiple]}
+            showCancel= {false}
+            itemCallbacks={[this.takePhoto]}
             ref={(dialog)=>{
               this.dialog = dialog;}
             }

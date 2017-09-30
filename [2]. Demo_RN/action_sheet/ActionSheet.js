@@ -13,8 +13,9 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
+const {width, height} = Dimensions.get('window');
+
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
 const cancelSeperateLineHeight = 2.5;
@@ -26,41 +27,41 @@ export default class AlertSelected extends Component {
 
     static propTypes = {
 
-        title:PropTypes.string,
-        titleFont:PropTypes.number,
-        titleColor:PropTypes.string,
+        mainTitle:PropTypes.string,
+        mainTitleFont:PropTypes.number,
+        mainTitleColor:PropTypes.string,
 
-        itemColor:PropTypes.string,
+        itemTitleFont:PropTypes.number,
+        itemTitleColor:PropTypes.string,
 
         cancelTitle:PropTypes.string,
         cancelTitleFont:PropTypes.number,
         cancelTitleColor:PropTypes.string,
+        showCancel:PropTypes.bool,
     }
 
     constructor(props) {
         super(props);
         this.state = {
 
-            //Text ,Color and Fonts
-            titleColor:this.props.titleColor?this.props.titleColor:'gray',
-            titleFont:this.props.titleFont?this.props.titleFont:13,
+            //About Text ,Color and Fonts
+            mainTitleFont:this.props.mainTitleFont?this.props.mainTitleFont:13,
+            mainTitleColor:this.props.mainTitleColor?this.props.mainTitleColor:'gray',
 
-            itemColor:this.props.itemColor?this.props.itemColor:'black',
-            itemFont:this.props.itemFont?this.props.itemFont:14,
             itemTitles:this.props.itemTitles,
+            itemTitleFont:this.props.itemTitleFont?this.props.itemTitleFont:14,
+            itemTitleColor:this.props.itemTitleColor?this.props.itemTitleColor:'black',
 
-            cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'取消',
+            cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'Cancel',
             cancelTitleColor:this.props.cancelTitleColor?this.props.cancelTitleColor:'red',
             cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
 
-            //Heights
-            titleHeight:this.props.title?titleHeight:0,
-            itemsHeight:(itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length,
-            cancelHeight:(itemHeight + cancelSeperateLineHeight),
+            //About Heights
+            itemsPartHeight:(itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length,
+            cancelPartHeight:this.props.showCancel?(itemHeight + cancelSeperateLineHeight):0,
 
-            //About Animations
+            //About About Animations
             hide: true,
-
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
 
@@ -73,12 +74,12 @@ export default class AlertSelected extends Component {
     render() {
 
         //Calculate Title Height
-        if (!this.props.title){
+        if (!this.props.mainTitle){
             this.real_titleHeight = 0
         }else {
             this.real_titleHeight = titleHeight;
         }
-        let totalHeight = this.real_titleHeight +  this.state.itemsHeight + this.state.cancelHeight;
+        let totalHeight = this.real_titleHeight +  this.state.itemsPartHeight + this.state.cancelPartHeight;
 
         if (this.state.hide) {
 
@@ -97,11 +98,6 @@ export default class AlertSelected extends Component {
                         width: width,
                         height: totalHeight,
                         left: 0,
-                        ...Platform.select({
-                            ios:{
-                                bottom:0,
-                            },
-                        }),
                         alignItems: "center",
                         justifyContent: "space-between",
                     }, {
@@ -113,7 +109,7 @@ export default class AlertSelected extends Component {
                         }]
                     }]}>
                         <View>
-                            {this.renderTitleItem(this.props.title)}
+                            {this.renderTitleItem()}
                             {this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))}
                             {this.renderCancelItem()}
                         </View>
@@ -125,15 +121,15 @@ export default class AlertSelected extends Component {
     }
 
     //绘制标题
-    renderTitleItem(title){
-        if(!title){
+    renderTitleItem(){
+        if(!this.props.mainTitle){
             return null;
         }else {
             return (
                 <TouchableWithoutFeedback
                 >
                     <View style={[styles.titleContentViewStyle,{height:this.real_titleHeight}]}>
-                        <Text style={{color: this.state.titleColor, fontSize: this.state.titleFont}}>{this.props.title}</Text>
+                        <Text style={{color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont}}>{this.props.mainTitle}</Text>
                     </View>
                 </TouchableWithoutFeedback>
             )
@@ -154,7 +150,7 @@ export default class AlertSelected extends Component {
                     onPress={this.choose.bind(this, i)}
                 >
                     <View style={styles.item}>
-                        <Text style={[styles.textStyle,{color: this.state.itemColor, fontSize: this.state.itemFont}]}>{item}</Text>
+                        <Text style={[styles.textStyle,{color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{item}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -281,7 +277,7 @@ const styles = StyleSheet.create({
         top: top,
     },
 
-    // Title Content Backgournd View
+    // Title Content Background View
     titleContentViewStyle: {
         flexDirection: 'row',
         flexWrap:'wrap',
@@ -293,7 +289,7 @@ const styles = StyleSheet.create({
         // marginRight: 10
     },
 
-    // Item Content Backgournd View
+    // Item Content Background View
     itemContentViewStyle: {
         width: width,
         height: itemHeight + itemSeperateLineHeight,
