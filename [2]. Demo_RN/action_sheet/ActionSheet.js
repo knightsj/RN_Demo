@@ -5,7 +5,6 @@ import {
     View,
     Image,
     Text,
-    TouchableHighlight,
     Animated,
     Easing,
     Dimensions,
@@ -15,14 +14,11 @@ import {
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-const [aWidth] = [width];
 const [left, top] = [0, 0];
-const [middleLeft] = [(width - aWidth) / 2];
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
 const cancelSeperateLineHeight = 2.5;
 const seperateLineColor='#e3e3e3';
-
 const titleHeight = 46;
 
 
@@ -45,28 +41,30 @@ export default class AlertSelected extends Component {
         super(props);
         this.state = {
 
+            //Text ,Color and Fonts
             titleColor:this.props.titleColor?this.props.titleColor:'gray',
             titleFont:this.props.titleFont?this.props.titleFont:12,
 
             itemColor:this.props.itemColor?this.props.itemColor:'black',
-            itemFont:this.props.itemFont?this.props.itemFont:15,
+            itemFont:this.props.itemFont?this.props.itemFont:14,
             itemTitles:this.props.itemTitles,
 
             cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'取消',
             cancelTitleColor:this.props.cancelTitleColor?this.props.cancelTitleColor:'red',
-            cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:16,
-            
-            offset: new Animated.Value(0),
-            opacity: new Animated.Value(0),
+            cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
 
+            //Heights
             titleHeight:this.props.title?titleHeight:0,
             itemsHeight:(itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length,
             cancelHeight:(itemHeight + cancelSeperateLineHeight),
 
+            //About Animations
             hide: true,
 
+            offset: new Animated.Value(0),
+            opacity: new Animated.Value(0),
+
         };
-        this.entityList = [];//数据源
 
     }
 
@@ -74,7 +72,7 @@ export default class AlertSelected extends Component {
 
     render() {
 
-        let totalHeight = this.state.titleHeight +  this.state.itemsHeight + this.state.cancelHeight +6;
+        let totalHeight = this.state.titleHeight +  this.state.itemsHeight + this.state.cancelHeight;
 
         if (this.state.hide) {
 
@@ -92,10 +90,10 @@ export default class AlertSelected extends Component {
                     <Animated.View style={[{
                         width: width,
                         height: totalHeight,
-                        left: middleLeft,
+                        left: 0,
                         ...Platform.select({
                             ios:{
-                                bottom: - 40,
+                                bottom:0,
                             },
                         }),
                         alignItems: "center",
@@ -104,15 +102,15 @@ export default class AlertSelected extends Component {
                         transform: [{
                             translateY: this.state.offset.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [height, (height - totalHeight - 34)]
+                                outputRange: [height, (height - totalHeight)]
                             }),
                         }]
                     }]}>
-                            <View>
-                                {this.renderTitleItem(this.props.title)}
-                                {this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))}
-                                {this.renderCancelItem()}
-                            </View>
+                        <View>
+                            {this.renderTitleItem(this.props.title)}
+                            {this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))}
+                            {this.renderCancelItem()}
+                        </View>
                     </Animated.View>
                 </View>
                 </TouchableWithoutFeedback>
@@ -126,9 +124,12 @@ export default class AlertSelected extends Component {
             return null;
         }else {
             return (
-                <View style={[styles.titleContentViewStyle,{height:this.state.titleHeight}]}>
-                    <Text style={{color: this.state.titleColor, fontSize: this.state.titleFont}}>{this.props.title}</Text>
-                </View>
+                <TouchableWithoutFeedback
+                >
+                    <View style={[styles.titleContentViewStyle,{height:this.state.titleHeight}]}>
+                        <Text style={{color: this.state.titleColor, fontSize: this.state.titleFont}}>{this.props.title}</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             )
         }
     }
@@ -137,38 +138,36 @@ export default class AlertSelected extends Component {
     renderMiddleItems(item, i) {
 
         return (
-            <View style={styles.itemContentViewStyle}>
+            <View style={styles.itemContentViewStyle} key={i}>
 
                 {/*分割线*/}
-                <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor, width: width}}/>
+                <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor}}/>
 
                 {/*中间的选项*/}
                 <TouchableOpacity
-                    key={i}
                     onPress={this.choose.bind(this, i)}
                 >
                     <View style={styles.item}>
-                        <Text style={{
-                            color: this.state.itemColor,
-                            fontSize: this.state.itemFont,
-                            textAlign: "center",
-                        }}>{item}</Text>
+                        <Text style={[styles.textStyle,{color: this.state.itemColor, fontSize: this.state.itemFont}]}>{item}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         );
     }
 
-    //绘制取消
+    //绘制取消按钮
     renderCancelItem(){
         return (
             <View style={styles.cancelContentViewStyle}>
                 <TouchableOpacity
                     onPress={this.cancel.bind(this)}
                 >
-                    <View style={{height: cancelSeperateLineHeight, backgroundColor: seperateLineColor, width: width}}/>
+                    {/* Seperate Line */}
+                    <View style={{height: cancelSeperateLineHeight, backgroundColor: seperateLineColor}}/>
+
+                    {/* Cancel Item */}
                     <View style={styles.item}>
-                        <Text style={[styles.textStyle,{color:this.state.cancelTitleColor},{fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
+                        <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -264,6 +263,7 @@ const styles = StyleSheet.create({
         left: left,
         top: top,
     },
+
     maskViewStyle: {
         justifyContent: "center",
         backgroundColor: "#000000",
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
         top: top,
     },
 
-    // 标题
+    // Title Content Backgournd View
     titleContentViewStyle: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -285,9 +285,9 @@ const styles = StyleSheet.create({
         // marginRight: 10
     },
 
-    // 分割线
+    // Item Content Backgournd View
     itemContentViewStyle: {
-        width: aWidth,
+        width: width,
         height: itemHeight + itemSeperateLineHeight,
         backgroundColor:'#fff',
         // borderBottomLeftRadius: 5,
@@ -295,9 +295,8 @@ const styles = StyleSheet.create({
     },
 
     item:{
-        width: aWidth,
+        width: width,
         height: itemHeight,
-        backgroundColor:'#fff',
         justifyContent: 'center',
         alignItems:'center'
         // borderRadius: 5,
@@ -309,6 +308,7 @@ const styles = StyleSheet.create({
     },
 
     cancelContentViewStyle:{
+        width: width,
         height: itemHeight + cancelSeperateLineHeight,
         backgroundColor: '#fff',
         justifyContent: 'center',
