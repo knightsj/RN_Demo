@@ -15,7 +15,7 @@ import {
 
 import ActionSheet from './ActionSheet'
 
-const selectedArr = ["拍照", "图库"];
+const selectedArr = ["拍照1", "图库"];
 
 export default class action_sheet extends Component {
 
@@ -27,7 +27,7 @@ export default class action_sheet extends Component {
   }
 
   showAlertSelected(){
-    this.dialog.show(selectedArr, '#333333', this.callbackSelected);
+    this.dialog.show(selectedArr,this.callbackSelected);
   }
 
   callbackSelected(i){
@@ -43,10 +43,12 @@ export default class action_sheet extends Component {
 
   takePhoto(){
 
+    alert('take photo');
+
   }
 
   pickMultiple(){
-
+    alert('pick multiple');
   }
 
   show(){
@@ -59,13 +61,16 @@ export default class action_sheet extends Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={()=>this.showAlertSelected()}>
           <Text style={styles.welcome}>
-            Welcome to React Native***
+            Welcome to React Native~~~~~
           </Text>
         </TouchableOpacity>
         <ActionSheet
-            title = "请选择照片啊啊啊啊啊啊啊"
+            title="sdfsdfsdf"
+            itemTitles={["dddd","sdss"]}
+            itemCallbacks={[this.takePhoto(),this.pickMultiple()]}
             ref={(dialog)=>{
-              this.dialog = dialog;}}
+              this.dialog = dialog;}
+            }
         />
       </View>
     );

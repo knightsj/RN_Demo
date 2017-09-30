@@ -21,26 +21,48 @@ const [middleLeft] = [(width - aWidth) / 2];
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
 const cancelSeperateLineHeight = 2;
+const seperateLineColor='#e3e3e3';
 
 
 export default class AlertSelected extends Component {
 
     static propTypes = {
+
         title:PropTypes.string,
+        titleFont:PropTypes.number,
+        titleColor:PropTypes.string,
+
+        itemColor:PropTypes.string,
+
         cancelTitle:PropTypes.string,
+        cancelTitleFont:PropTypes.number,
+        cancelTitleColor:PropTypes.string,
     }
 
     constructor(props) {
         super(props);
         this.state = {
+
+            titleColor:this.props.titleColor?this.props.titleColor:'black',
+            titleFont:this.props.titleFont?this.props.titleFont:16,
+
+            itemColor:this.props.itemColor?this.props.itemColor:'black',
+            itemFont:this.props.itemFont?this.props.itemFont:15,
+            itemTitles:this.props.itemTitles,
+
             cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'取消',
+            cancelTitleColor:this.props.cancelTitleColor?this.props.cancelTitleColor:'red',
+            cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:16,
+
+
+
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
             choose0: "",
             choose1: "",
+
             hide: true,
-            tipTextColor: '#333333',
-            aHeight: 236,
+            aHeight: 100,
         };
         this.entityList = [];//数据源
         this.callback = function () {
@@ -48,9 +70,12 @@ export default class AlertSelected extends Component {
     }
 
 
+
     render() {
         if (this.state.hide) {
+
             return (<View/>)
+
         } else {
             return (
                 <TouchableWithoutFeedback
@@ -59,9 +84,7 @@ export default class AlertSelected extends Component {
                     style={styles.container}
                 >
                 <View style={styles.container}>
-                    <Animated.View style={styles.mask}>
-                    </Animated.View>
-
+                    <Animated.View style={styles.maskViewStyle}></Animated.View>
                     <Animated.View style={[{
                         width: aWidth,
                         height: this.state.aHeight,
@@ -81,15 +104,9 @@ export default class AlertSelected extends Component {
                             }),
                         }]
                     }]}>
-
                             <View style={styles.content}>
-                                    <View  style={styles.content}>
-                                        <View style={styles.tipTitleView}>
-                                            <Text style={styles.tipTitleText}>{this.props.title}</Text>
-                                        </View>
-                                        {this.entityList.map((item, i) => this.renderItem(item, i))}
-                                    </View>
-
+                                {this.renderTitleItem(this.props.title)}
+                                {this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))}
                                 {this.renderCancelItem()}
                             </View>
                     </Animated.View>
@@ -99,18 +116,33 @@ export default class AlertSelected extends Component {
         }
     }
 
-    renderItem(item, i) {
+    //绘制标题
+    renderTitleItem(title){
+        if(title === null){
+            return null;
+        }else {
+            return (
+                <View style={styles.tipTitleView}>
+                    <Text style={{color: this.state.titleColor, fontSize: this.state.titleFont}}>{this.props.title}</Text>
+                </View>
+            )
+        }
+    }
+
+    //绘制选项
+    renderMiddleItems(item, i) {
+
         return (
             <View style={styles.itemContentViewStyle}>
-                <View style={{height: itemSeperateLineHeight, backgroundColor: '#a9a9a9', width: aWidth}}/>
+                <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor, width: aWidth}}/>
                 <TouchableOpacity
                     key={i}
-                    onPress={this.choose.bind(this, i)}
+                    onPress={this.props.itemCallbacks[i]}
                 >
                     <View style={styles.item}>
                         <Text style={{
-                            color: this.state.tipTextColor,
-                            fontSize: 17,
+                            color: this.state.itemColor,
+                            fontSize: this.state.itemFont,
                             textAlign: "center",
                         }}>{item}</Text>
                     </View>
@@ -119,17 +151,16 @@ export default class AlertSelected extends Component {
         );
     }
 
+    //绘制取消
     renderCancelItem(){
         return (
-
             <TouchableOpacity
                 style={styles.cancelItemViewStyle}
-                underlayColor={'#f0f0f0'}
                 onPress={this.cancel.bind(this)}
             >
                 <View >
-                    <View style={{height: cancelSeperateLineHeight, backgroundColor: '#a9a9a9', width: aWidth}}/>
-                    <Text style={styles.buttonText}>{this.state.cancelTitle}</Text>
+                    <View style={{height: cancelSeperateLineHeight, backgroundColor: seperateLineColor, width: aWidth}}/>
+                    <Text style={[styles.textStyle,{color:this.state.cancelTitleColor},{fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
                 </View>
             </TouchableOpacity>
             )
@@ -153,7 +184,7 @@ export default class AlertSelected extends Component {
                 {
                     easing: Easing.linear,//一个用于定义曲线的渐变函数
                     duration: 200,//动画持续的时间（单位是毫秒），默认为200。
-                    toValue: 0.8,//动画的最终值
+                    toValue: 0.7,//动画的最终值
                 }
             ),
             Animated.timing(
@@ -191,7 +222,7 @@ export default class AlertSelected extends Component {
     //取消
     cancel(event) {
         if (!this.state.hide) {
-                this.out();
+            this.out();
         }
 
     }
@@ -213,7 +244,8 @@ export default class AlertSelected extends Component {
      * tipTextColor: 字体颜色
      * callback：回调方法
      */
-    show(entityList, tipTextColor, callback) {
+    show(entityList, callback) {
+        // alert(this.state.itemTitles);
         this.entityList = entityList;
         this.callback = callback;
 
@@ -221,9 +253,9 @@ export default class AlertSelected extends Component {
             if (entityList && entityList.length > 0) {
                 let len = entityList.length;
                 if (len === 1) {
-                    this.setState({choose0: entityList[0], hide: false, tipTextColor: tipTextColor, aHeight: 180}, this.in);
+                    this.setState({choose0: this.state.itemTitles[0], hide: false, titleColor: this.state.titleColor, aHeight: 180}, this.in);
                 } else if (len === 2) {
-                    this.setState({choose0: entityList[0], choose1: entityList[1], hide: false, tipTextColor: tipTextColor, aHeight: 236}, this.in);
+                    this.setState({choose0: this.state.itemTitles[0], choose1: this.state.itemTitles[1], hide: false, titleColor: this.state.titleColor, aHeight: 236}, this.in);
                 }
             }
         }
@@ -231,6 +263,7 @@ export default class AlertSelected extends Component {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         position: "absolute",
         width: width,
@@ -238,7 +271,7 @@ const styles = StyleSheet.create({
         left: left,
         top: top,
     },
-    mask: {
+    maskViewStyle: {
         justifyContent: "center",
         backgroundColor: "#000000",
         opacity: 0.3,
@@ -255,14 +288,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
-        marginLeft: 10,
-        marginRight: 10
+        // marginLeft: 10,
+        // marginRight: 10
     },
-    // 提示文字
-    tipTitleText: {
-        color: "#999999",
-        fontSize: 14,
-    },
+
     // 分割线
     itemContentViewStyle: {
         width: aWidth,
@@ -271,6 +300,7 @@ const styles = StyleSheet.create({
         // borderBottomLeftRadius: 5,
         // borderBottomRightRadius: 5,
     },
+
     item:{
         width: aWidth,
         height: itemHeight,
@@ -278,6 +308,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // borderRadius: 5,
     },
+
     button: {
         height: itemHeight + itemSeperateLineHeight,
         backgroundColor: '#fff',
@@ -285,10 +316,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // borderRadius: 5,
     },
+
     // 取消按钮
     buttonText: {
         fontSize: 17,
         color: "black",
+        textAlign: "center",
+    },
+
+    textStyle:{
+        textAlign: "center",
+        justifyContent: 'center',
+    },
+
+    cancelTitleStyle:{
+        fontSize: 17,
         textAlign: "center",
     },
 
@@ -300,7 +342,7 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        backgroundColor: '#fff',
+        backgroundColor: 'red',
         // borderRadius: 5,
     }
 });
