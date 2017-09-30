@@ -65,8 +65,7 @@ export default class AlertSelected extends Component {
             aHeight: 100,
         };
         this.entityList = [];//数据源
-        this.callback = function () {
-        };//回调方法
+
     }
 
 
@@ -137,7 +136,7 @@ export default class AlertSelected extends Component {
                 <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor, width: aWidth}}/>
                 <TouchableOpacity
                     key={i}
-                    onPress={this.props.itemCallbacks[i]}
+                    onPress={this.choose.bind(this, i)}
                 >
                     <View style={styles.item}>
                         <Text style={{
@@ -220,7 +219,7 @@ export default class AlertSelected extends Component {
     }
 
     //取消
-    cancel(event) {
+    cancel() {
         if (!this.state.hide) {
             this.out();
         }
@@ -231,8 +230,9 @@ export default class AlertSelected extends Component {
     choose(i) {
         if (!this.state.hide) {
             this.out();
+            let callback = this.props.itemCallbacks[i];
             this.chooseTimer = setTimeout(()=>{
-                this.callback(i);
+                {callback()}
             }, 200);
         }
     }
@@ -244,14 +244,11 @@ export default class AlertSelected extends Component {
      * tipTextColor: 字体颜色
      * callback：回调方法
      */
-    show(entityList, callback) {
+    show(callback) {
         // alert(this.state.itemTitles);
-        this.entityList = entityList;
-        this.callback = callback;
-
         if (this.state.hide) {
-            if (entityList && entityList.length > 0) {
-                let len = entityList.length;
+            if (this.state.itemTitles && this.state.itemTitles.length > 0) {
+                let len = this.state.itemTitles.length;
                 if (len === 1) {
                     this.setState({choose0: this.state.itemTitles[0], hide: false, titleColor: this.state.titleColor, aHeight: 180}, this.in);
                 } else if (len === 2) {

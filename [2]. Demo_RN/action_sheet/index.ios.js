@@ -27,7 +27,7 @@ export default class action_sheet extends Component {
   }
 
   showAlertSelected(){
-    this.dialog.show(selectedArr,this.callbackSelected);
+    this.dialog.show(this.callbackSelected);
   }
 
   callbackSelected(i){
@@ -67,7 +67,7 @@ export default class action_sheet extends Component {
         <ActionSheet
             title="sdfsdfsdf"
             itemTitles={["dddd","sdss"]}
-            itemCallbacks={[this.takePhoto(),this.pickMultiple()]}
+            itemCallbacks={[this.takePhoto,this.pickMultiple]}
             ref={(dialog)=>{
               this.dialog = dialog;}
             }
