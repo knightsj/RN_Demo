@@ -37,7 +37,7 @@ export default class AlertSelected extends Component {
         cancelTitle:PropTypes.string,
         cancelTitleFont:PropTypes.number,
         cancelTitleColor:PropTypes.string,
-        showCancel:PropTypes.bool,
+        hideCancel:PropTypes.bool,
     }
 
     constructor(props) {
@@ -58,7 +58,7 @@ export default class AlertSelected extends Component {
 
             //About Heights
             itemsPartHeight:(itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length,
-            cancelPartHeight:this.props.showCancel?(itemHeight + cancelSeperateLineHeight):0,
+            cancelPartHeight:this.props.hideCancel?0:(itemHeight + cancelSeperateLineHeight),
 
             //About About Animations
             hide: true,
@@ -149,7 +149,7 @@ export default class AlertSelected extends Component {
                 <TouchableOpacity
                     onPress={this.choose.bind(this, i)}
                 >
-                    <View style={styles.item}>
+                    <View style={styles.itemStyle}>
                         <Text style={[styles.textStyle,{color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{item}</Text>
                     </View>
                 </TouchableOpacity>
@@ -168,7 +168,7 @@ export default class AlertSelected extends Component {
                     <View style={{height: cancelSeperateLineHeight, backgroundColor: seperateLineColor}}/>
 
                     {/* Cancel Item */}
-                    <View style={styles.item}>
+                    <View style={styles.itemStyle}>
                         <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
         // borderBottomRightRadius: 5,
     },
 
-    item:{
+    itemStyle:{
         width: width,
         height: itemHeight,
         justifyContent: 'center',

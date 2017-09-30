@@ -65,7 +65,6 @@ export default class action_sheet extends Component {
         <ActionSheet
             mainTitle="真的要退出登录么?"
             itemTitles={["退出登录"]}
-            showCancel= {false}
             itemCallbacks={[this.takePhoto]}
             ref={(dialog)=>{
               this.dialog = dialog;}
