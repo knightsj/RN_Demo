@@ -15,7 +15,6 @@ import {
 
 import ActionSheet from './ActionSheet'
 
-const selectedArr = ["拍照1", "图库"];
 
 export default class action_sheet extends Component {
 
@@ -52,7 +51,6 @@ export default class action_sheet extends Component {
   }
 
   show(){
-    alert('show')
 
   }
 
@@ -61,12 +59,12 @@ export default class action_sheet extends Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={()=>this.showAlertSelected()}>
           <Text style={styles.welcome}>
-            Welcome to React Native~~~~~
+            点击这里 弹出action sheet
           </Text>
         </TouchableOpacity>
         <ActionSheet
-            title="sdfsdfsdf"
-            itemTitles={["dddd","sdss"]}
+            title="真的退出登录么？"
+            itemTitles={["退出登录"]}
             itemCallbacks={[this.takePhoto,this.pickMultiple]}
             ref={(dialog)=>{
               this.dialog = dialog;}
@@ -83,16 +81,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
