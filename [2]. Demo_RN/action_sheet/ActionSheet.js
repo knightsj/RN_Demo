@@ -43,7 +43,7 @@ export default class AlertSelected extends Component {
 
             //Text ,Color and Fonts
             titleColor:this.props.titleColor?this.props.titleColor:'gray',
-            titleFont:this.props.titleFont?this.props.titleFont:12,
+            titleFont:this.props.titleFont?this.props.titleFont:13,
 
             itemColor:this.props.itemColor?this.props.itemColor:'black',
             itemFont:this.props.itemFont?this.props.itemFont:14,
@@ -72,7 +72,13 @@ export default class AlertSelected extends Component {
 
     render() {
 
-        let totalHeight = this.state.titleHeight +  this.state.itemsHeight + this.state.cancelHeight;
+        //Calculate Title Height
+        if (!this.props.title){
+            this.real_titleHeight = 0
+        }else {
+            this.real_titleHeight = titleHeight;
+        }
+        let totalHeight = this.real_titleHeight +  this.state.itemsHeight + this.state.cancelHeight;
 
         if (this.state.hide) {
 
@@ -126,7 +132,7 @@ export default class AlertSelected extends Component {
             return (
                 <TouchableWithoutFeedback
                 >
-                    <View style={[styles.titleContentViewStyle,{height:this.state.titleHeight}]}>
+                    <View style={[styles.titleContentViewStyle,{height:this.real_titleHeight}]}>
                         <Text style={{color: this.state.titleColor, fontSize: this.state.titleFont}}>{this.props.title}</Text>
                     </View>
                 </TouchableWithoutFeedback>
@@ -278,9 +284,11 @@ const styles = StyleSheet.create({
     // Title Content Backgournd View
     titleContentViewStyle: {
         flexDirection: 'row',
+        flexWrap:'wrap',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+        padding:10,
         // marginLeft: 10,
         // marginRight: 10
     },

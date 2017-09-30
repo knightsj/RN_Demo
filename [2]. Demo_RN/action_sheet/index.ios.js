@@ -6,10 +6,10 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
     TouchableOpacity
 } from 'react-native';
 
@@ -63,7 +63,7 @@ export default class action_sheet extends Component {
           </Text>
         </TouchableOpacity>
         <ActionSheet
-            title="真的退出登录么？"
+            title="真的要退出登录么?"
             itemTitles={["退出登录"]}
             itemCallbacks={[this.takePhoto,this.pickMultiple]}
             ref={(dialog)=>{
