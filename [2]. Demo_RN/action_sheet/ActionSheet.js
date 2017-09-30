@@ -48,7 +48,7 @@ export default class AlertSelected extends Component {
             mainTitleFont:this.props.mainTitleFont?this.props.mainTitleFont:13,
             mainTitleColor:this.props.mainTitleColor?this.props.mainTitleColor:'gray',
 
-            itemTitles:this.props.itemTitles,
+            itemTitles:this.props.itemTitles?this.props.itemTitles:[],
             itemTitleFont:this.props.itemTitleFont?this.props.itemTitleFont:14,
             itemTitleColor:this.props.itemTitleColor?this.props.itemTitleColor:'black',
 
@@ -57,7 +57,6 @@ export default class AlertSelected extends Component {
             cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
 
             //About Heights
-            itemsPartHeight:(itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length,
             cancelPartHeight:this.props.hideCancel?0:(itemHeight + cancelSeperateLineHeight),
 
             //About About Animations
@@ -73,13 +72,21 @@ export default class AlertSelected extends Component {
 
     render() {
 
+        //Calculate Items height
+        if (!this.props.itemTitles){
+            this.real_itemsPartHeight = 0;
+        }else {
+            this.real_itemsPartHeight = (itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length;
+        }
+
         //Calculate Title Height
         if (!this.props.mainTitle){
             this.real_titleHeight = 0
         }else {
             this.real_titleHeight = titleHeight;
         }
-        let totalHeight = this.real_titleHeight +  this.state.itemsPartHeight + this.state.cancelPartHeight;
+
+        let totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.state.cancelPartHeight;
 
         if (this.state.hide) {
 
@@ -134,6 +141,21 @@ export default class AlertSelected extends Component {
                 </TouchableWithoutFeedback>
             )
         }
+    }
+
+    renderItemsPart(){
+
+        this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))
+        // if(this.real_itemsPartHeight === 0){
+        //     return null;
+        // }else {
+        //
+        //         // for (var i = 0; i< this.state.itemTitles.length;i++){
+        //         //      return this.renderMiddleItems(this.state.itemTitles[i],i);
+        //         // }
+        //     this.state.itemTitles.map((item, i) => this.renderMiddleItems(item, i))
+        //
+        // }
     }
 
     //绘制选项
@@ -241,7 +263,9 @@ export default class AlertSelected extends Component {
             this.out();
             let callback = this.props.itemCallbacks[i];
             this.chooseTimer = setTimeout(()=>{
-                {callback()}
+                if(callback){
+                    {callback()}
+                }
             }, 200);
         }
     }
