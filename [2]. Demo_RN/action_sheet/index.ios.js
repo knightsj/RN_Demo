@@ -22,22 +22,10 @@ export default class action_sheet extends Component {
     super(props);
     this.dialog = ActionSheet;
     this.showAlertSelected = this.showAlertSelected.bind(this);
-    this.callbackSelected = this.callbackSelected.bind(this);
   }
 
   showAlertSelected(){
-    this.dialog.show(this.callbackSelected);
-  }
-
-  callbackSelected(i){
-    switch (i){
-      case 0: // 拍照
-        this.takePhoto();
-        break;
-      case 1: // 图库
-        this.pickMultiple();
-        break;
-    }
+    this.dialog.show();
   }
 
   takePhoto(){
@@ -60,9 +48,9 @@ export default class action_sheet extends Component {
           </Text>
         </TouchableOpacity>
         <ActionSheet
-            borderRadius = {0}
             mainTitle="斯蒂芬斯蒂芬递四方速递附件上岛咖啡克里斯多夫接口来圣诞节快乐发"
             itemTitles = {["sdfsdfds","sdfsdfsdf"]}
+            leftSpace={0}
             itemCallbacks={[this.takePhoto]}
             ref={(dialog)=>{
               this.dialog = dialog;}
