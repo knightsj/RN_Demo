@@ -217,13 +217,16 @@ export default class AlertSelected extends Component {
 
         var topRadius = 0;
         var bottomRadius = 0;
+        var showItemSeperateLine = true;
 
         for (var i = 0; i< this.state.itemTitles.length;i++) {
 
             if (!this.props.mainTitle && i === 0){
                 topRadius = this.state.borderRadius;
+                showItemSeperateLine = false;
             }else {
                 topRadius = 0;
+                showItemSeperateLine = true;
             }
 
             if ( i === this.state.itemTitles.length - 1){
@@ -237,7 +240,7 @@ export default class AlertSelected extends Component {
             let itemView =
                 <TouchableOpacity onPress={this.choose.bind(this, i)} key={i} activeOpacity = {1}>
                     {/*分割线*/}
-                    <View style={{width:width - 2*this.state.leftSpace,height: itemSeperateLineHeight, backgroundColor: this.itemSpaceColor}}/>
+                    {this._renderItemSeperateLine(showItemSeperateLine)}
                     {/*中间的选项*/}
                     <View style={[styles.itemContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
                         <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
@@ -246,6 +249,14 @@ export default class AlertSelected extends Component {
             itemsArr.push(itemView);
         }
         return itemsArr;
+    }
+
+    _renderItemSeperateLine(show){
+        if (show){
+            return ( <View style={{width:width - 2*this.state.leftSpace,height: itemSeperateLineHeight, backgroundColor: this.itemSpaceColor}}/>);
+        }else {
+            return null;
+        }
     }
 
 
