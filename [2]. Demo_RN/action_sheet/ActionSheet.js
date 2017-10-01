@@ -18,9 +18,9 @@ const {width, height} = Dimensions.get('window');
 
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
-const cancelSeperateLineHeight = 2.5;
+const cancelSeperateLineHeight = 2;
 const seperateLineColor='#e3e3e3';
-const titleHeight = 46;
+const titleHeight = 45;
 
 
 export default class AlertSelected extends Component {
@@ -38,6 +38,8 @@ export default class AlertSelected extends Component {
         cancelTitleFont:PropTypes.number,
         cancelTitleColor:PropTypes.string,
         hideCancel:PropTypes.bool,
+
+        cornerRadius:PropTypes.number,
     }
 
     constructor(props) {
@@ -59,6 +61,9 @@ export default class AlertSelected extends Component {
 
             //About Heights
             cancelPartHeight:this.props.hideCancel?0:(itemHeight + cancelSeperateLineHeight),
+
+
+            borderRadius:this.props.borderRadius?this.props.borderRadius:0,
 
             //About About Animations
             hide: true,
@@ -87,13 +92,25 @@ export default class AlertSelected extends Component {
 
         this.totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.state.cancelPartHeight;
 
+
+        //verticalSpaceColor
+        if(this.props.verticalSpaceColor){
+            this.verticalSpaceColor = this.props.verticalSpaceColor;
+        }else if (this.props.borderRadius > 0){
+            this.verticalSpaceColor = 'transparent';
+        }else {
+            this.verticalSpaceColor = '#e3e3e3';
+        }
+
+    }
+
+    componentWillUnmount() {
+        this.chooseTimer && clearTimeout(this.chooseTimer);
     }
 
 
 
     render() {
-
-
 
         if (this.state.hide) {
 
@@ -140,9 +157,8 @@ export default class AlertSelected extends Component {
             return null;
         }else {
             return (
-                <TouchableWithoutFeedback
-                >
-                    <View style={[styles.titleContentViewStyle,{height:this.real_titleHeight}]}>
+                <TouchableWithoutFeedback>
+                    <View style={[styles.titleContentViewStyle,{height:this.real_titleHeight,borderRadius:this.state.borderRadius}]}>
                         <Text style={{color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont}}>{this.props.mainTitle}</Text>
                     </View>
                 </TouchableWithoutFeedback>
@@ -156,18 +172,15 @@ export default class AlertSelected extends Component {
 
             for (var i = 0; i< this.state.itemTitles.length;i++) {
                 let title = this.state.itemTitles[i];
-                let itemView = <View style={styles.itemContentViewStyle} key={i}>
-                    {/*分割线*/}
-                    <View style={{height: itemSeperateLineHeight, backgroundColor: seperateLineColor}}/>
-                            {/*中间的选项*/}
-                        <TouchableOpacity
-                            onPress={this.choose.bind(this, i)}
-                        >
-                            <View style={styles.itemStyle}>
-                                <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                let itemView =
+                    <TouchableOpacity onPress={this.choose.bind(this, i)} key={i}>
+                        {/*分割线*/}
+                        <View style={{width:width,height: itemSeperateLineHeight, backgroundColor: this.verticalSpaceColor}}/>
+                        {/*中间的选项*/}
+                        <View style={[styles.itemContentViewStyle,{borderRadius:this.state.borderRadius}]} key={i}>
+                            <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
+                        </View>
+                    </TouchableOpacity>
                     itemsArr.push(itemView);
                 }
                 return itemsArr;
@@ -177,15 +190,13 @@ export default class AlertSelected extends Component {
     //绘制取消按钮
     renderCancelItem(){
         return (
-            <View style={styles.cancelContentViewStyle}>
-                <TouchableOpacity
-                    onPress={this.cancel.bind(this)}
-                >
+            <View style={[styles.cancelContentViewStyle]}>
+                <TouchableOpacity onPress={this.cancel.bind(this)}>
                     {/* Seperate Line */}
-                    <View style={{height: cancelSeperateLineHeight, backgroundColor: seperateLineColor}}/>
+                    <View style={{height: cancelSeperateLineHeight, backgroundColor: this.verticalSpaceColor}}/>
 
                     {/* Cancel Item */}
-                    <View style={styles.itemStyle}>
+                    <View style={[styles.itemStyle,{borderRadius:this.state.borderRadius}]}>
                         <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
@@ -194,12 +205,7 @@ export default class AlertSelected extends Component {
     }
 
 
-    componentWillUnmount() {
-        // 如果存在this.timer，则使用clearTimeout清空。
-        // 如果你使用多个timer，那么用多个变量，或者用个数组来保存引用，然后逐个clear
-        this.timer && clearTimeout(this.timer);
-        this.chooseTimer && clearTimeout(this.chooseTimer);
-    }
+
 
     //显示动画
     in() {
@@ -298,7 +304,20 @@ const styles = StyleSheet.create({
         top: top,
     },
 
-    // Title Content Background View
+    itemStyle:{
+        width: width,
+        height: itemHeight,
+        backgroundColor:'white',
+        justifyContent: 'center',
+        alignItems:'center',
+    },
+
+    textStyle:{
+        textAlign: "center",
+        justifyContent: 'center',
+    },
+
+    // Title content background view
     titleContentViewStyle: {
         flexDirection: 'row',
         flexWrap:'wrap',
@@ -310,33 +329,23 @@ const styles = StyleSheet.create({
         // marginRight: 10
     },
 
-    // Item Content Background View
+    // Item content background View
     itemContentViewStyle: {
         width: width,
-        height: itemHeight + itemSeperateLineHeight,
-        backgroundColor:'#fff',
-        // borderBottomLeftRadius: 5,
-        // borderBottomRightRadius: 5,
-    },
-
-    itemStyle:{
-        width: width,
         height: itemHeight,
+        backgroundColor:'white',
         justifyContent: 'center',
         alignItems:'center'
-        // borderRadius: 5,
+
     },
 
-    textStyle:{
-        textAlign: "center",
-        justifyContent: 'center',
-    },
-
+    // Cancel content background View
     cancelContentViewStyle:{
         width: width,
         height: itemHeight + cancelSeperateLineHeight,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         justifyContent: 'center',
         alignItems:'center'
     },
+
 });

@@ -60,6 +60,7 @@ export default class action_sheet extends Component {
           </Text>
         </TouchableOpacity>
         <ActionSheet
+            borderRadius = {0}
             mainTitle="斯蒂芬斯蒂芬递四方速递附件上岛咖啡克里斯多夫接口来圣诞节快乐发"
             itemTitles = {["sdfsdfds","sdfsdfsdf"]}
             itemCallbacks={[this.takePhoto]}
