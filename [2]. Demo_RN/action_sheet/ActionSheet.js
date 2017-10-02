@@ -14,8 +14,9 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 
-const [left, top] = [0, 0];
+
 const {width, height} = Dimensions.get('window');
+const [left, top] = [0, 0];
 
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
@@ -52,6 +53,8 @@ export default class AlertSelected extends Component {
         bottomSpace:PropTypes.number,
         leftSpace:PropTypes.number,
 
+        maskOpacity:PropTypes.number,
+
 
     }
 
@@ -86,6 +89,8 @@ export default class AlertSelected extends Component {
             hide: true,
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
+
+            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3
 
         };
 
@@ -147,7 +152,9 @@ export default class AlertSelected extends Component {
             this.cancelSpaceColor = 'transparent';
         }else {
             this.cancelSpaceColor = '#e3e3e3';
-        }}
+        }
+
+    }
 
 
 
@@ -170,7 +177,7 @@ export default class AlertSelected extends Component {
                     underlayColor={'transparent'}
                 >
                 <View style={[styles.container]}>
-                    <Animated.View style={[styles.maskViewStyle]}></Animated.View>
+                    <Animated.View style={[styles.maskViewStyle,{        opacity: this.state.maskOpacity}]}></Animated.View>
                     <Animated.View style={[{
                         width: width,
                         height: this.totalHeight,
@@ -368,7 +375,6 @@ const styles = StyleSheet.create({
     maskViewStyle: {
         justifyContent: "center",
         backgroundColor: "#000000",
-        opacity: 0.3,
         position: "absolute",
         width: width,
         height: height,
