@@ -48,11 +48,12 @@ export default class action_sheet extends Component {
           </Text>
         </TouchableOpacity>
         <ActionSheet
-
+            mainTitle="时代峰峻克鲁塞德时代峰峻克鲁塞德时代峰峻克鲁塞德时代峰峻克鲁塞德"
             itemTitles = {["sdfsdfds","sdfsdfsdf"]}
             borderRadius = {6}
             bottomSpace = {10}
             leftSpace = {6}
+            mainTitlePadding = {18}
 
             itemCallbacks={[this.takePhoto]}
             ref={(dialog)=>{

@@ -33,6 +33,8 @@ export default class AlertSelected extends Component {
         mainTitleFont:PropTypes.number,
         mainTitleColor:PropTypes.string,
         mainTitleHeight:PropTypes.number,
+        mainTitleTextAlign:PropTypes.string,
+        mainTitlePadding:PropTypes.number,
 
         //items
         itemTitleFont:PropTypes.number,
@@ -75,6 +77,8 @@ export default class AlertSelected extends Component {
             mainTitleFont:this.props.mainTitleFont?this.props.mainTitleFont:13,
             mainTitleColor:this.props.mainTitleColor?this.props.mainTitleColor:'gray',
             mainTitleHeight:this.props.mainTitleHeight?this.props.mainTitleHeight:titleHeight,
+            mainTitleTextAlign:this.props.mainTitleTextAlign?this.props.mainTitleTextAlign:'left',
+            mainTitlePadding:this.props.mainTitlePadding?this.props.mainTitlePadding:10,
 
             itemTitles:this.props.itemTitles?this.props.itemTitles:[],
             itemTitleFont:this.props.itemTitleFont?this.props.itemTitleFont:14,
@@ -209,21 +213,22 @@ export default class AlertSelected extends Component {
         }
     }
 
-    //绘制标题
+    //render title part
     _renderTitleItem(){
         if(!this.props.mainTitle){
             return null;
         }else {
             return (
                 <TouchableWithoutFeedback>
-                    <View style={[styles.titleContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_titleHeight,borderTopLeftRadius:this.state.borderRadius,borderTopRightRadius:this.state.borderRadius}]}>
-                        <Text style={{color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont}}>{this.props.mainTitle}</Text>
+                    <View style={[styles.titleContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_titleHeight,borderTopLeftRadius:this.state.borderRadius,borderTopRightRadius:this.state.borderRadius,padding:this.state.mainTitlePadding}]}>
+                        <Text style={ {color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont,textAlign: this.state.mainTitleTextAlign,}}>{this.props.mainTitle}</Text>
                     </View>
                 </TouchableWithoutFeedback>
             )
         }
     }
 
+    //render selection items part
     _renderItemsPart(){
 
         var itemsArr = new Array();
@@ -264,6 +269,7 @@ export default class AlertSelected extends Component {
         return itemsArr;
     }
 
+    //render selection seperate line
     _renderItemSeperateLine(show){
         if (show){
             return ( <View style={{width:width - 2*this.state.leftSpace,height: itemSeperateLineHeight, backgroundColor: this.itemSpaceColor}}/>);
@@ -273,7 +279,7 @@ export default class AlertSelected extends Component {
     }
 
 
-    //Render cancel item
+    //render cancel part
     _renderCancelItem(){
         return (
             <View style={[styles.cancelContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_cancelPartHeight}]}>
@@ -395,14 +401,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    // title content background view style
+    //title content background view style
     titleContentViewStyle: {
-        flexDirection: 'row',
-        flexWrap:'wrap',
+
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding:10,
+
     },
 
     // item content background view style
