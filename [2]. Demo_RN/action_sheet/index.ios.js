@@ -20,12 +20,11 @@ export default class action_sheet extends Component {
 
   constructor(props) {
     super(props);
-    this.dialog = ActionSheet;
-    this.showAlertSelected = this.showAlertSelected.bind(this);
+
   }
 
   showAlertSelected(){
-    this.dialog.show();
+    this.actionsheet1.show();
   }
 
   takePhoto(){
@@ -40,25 +39,34 @@ export default class action_sheet extends Component {
 
 
   render() {
+
+
+
+
+
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={()=>this.showAlertSelected()}>
-          <Text style={styles.welcome}>
-            Click here to show action sheet
-          </Text>
+            <Text style={styles.welcome}>
+              Click here to show action sheet
+            </Text>
         </TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.showAlertSelected()}>
+              <Text style={styles.welcome}>
+                  Click here to show action sheet
+              </Text>
+          </TouchableOpacity>
         <ActionSheet
             mainTitle="时代峰峻克鲁塞德时代峰峻克鲁塞德时代峰峻克鲁塞德时代峰峻克鲁塞德"
             itemTitles = {["sdfsdfds","sdfsdfsdf"]}
             borderRadius = {6}
             bottomSpace = {10}
             leftSpace = {6}
+            itemVerticalSpace = {4}
+            titleFontWeight ="bold"
+            contentBackgroundColor = 'yellow'
             mainTitlePadding = {18}
-
-            itemCallbacks={[this.takePhoto]}
-            ref={(dialog)=>{
-              this.dialog = dialog;}
-            }
+            ref={(actionsheet1)=>{this.actionsheet1 = actionsheet1}}
         />
       </View>
     );

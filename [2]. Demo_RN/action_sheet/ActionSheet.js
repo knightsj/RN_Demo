@@ -49,19 +49,31 @@ export default class AlertSelected extends Component {
         hideCancel:PropTypes.bool,
 
 
+        fontWeight:PropTypes.string,
+        titleFontWeight:PropTypes.string,
+        itemFontWeight:PropTypes.string,
+        cancelFontWeight:PropTypes.string,
+
+        //background color
+        contentBackgroundColor:PropTypes.string,
+        titleBackgroundColor:PropTypes.string,
+        itemBackgroundColor:PropTypes.string,
+        cancelBackgroundColor:PropTypes.string,
+
+
         //space color
         itemSpaceColor:PropTypes.string,
         cancelSpaceColor:PropTypes.string,
 
 
         //space distance
+        itemVerticalSpace:PropTypes.number,
         cancelVerticalSpace:PropTypes.number,
         bottomSpace:PropTypes.number,
-        leftSpace:PropTypes.number,
+        sideSpace:PropTypes.number,
 
         //radius
         borderRadius:PropTypes.number,
-        edgeRadius:PropTypes.number,
 
         //opacity
         maskOpacity:PropTypes.number,
@@ -90,15 +102,22 @@ export default class AlertSelected extends Component {
             cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
             cancelHeight:this.props.cancelHeight?this.props.cancelHeight:itemHeight,
 
-            leftSpace:this.props.leftSpace?this.props.leftSpace:0,
+
+
+
+            sideSpace:this.props.sideSpace?this.props.sideSpace:0,
 
             hide: true,
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
 
+            itemVerticalSpace:this.props.itemVerticalSpace?this.props.itemVerticalSpace:itemSeperateLineHeight,
+
             borderRadius:this.props.borderRadius?this.props.borderRadius:0,
 
-            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3
+            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3,
+
+            selectionCallbacks:this.props.selectionCallbacks?this.props.selectionCallbacks:[]
 
         };
 
@@ -110,7 +129,7 @@ export default class AlertSelected extends Component {
         if (!this.props.itemTitles){
             this.real_itemsPartHeight = 0;
         }else {
-            this.real_itemsPartHeight = (this.state.itemHeight + itemSeperateLineHeight) * this.props.itemTitles.length;
+            this.real_itemsPartHeight = (this.state.itemHeight + this.state.itemVerticalSpace) * this.props.itemTitles.length;
         }
 
         //Calculate Title Height
@@ -162,6 +181,60 @@ export default class AlertSelected extends Component {
             this.cancelSpaceColor = 'transparent';
         }else {
             this.cancelSpaceColor = '#e3e3e3';
+        }
+
+        if(this.state.sideSpace > 0){
+            this.contentWidth = width - 2*this.state.sideSpace;
+        }
+
+        //background color
+        if (this.props.contentBackgroundColor){
+            this.titleBackgroundColor = this.props.contentBackgroundColor;
+            this.itemBackgroundColor = this.props.contentBackgroundColor;
+            this.cancelBackgroundColor = this.props.contentBackgroundColor;
+        }else {
+            if (this.props.titleBackgroundColor){
+                this.titleBackgroundColor = this.props.titleBackgroundColor;
+            }else {
+                this.titleBackgroundColor = 'white';
+            }
+
+            if (this.props.itemBackgroundColor){
+                this.itemBackgroundColor = this.props.itemBackgroundColor;
+            }else {
+                this.itemBackgroundColor = 'white';
+            }
+
+            if (this.props.cancelBackgroundColor){
+                this.cancelBackgroundColor = this.props.cancelBackgroundColor;
+            }else {
+                this.cancelBackgroundColor = 'white';
+            }
+        }
+
+        //font weight
+        if (this.props.fontWeight){
+            this.titleFontWeight = this.props.fontWeight;
+            this.itemFontWeight = this.props.fontWeight;
+            this.cancelFontWeight = this.props.fontWeight;
+        }else {
+            if(this.props.titleFontWeight){
+                this.titleFontWeight = this.props.titleFontWeight;
+            }else {
+                this.titleFontWeight = 'normal';
+            }
+
+            if(this.props.itemFontWeight){
+                this.itemFontWeight = this.props.itemFontWeight;
+            }else {
+                this.itemFontWeight = 'normal';
+            }
+
+            if(this.props.cancelFontWeight){
+                this.cancelFontWeight = this.props.cancelFontWeight;
+            }else {
+                this.cancelFontWeight = 'bold';
+            }
         }
 
     }
@@ -220,8 +293,8 @@ export default class AlertSelected extends Component {
         }else {
             return (
                 <TouchableWithoutFeedback>
-                    <View style={[styles.titleContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_titleHeight,borderTopLeftRadius:this.state.borderRadius,borderTopRightRadius:this.state.borderRadius,padding:this.state.mainTitlePadding}]}>
-                        <Text style={ {color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont,textAlign: this.state.mainTitleTextAlign,}}>{this.props.mainTitle}</Text>
+                    <View style={[styles.contentViewStyle,{backgroundColor:this.titleBackgroundColor,width:this.contentWidth,height:this.real_titleHeight,borderTopLeftRadius:this.state.borderRadius,borderTopRightRadius:this.state.borderRadius,padding:this.state.mainTitlePadding}]}>
+                        <Text style={ {color: this.state.mainTitleColor, fontSize: this.state.mainTitleFont, fontWeight:this.titleFontWeight, textAlign: this.state.mainTitleTextAlign,}}>{this.props.mainTitle}</Text>
                     </View>
                 </TouchableWithoutFeedback>
             )
@@ -260,8 +333,8 @@ export default class AlertSelected extends Component {
                     {/* Seperate Line */}
                     {this._renderItemSeperateLine(showItemSeperateLine)}
                     {/* item for selection*/}
-                    <View style={[styles.itemContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
-                        <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
+                    <View style={[styles.contentViewStyle,{backgroundColor:this.itemBackgroundColor,width:this.contentWidth,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
+                        <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont,fontWeight:this.itemFontWeight}]}>{title}</Text>
                     </View>
                 </TouchableOpacity>
             itemsArr.push(itemView);
@@ -272,7 +345,7 @@ export default class AlertSelected extends Component {
     //render selection seperate line
     _renderItemSeperateLine(show){
         if (show){
-            return ( <View style={{width:width - 2*this.state.leftSpace,height: itemSeperateLineHeight, backgroundColor: this.itemSpaceColor}}/>);
+            return ( <View style={{width:this.contentWidth,height: this.state.itemVerticalSpace, backgroundColor: this.itemSpaceColor}}/>);
         }else {
             return null;
         }
@@ -282,21 +355,17 @@ export default class AlertSelected extends Component {
     //render cancel part
     _renderCancelItem(){
         return (
-            <View style={[styles.cancelContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_cancelPartHeight}]}>
                 <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {1}>
                     {/* Seperate Line */}
-                    <View style={{width:width - 2*this.state.leftSpace,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
+                    <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
 
                     {/* Cancel Item */}
-                    <View style={[styles.itemContentViewStyle,{borderRadius:this.state.borderRadius,width:width - 2*this.state.leftSpace,height:this.state.itemHeight}]}>
-                        <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont}]}>{this.state.cancelTitle}</Text>
+                    <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.itemHeight}]}>
+                        <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont,fontWeight:this.cancelFontWeight}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
-            </View>
         );
     }
-
-
 
 
     //animation of showing
@@ -355,7 +424,7 @@ export default class AlertSelected extends Component {
     _select(i) {
         if (!this.state.hide) {
             this._fade();
-            let callback = this.props.itemCallbacks[i];
+            let callback = this.state.selectionCallbacks[i];
             this.chooseTimer = setTimeout(()=>{
                 if(callback){
                     {callback()}
@@ -376,7 +445,7 @@ export default class AlertSelected extends Component {
 
 const styles = StyleSheet.create({
 
-    //whole container
+    //style of whole container
     container: {
         position: "absolute",
         width: width,
@@ -384,7 +453,7 @@ const styles = StyleSheet.create({
         top: top,
     },
 
-    //mask
+    //style of mask
     maskViewStyle: {
         justifyContent: "center",
         backgroundColor: "#000000",
@@ -401,28 +470,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    //title content background view style
-    titleContentViewStyle: {
-
+    //style of content (title & item & cancel)
+    contentViewStyle:{
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
-
     },
 
-    // item content background view style
-    itemContentViewStyle: {
-        backgroundColor:'white',
-        justifyContent: 'center',
-        alignItems:'center'
-
-    },
-
-    // cancel content background view style
-    cancelContentViewStyle:{
-        backgroundColor: 'transparent',
-        justifyContent: 'center',
-        alignItems:'center'
-    },
 
 });
