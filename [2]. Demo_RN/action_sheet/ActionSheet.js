@@ -28,31 +28,40 @@ export default class AlertSelected extends Component {
 
     static propTypes = {
 
+        //title
         mainTitle:PropTypes.string,
         mainTitleFont:PropTypes.number,
         mainTitleColor:PropTypes.string,
         mainTitleHeight:PropTypes.number,
 
+        //items
         itemTitleFont:PropTypes.number,
         itemTitleColor:PropTypes.string,
         itemHeight:PropTypes.number,
 
+        //cancel
         cancelTitle:PropTypes.string,
         cancelTitleFont:PropTypes.number,
         cancelTitleColor:PropTypes.string,
         cancelHeight:PropTypes.number,
         hideCancel:PropTypes.bool,
 
-        borderRadius:PropTypes.number,
-        edgeRadius:PropTypes.number,
+
+        //space color
         itemSpaceColor:PropTypes.string,
         cancelSpaceColor:PropTypes.string,
 
 
+        //space distance
         cancelVerticalSpace:PropTypes.number,
         bottomSpace:PropTypes.number,
         leftSpace:PropTypes.number,
 
+        //radius
+        borderRadius:PropTypes.number,
+        edgeRadius:PropTypes.number,
+
+        //opacity
         maskOpacity:PropTypes.number,
 
 
@@ -63,7 +72,6 @@ export default class AlertSelected extends Component {
         super(props);
         this.state = {
 
-            //About Text ,Color and Fonts
             mainTitleFont:this.props.mainTitleFont?this.props.mainTitleFont:13,
             mainTitleColor:this.props.mainTitleColor?this.props.mainTitleColor:'gray',
             mainTitleHeight:this.props.mainTitleHeight?this.props.mainTitleHeight:titleHeight,
@@ -71,24 +79,20 @@ export default class AlertSelected extends Component {
             itemTitles:this.props.itemTitles?this.props.itemTitles:[],
             itemTitleFont:this.props.itemTitleFont?this.props.itemTitleFont:14,
             itemTitleColor:this.props.itemTitleColor?this.props.itemTitleColor:'black',
+            itemHeight:this.props.itemHeight?this.props.itemHeight:itemHeight,
 
             cancelTitle:this.props.cancelTitle?this.props.cancelTitle:'Cancel',
             cancelTitleColor:this.props.cancelTitleColor?this.props.cancelTitleColor:'red',
             cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
-
-
-
-            leftSpace:this.props.leftSpace?this.props.leftSpace:0,
-            borderRadius:this.props.borderRadius?this.props.borderRadius:0,
-
-            mainTitleHeight:this.props.mainTitleHeight?this.props.mainTitleHeight:titleHeight,
-            itemHeight:this.props.itemHeight?this.props.itemHeight:itemHeight,
             cancelHeight:this.props.cancelHeight?this.props.cancelHeight:itemHeight,
 
-            //About About Animations
+            leftSpace:this.props.leftSpace?this.props.leftSpace:0,
+
             hide: true,
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
+
+            borderRadius:this.props.borderRadius?this.props.borderRadius:0,
 
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3
 
@@ -112,7 +116,7 @@ export default class AlertSelected extends Component {
             this.real_titleHeight = this.state.mainTitleHeight;
         }
 
-
+        //Calculate bottom space and cancel vertical space
         if (this.props.bottomSpace){
 
             this.bottomSpace = this.props.bottomSpace;
@@ -136,6 +140,7 @@ export default class AlertSelected extends Component {
             this.real_cancelPartHeight = this.cancelVerticalSpace + this.state.itemHeight ;
         }
 
+        // total content height
         this.totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.real_cancelPartHeight + this.bottomSpace;
 
 
@@ -146,6 +151,7 @@ export default class AlertSelected extends Component {
             this.itemSpaceColor = '#e3e3e3';
         }
 
+        // cancel space color
         if(this.props.cancelSpaceColor){
             this.cancelSpaceColor =  this.props.cancelSpaceColor;
         }else if(this.props.borderRadius){
@@ -173,11 +179,11 @@ export default class AlertSelected extends Component {
         } else {
             return (
                 <TouchableWithoutFeedback
-                    onPress={()=>this.out()}
+                    onPress={()=>this._fade()}
                     underlayColor={'transparent'}
                 >
                 <View style={[styles.container]}>
-                    <Animated.View style={[styles.maskViewStyle,{        opacity: this.state.maskOpacity}]}></Animated.View>
+                    <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
                     <Animated.View style={[{
                         width: width,
                         height: this.totalHeight,
@@ -192,9 +198,9 @@ export default class AlertSelected extends Component {
                         }]
                     }]}>
                         <View>
-                            {this.renderTitleItem()}
-                            {this.renderItemsPart()}
-                            {this.renderCancelItem()}
+                            {this._renderTitleItem()}
+                            {this._renderItemsPart()}
+                            {this._renderCancelItem()}
                         </View>
                     </Animated.View>
                 </View>
@@ -204,7 +210,7 @@ export default class AlertSelected extends Component {
     }
 
     //绘制标题
-    renderTitleItem(){
+    _renderTitleItem(){
         if(!this.props.mainTitle){
             return null;
         }else {
@@ -218,7 +224,7 @@ export default class AlertSelected extends Component {
         }
     }
 
-    renderItemsPart(){
+    _renderItemsPart(){
 
         var itemsArr = new Array();
 
@@ -245,10 +251,10 @@ export default class AlertSelected extends Component {
 
             let title = this.state.itemTitles[i];
             let itemView =
-                <TouchableOpacity onPress={this.choose.bind(this, i)} key={i} activeOpacity = {1}>
-                    {/*分割线*/}
+                <TouchableOpacity onPress={this._select.bind(this, i)} key={i} activeOpacity = {1}>
+                    {/* Seperate Line */}
                     {this._renderItemSeperateLine(showItemSeperateLine)}
-                    {/*中间的选项*/}
+                    {/* item for selection*/}
                     <View style={[styles.itemContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
                         <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont}]}>{title}</Text>
                     </View>
@@ -267,11 +273,11 @@ export default class AlertSelected extends Component {
     }
 
 
-    //绘制取消按钮
-    renderCancelItem(){
+    //Render cancel item
+    _renderCancelItem(){
         return (
             <View style={[styles.cancelContentViewStyle,{width:width - 2*this.state.leftSpace,height:this.real_cancelPartHeight}]}>
-                <TouchableOpacity onPress={this.cancel.bind(this)} activeOpacity = {1}>
+                <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {1}>
                     {/* Seperate Line */}
                     <View style={{width:width - 2*this.state.leftSpace,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
 
@@ -287,15 +293,15 @@ export default class AlertSelected extends Component {
 
 
 
-    //显示动画
-    in() {
+    //animation of showing
+    _appear() {
         Animated.parallel([
             Animated.timing(
                 this.state.opacity,
                 {
-                    easing: Easing.linear,//一个用于定义曲线的渐变函数
-                    duration: 200,//动画持续的时间（单位是毫秒），默认为200。
-                    toValue: 0.7,//动画的最终值
+                    easing: Easing.linear,
+                    duration: 200,
+                    toValue: 0.7,
                 }
             ),
             Animated.timing(
@@ -309,7 +315,8 @@ export default class AlertSelected extends Component {
         ]).start();
     }
 
-    out() {
+    //animation of fading
+    _fade() {
         Animated.parallel([
             Animated.timing(
                 this.state.opacity,
@@ -330,41 +337,40 @@ export default class AlertSelected extends Component {
         ]).start((finished) => this.setState({hide: true}));
     }
 
-    //取消
-    cancel() {
+    //dismiss ActionSheet
+    _dismiss() {
         if (!this.state.hide) {
-            this.out();
+            this._fade();
         }
 
     }
 
-    //选择
-    choose(i) {
+    //select item
+    _select(i) {
         if (!this.state.hide) {
-            this.out();
+            this._fade();
             let callback = this.props.itemCallbacks[i];
             this.chooseTimer = setTimeout(()=>{
                 if(callback){
                     {callback()}
-                }else {
-                    alert('there is no callback in item line'+i);
                 }
             }, 200);
         }
     }
 
-    /**
-     * 弹出控件，最多支持3个选项(包括取消)
+    /*
+     show ActionSheet
      */
     show() {
         if (this.state.hide) {
-            this.setState({hide: false}, this.in);
+            this.setState({hide: false}, this._appear);
         }
     }
 }
 
 const styles = StyleSheet.create({
 
+    //whole container
     container: {
         position: "absolute",
         width: width,
@@ -372,6 +378,7 @@ const styles = StyleSheet.create({
         top: top,
     },
 
+    //mask
     maskViewStyle: {
         justifyContent: "center",
         backgroundColor: "#000000",
@@ -382,13 +389,13 @@ const styles = StyleSheet.create({
         top: top,
     },
 
-
+    //style of text
     textStyle:{
         textAlign: "center",
         justifyContent: 'center',
     },
 
-    // Title content background view
+    // title content background view style
     titleContentViewStyle: {
         flexDirection: 'row',
         flexWrap:'wrap',
@@ -396,20 +403,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         padding:10,
-        // marginLeft: 10,
-        // marginRight: 10
     },
 
-    // Item content background View
+    // item content background view style
     itemContentViewStyle: {
-        width: width,
         backgroundColor:'white',
         justifyContent: 'center',
         alignItems:'center'
 
     },
 
-    // Cancel content background View
+    // cancel content background view style
     cancelContentViewStyle:{
         backgroundColor: 'transparent',
         justifyContent: 'center',
