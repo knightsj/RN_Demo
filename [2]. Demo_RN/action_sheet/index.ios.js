@@ -50,17 +50,27 @@ export default class action_sheet extends Component {
           }
               break;
           case 5:{
-
+              this.actionsheet5.show();
           }
               break;
-          case 3:{
-              this.actionsheet3.show();
+          case 6:{
+              this.actionsheet6.show();
           }
               break;
-          case 3:{
-              this.actionsheet3.show();
+          case 7:{
+              this.actionsheet7.show();
           }
           break;
+
+          case 8:{
+              this.actionsheet8.show();
+          }
+              break;
+
+          case 9:{
+              this.actionsheet9.show();
+          }
+              break;
       }
 
   }
@@ -113,7 +123,37 @@ export default class action_sheet extends Component {
                       5. 3 selection with title and without cancel
                   </Text>
               </TouchableOpacity>
+          </View>
 
+          <View style={styles.section}>
+              <Text style={styles.title}>
+                  iOS styles:
+              </Text>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(5)}>
+                  <Text style={styles.welcome}>
+                      1. 3 selection without title
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(6)}>
+                  <Text style={styles.welcome}>
+                      2. 3 selection with title(one row)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(7)}>
+                  <Text style={styles.welcome}>
+                      3. 3 selection with title(two rows, testAlign is left)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(8)}>
+                  <Text style={styles.welcome}>
+                      4. 3 selection with title(two rows, testAlign is center)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(9)}>
+                  <Text style={styles.welcome}>
+                      5. 3 selection with title and without cancel
+                  </Text>
+              </TouchableOpacity>
           </View>
 
           <ActionSheet
@@ -142,6 +182,59 @@ export default class action_sheet extends Component {
               hideCancel = {true}
               ref={(actionsheet4)=>{this.actionsheet4 = actionsheet4}}
           />
+
+          {/*iOS style*/}
+          <ActionSheet
+              itemTitles = {["By phone","By message","By email"]}
+              ref={(actionsheet5)=>{this.actionsheet5 = actionsheet5}}
+              bottomSpace = {10}
+              borderRadius = {5}
+              sideSpace = {6}
+              itemTitleColor = '#006FFF'
+              cancelTitleColor = '#006FFF'
+          />
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              ref={(actionsheet6)=>{this.actionsheet6 = actionsheet6}}
+              bottomSpace = {10}
+              borderRadius = {5}
+              sideSpace = {6}
+              itemTitleColor = '#006FFF'
+              cancelTitleColor = '#006FFF'
+          />
+          <ActionSheet
+              mainTitle="Are you sure to contact? Please choose one method to contact"
+              itemTitles = {["By phone","By message","By email"]}
+              ref={(actionsheet7)=>{this.actionsheet7 = actionsheet7}}
+              bottomSpace = {10}
+              borderRadius = {5}
+              sideSpace = {6}
+              itemTitleColor = '#006FFF'
+              cancelTitleColor = '#006FFF'
+          />
+          <ActionSheet
+              mainTitle="Are you sure to contact? Please choose one method to contact"
+              itemTitles = {["By phone","By message","By email"]}
+              mainTitleTextAlign = 'center'
+              ref={(actionsheet8)=>{this.actionsheet8 = actionsheet8}}
+              bottomSpace = {10}
+              borderRadius = {5}
+              sideSpace = {6}
+              itemTitleColor = '#006FFF'
+              cancelTitleColor = '#006FFF'
+          />
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              hideCancel = {true}
+              ref={(actionsheet9)=>{this.actionsheet9 = actionsheet9}}
+              bottomSpace = {10}
+              borderRadius = {5}
+              sideSpace = {6}
+              itemTitleColor = '#006FFF'
+              cancelTitleColor = '#006FFF'
+          />
       </View>
     );
   }
@@ -151,7 +244,6 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
