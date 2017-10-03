@@ -48,7 +48,7 @@ export default class AlertSelected extends Component {
         cancelHeight:PropTypes.number,
         hideCancel:PropTypes.bool,
 
-
+        //font weight
         fontWeight:PropTypes.string,
         titleFontWeight:PropTypes.string,
         itemFontWeight:PropTypes.string,
@@ -185,6 +185,8 @@ export default class AlertSelected extends Component {
 
         if(this.state.sideSpace > 0){
             this.contentWidth = width - 2*this.state.sideSpace;
+        }else {
+            this.contentWidth = width;
         }
 
         //background color
