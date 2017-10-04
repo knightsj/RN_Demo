@@ -71,26 +71,122 @@ export default class action_sheet extends Component {
               this.actionsheet9.show();
           }
               break;
+
+          case 10:{
+              this.actionsheet10.show();
+          }
+              break;
+
+          case 11:{
+              this.actionsheet11.show();
+          }
+              break;
+
+          case 12:{
+              this.actionsheet12.show();
+          }
+              break;
+
+          case 13:{
+              this.actionsheet13.show();
+          }
+              break;
+
+          case 14:{
+              this.actionsheet14.show();
+          }
+              break;
+
+          case 15:{
+              this.actionsheet15.show();
+          }
+              break;
+
+          case 16:{
+              this.actionsheet16.show();
+          }
+              break;
+
+          case 17:{
+              this.actionsheet17.show();
+          }
+              break;
+
+          case 18:{
+              this.actionsheet18.show();
+          }
+              break;
+
+          case 19:{
+              this.actionsheet19.show();
+          }
+              break;
+
+          case 20:{
+              this.actionsheet20.show();
+          }
+              break;
+
+          case 21:{
+              this.actionsheet21.show();
+          }
+              break;
+
+          case 22:{
+              this.actionsheet22.show();
+          }
+              break;
+
+          case 23:{
+              this.actionsheet23.show();
+          }
+              break;
+
+          case 24:{
+              this.actionsheet24.show();
+          }
+              break;
+
+          case 25:{
+              this.actionsheet25.show();
+          }
+              break;
+
+          case 26:{
+              this.actionsheet26.show();
+          }
+              break;
+
+          case 27:{
+              this.actionsheet27.show();
+          }
+              break;
+
+          case 28:{
+              this.actionsheet28.show();
+          }
+              break;
+
       }
 
   }
 
-  takePhoto(){
+  clickedByPhone(){
 
-    alert('take photo');
+    alert('By Phone');
 
   }
 
-  pickMultiple(){
-    alert('pick multiple');
+  clickedByMessage(){
+    alert('By Message');
   }
 
+    clickedByEmail(){
+        alert('By Email');
+    }
 
-  render() {
 
-
-
-
+    render() {
 
     return (
       <View style={styles.container}>
@@ -125,6 +221,7 @@ export default class action_sheet extends Component {
               </TouchableOpacity>
           </View>
 
+
           <View style={styles.section}>
               <Text style={styles.title}>
                   iOS styles:
@@ -156,29 +253,143 @@ export default class action_sheet extends Component {
               </TouchableOpacity>
           </View>
 
+          <View style={styles.section}>
+              <Text style={styles.title}>
+                  Custom styles:
+              </Text>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(10)}>
+                  <Text style={styles.welcome}>
+                      1. custom title (fontSize,color,height)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(11)}>
+                  <Text style={styles.welcome}>
+                      2. custom items (fontSize,color,height)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(12)}>
+                  <Text style={styles.welcome}>
+                      3. custom cancel (fontSize,color,height)
+                  </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(13)}>
+                  <Text style={styles.welcome}>
+                      4. custom all fontWeight(bold)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(14)}>
+                  <Text style={styles.welcome}>
+                      5. custom title fontWeight(bold)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(15)}>
+                  <Text style={styles.welcome}>
+                      6. custom item fontWeight(bold)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(16)}>
+                  <Text style={styles.welcome}>
+                      7. custom cancel fontWeight(normal)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(17)}>
+                  <Text style={styles.welcome}>
+                      8. custom all background color(sky blue)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(18)}>
+                  <Text style={styles.welcome}>
+                      9. custom title background color(sky blue)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(19)}>
+                  <Text style={styles.welcome}>
+                      10. custom item background color(sky blue)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(20)}>
+                  <Text style={styles.welcome}>
+                      11. custom cancel background color(sky blue)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(21)}>
+                  <Text style={styles.welcome}>
+                      12. custom item vertical space(10)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(22)}>
+                  <Text style={styles.welcome}>
+                      13. custom cancel vertical space(10)
+                  </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.showAlertSelected(23)}>
+                  <Text style={styles.welcome}>
+                      14. custom bottom vertical space(10)
+                  </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(24)}>
+                  <Text style={styles.welcome}>
+                      15. custom side space(10)
+                  </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(25)}>
+                  <Text style={styles.welcome}>
+                      16. custom item space color(orange)
+                  </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(26)}>
+                  <Text style={styles.welcome}>
+                      17. custom cancel space color(orange)
+                  </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(27)}>
+                  <Text style={styles.welcome}>
+                      18. custom border radius(8)
+                  </Text>
+              </TouchableOpacity>
+
+
+              <TouchableOpacity onPress={()=>this.showAlertSelected(28)}>
+                  <Text style={styles.welcome}>
+                      19. custom mask opacity(0.9)
+                  </Text>
+              </TouchableOpacity>
+
+          </View>
+
           <ActionSheet
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet0)=>{this.actionsheet0 = actionsheet0}}
           />
           <ActionSheet
             mainTitle="Are you sure to contact?"
             itemTitles = {["By phone","By message","By email"]}
+            selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
             ref={(actionsheet1)=>{this.actionsheet1 = actionsheet1}}
           />
           <ActionSheet
               mainTitle="Are you sure to contact? Please choose one method to contact"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet2)=>{this.actionsheet2 = actionsheet2}}
           />
           <ActionSheet
               mainTitle="Are you sure to contact? Please choose one method to contact"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleTextAlign = 'center'
               ref={(actionsheet3)=>{this.actionsheet3 = actionsheet3}}
           />
           <ActionSheet
               mainTitle="Are you sure to contact?"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               hideCancel = {true}
               ref={(actionsheet4)=>{this.actionsheet4 = actionsheet4}}
           />
@@ -186,6 +397,7 @@ export default class action_sheet extends Component {
           {/*iOS style*/}
           <ActionSheet
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet5)=>{this.actionsheet5 = actionsheet5}}
               bottomSpace = {10}
               borderRadius = {5}
@@ -196,6 +408,7 @@ export default class action_sheet extends Component {
           <ActionSheet
               mainTitle="Are you sure to contact?"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet6)=>{this.actionsheet6 = actionsheet6}}
               bottomSpace = {10}
               borderRadius = {5}
@@ -206,6 +419,7 @@ export default class action_sheet extends Component {
           <ActionSheet
               mainTitle="Are you sure to contact? Please choose one method to contact"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet7)=>{this.actionsheet7 = actionsheet7}}
               bottomSpace = {10}
               borderRadius = {5}
@@ -216,6 +430,7 @@ export default class action_sheet extends Component {
           <ActionSheet
               mainTitle="Are you sure to contact? Please choose one method to contact"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleTextAlign = 'center'
               ref={(actionsheet8)=>{this.actionsheet8 = actionsheet8}}
               bottomSpace = {10}
@@ -227,14 +442,175 @@ export default class action_sheet extends Component {
           <ActionSheet
               mainTitle="Are you sure to contact?"
               itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               hideCancel = {true}
               ref={(actionsheet9)=>{this.actionsheet9 = actionsheet9}}
-              bottomSpace = {10}
+
               borderRadius = {5}
               sideSpace = {6}
               itemTitleColor = '#006FFF'
               cancelTitleColor = '#006FFF'
           />
+
+          {/*Custom Style*/}
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              mainTitleHeight = {60}
+              mainTitleFont = {18}
+              mainTitleColor = 'blue'
+              ref={(actionsheet10)=>{this.actionsheet10 = actionsheet10}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              itemHeight = {60}
+              itemTitleFont = {18}
+              itemTitleColor = 'blue'
+              ref={(actionsheet11)=>{this.actionsheet11 = actionsheet11}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              cancelHeight = {80}
+              cancelTitleFont = {18}
+              cancelTitleColor = 'blue'
+              ref={(actionsheet12)=>{this.actionsheet12 = actionsheet12}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              fontWeight = 'bold'
+              ref={(actionsheet13)=>{this.actionsheet13 = actionsheet13}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              titleFontWeight = 'bold'
+              ref={(actionsheet14)=>{this.actionsheet14 = actionsheet14}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              itemFontWeight = 'bold'
+              ref={(actionsheet15)=>{this.actionsheet15 = actionsheet15}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              cancelFontWeight = 'normal'
+              ref={(actionsheet16)=>{this.actionsheet16 = actionsheet16}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              contentBackgroundColor = '#00C5FF'
+              ref={(actionsheet17)=>{this.actionsheet17 = actionsheet17}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              titleBackgroundColor = '#00C5FF'
+              ref={(actionsheet18)=>{this.actionsheet18 = actionsheet18}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              itemBackgroundColor = '#00C5FF'
+              ref={(actionsheet19)=>{this.actionsheet19 = actionsheet19}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              cancelBackgroundColor = '#00C5FF'
+              ref={(actionsheet20)=>{this.actionsheet20 = actionsheet20}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              itemVerticalSpace = {10}
+              ref={(actionsheet21)=>{this.actionsheet21 = actionsheet21}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              cancelVerticalSpace = {10}
+              ref={(actionsheet22)=>{this.actionsheet22 = actionsheet22}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              bottomSpace = {10}
+              ref={(actionsheet23)=>{this.actionsheet23 = actionsheet23}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              sideSpace = {10}
+              ref={(actionsheet24)=>{this.actionsheet24 = actionsheet24}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              itemSpaceColor = 'orange'
+              ref={(actionsheet25)=>{this.actionsheet25 = actionsheet25}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              cancelSpaceColor = 'orange'
+              ref={(actionsheet26)=>{this.actionsheet26 = actionsheet26}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              borderRadius = {8}
+              ref={(actionsheet27)=>{this.actionsheet27 = actionsheet27}}
+          />
+
+          <ActionSheet
+              mainTitle="Are you sure to contact?"
+              itemTitles = {["By phone","By message","By email"]}
+              selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
+              maskOpacity = {0.9}
+              ref={(actionsheet28)=>{this.actionsheet28 = actionsheet28}}
+          />
+
       </View>
     );
   }
@@ -244,16 +620,18 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        alignItems: 'center',
+
+        alignItems: 'flex-start',
         backgroundColor: '#F5FCFF',
     },
 
     section:{
-        marginTop:30
+        marginTop:26,
+        marginLeft:20,
     },
 
   title: {
-      marginBottom:10,
+      marginBottom:5,
       fontWeight:'bold',
       fontSize:15
 

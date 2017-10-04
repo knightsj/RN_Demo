@@ -103,21 +103,18 @@ export default class AlertSelected extends Component {
             cancelHeight:this.props.cancelHeight?this.props.cancelHeight:itemHeight,
 
 
-
-
             sideSpace:this.props.sideSpace?this.props.sideSpace:0,
-
-            hide: true,
-            offset: new Animated.Value(0),
-            opacity: new Animated.Value(0),
-
             itemVerticalSpace:this.props.itemVerticalSpace?this.props.itemVerticalSpace:itemSeperateLineHeight,
 
             borderRadius:this.props.borderRadius?this.props.borderRadius:0,
 
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3,
 
-            selectionCallbacks:this.props.selectionCallbacks?this.props.selectionCallbacks:[]
+            selectionCallbacks:this.props.selectionCallbacks?this.props.selectionCallbacks:[],
+
+            hide: true,
+            offset: new Animated.Value(0),
+            opacity: new Animated.Value(0),
 
         };
 
@@ -362,7 +359,7 @@ export default class AlertSelected extends Component {
                     <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
 
                     {/* Cancel Item */}
-                    <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.itemHeight}]}>
+                    <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.cancelHeight}]}>
                         <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont,fontWeight:this.cancelFontWeight}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
