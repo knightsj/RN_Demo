@@ -157,7 +157,7 @@ export default class AlertSelected extends Component {
         if (this.props.hideCancel){
             this.real_cancelPartHeight = 0;
         }else {
-            this.real_cancelPartHeight = this.cancelVerticalSpace + this.state.itemHeight ;
+            this.real_cancelPartHeight = this.cancelVerticalSpace + this.state.cancelHeight ;
         }
 
         // total content height
