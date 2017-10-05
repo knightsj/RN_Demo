@@ -20,7 +20,7 @@ const [left, top] = [0, 0];
 
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
-const cancelSeperateLineHeight = 2;
+const cancelSeperateLineHeight = 2.5;
 const titleHeight = 46;
 
 
@@ -60,11 +60,9 @@ export default class AlertSelected extends Component {
         itemBackgroundColor:PropTypes.string,
         cancelBackgroundColor:PropTypes.string,
 
-
         //space color
         itemSpaceColor:PropTypes.string,
         cancelSpaceColor:PropTypes.string,
-
 
         //space distance
         itemVerticalSpace:PropTypes.number,
@@ -107,7 +105,6 @@ export default class AlertSelected extends Component {
             itemVerticalSpace:this.props.itemVerticalSpace?this.props.itemVerticalSpace:itemSeperateLineHeight,
 
             borderRadius:this.props.borderRadius?this.props.borderRadius:0,
-
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3,
 
             selectionCallbacks:this.props.selectionCallbacks?this.props.selectionCallbacks:[],
@@ -416,7 +413,6 @@ export default class AlertSelected extends Component {
         if (!this.state.hide) {
             this._fade();
         }
-
     }
 
     //select item
