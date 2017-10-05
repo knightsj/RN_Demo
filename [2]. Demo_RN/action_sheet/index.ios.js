@@ -399,6 +399,7 @@ export default class action_sheet extends Component {
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet5)=>{this.actionsheet5 = actionsheet5}}
+              contentBackgroundColor = '#EFF0F1'
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -410,6 +411,7 @@ export default class action_sheet extends Component {
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet6)=>{this.actionsheet6 = actionsheet6}}
+              contentBackgroundColor = '#EFF0F1'
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -421,6 +423,7 @@ export default class action_sheet extends Component {
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet7)=>{this.actionsheet7 = actionsheet7}}
+              contentBackgroundColor = '#EFF0F1'
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -433,6 +436,7 @@ export default class action_sheet extends Component {
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleTextAlign = 'center'
               ref={(actionsheet8)=>{this.actionsheet8 = actionsheet8}}
+              contentBackgroundColor = '#EFF0F1'
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -445,7 +449,7 @@ export default class action_sheet extends Component {
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               hideCancel = {true}
               ref={(actionsheet9)=>{this.actionsheet9 = actionsheet9}}
-
+              contentBackgroundColor = '#EFF0F1'
               borderRadius = {5}
               sideSpace = {6}
               itemTitleColor = '#006FFF'

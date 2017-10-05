@@ -11,7 +11,8 @@ import {
     Platform,
     TouchableOpacity,
     TouchableHighlight,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    BackAndroid
 } from 'react-native';
 
 
@@ -118,6 +119,10 @@ export default class AlertSelected extends Component {
     }
 
     componentWillMount() {
+
+       if (Platform.OS === 'android') {
+           BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+       }
 
         //Calculate Items height
         if (!this.props.itemTitles){
@@ -239,6 +244,9 @@ export default class AlertSelected extends Component {
 
     componentWillUnmount() {
         this.chooseTimer && clearTimeout(this.chooseTimer);
+        if (Platform.OS === 'android') {
+            BackAndroid.removeEventListener('hardwareBackPress', this._onBackAndroid);
+        }
     }
 
 
@@ -435,6 +443,10 @@ export default class AlertSelected extends Component {
         if (this.state.hide) {
             this.setState({hide: false}, this._appear);
         }
+    }
+
+    _onBackAndroid(){
+        this._dismiss();
     }
 }
 
