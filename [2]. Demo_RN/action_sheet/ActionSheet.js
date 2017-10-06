@@ -12,7 +12,7 @@ import {
     TouchableOpacity,
     TouchableHighlight,
     TouchableWithoutFeedback,
-    BackAndroid
+    BackHandler
 } from 'react-native';
 
 
@@ -21,7 +21,7 @@ const [left, top] = [0, 0];
 
 const itemHeight = 44;
 const itemSeperateLineHeight = 1;
-const cancelSeperateLineHeight = 2.5;
+const cancelSeperateLineHeight = 3;
 const titleHeight = 46;
 
 
@@ -106,7 +106,7 @@ export default class AlertSelected extends Component {
             itemVerticalSpace:this.props.itemVerticalSpace?this.props.itemVerticalSpace:itemSeperateLineHeight,
 
             borderRadius:this.props.borderRadius?this.props.borderRadius:0,
-            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.3,
+            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.5,
 
             selectionCallbacks:this.props.selectionCallbacks?this.props.selectionCallbacks:[],
 
@@ -121,7 +121,7 @@ export default class AlertSelected extends Component {
     componentWillMount() {
 
        if (Platform.OS === 'android') {
-           BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+           BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
        }
 
         //Calculate Items height
@@ -245,7 +245,7 @@ export default class AlertSelected extends Component {
     componentWillUnmount() {
         this.chooseTimer && clearTimeout(this.chooseTimer);
         if (Platform.OS === 'android') {
-            BackAndroid.removeEventListener('hardwareBackPress', this._onBackAndroid);
+            BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
         }
     }
 
@@ -261,7 +261,6 @@ export default class AlertSelected extends Component {
             return (
                 <TouchableWithoutFeedback
                     onPress={()=>this._fade()}
-                    underlayColor={'transparent'}
                 >
                 <View style={[styles.container]}>
                     <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
@@ -269,7 +268,7 @@ export default class AlertSelected extends Component {
                         width: width,
                         height: this.totalHeight,
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
                     }, {
                         transform: [{
                             translateY: this.state.offset.interpolate({
@@ -278,7 +277,7 @@ export default class AlertSelected extends Component {
                             }),
                         }]
                     }]}>
-                        <View>
+                        <View style={styles.content}>
                             {this._renderTitleItem()}
                             {this._renderItemsPart()}
                             {this._renderCancelItem()}
@@ -333,14 +332,16 @@ export default class AlertSelected extends Component {
 
             let title = this.state.itemTitles[i];
             let itemView =
-                <TouchableOpacity onPress={this._select.bind(this, i)} key={i} activeOpacity = {1}>
+                <View key={i}>
                     {/* Seperate Line */}
                     {this._renderItemSeperateLine(showItemSeperateLine)}
                     {/* item for selection*/}
-                    <View style={[styles.contentViewStyle,{backgroundColor:this.itemBackgroundColor,width:this.contentWidth,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
-                        <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont,fontWeight:this.itemFontWeight}]}>{title}</Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={this._select.bind(this, i)}  activeOpacity = {1}>
+                        <View style={[styles.contentViewStyle,{backgroundColor:this.itemBackgroundColor,width:this.contentWidth,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
+                            <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont,fontWeight:this.itemFontWeight}]}>{title}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             itemsArr.push(itemView);
         }
         return itemsArr;
@@ -359,15 +360,16 @@ export default class AlertSelected extends Component {
     //render cancel part
     _renderCancelItem(){
         return (
-                <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {1}>
-                    {/* Seperate Line */}
-                    <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
-
-                    {/* Cancel Item */}
+          <View style={{width:this.contentWidth,height: this.cancelVerticalSpace + this.state.itemHeight}}>
+              {/* Seperate Line */}
+                <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
+              {/* Cancel Item */}
+                <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {0.8}>
                     <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.cancelHeight}]}>
                         <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont,fontWeight:this.cancelFontWeight}]}>{this.state.cancelTitle}</Text>
                     </View>
                 </TouchableOpacity>
+          </View>
         );
     }
 
@@ -458,6 +460,11 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
         top: top,
+    },
+
+    content:{
+        justifyContent:'center',
+        alignItems: 'center',
     },
 
     //style of mask
