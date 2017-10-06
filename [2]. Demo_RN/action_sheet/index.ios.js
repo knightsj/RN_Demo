@@ -318,6 +318,7 @@ export default class action_sheet extends Component {
                       12. custom item vertical space(10)
                   </Text>
               </TouchableOpacity>
+
               <TouchableOpacity onPress={()=>this.showAlertSelected(22)}>
                   <Text style={styles.welcome}>
                       13. custom cancel vertical space(10)
@@ -359,6 +360,8 @@ export default class action_sheet extends Component {
                       19. custom mask opacity(0.9)
                   </Text>
               </TouchableOpacity>
+
+
 
           </View>
 
@@ -556,6 +559,7 @@ export default class action_sheet extends Component {
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemVerticalSpace = {10}
+              cancelVerticalSpace = {20}
               ref={(actionsheet21)=>{this.actionsheet21 = actionsheet21}}
           />
 
@@ -624,7 +628,6 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-
         alignItems: 'flex-start',
         backgroundColor: '#F5FCFF',
     },
@@ -640,6 +643,10 @@ const styles = StyleSheet.create({
       fontSize:15
 
   },
+
+    welcome:{
+        fontSize:12
+    }
 });
 
 AppRegistry.registerComponent('action_sheet', () => action_sheet);
