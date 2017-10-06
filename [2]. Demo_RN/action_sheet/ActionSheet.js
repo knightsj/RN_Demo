@@ -360,7 +360,7 @@ export default class AlertSelected extends Component {
     //render cancel part
     _renderCancelItem(){
         return (
-          <View style={{width:this.contentWidth,height: this.cancelVerticalSpace + this.state.itemHeight}}>
+          <View style={{width:this.contentWidth,height: this.real_cancelPartHeight}}>
               {/* Seperate Line */}
                 <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
               {/* Cancel Item */}

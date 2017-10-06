@@ -371,26 +371,26 @@ export default class action_sheet extends Component {
               ref={(actionsheet0)=>{this.actionsheet0 = actionsheet0}}
           />
           <ActionSheet
-            mainTitle="Are you sure to contact?"
+            mainTitle="There are three ways to contact."
             itemTitles = {["By phone","By message","By email"]}
             selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
             ref={(actionsheet1)=>{this.actionsheet1 = actionsheet1}}
           />
           <ActionSheet
-              mainTitle="Are you sure to contact? Please choose one method to contact"
+              mainTitle="There are three ways to contact. Please choose one to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet2)=>{this.actionsheet2 = actionsheet2}}
           />
           <ActionSheet
-              mainTitle="Are you sure to contact? Please choose one method to contact"
+              mainTitle="There are three ways to contact. Please choose one to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleTextAlign = 'center'
               ref={(actionsheet3)=>{this.actionsheet3 = actionsheet3}}
           />
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               hideCancel = {true}
@@ -410,7 +410,7 @@ export default class action_sheet extends Component {
               cancelTitleColor = '#006FFF'
           />
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet6)=>{this.actionsheet6 = actionsheet6}}
@@ -422,7 +422,7 @@ export default class action_sheet extends Component {
               cancelTitleColor = '#006FFF'
           />
           <ActionSheet
-              mainTitle="Are you sure to contact? Please choose one method to contact"
+              mainTitle="There are three ways to contact. Please choose one to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet7)=>{this.actionsheet7 = actionsheet7}}
@@ -434,7 +434,7 @@ export default class action_sheet extends Component {
               cancelTitleColor = '#006FFF'
           />
           <ActionSheet
-              mainTitle="Are you sure to contact? Please choose one method to contact"
+              mainTitle="There are three ways to contact. Please choose one to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleTextAlign = 'center'
@@ -447,7 +447,7 @@ export default class action_sheet extends Component {
               cancelTitleColor = '#006FFF'
           />
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               hideCancel = {true}
@@ -461,7 +461,7 @@ export default class action_sheet extends Component {
 
           {/*Custom Style*/}
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               mainTitleHeight = {60}
@@ -471,7 +471,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemHeight = {60}
@@ -481,7 +481,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               cancelHeight = {80}
@@ -491,7 +491,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               fontWeight = 'bold'
@@ -499,7 +499,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               titleFontWeight = 'bold'
@@ -507,7 +507,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemFontWeight = 'bold'
@@ -515,7 +515,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               cancelFontWeight = 'normal'
@@ -523,7 +523,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               contentBackgroundColor = '#00C5FF'
@@ -531,7 +531,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               titleBackgroundColor = '#00C5FF'
@@ -539,7 +539,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemBackgroundColor = '#00C5FF'
@@ -547,7 +547,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               cancelBackgroundColor = '#00C5FF'
@@ -555,7 +555,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemVerticalSpace = {10}
@@ -564,7 +564,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               cancelVerticalSpace = {10}
@@ -572,7 +572,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               bottomSpace = {10}
@@ -580,7 +580,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               sideSpace = {10}
@@ -588,7 +588,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemSpaceColor = 'orange'
@@ -596,7 +596,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               cancelSpaceColor = 'orange'
@@ -604,7 +604,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               borderRadius = {8}
@@ -612,7 +612,7 @@ export default class action_sheet extends Component {
           />
 
           <ActionSheet
-              mainTitle="Are you sure to contact?"
+              mainTitle="There are three ways to contact."
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               maskOpacity = {0.9}
