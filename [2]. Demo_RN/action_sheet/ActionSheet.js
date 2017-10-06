@@ -101,9 +101,10 @@ export default class AlertSelected extends Component {
             cancelTitleFont:this.props.cancelTitleFont?this.props.cancelTitleFont:15,
             cancelHeight:this.props.cancelHeight?this.props.cancelHeight:itemHeight,
 
-
             sideSpace:this.props.sideSpace?this.props.sideSpace:0,
             itemVerticalSpace:this.props.itemVerticalSpace?this.props.itemVerticalSpace:itemSeperateLineHeight,
+            cancelVerticalSpace:this.props.cancelVerticalSpace?this.props.cancelVerticalSpace:cancelSeperateLineHeight,
+            bottomSpace:this.props.bottomSpace?this.props.bottomSpace:0,
 
             borderRadius:this.props.borderRadius?this.props.borderRadius:0,
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.5,
@@ -138,32 +139,15 @@ export default class AlertSelected extends Component {
             this.real_titleHeight = this.state.mainTitleHeight;
         }
 
-        //Calculate bottom space and cancel vertical space
-        if (this.props.bottomSpace){
-
-            this.bottomSpace = this.props.bottomSpace;
-            this.cancelVerticalSpace =  this.props.bottomSpace;
-
-        }else {
-
-            this.bottomSpace = 0;
-
-            if (this.props.cancelVerticalSpace){
-                this.cancelVerticalSpace = this.props.cancelVerticalSpace;
-            }else {
-                this.cancelVerticalSpace = cancelSeperateLineHeight;
-            }
-        }
-
         //Calculate Cancel part height
         if (this.props.hideCancel){
             this.real_cancelPartHeight = 0;
         }else {
-            this.real_cancelPartHeight = this.cancelVerticalSpace + this.state.cancelHeight ;
+            this.real_cancelPartHeight = this.state.cancelVerticalSpace + this.state.cancelHeight;
         }
 
         // total content height
-        this.totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.real_cancelPartHeight + this.bottomSpace;
+        this.totalHeight = this.real_titleHeight +  this.real_itemsPartHeight + this.real_cancelPartHeight + this.state.bottomSpace;
 
 
         //verticalSpaceColor
@@ -268,7 +252,7 @@ export default class AlertSelected extends Component {
                         width: width,
                         height: this.totalHeight,
                         alignItems: "center",
-                        justifyContent: "center",
+                        justifyContent: "space-between",
                     }, {
                         transform: [{
                             translateY: this.state.offset.interpolate({
@@ -277,11 +261,13 @@ export default class AlertSelected extends Component {
                             }),
                         }]
                     }]}>
-                        <View style={styles.content}>
+                        <View>
                             {this._renderTitleItem()}
                             {this._renderItemsPart()}
                             {this._renderCancelItem()}
                         </View>
+
+
                     </Animated.View>
                 </View>
                 </TouchableWithoutFeedback>
@@ -362,7 +348,7 @@ export default class AlertSelected extends Component {
         return (
           <View style={{width:this.contentWidth,height: this.real_cancelPartHeight}}>
               {/* Seperate Line */}
-                <View style={{width:this.contentWidth,height: this.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
+                <View style={{width:this.contentWidth,height: this.state.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
               {/* Cancel Item */}
                 <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {0.8}>
                     <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.cancelHeight}]}>
@@ -460,12 +446,9 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
         top: top,
+        bottom:0,
     },
 
-    content:{
-        justifyContent:'center',
-        alignItems: 'center',
-    },
 
     //style of mask
     maskViewStyle: {
@@ -476,7 +459,10 @@ const styles = StyleSheet.create({
         height: height,
         left: left,
         top: top,
+        bottom:0,
     },
+
+
 
     //style of text
     textStyle:{

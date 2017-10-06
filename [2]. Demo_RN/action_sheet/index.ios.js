@@ -403,6 +403,7 @@ export default class action_sheet extends Component {
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet5)=>{this.actionsheet5 = actionsheet5}}
               contentBackgroundColor = '#EFF0F1'
+              cancelVerticalSpace = {10}
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -415,6 +416,7 @@ export default class action_sheet extends Component {
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet6)=>{this.actionsheet6 = actionsheet6}}
               contentBackgroundColor = '#EFF0F1'
+              cancelVerticalSpace = {10}
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -427,6 +429,7 @@ export default class action_sheet extends Component {
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               ref={(actionsheet7)=>{this.actionsheet7 = actionsheet7}}
               contentBackgroundColor = '#EFF0F1'
+              cancelVerticalSpace = {10}
               bottomSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
@@ -441,6 +444,7 @@ export default class action_sheet extends Component {
               ref={(actionsheet8)=>{this.actionsheet8 = actionsheet8}}
               contentBackgroundColor = '#EFF0F1'
               bottomSpace = {10}
+              cancelVerticalSpace = {10}
               borderRadius = {5}
               sideSpace = {6}
               itemTitleColor = '#006FFF'
@@ -559,7 +563,6 @@ export default class action_sheet extends Component {
               itemTitles = {["By phone","By message","By email"]}
               selectionCallbacks = {[this.clickedByPhone,this.clickedByMessage,this.clickedByEmail]}
               itemVerticalSpace = {10}
-              cancelVerticalSpace = {20}
               ref={(actionsheet21)=>{this.actionsheet21 = actionsheet21}}
           />
 
