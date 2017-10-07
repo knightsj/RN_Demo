@@ -20,21 +20,29 @@ const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
 
 const itemHeight = 44;
+const titleHeight = 46;
+
 const itemSeperateLineHeight = 1;
 const cancelSeperateLineHeight = 3;
-const titleHeight = 46;
+
 
 
 export default class AlertSelected extends Component {
 
     static propTypes = {
 
+        //selection items title
+        itemTitles:PropTypes.array,
+
+        //selection items callback
+        selectionCallbacks:PropTypes.array,
+
         //title
         mainTitle:PropTypes.string,
         mainTitleFont:PropTypes.number,
         mainTitleColor:PropTypes.string,
         mainTitleHeight:PropTypes.number,
-        mainTitleTextAlign:PropTypes.string,
+        mainTitleTextAlign:PropTypes.oneOf(['center', 'left']),
         mainTitlePadding:PropTypes.number,
 
         //items
@@ -322,7 +330,7 @@ export default class AlertSelected extends Component {
                     {/* Seperate Line */}
                     {this._renderItemSeperateLine(showItemSeperateLine)}
                     {/* item for selection*/}
-                    <TouchableOpacity onPress={this._select.bind(this, i)}  activeOpacity = {1}>
+                    <TouchableOpacity onPress={this._select.bind(this, i)}  activeOpacity = {0.9}>
                         <View style={[styles.contentViewStyle,{backgroundColor:this.itemBackgroundColor,width:this.contentWidth,height:this.state.itemHeight,borderTopLeftRadius:topRadius,borderTopRightRadius:topRadius,borderBottomLeftRadius:bottomRadius,borderBottomRightRadius:bottomRadius}]} key={i}>
                             <Text style={[styles.textStyle, {color: this.state.itemTitleColor, fontSize: this.state.itemTitleFont,fontWeight:this.itemFontWeight}]}>{title}</Text>
                         </View>
@@ -350,7 +358,7 @@ export default class AlertSelected extends Component {
               {/* Seperate Line */}
                 <View style={{width:this.contentWidth,height: this.state.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
               {/* Cancel Item */}
-                <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {0.8}>
+                <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {0.9}>
                     <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.cancelHeight}]}>
                         <Text style={[styles.textStyle,{color:this.state.cancelTitleColor,fontSize:this.state.cancelTitleFont,fontWeight:this.cancelFontWeight}]}>{this.state.cancelTitle}</Text>
                     </View>
@@ -446,7 +454,6 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
         top: top,
-        bottom:0,
     },
 
 
@@ -459,10 +466,7 @@ const styles = StyleSheet.create({
         height: height,
         left: left,
         top: top,
-        bottom:0,
     },
-
-
 
     //style of text
     textStyle:{
