@@ -353,10 +353,17 @@ export default class AlertSelected extends Component {
 
     //render cancel part
     _renderCancelItem(){
+
+        var showCancelSeperateLine = true;
+
+        if( (!this.props.mainTitle) && (this.state.itemTitles.length === 0)){
+            showCancelSeperateLine = false;
+        }
+
         return (
           <View style={{width:this.contentWidth,height: this.real_cancelPartHeight}}>
               {/* Seperate Line */}
-                <View style={{width:this.contentWidth,height: this.state.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>
+              {this._renderCancelSeperateLine(showCancelSeperateLine)}
               {/* Cancel Item */}
                 <TouchableOpacity onPress={this._dismiss.bind(this)} activeOpacity = {0.9}>
                     <View style={[styles.contentViewStyle,{backgroundColor:this.cancelBackgroundColor,borderRadius:this.state.borderRadius,width:this.contentWidth,height:this.state.cancelHeight}]}>
@@ -365,6 +372,14 @@ export default class AlertSelected extends Component {
                 </TouchableOpacity>
           </View>
         );
+    }
+
+    _renderCancelSeperateLine(show){
+        if (show){
+            return ( <View style={{width:this.contentWidth,height: this.state.cancelVerticalSpace, backgroundColor: this.cancelSpaceColor}}/>);
+        }else {
+            return null;
+        }
     }
 
 
