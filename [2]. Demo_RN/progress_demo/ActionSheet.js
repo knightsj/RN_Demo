@@ -27,8 +27,14 @@ export default class ActionSheet extends Component {
     static propTypes = {
         //title
         loadingText:PropTypes.string,
+
         finishText:PropTypes.string,
         finishImage:PropTypes.string,
+
+        failedText:PropTypes.string,
+        failedImage:PropTypes.string,
+
+        failedDuration:PropTypes.number,
     }
 
     constructor(props) {
@@ -41,7 +47,7 @@ export default class ActionSheet extends Component {
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
             animating:true,
-            favoriteIcon:this.props.finishImage?require('./img/progress@3x.png'):require('./img/progress@3x.png')
+            // favoriteIcon:this.props.finishImage?require('./img/timg.jpg'):require('./img/timg.jpg')
 
         };
 
@@ -55,7 +61,7 @@ export default class ActionSheet extends Component {
         //     this.finishImagePath = '';
         // }
 
-        this.icon = this.props.finishImage?require('./img/progress@2x.png'):require('./img/progress@2x.png');
+        // this.icon = this.props.finishImage?require('./img/progress@2x.png'):require('./img/progress@2x.png');
     }
 
 
@@ -84,7 +90,7 @@ export default class ActionSheet extends Component {
                 size="large"/>
 
         } else {
-            return <Image source={require("./img/progress.png")}></Image>
+            return <Image source={require('./img/progress.png')}/>
         }
     }
 
