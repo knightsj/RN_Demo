@@ -22,7 +22,7 @@ const [left, top] = [0, 0];
 
 
 
-export default class Progress extends Component {
+export default class ProgressComponent extends Component {
 
     static propTypes = {
         //title

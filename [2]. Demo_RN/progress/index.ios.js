@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 
 
-import Progress from './Progress'
+import ProgressComponent from './ProgressComponent'
 
 
 export default class Demo extends Component {
@@ -59,7 +59,7 @@ export default class Demo extends Component {
                 </View>
 
 
-                <Progress
+                <ProgressComponent
                     loadingText = "正在清理缓存..."
                     finishText  = "缓存已清除"
                     finishImagePath = './img/progress@2x.png'
