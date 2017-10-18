@@ -12,7 +12,6 @@ import {
     TouchableOpacity,
     TouchableHighlight,
     TouchableWithoutFeedback,
-    BackHandler,
     ActivityIndicator
 } from 'react-native';
 
@@ -22,7 +21,7 @@ const [left, top] = [0, 0];
 
 
 
-export default class ProgressComponent extends Component {
+export default class Progress extends Component {
 
     static propTypes = {
         //title
@@ -49,16 +48,21 @@ export default class ProgressComponent extends Component {
             animating:true,
 
             finishDuration:this.props.finishDuration?this.props.finishDuration * 1000:500,
-            finishImagePath:this.props.finishImage?require(this.props.finishImage):require(''),
-            endState:null,
 
-            // favoriteIcon:this.props.finishImage?require('./img/timg.jpg'):require('./img/timg.jpg')
+
+
+            // finishImagePath:this.props.finishImage?require('../img/progress@2x.png'):require('../img/progress@2x.png')
 
         };
+
+
 
     }
 
     componentWillMount() {
+
+        this.progressState = 0;
+
         // let path = this.props.finishImage;
         // if (this.props.finishImage){
         //     this.finishImagePath = require(path);
@@ -69,10 +73,6 @@ export default class ProgressComponent extends Component {
         // this.icon = this.props.finishImage?require('./img/progress@2x.png'):require('./img/progress@2x.png');
     }
 
-    componentDidMount() {
-
-    }
-
 
     componentWillUnmount() {
         this.finishTimer && clearTimeout(this.finishTimer);
@@ -81,45 +81,48 @@ export default class ProgressComponent extends Component {
 
     _indicatorText(){
 
-        if(this.state.animating){
+        if( this.progressState === 0){
+
             return this.props.loadingText;
-        }else {
 
-            //End
-            if (this.state.endState === 'succeed') {
-                return this.props.finishText;
+        }else if (this.progressState === 1) {
 
-            } else if (this.state.endState === 'failed') {
-                return this.props.failedText;
-            } else {
-                return null;
-            }
+            return this.props.finishText;
+
+        } else if (this.progressState === 2) {
+
+            return this.props.failedText;
+
+        } else {
+
+            return null;
+
         }
     }
 
 
     _indicatorView() {
 
-        if (this.state.animating) {
+        if( this.progressState === 0){
 
             return <ActivityIndicator
-                animating={this.state.animating}
+                animating={true}
                 style={[styles.centering, {height: 76}]}
                 size="large"/>
 
+        }else if (this.progressState === 1) {
+
+            return <Image source={require('../img/progress@2x.png')}
+                          style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+
+        } else if (this.progressState === 2) {
+
+            return <Image source={require('../img/progress@2x.png')}
+                          style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+
         } else {
 
-            //End
-            if (this.state.endState === 'succeed') {
-                return <Image source={this.state.finishImagePath}
-                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
-
-            } else if (this.state.endState === 'failed') {
-                return <Image source={this.state.finishImagePath}
-                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
-            } else {
-                return null;
-            }
+            return null;
 
         }
 
@@ -211,16 +214,38 @@ export default class ProgressComponent extends Component {
     finish(){
         if (!this.state.hide) {
 
+            this.progressState = 1;
             this.setState({animating:false});
 
             this.finishTimer = setTimeout(
                 () => {
                     this._fade();
+                    this.progressState = 0;
                 },
                 this.state.finishDuration
             );
 
         }
+
+
+    }
+
+    failed(){
+        if (!this.state.hide) {
+
+            this.progressState = 2;
+            this.setState({animating:false});
+
+            this.finishTimer = setTimeout(
+                () => {
+                    this._fade();
+                    this.progressState = 0;
+                },
+                this.state.finishDuration
+            );
+
+        }
+
     }
 }
 

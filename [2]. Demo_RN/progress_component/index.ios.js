@@ -9,90 +9,48 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View,
-    TouchableOpacity,
-    Platform,
-    StatusBar,
+    View
 } from 'react-native';
 
+import Progress from './ProgressHUD'
 
-import Progress from './ProgressComponent'
-
-
-export default class Demo extends Component {
-
-  constructor(props) {
-    super(props);
-
-  }
-
-  showActionSheet(type){
-    switch (type){
-
-      case 0:{
-        this.actionsheet0.show();
-      }
-        break;
-
-    }
-
-  }
-
-
+export default class demo_new extends Component {
   render() {
-
-    var hideStatusBar = Platform.OS === 'ios' ? false : true;
-    // let icon  = ;
-
     return (
         <View style={styles.container}>
-          <StatusBar hidden={hideStatusBar} />
-          <View style={styles.section}>
-            <Text style={styles.title}>
-              default styles:
-            </Text>
-            <TouchableOpacity onPress={()=>this.showActionSheet(0)}>
-              <Text style={styles.welcome}>
-                1. 3 selection without title
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-
-          <Progress
-              loadingText = "正在清理缓存..."
-              finishText  = "缓存已清除"
-              finishDuration = {0.5}
-              ref={(actionsheet0)=>{this.actionsheet0 = actionsheet0}}
-          />
-
+          <Text style={styles.welcome}>
+            Welcome to React Native!
+          </Text>
+          <Text style={styles.instructions}>
+            To get started, edit index.android.js
+          </Text>
+          <Text style={styles.instructions}>
+            Double tap R on your keyboard to reload,{'\n'}
+            Shake or press menu button for dev menu
+          </Text>
+          <Progress/>
         </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-
-  section:{
-    marginTop:Platform.OS === 'ios' ? 24 : 20,
-    marginLeft:20,
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-
-  title: {
-    marginBottom:Platform.OS === 'ios' ? 5 : 2,
-    fontWeight:'bold',
-    fontSize:Platform.OS === 'ios' ? 15 : 14,
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
   },
-
-  welcome:{
-    fontSize:12
-  }
 });
 
-AppRegistry.registerComponent('progress', () => Demo);
+AppRegistry.registerComponent('demo_new', () => demo_new);
