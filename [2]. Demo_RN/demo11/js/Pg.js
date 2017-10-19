@@ -138,7 +138,6 @@ export default class Progress extends Component {
                                 {this._indicatorView()}
                                 <Text style={styles.loadingTextStyle}>{this._indicatorText()}</Text>
                             </View>
-
                         </View>
                     </View>
             );
@@ -201,7 +200,17 @@ export default class Progress extends Component {
         }
     }
 
+
     finish(){
+        if (!this.state.hide) {
+
+            this.setState({hide:true});
+            this.progressState = 0;
+        }
+    }
+
+
+    succeed(){
         if (!this.state.hide) {
 
             this.progressState = 1;
