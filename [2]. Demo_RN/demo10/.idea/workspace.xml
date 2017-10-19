@@ -4,9 +4,9 @@
     <list default="true" id="178add47-ae5b-4d9c-81e5-357b07a4f049" name="Default" comment="" />
     <ignored path="demo10.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/.tmp/" />
-    <ignored path="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/temp/" />
-    <ignored path="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/tmp/" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +27,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/index.ios.js" />
+        <option value="$PROJECT_DIR$/index.ios.js" />
       </list>
     </option>
   </component>
@@ -69,7 +69,14 @@
     </navigator>
     <panes>
       <pane id="ProjectPane">
-        <subPane />
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo10" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
       </pane>
       <pane id="Scope" />
       <pane id="Scratches" />
@@ -78,7 +85,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demo11" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
@@ -86,7 +93,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/image" />
+      <recent name="$PROJECT_DIR$/image" />
     </key>
   </component>
   <component name="RunManager">
@@ -194,7 +201,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Documents/MyGithubProjects/RN_Demo/[2]. Demo_RN/demo10/index.ios.js">
+    <entry file="file://$PROJECT_DIR$/index.ios.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />

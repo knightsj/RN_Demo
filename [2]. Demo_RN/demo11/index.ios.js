@@ -36,20 +36,18 @@ export default class demo11 extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.section}>
-                    <Text style={styles.title}>
-                        default styles:
-                    </Text>
                     <TouchableOpacity onPress={()=>this.showActionSheet(0)}>
                         <Text style={styles.welcome}>
-                            1. 3 selection without title
+                            显示 ProgressHUD
                         </Text>
                     </TouchableOpacity>
                 </View>
 
 
                 <Progress
-                    loadingText = "正在清理缓存..."
+                    loadingText = "清理缓存中..."
                     finishText  = "缓存已清除"
+                    failedText =  "缓存清理失败"
                     finishDuration = {0.5}
                     ref={(actionsheet0)=>{this.actionsheet0 = actionsheet0}}
                 />

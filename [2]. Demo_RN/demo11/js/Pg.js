@@ -51,7 +51,6 @@ export default class Progress extends Component {
             animating:true,
 
             finishDuration:this.props.finishDuration?this.props.finishDuration * 1000:500,
-            // finishImagePath:this.props.finishImage?require('../res/img/pp.png'):require('../res/img/pp.png')
 
         };
 
@@ -63,14 +62,6 @@ export default class Progress extends Component {
 
         this.progressState = 0;
 
-        // let path = this.props.finishImage;
-        // if (this.props.finishImage){
-        //     this.finishImagePath = require(path);
-        // }else {
-        //     this.finishImagePath = '';
-        // }
-
-        // this.icon = this.props.finishImage?require('./img/progress@2x.png'):require('./img/progress@2x.png');
     }
 
 
@@ -112,15 +103,16 @@ export default class Progress extends Component {
 
         }else if (this.progressState === 1) {
 
-            var icon = this.props.finishImage?{uri:'progress'}:{uri:'progress'};
+            var icon = this.props.finishImage?{uri:this.props.finishImage}:{uri:'progress'};
             return <Image source={icon}
                           style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
 
         } else if (this.progressState === 2) {
 
-            return null;
-            // return <Image source={require('../img/progress@2x.png')}
-            //               style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+
+            var icon = this.props.failedImage?{uri:this.props.failedImage}:{uri:'progress_failed'};
+            return <Image source={icon}
+                          style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
 
         } else {
 
@@ -139,9 +131,6 @@ export default class Progress extends Component {
 
         } else {
             return (
-                <TouchableWithoutFeedback
-                    onPress={()=>this.finish()}
-                >
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
@@ -152,7 +141,6 @@ export default class Progress extends Component {
 
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
             );
         }
     }
