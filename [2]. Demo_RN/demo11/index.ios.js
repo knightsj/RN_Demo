@@ -15,41 +15,29 @@ import {
 
 } from 'react-native';
 
-import Progress from './js/Pg'
+import Progress from './js/Progress'
 
 export default class demo11 extends Component {
-
-    showActionSheet(type){
-        switch (type){
-
-            case 0:{
-                this.actionsheet0.show();
-            }
-                break;
-
-        }
-
-    }
 
     render() {
 
         return (
             <View style={styles.container}>
-                <View style={styles.section}>
-                    <TouchableOpacity onPress={()=>this.showActionSheet(0)}>
-                        <Text style={styles.welcome}>
-                            显示 ProgressHUD
-                        </Text>
-                    </TouchableOpacity>
-                </View>
 
+                <TouchableOpacity onPress={()=>this.progress.show()}>
+                    <Text style={styles.welcome}>
+                        显示 ProgressHUD
+                    </Text>
+                </TouchableOpacity>
 
                 <Progress
-                    loadingText = "清理缓存中..."
-                    finishText  = "缓存已清除"
-                    failedText =  "缓存清理失败"
-                    finishDuration = {0.5}
-                    ref={(actionsheet0)=>{this.actionsheet0 = actionsheet0}}
+                    loadingText  = "清理缓存中..."      //加载中的文案
+                    succeedText  = "缓存已清除"         //成功的文案
+                    succeedImage = "progress_succeed" //成功的图片
+                    failedText   =  "清理缓存失败"      //失败的文案
+                    failedImage  = "progress_failed"  //失败的图片
+                    finishDuration = {0.8}            //消失时间
+                    ref={(progress)=>{this.progress = progress}}
                 />
 
             </View>
@@ -60,14 +48,14 @@ export default class demo11 extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    marginTop: 100,
   },
   instructions: {
     textAlign: 'center',

@@ -1,3 +1,6 @@
+/**
+ * Created by SunShijie on 2017/10/18.
+ */
 
 import React, {Component, PropTypes} from 'react';
 import {
@@ -8,11 +11,7 @@ import {
     Animated,
     Easing,
     Dimensions,
-    Platform,
-    TouchableOpacity,
-    TouchableHighlight,
-    TouchableWithoutFeedback,
-    ActivityIndicator
+    ActivityIndicator,
 } from 'react-native';
 
 
@@ -24,16 +23,22 @@ const [left, top] = [0, 0];
 export default class Progress extends Component {
 
     static propTypes = {
-        //title
+
+        //正在加载中的文字
         loadingText:PropTypes.string,
 
-        finishText:PropTypes.string,
-        finishImage:PropTypes.string,
-        finishDuration:PropTypes.number,
+        //成功回调的文字
+        succeedText:PropTypes.string,
+        //成功回调的图片路径
+        succeedImage:PropTypes.string,
 
+        //失败回调的文字
         failedText:PropTypes.string,
+        //失败回调的图片路径
         failedImage:PropTypes.string,
 
+        //回调后距离progress消失的时间间隔，单位为秒
+        dismissDuration:PropTypes.number,
     }
 
     constructor(props) {
@@ -41,33 +46,21 @@ export default class Progress extends Component {
         super(props);
         this.state = {
 
-            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.1,
             hide: true,
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
-            animating:true,
 
-            finishDuration:this.props.finishDuration?this.props.finishDuration * 1000:500,
-            // finishImagePath:this.props.finishImage?require('../res/img/pp.png'):require('../res/img/pp.png')
+            animating:true,
+            maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.1,
+            dismissDuration:this.props.dismissDuration?this.props.dismissDuration * 1000:500,
 
         };
-
-
-
     }
 
     componentWillMount() {
 
         this.progressState = 0;
 
-        // let path = this.props.finishImage;
-        // if (this.props.finishImage){
-        //     this.finishImagePath = require(path);
-        // }else {
-        //     this.finishImagePath = '';
-        // }
-
-        // this.icon = this.props.finishImage?require('./img/progress@2x.png'):require('./img/progress@2x.png');
     }
 
 
@@ -84,7 +77,7 @@ export default class Progress extends Component {
 
         }else if (this.progressState === 1) {
 
-            return this.props.finishText;
+            return this.props.succeedText;
 
         } else if (this.progressState === 2) {
 
@@ -109,15 +102,23 @@ export default class Progress extends Component {
 
         }else if (this.progressState === 1) {
 
-            var icon = this.props.finishImage?require('../res/img/pp.png'):require('../res/img/pp.png');
-            return <Image source={icon}
-                          style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+            if (this.props.succeedImage){
+                return <Image source={{uri:this.props.succeedImage}}
+                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+            }else {
+                return null;
+            }
+
 
         } else if (this.progressState === 2) {
 
-            return null;
-            // return <Image source={require('../img/progress@2x.png')}
-            //               style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+
+            if (this.props.failedImage){
+                return <Image source={{uri:this.props.failedImage}}
+                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+            }else {
+                return null;
+            }
 
         } else {
 
@@ -136,9 +137,6 @@ export default class Progress extends Component {
 
         } else {
             return (
-                <TouchableWithoutFeedback
-                    onPress={()=>this.finish()}
-                >
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
@@ -146,10 +144,8 @@ export default class Progress extends Component {
                                 {this._indicatorView()}
                                 <Text style={styles.loadingTextStyle}>{this._indicatorText()}</Text>
                             </View>
-
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
             );
         }
     }
@@ -201,16 +197,24 @@ export default class Progress extends Component {
         ]).start((finished) => this.setState({hide: true}));
     }
 
-    /*
-     show ActionSheet
-     */
+    //显示Progress
     show() {
         if (this.state.hide) {
             this.setState({hide: false}, this._appear);
         }
     }
 
+
     finish(){
+        if (!this.state.hide) {
+
+            this.setState({hide:true});
+            this.progressState = 0;
+        }
+    }
+
+
+    succeed(){
         if (!this.state.hide) {
 
             this.progressState = 1;
@@ -221,7 +225,7 @@ export default class Progress extends Component {
                     this._fade();
                     this.progressState = 0;
                 },
-                this.state.finishDuration
+                this.state.dismissDuration
             );
 
         }
@@ -240,7 +244,7 @@ export default class Progress extends Component {
                     this._fade();
                     this.progressState = 0;
                 },
-                this.state.finishDuration
+                this.state.dismissDuration
             );
 
         }
