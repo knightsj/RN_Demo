@@ -108,7 +108,7 @@ RCT_EXPORT_METHOD(calculateCacheSizeWithCompletionBlock:(RCTResponseSenderBlock)
     }
     if (callback) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        callback(@[totalSize]);
+        callback(@[[NSNumber numberWithInteger:totalSize]]);
       });
     }
   });

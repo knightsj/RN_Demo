@@ -8,6 +8,7 @@
 
 #import "SkinManager.h"
 #import "ZipArchive.h"
+#import "SkinUtils.h"
 
 
 #if __has_include(<AFNetworking/AFNetworking.h>)
@@ -42,11 +43,11 @@
   return _manager;
 }
 
-- (void)downloadZipAndUnachiveSkin:(NSString *)skin
-                               url:(NSString *)url
-                           success:(SkinZipDownloadSuccess)successBlock
-                          progress:(SkinZipDownloadProgress)progressBlock
-                            falure:(SkinZipDownloadFailure)failureBlock{
+- (void)downloadSkin:(NSString *)skinName
+                 url:(NSString *)url
+             success:(SkinZipDownloadSuccess)successBlock
+            progress:(SkinZipDownloadProgress)progressBlock
+              falure:(SkinZipDownloadFailure)failureBlock{
 
   //download url
   NSURL *download_url = [NSURL URLWithString:url];
@@ -59,10 +60,11 @@
   //unachive folder url
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-  NSString *folder_path = [documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"skin/%@",skin]];
+  NSString *folder_path = [documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"skin/%@",skinName]];
   
   
-  SKLog(@"======= zip包即将下载。\nskin名称：%@ \n下载url：%@ \nzip包下载目标地址：%@",skin,url,zip_path);
+  SKLog(@"======= zip包即将下载。\nskin名称：%@ \n下载url：%@ \nzip包下载目标地址：%@",skinName,url,zip_path);
+  
   //默认配置
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   
@@ -76,7 +78,7 @@
     
     // 下载进度
     if (progressBlock) {
-          SKLog(@"======= zip包正在下载。\n进度：%@ \nskin名称：%@ \nzip包下载目标地址：%@",downloadProgress, skin,zip_path);
+          SKLog(@"======= zip包正在下载。\n进度：%@ \nskin名称：%@ \nzip包下载目标地址：%@",downloadProgress, skinName,zip_path);
           progressBlock(downloadProgress);
     }
     
@@ -90,27 +92,56 @@
     //设置下载完成操作
     // filePath就是你下载文件的位置，你可以解压，也可以直接拿来使用
     NSString *zip_path = [filePath path];// 将NSURL转成NSString
-    SKLog(@"======= zip包下载完成，还未解压。\nskin名称：%@ \nzip包地址：%@",skin,zip_path);
+    SKLog(@"======= zip包下载完成，还未解压。\nskin名称：%@ \nzip包地址：%@",skinName,zip_path);
     
     ZipArchive* zip = [[ZipArchive alloc] init];
     if( [zip UnzipOpenFile:zip_path] ){
       BOOL result = [zip UnzipFileTo:folder_path overWrite:YES];
       if( NO==result ){
         //解压缩失败
-        SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skin, zip_path);
+        SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skinName, zip_path);
         
       }
       [zip UnzipCloseFile];
-      SKLog(@"======= zip包下载完成 并解压完毕。\nskin名称：%@：\nzip包地址：%@ \n解压后文件夹位置：%@",skin,zip_path,folder_path);
+      SKLog(@"======= zip包下载完成 并解压完毕。\nskin名称：%@：\nzip包地址：%@ \n解压后文件夹位置：%@",skinName,zip_path,folder_path);
+      
+      [self updateSkinInfoOfSkinName:skinName];
+      
     }else{
-        SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skin, zip_path);
+        SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skinName, zip_path);
     }
-
   }];
   
   [_downloadTask resume];
 }
 
+
+//更新skin的plist配置文件
+- (void)updateSkinInfoOfSkinName:(NSString *)skinName{
+  
+  //拿到skin之后自动去皮肤包文件夹里查找json文件，获取信息，写入plist文件
+  NSData *jsonData = [NSData dataWithContentsOfFile:[SkinUtils generateSkinColorJSONPathWithSkinName:skinName]];
+  
+  NSError *error;
+  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                       options:NSJSONReadingMutableContainers
+                                                         error:&error];
+  if(error) {
+     //返回失败
+  }
+  
+  NSMutableDictionary *skin_info = [dict mutableCopy];
+  [skin_info addEntriesFromDictionary:@{@"name":skinName,
+                                         @"local_path":[SkinUtils generateSkinFolderPathWithSkinName:skinName]}];
+  //更新配置字典
+  NSMutableDictionary * configDict = [SkinUtils generateSkinConfigDict];
+  [configDict setObject:skin_info forKey:skinName];
+  
+  //把更新后的配置字典写入plist文件
+  [configDict writeToFile:[SkinUtils generateSkinConfigFilePath] atomically:YES];
+  
+  
+}
 
 - (NSString *)getLastSkin{
   

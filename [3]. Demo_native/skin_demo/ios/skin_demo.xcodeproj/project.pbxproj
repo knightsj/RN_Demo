@@ -51,6 +51,7 @@
 		CB3394261F79DA0100A8CF99 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3394251F79DA0100A8CF99 /* libz.tbd */; };
 		CB3394291F79DA4200A8CF99 /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3394281F79DA4200A8CF99 /* SkinManager.m */; };
 		CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB42ABEA1F7B84E300234E28 /* CacheMudule.m */; };
+		CBBE49581F9B25C900B06BA1 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBE49571F9B25C900B06BA1 /* SkinUtils.m */; };
 		CBF22A241F73489F0090951F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A231F73489F0090951F /* HomeViewController.m */; };
 		CBF22A401F7348C10090951F /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A3F1F7348C10090951F /* SkinViewController.m */; };
 		CBF22A421F7348D20090951F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A411F7348D20090951F /* main.storyboard */; };
@@ -305,6 +306,8 @@
 		CB3394281F79DA4200A8CF99 /* SkinManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = skin_demo/SkinManager.m; sourceTree = "<group>"; };
 		CB42ABE91F7B84E300234E28 /* CacheMudule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheMudule.h; path = skin_demo/CacheMudule.h; sourceTree = "<group>"; };
 		CB42ABEA1F7B84E300234E28 /* CacheMudule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = skin_demo/CacheMudule.m; sourceTree = "<group>"; };
+		CBBE49561F9B25C900B06BA1 /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = skin_demo/SkinUtils.h; sourceTree = "<group>"; };
+		CBBE49571F9B25C900B06BA1 /* SkinUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinUtils.m; path = skin_demo/SkinUtils.m; sourceTree = "<group>"; };
 		CBF22A221F73489F0090951F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = skin_demo/HomeViewController.h; sourceTree = "<group>"; };
 		CBF22A231F73489F0090951F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = skin_demo/HomeViewController.m; sourceTree = "<group>"; };
 		CBF22A3E1F7348C10090951F /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = skin_demo/SkinViewController.h; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				CB3394281F79DA4200A8CF99 /* SkinManager.m */,
 				CB42ABE91F7B84E300234E28 /* CacheMudule.h */,
 				CB42ABEA1F7B84E300234E28 /* CacheMudule.m */,
+				CBBE49561F9B25C900B06BA1 /* SkinUtils.h */,
+				CBBE49571F9B25C900B06BA1 /* SkinUtils.m */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -1044,6 +1049,7 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				CB3394221F79D9E400A8CF99 /* zip.c in Sources */,
 				CBF22A241F73489F0090951F /* HomeViewController.m in Sources */,
+				CBBE49581F9B25C900B06BA1 /* SkinUtils.m in Sources */,
 				CB3394231F79D9E400A8CF99 /* ZipArchive.mm in Sources */,
 				CB3394291F79DA4200A8CF99 /* SkinManager.m in Sources */,
 				CB3393F31F79D70C00A8CF99 /* AFHTTPSessionManager.m in Sources */,

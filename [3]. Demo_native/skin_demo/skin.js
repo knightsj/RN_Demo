@@ -34,14 +34,13 @@ export default class skinPage extends Component {
         }
     }
 
-
+    //RN触发原生更换皮肤
     changeIntoSkin(skinName){
         SkinModule.changeSkinWithName(skinName);
     }
 
     componentWillMount() {
-        //开始监听
-
+        //开始监听从iOS端发来的通知
         this.listener = skinModule.addListener("RNChangeSkin",(skinInfo) => this.changeSkin(skinInfo))
     }
 
@@ -84,7 +83,6 @@ export default class skinPage extends Component {
 
         this.setState({
             skin:skinInfo.skinName,
-
         })
 
     }

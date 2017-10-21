@@ -8,6 +8,7 @@
 
 #import "SkinModule.h"
 #import "SkinManager.h"
+#import "SkinUtils.h"
 
 @implementation SkinModule
 
@@ -211,7 +212,6 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
     NSString *localPath = [currentSkinDict objectForKey:@"local_path"];
     
     if (localPath.length == 0) {
-      
       
     }else if ([localPath isEqualToString:@"bundle"]){
       NSLog(@"即将获取bundle的皮肤资源");

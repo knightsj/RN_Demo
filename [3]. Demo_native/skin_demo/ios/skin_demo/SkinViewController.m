@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    [[SkinManager sharedManager] downloadZipAndUnachiveSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
+    [[SkinManager sharedManager] downloadSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
        
     } progress:^(NSProgress *progress) {
       
@@ -29,6 +29,9 @@
   
   
 }
+
+
+//点击弹出RN界面
 - (IBAction)jumpToSkinSettingPage:(UIButton *)sender {
   
   NSURL *jsCodeLocation;

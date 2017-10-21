@@ -18,11 +18,11 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 + (instancetype)sharedManager;
 
-- (void)downloadZipAndUnachiveSkin:(NSString *)skin
-                               url:(NSString *)url
-                           success:(SkinZipDownloadSuccess)successBlock
-                          progress:(SkinZipDownloadProgress)progressBlock
-                            falure:(SkinZipDownloadFailure)failureBlock;
+- (void)downloadSkin:(NSString *)skinName
+                 url:(NSString *)url
+             success:(SkinZipDownloadSuccess)successBlock
+            progress:(SkinZipDownloadProgress)progressBlock
+              falure:(SkinZipDownloadFailure)failureBlock;
 
 - (NSString *)getLastSkin;
 
