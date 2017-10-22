@@ -230,8 +230,7 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
   }else{
     
   }
-  
-  
+
   NSDictionary *stateImageDict = @{stateName:imagePath};
   NSLog(@"返回图片%@",stateImageDict);
   return stateImageDict;
