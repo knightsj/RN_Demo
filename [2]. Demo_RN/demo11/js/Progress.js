@@ -12,17 +12,25 @@ import {
     Easing,
     Dimensions,
     ActivityIndicator,
+    TouchableWithoutFeedback
 } from 'react-native';
 
 
 const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
-
+const [limit_width, limit_height] = [50, 50];
+const [text_width, text_height] = [240, 200];
 
 
 export default class Progress extends Component {
 
     static propTypes = {
+
+        //类型
+        type:PropTypes.oneOf(['original', 'text']),
+
+        width:PropTypes.number,
+        height:PropTypes.number,
 
         //正在加载中的文字
         loadingText:PropTypes.string,
@@ -50,6 +58,7 @@ export default class Progress extends Component {
             offset: new Animated.Value(0),
             opacity: new Animated.Value(0),
 
+            type:this.props.type?this.props.type:'original',
             animating:true,
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.1,
             dismissDuration:this.props.dismissDuration?this.props.dismissDuration * 1000:500,
@@ -60,6 +69,31 @@ export default class Progress extends Component {
     componentWillMount() {
 
         this.progressState = 0;
+
+        //width and height
+        if (this.state.type === 'original'){
+            if((!this.props.width)||(!this.props.height)){
+                this.width = limit_width;
+                this.height = limit_height;
+            }else if(this.props.width < limit_width && this.props.height < limit_height){
+                this.width = this.props.width;
+                this.height = this.props.height;
+            }else {
+                this.width = limit_width;
+                this.height = limit_height;
+            }
+        }else if (this.state.type === 'text'){
+            if((!this.props.width)||(!this.props.height)){
+                this.width = text_width;
+                this.height = text_height;
+            }else if(this.props.width < text_width && this.props.height < text_height){
+                this.width = this.props.width;
+                this.height = this.props.height;
+            }else {
+                this.width = text_width;
+                this.height = text_height;
+            }
+        }
 
     }
 
@@ -93,7 +127,7 @@ export default class Progress extends Component {
 
     _indicatorView() {
 
-        if( this.progressState === 0){
+        if(this.progressState === 0){
 
             return <ActivityIndicator
                 animating={true}
@@ -137,15 +171,18 @@ export default class Progress extends Component {
 
         } else {
             return (
+                <TouchableWithoutFeedback onPress={()=>this.finish()}>
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
-                            <View style={styles.bottomViewStyle}>
+                            <View style={[styles.bottomViewStyle,{width:this.width,height:this.height}]}>
                                 {this._indicatorView()}
                                 <Text style={styles.loadingTextStyle}>{this._indicatorText()}</Text>
                             </View>
                         </View>
                     </View>
+                    </TouchableWithoutFeedback>
+
             );
         }
     }
@@ -284,8 +321,6 @@ const styles = StyleSheet.create({
     },
 
     bottomViewStyle:{
-        width:240,
-        height:200,
         backgroundColor:'black',
         opacity:0.6,
         borderRadius:8,

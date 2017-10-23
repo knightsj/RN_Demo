@@ -31,6 +31,7 @@ export default class demo11 extends Component {
                 </TouchableOpacity>
 
                 <Progress
+                    type = "text"
                     loadingText  = "清理缓存中..."      //加载中的文案
                     succeedText  = "缓存已清除"         //成功的文案
                     succeedImage = "progress_succeed" //成功的图片
