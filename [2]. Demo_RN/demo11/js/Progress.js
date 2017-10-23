@@ -19,7 +19,7 @@ import {
 const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
 const [limit_width, limit_height] = [100, 90];
-const [text_width, text_height] = [240, 200];
+const [text_width, text_height] = [240, 190];
 
 
 export default class Progress extends Component {
@@ -79,7 +79,7 @@ export default class Progress extends Component {
 
         //width, height,indicator marginTop
         if (this.state.type === 'original'){
-            this.indicatorMarginTop = 16;
+            this.indicatorMarginTop = 17;
             if((!this.props.width)||(!this.props.height)){
                 this.width = limit_width;
                 this.height = limit_height;
@@ -91,7 +91,7 @@ export default class Progress extends Component {
                 this.height = limit_height;
             }
         }else if (this.state.type === 'text'){
-            this.indicatorMarginTop =0;
+            this.indicatorMarginTop = 0;
             if((!this.props.width)||(!this.props.height)){
                 this.width = text_width;
                 this.height = text_height;
@@ -147,7 +147,7 @@ export default class Progress extends Component {
 
             return <ActivityIndicator
                 animating={true}
-                style={[styles.centering, {height: 76,marginTop:this.indicatorMarginTop}]}
+                style={[styles.centering, {height: 76,marginTop:this.indicatorMarginTop,marginLeft:4}]}
                 size="large"/>
 
         }else if (this.progressState === 1) {
@@ -199,7 +199,7 @@ export default class Progress extends Component {
 
         } else {
             return (
-                <TouchableWithoutFeedback onPress={()=>this.succeed()}>
+
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity,backgroundColor:this.state.maskBackgroundColor}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
@@ -209,7 +209,6 @@ export default class Progress extends Component {
                             </View>
                         </View>
                     </View>
-                    </TouchableWithoutFeedback>
 
             );
         }
