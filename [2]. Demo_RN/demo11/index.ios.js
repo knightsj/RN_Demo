@@ -38,6 +38,8 @@ export default class demo11 extends Component {
                     failedText   =  "清理缓存失败"      //失败的文案
                     failedImage  = "progress_failed"  //失败的图片
                     finishDuration = {0.8}            //消失时间
+                    maskOpacity = {0}
+                    maskBackgroundColor='#fff'
                     ref={(progress)=>{this.progress = progress}}
                 />
 

@@ -47,6 +47,10 @@ export default class Progress extends Component {
 
         //回调后距离progress消失的时间间隔，单位为秒
         dismissDuration:PropTypes.number,
+
+        maskBackgroundColor:PropTypes.string
+
+
     }
 
     constructor(props) {
@@ -62,6 +66,9 @@ export default class Progress extends Component {
             animating:true,
             maskOpacity:this.props.maskOpacity?this.props.maskOpacity:0.1,
             dismissDuration:this.props.dismissDuration?this.props.dismissDuration * 1000:500,
+
+            maskBackgroundColor:this.props.maskBackgroundColor?this.props.maskBackgroundColor:'#000'
+
 
         };
     }
@@ -194,7 +201,7 @@ export default class Progress extends Component {
             return (
                 <TouchableWithoutFeedback onPress={()=>this.succeed()}>
                     <View style={[styles.container]}>
-                        <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
+                        <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity,backgroundColor:this.state.maskBackgroundColor}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
                             <View style={[styles.bottomViewStyle,{width:this.width,height:this.height}]}>
                                 {this._indicatorView()}
@@ -339,7 +346,6 @@ const styles = StyleSheet.create({
     //style of mask
     maskViewStyle: {
         justifyContent: "center",
-        backgroundColor: "#000000",
         position: "absolute",
         width: width,
         height: height,
