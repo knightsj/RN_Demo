@@ -18,7 +18,7 @@ import {
 
 const {width, height} = Dimensions.get('window');
 const [left, top] = [0, 0];
-const [limit_width, limit_height] = [50, 50];
+const [limit_width, limit_height] = [100, 90];
 const [text_width, text_height] = [240, 200];
 
 
@@ -70,8 +70,9 @@ export default class Progress extends Component {
 
         this.progressState = 0;
 
-        //width and height
+        //width, height,indicator marginTop
         if (this.state.type === 'original'){
+            this.indicatorMarginTop = 16;
             if((!this.props.width)||(!this.props.height)){
                 this.width = limit_width;
                 this.height = limit_height;
@@ -83,6 +84,7 @@ export default class Progress extends Component {
                 this.height = limit_height;
             }
         }else if (this.state.type === 'text'){
+            this.indicatorMarginTop =0;
             if((!this.props.width)||(!this.props.height)){
                 this.width = text_width;
                 this.height = text_height;
@@ -105,23 +107,30 @@ export default class Progress extends Component {
 
     _indicatorText(){
 
-        if( this.progressState === 0){
+        if (this.state.type === 'text'){
 
-            return this.props.loadingText;
+            if( this.progressState === 0){
 
-        }else if (this.progressState === 1) {
+                return this.props.loadingText;
 
-            return this.props.succeedText;
+            }else if (this.progressState === 1) {
 
-        } else if (this.progressState === 2) {
+                return this.props.succeedText;
 
-            return this.props.failedText;
+            } else if (this.progressState === 2) {
 
-        } else {
+                return this.props.failedText;
 
+            } else {
+
+                return null;
+
+            }
+
+        }else if (this.state.type === 'original'){
             return null;
-
         }
+
     }
 
 
@@ -131,26 +140,38 @@ export default class Progress extends Component {
 
             return <ActivityIndicator
                 animating={true}
-                style={[styles.centering, {height: 76}]}
+                style={[styles.centering, {height: 76,marginTop:this.indicatorMarginTop}]}
                 size="large"/>
 
         }else if (this.progressState === 1) {
 
-            if (this.props.succeedImage){
-                return <Image source={{uri:this.props.succeedImage}}
-                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
-            }else {
+            if (this.state.type === 'text'){
+
+                if (this.props.succeedImage){
+                    return <Image source={{uri:this.props.succeedImage}}
+                                  style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+                }else {
+                    return null;
+                }
+
+            }else if (this.state.type === 'original'){
                 return null;
             }
-
 
         } else if (this.progressState === 2) {
 
 
-            if (this.props.failedImage){
-                return <Image source={{uri:this.props.failedImage}}
-                              style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
-            }else {
+
+            if (this.state.type === 'text'){
+
+                if (this.props.failedImage){
+                    return <Image source={{uri:this.props.failedImage}}
+                                  style={{width: 40, height: 40, marginTop: 10, marginBottom: 26}}/>
+                }else {
+                    return null;
+                }
+
+            }else if (this.state.type === 'original'){
                 return null;
             }
 
@@ -171,7 +192,7 @@ export default class Progress extends Component {
 
         } else {
             return (
-                <TouchableWithoutFeedback onPress={()=>this.finish()}>
+                <TouchableWithoutFeedback onPress={()=>this.succeed()}>
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity}]}></Animated.View>
                         <View style={{justifyContent:'center',alignItems:'center'}}>
@@ -252,39 +273,51 @@ export default class Progress extends Component {
 
 
     succeed(){
-        if (!this.state.hide) {
+        if (this.state.type === 'text'){
+            if (!this.state.hide) {
 
-            this.progressState = 1;
-            this.setState({animating:false});
+                this.progressState = 1;
+                this.setState({animating:false});
 
-            this.finishTimer = setTimeout(
-                () => {
-                    this._fade();
-                    this.progressState = 0;
-                },
-                this.state.dismissDuration
-            );
+                this.finishTimer = setTimeout(
+                    () => {
+                        this._fade();
+                        this.progressState = 0;
+                    },
+                    this.state.dismissDuration
+                );
 
+            }
+        }else if (this.state.type === 'original'){
+            this.finish();
         }
+
 
 
     }
 
     failed(){
-        if (!this.state.hide) {
 
-            this.progressState = 2;
-            this.setState({animating:false});
+        if (this.state.type === 'text'){
+            if (!this.state.hide) {
 
-            this.finishTimer = setTimeout(
-                () => {
-                    this._fade();
-                    this.progressState = 0;
-                },
-                this.state.dismissDuration
-            );
+                this.progressState = 2;
+                this.setState({animating:false});
 
+                this.finishTimer = setTimeout(
+                    () => {
+                        this._fade();
+                        this.progressState = 0;
+                    },
+                    this.state.dismissDuration
+                );
+
+            }
+        }else if (this.state.type === 'original'){
+            this.finish();
         }
+
+
 
     }
 }
