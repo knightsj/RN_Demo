@@ -1,8 +1,8 @@
 //
 //  SkinManager.h
-//  skin_demo
+//  skin
 //
-//  Created by Sun Shijie on 2017/9/26.
+//  Created by Sun Shijie on 2017/10/25.
 //  Copyright © 2017年 Facebook. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 typedef void(^SkinZipDownloadSuccess)();
 typedef void(^SkinZipDownloadProgress)(NSProgress *progress);
 typedef void(^SkinZipDownloadFailure)(NSError *error);
+
 
 @interface SkinManager : NSObject
 
@@ -26,6 +27,6 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 - (NSString *)getLastSkin;
 
-- (NSString *)getCurrentSkin;
+//- (NSString *)getCurrentSkin;
 
 @end

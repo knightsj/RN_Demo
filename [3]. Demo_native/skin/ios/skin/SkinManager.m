@@ -1,15 +1,15 @@
 //
 //  SkinManager.m
-//  skin_demo
+//  skin
 //
-//  Created by Sun Shijie on 2017/9/26.
+//  Created by Sun Shijie on 2017/10/25.
 //  Copyright © 2017年 Facebook. All rights reserved.
 //
 
 #import "SkinManager.h"
+
 #import "ZipArchive.h"
 #import "SkinUtils.h"
-
 
 #if __has_include(<AFNetworking/AFNetworking.h>)
 #import <AFNetworking/AFNetworking.h>
@@ -23,6 +23,7 @@
 #else
 #define SKLog(...)
 #endif
+
 
 @interface SkinManager()
 
@@ -48,7 +49,7 @@
              success:(SkinZipDownloadSuccess)successBlock
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock{
-
+  
   //download url
   NSURL *download_url = [NSURL URLWithString:url];
   
@@ -78,8 +79,8 @@
     
     // 下载进度
     if (progressBlock) {
-          SKLog(@"======= zip包正在下载。\n进度：%@ \nskin名称：%@ \nzip包下载目标地址：%@",downloadProgress, skinName,zip_path);
-          progressBlock(downloadProgress);
+      SKLog(@"======= zip包正在下载。\n进度：%@ \nskin名称：%@ \nzip包下载目标地址：%@",downloadProgress, skinName,zip_path);
+      progressBlock(downloadProgress);
     }
     
   } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
@@ -108,7 +109,7 @@
       [self updateSkinInfoOfSkinName:skinName];
       
     }else{
-        SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skinName, zip_path);
+      SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skinName, zip_path);
     }
   }];
   
@@ -127,12 +128,12 @@
                                                        options:NSJSONReadingMutableContainers
                                                          error:&error];
   if(error) {
-     //返回失败
+    //返回失败
   }
   
   NSMutableDictionary *skin_info = [dict mutableCopy];
   [skin_info addEntriesFromDictionary:@{@"name":skinName,
-                                         @"local_path":[SkinUtils generateSkinFolderPathWithSkinName:skinName]}];
+                                        @"local_path":[SkinUtils generateSkinFolderPathWithSkinName:skinName]}];
   //更新配置字典
   NSMutableDictionary * configDict = [SkinUtils generateSkinConfigDict];
   [configDict setObject:skin_info forKey:skinName];
@@ -151,3 +152,4 @@
 
 
 @end
+
