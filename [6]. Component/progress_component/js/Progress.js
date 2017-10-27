@@ -47,8 +47,16 @@ export default class Progress extends Component {
 
         //回调后距离progress消失的时间间隔，单位为秒
         dismissDuration:PropTypes.number,
+        maskBackgroundColor:PropTypes.string,
 
-        maskBackgroundColor:PropTypes.string
+        //成功后progress完全消失的回调
+        succeedCallback:PropTypes.func,
+
+        //失败后progress完全消失的回调
+        failedCallback:PropTypes.func,
+
+        //取消后progress完全消失的回调
+        finishCallback:PropTypes.func,
 
 
     }
@@ -199,17 +207,15 @@ export default class Progress extends Component {
 
         } else {
             return (
-
                     <View style={[styles.container]}>
                         <Animated.View style={[styles.maskViewStyle,{opacity: this.state.maskOpacity,backgroundColor:this.state.maskBackgroundColor}]}></Animated.View>
-                        <View style={{justifyContent:'center',alignItems:'center'}}>
-                            <View style={[styles.bottomViewStyle,{width:this.width,height:this.height}]}>
-                                {this._indicatorView()}
-                                <Text style={styles.loadingTextStyle}>{this._indicatorText()}</Text>
+                            <View style={{justifyContent:'center',alignItems:'center'}}>
+                                <View style={[styles.bottomViewStyle,{width:this.width,height:this.height}]}>
+                                    {this._indicatorView()}
+                                    <Text style={styles.loadingTextStyle}>{this._indicatorText()}</Text>
+                                </View>
                             </View>
-                        </View>
                     </View>
-
             );
         }
     }
@@ -274,6 +280,9 @@ export default class Progress extends Component {
 
             this.setState({hide:true});
             this.progressState = 0;
+            if (this.props.finishCallback){
+                this.props.finishCallback();
+            }
         }
     }
 
@@ -289,6 +298,9 @@ export default class Progress extends Component {
                     () => {
                         this._fade();
                         this.progressState = 0;
+                        if (this.props.succeedCallback){
+                            this.props.succeedCallback();
+                        }
                     },
                     this.state.dismissDuration
                 );
@@ -314,6 +326,9 @@ export default class Progress extends Component {
                     () => {
                         this._fade();
                         this.progressState = 0;
+                        if (this.props.failedCallback){
+                            this.props.failedCallback();
+                        }
                     },
                     this.state.dismissDuration
                 );

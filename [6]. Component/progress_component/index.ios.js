@@ -19,6 +19,12 @@ import Progress from './js/Progress'
 
 export default class demo11 extends Component {
 
+
+    logout(){
+        alert('退出登录');
+    }
+
+
     render() {
 
         return (
@@ -55,10 +61,8 @@ export default class demo11 extends Component {
                     maskOpacity = {0}
                     maskBackgroundColor='#fff'
                     ref={(progress2)=>{this.progress2 = progress2}}
+                    succeedCallback={this.logout}
                 />
-
-
-
             </View>
         );
     }
