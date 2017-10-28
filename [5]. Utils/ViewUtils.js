@@ -9,65 +9,159 @@ import {
     TouchableHighlight
 } from 'react-native';
 
+export var FlAG_SETTINGITEMTYPE= {flag_top:'top',flag_middle:'middle',flag_bottom:'bottom',flag_single:'single'};
 
 export default class ViewUtils{
+
+    //
     static getLeftButton(callBack){
         return <TouchableOpacity
             style={{padding:8}}
             onPress={callBack}>
             <Image
-                style={{width:26,height:26,tintColor:'white'}}
-                source={require('../../res/images/ic_arrow_back_white_36pt.png')}
+                style={{width:12,height:16,tintColor:'white'}}
+                source={{uri:'nav_back'}}
             />
 
         </TouchableOpacity>
     }
 
-    static createSettingItem(callBack,icon,text,tintColor,expandableIcon){
 
-        //警告
+    //用于for循环生成的cellItem
+    static createSettingItemWithIndex(index,settingItemType,callBack,icon,title,detailText,tintColor, arrowIcon,expandableIcon){
+
+        let topLineView = null;
+        let bottomLineView = null;
+        let topStyle = null;
+
+        if (settingItemType === FlAG_SETTINGITEMTYPE.flag_top || settingItemType === FlAG_SETTINGITEMTYPE.flag_single){
+
+            topStyle = {marginTop:10}
+
+        }else{
+
+            topStyle = {marginTop:0}
+
+        }
+
+        if (settingItemType === FlAG_SETTINGITEMTYPE.flag_top || settingItemType ===FlAG_SETTINGITEMTYPE.flag_single){
+
+            topLineView = <View style={styles.settingItemFullLineStyle}></View>
+        }
+
+        if (settingItemType === FlAG_SETTINGITEMTYPE.flag_bottom ||settingItemType === FlAG_SETTINGITEMTYPE.flag_single){
+
+            bottomLineView = <View style={styles.settingItemFullLineStyle}></View>
+
+        }else if (settingItemType === FlAG_SETTINGITEMTYPE.flag_top || settingItemType === FlAG_SETTINGITEMTYPE.flag_middle){
+
+            bottomLineView = <View style={styles.settingItemMiddleLineStyle}></View>
+        }
+
+
+
         let image = null;
         if (icon){
             image = <Image
-                source={icon}
+                source={{uri:icon}}
                 resizeMode='stretch'
-                style={[{width:18,height:18,marginRight:10},tintColor]}
+                style={[{width:22,height:22}]}
             />
         }
+
+        let content =
+
+        if(index >= 0){
+
+            return (
+                <View style={[{backgroundColor:'red'},topStyle]}
+                      key = {index}
+                >
+                    {topLineView}
+                    <TouchableHighlight
+                        onPress={callBack}
+                        underlayColor= 'transparent'
+                    >
+
+                        <View style={styles.settingItemContainerStyle}>
+                            {/*左侧*/}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                {image}
+                                <Text style={styles.settingItemTitleStyle}>{title}</Text>
+                            </View>
+                            {/*右侧*/}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <Text style={styles.settingItemDetailTitleStyle}>{detailText}</Text>
+                                <Image source={{uri:expandableIcon?expandableIcon:arrowIcon}}
+                                       style={[{marginRight:6,height:12,width:8}]}
+                                />
+                            </View>
+                        </View>
+
+                    </TouchableHighlight>
+                    {bottomLineView}
+                </View>
+            )
+
+        }else{
+
+            return (
+                <View style={[{backgroundColor:'white'},topStyle]}
+
+                >
+                    {topLineView}
+                    <TouchableHighlight
+                        onPress={callBack}
+                        underlayColor= 'transparent'
+                    >
+
+                        <View style={styles.settingItemContainerStyle}>
+                            {/*左侧*/}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                {image}
+                                <Text style={styles.settingItemTitleStyle}>{title}</Text>
+                            </View>
+                            {/*右侧*/}
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <Text style={styles.settingItemDetailTitleStyle}>{detailText}</Text>
+                                <Image source={{uri:expandableIcon?expandableIcon:arrowIcon}}
+                                       style={[{marginRight:6,height:12,width:8}]}
+                                />
+                            </View>
+                        </View>
+
+                    </TouchableHighlight>
+                    {bottomLineView}
+                </View>
+            )
+
+        }
+
+    }
+
+    static createSettingItem(settingItemType,callBack,icon,title,detailText,tintColor, arrowIcon,expandableIcon){
+
+        return this.createSettingItemWithIndex(null,settingItemType,callBack,icon,title,detailText,tintColor, arrowIcon,expandableIcon )
+    }
+
+    static createMiddleContentItem(callBack,text){
         return (
-            <View style={{backgroundColor:'white'}}>
+            <View style={[{backgroundColor:'white'},{marginTop:10}]}>
+                <View style={styles.settingItemFullLineStyle}></View>
                 <TouchableHighlight
                     onPress={callBack}
-                    underlayColor= 'transparent'
-                >
-                    <View style={styles.settingItemContainerStyle}>
-                        <View style={{flexDirection:'row',alignItems:'center'}}>
-                            {image}
-                            <Text>{text}</Text>
+                    underlayColor= 'transparent'>
+                    <View style={styles.settingItemMiddleContainerStyle}>
+                        <View style={{justifyContent:'center',alignItems:'center'}}>
+                            <Text style={styles.settingMiddleTittleStyle}>{text}</Text>
                         </View>
-                        <Image source={expandableIcon?expandableIcon:require('../../res/images/ic_tiaozhuan.png')}
-                               style={[{marginRight:0,height:22,width:22},tintColor]}//要用括号
-                        />
                     </View>
                 </TouchableHighlight>
+                <View style={styles.settingItemFullLineStyle}/>
             </View>
         )
     }
 
-    static createMoreButton(callback){
-       return <TouchableHighlight
-            underlayColor='transparent'
-            ref = 'moreMenuButton'
-            onPress={callback}
-        >
-            <View style={{paddingRight:8}}>
-                <Image
-                    source={require('../../res/images/ic_more_vert_white_48pt.png')}
-                    style={{width:24,height:24}}
-                />
-            </View>
-        </TouchableHighlight>
-    }
 }
 
 
@@ -83,5 +177,48 @@ const styles = StyleSheet.create({
         alignItems:'center',
         padding:10,
         height:44,
-    }
+    },
+
+    settingItemTitleStyle:{
+        marginLeft:12,
+        fontSize:16,
+        fontFamily:'Helvetica',
+        fontWeight:'100'
+    },
+
+    settingItemDetailTitleStyle:{
+        marginRight:12,
+        color:'gray',
+        fontSize:15,
+        fontFamily:'Helvetica',
+        fontWeight:'100'
+    },
+
+    settingItemMiddleContainerStyle:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        padding:10,
+        height:44,
+    },
+
+    settingMiddleTittleStyle:{
+        fontSize:17,
+        justifyContent: 'center',
+        fontFamily:'Helvetica',
+        fontWeight:'100'
+    },
+
+    settingItemFullLineStyle:{
+        backgroundColor: '#D5D5D5',
+        height: 0.8,
+    },
+
+    settingItemMiddleLineStyle:{
+        backgroundColor: '#D5D5D5',
+        height: 0.8,
+        marginLeft:14,
+        marginRight:14
+    },
+
 });
