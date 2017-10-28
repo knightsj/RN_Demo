@@ -61,77 +61,53 @@ export default class ViewUtils{
 
 
         let image = null;
-        if (icon){
+        if (icon) {
             image = <Image
-                source={{uri:icon}}
+                source={{uri: icon}}
                 resizeMode='stretch'
-                style={[{width:22,height:22}]}
+                style={[{width: 22, height: 22}]}
             />
         }
 
-        let content =
+        let content = <View>
+            {topLineView}
+            <TouchableHighlight
+                onPress={callBack}
+                underlayColor= 'transparent'
+            >
 
-        if(index >= 0){
+                <View style={styles.settingItemContainerStyle}>
+                    {/*左侧*/}
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                        {image}
+                        <Text style={styles.settingItemTitleStyle}>{title}</Text>
+                    </View>
+                    {/*右侧*/}
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <Text style={styles.settingItemDetailTitleStyle}>{detailText}</Text>
+                        <Image source={{uri:expandableIcon?expandableIcon:arrowIcon}}
+                               style={[{marginRight:6,height:12,width:8}]}
+                        />
+                    </View>
+                </View>
+
+            </TouchableHighlight>
+            {bottomLineView}
+
+        </View>
+
+        if(index > 0 || index == 0){
 
             return (
-                <View style={[{backgroundColor:'red'},topStyle]}
-                      key = {index}
-                >
-                    {topLineView}
-                    <TouchableHighlight
-                        onPress={callBack}
-                        underlayColor= 'transparent'
-                    >
-
-                        <View style={styles.settingItemContainerStyle}>
-                            {/*左侧*/}
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                                {image}
-                                <Text style={styles.settingItemTitleStyle}>{title}</Text>
-                            </View>
-                            {/*右侧*/}
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                                <Text style={styles.settingItemDetailTitleStyle}>{detailText}</Text>
-                                <Image source={{uri:expandableIcon?expandableIcon:arrowIcon}}
-                                       style={[{marginRight:6,height:12,width:8}]}
-                                />
-                            </View>
-                        </View>
-
-                    </TouchableHighlight>
-                    {bottomLineView}
+                <View style={[{backgroundColor:'white'},topStyle]} key = {index}>
+                    {content}
                 </View>
             )
-
         }else{
 
             return (
-                <View style={[{backgroundColor:'white'},topStyle]}
-
-                >
-                    {topLineView}
-                    <TouchableHighlight
-                        onPress={callBack}
-                        underlayColor= 'transparent'
-                    >
-
-                        <View style={styles.settingItemContainerStyle}>
-                            {/*左侧*/}
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                                {image}
-                                <Text style={styles.settingItemTitleStyle}>{title}</Text>
-                            </View>
-                            {/*右侧*/}
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                                <Text style={styles.settingItemDetailTitleStyle}>{detailText}</Text>
-                                <Image source={{uri:expandableIcon?expandableIcon:arrowIcon}}
-                                       style={[{marginRight:6,height:12,width:8}]}
-                                />
-                            </View>
-                        </View>
-
-                    </TouchableHighlight>
-                    {bottomLineView}
+                <View style={[{backgroundColor:'white'},topStyle]}>
+                    {content}
                 </View>
             )
 
