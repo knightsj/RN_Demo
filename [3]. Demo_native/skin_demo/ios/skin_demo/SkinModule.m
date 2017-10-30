@@ -7,7 +7,7 @@
 //
 
 #import "SkinModule.h"
-#import "SkinManager.h"
+//#import "SkinManager.h"
 #import "SkinUtils.h"
 
 @implementation SkinModule
@@ -50,8 +50,8 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
   NSArray *keys = [dict allKeys];
   if ([keys containsObject:skinName]) {
     
-    [SkinManager sharedManager].lastSkin = lastSkinName;
-    NSLog(@"保存上一个皮肤为：%@",lastSkinName);
+//    [SkinManager sharedManager].lastSkin = lastSkinName;
+//    NSLog(@"保存上一个皮肤为：%@",lastSkinName);
     
     [[NSUserDefaults standardUserDefaults] setValue:skinName forKey:@"current_skin"];
     NSLog(@"修改皮肤为：%@",skinName);

@@ -34,19 +34,19 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* skinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* skinTests.m */; };
+		32F54FA41E254EDB41FF0544 /* libPods-skin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779AEBFB4CFBD064E9A7553 /* libPods-skin.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CB8B32E81FA0E3C300949D52 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32DD1FA0E3C200949D52 /* SkinUtils.m */; };
-		CB8B32E91FA0E3C300949D52 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32DD1FA0E3C200949D52 /* SkinUtils.m */; };
-		CB8B32EA1FA0E3C300949D52 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32DE1FA0E3C200949D52 /* CacheMudule.m */; };
-		CB8B32EB1FA0E3C300949D52 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32DE1FA0E3C200949D52 /* CacheMudule.m */; };
-		CB8B32EC1FA0E3C300949D52 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E01FA0E3C200949D52 /* HomeViewController.m */; };
-		CB8B32ED1FA0E3C300949D52 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E01FA0E3C200949D52 /* HomeViewController.m */; };
-		CB8B32EE1FA0E3C300949D52 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E11FA0E3C200949D52 /* SkinModule.m */; };
-		CB8B32EF1FA0E3C300949D52 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E11FA0E3C200949D52 /* SkinModule.m */; };
-		CB8B32F01FA0E3C300949D52 /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E51FA0E3C300949D52 /* SkinViewController.m */; };
-		CB8B32F11FA0E3C300949D52 /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32E51FA0E3C300949D52 /* SkinViewController.m */; };
-		CB8B32F71FA0E5A400949D52 /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B32F61FA0E5A400949D52 /* SkinManager.m */; };
+		CB3ED87D1FA6255C00BBC9CA /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3ED87C1FA6255C00BBC9CA /* SkinManager.m */; };
+		CB3ED87E1FA6255C00BBC9CA /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3ED87C1FA6255C00BBC9CA /* SkinManager.m */; };
+		CB3ED89F1FA77C4300BBC9CA /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3ED89E1FA77C4200BBC9CA /* SkinUtils.m */; };
+		CB3ED8A01FA77C4300BBC9CA /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3ED89E1FA77C4200BBC9CA /* SkinUtils.m */; };
+		CB3ED8A21FA77CCE00BBC9CA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A11FA77CCE00BBC9CA /* libz.tbd */; };
+		CB3ED8A41FA77CE200BBC9CA /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A31FA77CE200BBC9CA /* libz.1.tbd */; };
+		CB3ED8A91FA77CF400BBC9CA /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A51FA77CF300BBC9CA /* libz.1.1.3.tbd */; };
+		CB3ED8AA1FA77CF400BBC9CA /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A61FA77CF300BBC9CA /* libz.1.2.8.tbd */; };
+		CB3ED8AB1FA77CF400BBC9CA /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A71FA77CF400BBC9CA /* libz.1.2.11.tbd */; };
+		CB3ED8AC1FA77CF400BBC9CA /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3ED8A81FA77CF400BBC9CA /* libz.1.2.5.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,6 +251,7 @@
 		00E356EE1AD99517003FC87E /* skinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = skinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* skinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = skinTests.m; sourceTree = "<group>"; };
+		0779AEBFB4CFBD064E9A7553 /* libPods-skin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-skin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* skin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,46 +265,46 @@
 		2D02E47B1E0B4A5D006451C7 /* skin-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "skin-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* skin-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "skin-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6609E043CFA7FD6D469A62A3 /* Pods-skin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skin/Pods-skin.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CB8B32A81FA0E3A200949D52 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		CB8B32A91FA0E3A200949D52 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		CB8B32AA1FA0E3A200949D52 /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		CB8B32AB1FA0E3A200949D52 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		CB8B32AC1FA0E3A200949D52 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		CB8B32AD1FA0E3A200949D52 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		CB8B32AE1FA0E3A200949D52 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		CB8B32AF1FA0E3A200949D52 /* AFURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		CB8B32B01FA0E3A200949D52 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		CB8B32B11FA0E3A200949D52 /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		CB8B32B21FA0E3A200949D52 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		CB8B32B31FA0E3A200949D52 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		CB8B32B41FA0E3A200949D52 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		CB8B32CF1FA0E3A900949D52 /* ZipArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
-		CB8B32D11FA0E3A900949D52 /* unzip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		CB8B32D21FA0E3A900949D52 /* zip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		CB8B32D31FA0E3A900949D52 /* ioapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		CB8B32D41FA0E3A900949D52 /* mztools.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		CB8B32D51FA0E3A900949D52 /* crypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		CB8B32D61FA0E3A900949D52 /* zip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		CB8B32D71FA0E3A900949D52 /* unzip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		CB8B32D81FA0E3A900949D52 /* mztools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		CB8B32D91FA0E3A900949D52 /* ioapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		CB8B32DA1FA0E3A900949D52 /* ZipArchive.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
-		CB8B32DB1FA0E3C200949D52 /* skin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = skin.plist; path = ../../skin_demo/ios/skin_demo/skin.plist; sourceTree = "<group>"; };
-		CB8B32DD1FA0E3C200949D52 /* SkinUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinUtils.m; path = ../../skin_demo/ios/skin_demo/SkinUtils.m; sourceTree = "<group>"; };
-		CB8B32DE1FA0E3C200949D52 /* CacheMudule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = ../../skin_demo/ios/skin_demo/CacheMudule.m; sourceTree = "<group>"; };
-		CB8B32DF1FA0E3C200949D52 /* SkinModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = ../../skin_demo/ios/skin_demo/SkinModule.h; sourceTree = "<group>"; };
-		CB8B32E01FA0E3C200949D52 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = ../../skin_demo/ios/skin_demo/HomeViewController.m; sourceTree = "<group>"; };
-		CB8B32E11FA0E3C200949D52 /* SkinModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = ../../skin_demo/ios/skin_demo/SkinModule.m; sourceTree = "<group>"; };
-		CB8B32E21FA0E3C200949D52 /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = ../../skin_demo/ios/skin_demo/SkinUtils.h; sourceTree = "<group>"; };
-		CB8B32E31FA0E3C200949D52 /* CacheMudule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CacheMudule.h; path = ../../skin_demo/ios/skin_demo/CacheMudule.h; sourceTree = "<group>"; };
-		CB8B32E41FA0E3C200949D52 /* SkinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = ../../skin_demo/ios/skin_demo/SkinViewController.h; sourceTree = "<group>"; };
-		CB8B32E51FA0E3C300949D52 /* SkinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinViewController.m; path = ../../skin_demo/ios/skin_demo/SkinViewController.m; sourceTree = "<group>"; };
-		CB8B32E61FA0E3C300949D52 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = ../../skin_demo/ios/skin_demo/HomeViewController.h; sourceTree = "<group>"; };
-		CB8B32F41FA0E40500949D52 /* main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = main.storyboard; path = ../../skin_demo/ios/skin_demo/main.storyboard; sourceTree = "<group>"; };
-		CB8B32F51FA0E5A400949D52 /* SkinManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinManager.h; path = skin/SkinManager.h; sourceTree = "<group>"; };
-		CB8B32F61FA0E5A400949D52 /* SkinManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = skin/SkinManager.m; sourceTree = "<group>"; };
+		B133B32D5C8A01BF6B9330FF /* Pods-skin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin.release.xcconfig"; path = "Pods/Target Support Files/Pods-skin/Pods-skin.release.xcconfig"; sourceTree = "<group>"; };
+		CB3ED87B1FA6255C00BBC9CA /* SkinManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinManager.h; path = ../../skin_demo/ios/skin_demo/SkinManager.h; sourceTree = "<group>"; };
+		CB3ED87C1FA6255C00BBC9CA /* SkinManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = ../../skin_demo/ios/skin_demo/SkinManager.m; sourceTree = "<group>"; };
+		CB3ED8821FA77A2B00BBC9CA /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		CB3ED8831FA77A2B00BBC9CA /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		CB3ED8841FA77A2B00BBC9CA /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		CB3ED8851FA77A2B00BBC9CA /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		CB3ED8861FA77A2B00BBC9CA /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		CB3ED8871FA77A2B00BBC9CA /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		CB3ED8881FA77A2B00BBC9CA /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		CB3ED8891FA77A2B00BBC9CA /* AFURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		CB3ED88A1FA77A2B00BBC9CA /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		CB3ED88B1FA77A2B00BBC9CA /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		CB3ED88C1FA77A2B00BBC9CA /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		CB3ED88D1FA77A2B00BBC9CA /* AFSecurityPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		CB3ED88E1FA77A2B00BBC9CA /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		CB3ED8901FA77A6200BBC9CA /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		CB3ED8911FA77A6200BBC9CA /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		CB3ED8921FA77A6200BBC9CA /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		CB3ED8931FA77A6200BBC9CA /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		CB3ED8941FA77A6200BBC9CA /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		CB3ED8951FA77A6200BBC9CA /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		CB3ED8961FA77A6200BBC9CA /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		CB3ED8971FA77A6200BBC9CA /* AFURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		CB3ED8981FA77A6200BBC9CA /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		CB3ED8991FA77A6200BBC9CA /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		CB3ED89A1FA77A6200BBC9CA /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		CB3ED89B1FA77A6200BBC9CA /* AFSecurityPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		CB3ED89C1FA77A6200BBC9CA /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		CB3ED89D1FA77C4200BBC9CA /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = ../../skin_demo/ios/skin_demo/SkinUtils.h; sourceTree = "<group>"; };
+		CB3ED89E1FA77C4200BBC9CA /* SkinUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinUtils.m; path = ../../skin_demo/ios/skin_demo/SkinUtils.m; sourceTree = "<group>"; };
+		CB3ED8A11FA77CCE00BBC9CA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CB3ED8A31FA77CE200BBC9CA /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		CB3ED8A51FA77CF300BBC9CA /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		CB3ED8A61FA77CF300BBC9CA /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		CB3ED8A71FA77CF400BBC9CA /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
+		CB3ED8A81FA77CF400BBC9CA /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +320,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB3ED8A91FA77CF400BBC9CA /* libz.1.1.3.tbd in Frameworks */,
+				CB3ED8AA1FA77CF400BBC9CA /* libz.1.2.8.tbd in Frameworks */,
+				CB3ED8AB1FA77CF400BBC9CA /* libz.1.2.11.tbd in Frameworks */,
+				CB3ED8AC1FA77CF400BBC9CA /* libz.1.2.5.tbd in Frameworks */,
+				CB3ED8A41FA77CE200BBC9CA /* libz.1.tbd in Frameworks */,
+				CB3ED8A21FA77CCE00BBC9CA /* libz.tbd in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -330,6 +337,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				32F54FA41E254EDB41FF0544 /* libPods-skin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,20 +446,6 @@
 		13B07FAE1A68108700A75B9A /* skin */ = {
 			isa = PBXGroup;
 			children = (
-				CB8B32F41FA0E40500949D52 /* main.storyboard */,
-				CB8B32E31FA0E3C200949D52 /* CacheMudule.h */,
-				CB8B32DE1FA0E3C200949D52 /* CacheMudule.m */,
-				CB8B32E61FA0E3C300949D52 /* HomeViewController.h */,
-				CB8B32E01FA0E3C200949D52 /* HomeViewController.m */,
-				CB8B32DB1FA0E3C200949D52 /* skin.plist */,
-				CB8B32DF1FA0E3C200949D52 /* SkinModule.h */,
-				CB8B32E11FA0E3C200949D52 /* SkinModule.m */,
-				CB8B32E21FA0E3C200949D52 /* SkinUtils.h */,
-				CB8B32DD1FA0E3C200949D52 /* SkinUtils.m */,
-				CB8B32E41FA0E3C200949D52 /* SkinViewController.h */,
-				CB8B32E51FA0E3C300949D52 /* SkinViewController.m */,
-				CB8B32CE1FA0E3A900949D52 /* ZipArchive */,
-				CB8B32A71FA0E3A200949D52 /* AFNetworking */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -459,8 +453,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				CB8B32F51FA0E5A400949D52 /* SkinManager.h */,
-				CB8B32F61FA0E5A400949D52 /* SkinManager.m */,
+				CB3ED87B1FA6255C00BBC9CA /* SkinManager.h */,
+				CB3ED87C1FA6255C00BBC9CA /* SkinManager.m */,
+				CB3ED89D1FA77C4200BBC9CA /* SkinUtils.h */,
+				CB3ED89E1FA77C4200BBC9CA /* SkinUtils.m */,
 			);
 			name = skin;
 			sourceTree = "<group>";
@@ -487,6 +483,15 @@
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6206DD8ECE9BB1C7FBF59A57 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6609E043CFA7FD6D469A62A3 /* Pods-skin.debug.xcconfig */,
+				B133B32D5C8A01BF6B9330FF /* Pods-skin.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -532,6 +537,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* skinTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				CB3ED8801FA77A2A00BBC9CA /* Frameworks */,
+				6206DD8ECE9BB1C7FBF59A57 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -548,52 +555,60 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CB8B32A71FA0E3A200949D52 /* AFNetworking */ = {
+		CB3ED8801FA77A2A00BBC9CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB8B32A81FA0E3A200949D52 /* AFSecurityPolicy.h */,
-				CB8B32A91FA0E3A200949D52 /* AFNetworkReachabilityManager.h */,
-				CB8B32AA1FA0E3A200949D52 /* AFURLSessionManager.h */,
-				CB8B32AB1FA0E3A200949D52 /* AFURLRequestSerialization.h */,
-				CB8B32AC1FA0E3A200949D52 /* AFURLResponseSerialization.m */,
-				CB8B32AD1FA0E3A200949D52 /* AFHTTPSessionManager.m */,
-				CB8B32AE1FA0E3A200949D52 /* AFURLResponseSerialization.h */,
-				CB8B32AF1FA0E3A200949D52 /* AFURLSessionManager.m */,
-				CB8B32B01FA0E3A200949D52 /* AFURLRequestSerialization.m */,
-				CB8B32B11FA0E3A200949D52 /* AFNetworking.h */,
-				CB8B32B21FA0E3A200949D52 /* AFNetworkReachabilityManager.m */,
-				CB8B32B31FA0E3A200949D52 /* AFSecurityPolicy.m */,
-				CB8B32B41FA0E3A200949D52 /* AFHTTPSessionManager.h */,
+				CB3ED8A51FA77CF300BBC9CA /* libz.1.1.3.tbd */,
+				CB3ED8A81FA77CF400BBC9CA /* libz.1.2.5.tbd */,
+				CB3ED8A61FA77CF300BBC9CA /* libz.1.2.8.tbd */,
+				CB3ED8A71FA77CF400BBC9CA /* libz.1.2.11.tbd */,
+				CB3ED8A31FA77CE200BBC9CA /* libz.1.tbd */,
+				CB3ED8A11FA77CCE00BBC9CA /* libz.tbd */,
+				CB3ED88F1FA77A6200BBC9CA /* AFNetworking */,
+				CB3ED8811FA77A2B00BBC9CA /* AFNetworking */,
+				0779AEBFB4CFBD064E9A7553 /* libPods-skin.a */,
 			);
-			name = AFNetworking;
-			path = ../../skin_demo/ios/skin_demo/AFNetworking;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CB8B32CE1FA0E3A900949D52 /* ZipArchive */ = {
+		CB3ED8811FA77A2B00BBC9CA /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				CB8B32CF1FA0E3A900949D52 /* ZipArchive.h */,
-				CB8B32D01FA0E3A900949D52 /* minizip */,
-				CB8B32DA1FA0E3A900949D52 /* ZipArchive.mm */,
+				CB3ED8821FA77A2B00BBC9CA /* AFSecurityPolicy.h */,
+				CB3ED8831FA77A2B00BBC9CA /* AFNetworkReachabilityManager.h */,
+				CB3ED8841FA77A2B00BBC9CA /* AFURLSessionManager.h */,
+				CB3ED8851FA77A2B00BBC9CA /* AFURLRequestSerialization.h */,
+				CB3ED8861FA77A2B00BBC9CA /* AFURLResponseSerialization.m */,
+				CB3ED8871FA77A2B00BBC9CA /* AFHTTPSessionManager.m */,
+				CB3ED8881FA77A2B00BBC9CA /* AFURLResponseSerialization.h */,
+				CB3ED8891FA77A2B00BBC9CA /* AFURLSessionManager.m */,
+				CB3ED88A1FA77A2B00BBC9CA /* AFURLRequestSerialization.m */,
+				CB3ED88B1FA77A2B00BBC9CA /* AFNetworking.h */,
+				CB3ED88C1FA77A2B00BBC9CA /* AFNetworkReachabilityManager.m */,
+				CB3ED88D1FA77A2B00BBC9CA /* AFSecurityPolicy.m */,
+				CB3ED88E1FA77A2B00BBC9CA /* AFHTTPSessionManager.h */,
 			);
-			name = ZipArchive;
-			path = ../../skin_demo/ios/ZipArchive;
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
-		CB8B32D01FA0E3A900949D52 /* minizip */ = {
+		CB3ED88F1FA77A6200BBC9CA /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				CB8B32D11FA0E3A900949D52 /* unzip.c */,
-				CB8B32D21FA0E3A900949D52 /* zip.c */,
-				CB8B32D31FA0E3A900949D52 /* ioapi.c */,
-				CB8B32D41FA0E3A900949D52 /* mztools.c */,
-				CB8B32D51FA0E3A900949D52 /* crypt.h */,
-				CB8B32D61FA0E3A900949D52 /* zip.h */,
-				CB8B32D71FA0E3A900949D52 /* unzip.h */,
-				CB8B32D81FA0E3A900949D52 /* mztools.h */,
-				CB8B32D91FA0E3A900949D52 /* ioapi.h */,
+				CB3ED8901FA77A6200BBC9CA /* AFSecurityPolicy.h */,
+				CB3ED8911FA77A6200BBC9CA /* AFNetworkReachabilityManager.h */,
+				CB3ED8921FA77A6200BBC9CA /* AFURLSessionManager.h */,
+				CB3ED8931FA77A6200BBC9CA /* AFURLRequestSerialization.h */,
+				CB3ED8941FA77A6200BBC9CA /* AFURLResponseSerialization.m */,
+				CB3ED8951FA77A6200BBC9CA /* AFHTTPSessionManager.m */,
+				CB3ED8961FA77A6200BBC9CA /* AFURLResponseSerialization.h */,
+				CB3ED8971FA77A6200BBC9CA /* AFURLSessionManager.m */,
+				CB3ED8981FA77A6200BBC9CA /* AFURLRequestSerialization.m */,
+				CB3ED8991FA77A6200BBC9CA /* AFNetworking.h */,
+				CB3ED89A1FA77A6200BBC9CA /* AFNetworkReachabilityManager.m */,
+				CB3ED89B1FA77A6200BBC9CA /* AFSecurityPolicy.m */,
+				CB3ED89C1FA77A6200BBC9CA /* AFHTTPSessionManager.h */,
 			);
-			path = minizip;
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -621,10 +636,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "skin" */;
 			buildPhases = (
+				0C68246FFC854D3B02D0B689 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				C83A53E2267632918CFF2ABC /* [CP] Embed Pods Frameworks */,
+				EFC94EAE341E3CC3CA272822 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -683,6 +701,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 5V6R56268H;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -989,6 +1010,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		0C68246FFC854D3B02D0B689 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-skin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1002,6 +1041,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		C83A53E2267632918CFF2ABC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-skin/Pods-skin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFC94EAE341E3CC3CA272822 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-skin/Pods-skin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1018,13 +1087,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB8B32F71FA0E5A400949D52 /* SkinManager.m in Sources */,
-				CB8B32F11FA0E3C300949D52 /* SkinViewController.m in Sources */,
-				CB8B32EB1FA0E3C300949D52 /* CacheMudule.m in Sources */,
-				CB8B32E91FA0E3C300949D52 /* SkinUtils.m in Sources */,
-				CB8B32EF1FA0E3C300949D52 /* SkinModule.m in Sources */,
+				CB3ED8A01FA77C4300BBC9CA /* SkinUtils.m in Sources */,
+				CB3ED87E1FA6255C00BBC9CA /* SkinManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				CB8B32ED1FA0E3C300949D52 /* HomeViewController.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1033,12 +1098,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB8B32F01FA0E3C300949D52 /* SkinViewController.m in Sources */,
-				CB8B32EA1FA0E3C300949D52 /* CacheMudule.m in Sources */,
-				CB8B32E81FA0E3C300949D52 /* SkinUtils.m in Sources */,
-				CB8B32EE1FA0E3C300949D52 /* SkinModule.m in Sources */,
+				CB3ED89F1FA77C4300BBC9CA /* SkinUtils.m in Sources */,
+				CB3ED87D1FA6255C00BBC9CA /* SkinManager.m in Sources */,
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
-				CB8B32EC1FA0E3C300949D52 /* HomeViewController.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,35 +1180,43 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6609E043CFA7FD6D469A62A3 /* Pods-skin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 5V6R56268H;
 				INFOPLIST_FILE = skin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_NAME = skin;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B133B32D5C8A01BF6B9330FF /* Pods-skin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5V6R56268H;
 				INFOPLIST_FILE = skin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_NAME = skin;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

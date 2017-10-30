@@ -9,7 +9,7 @@
 #import "SkinViewController.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import "SkinManager.h"
+//#import "SkinManager.h"
 
 @interface SkinViewController ()
 @end
@@ -19,14 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    [[SkinManager sharedManager] downloadSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
-       
-    } progress:^(NSProgress *progress) {
-      
-    } falure:^(NSError *error) {
-      
-    }];
-  
+//    [[SkinManager sharedManager] downloadSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
+//
+//    } progress:^(NSProgress *progress) {
+//
+//    } falure:^(NSError *error) {
+//
+//    }];
+//
   
 }
 
