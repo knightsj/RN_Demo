@@ -16,14 +16,6 @@
 #endif
 
 
-//Log输出
-#ifdef DEBUG
-#define SKLog(...) NSLog(@"%s 第%d行 \n %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
-#else
-#define SKLog(...)
-#endif
-
-
 @interface SkinManager()
 
 @property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
@@ -186,7 +178,9 @@
       [self setLastSkin:[self getCurrentSkin]];
       //设置当前的skin为更新的skin
       [self setCurrentSkin:skinName];
-      SKLog(@"======= 皮肤下载成功: \n ======= 上一个使用的皮肤:%@ \n ======= 正在使用的皮肤：%@，\n ======= 能够使用的所有皮肤：%@\n ======= 皮肤配置字典：%@",[self getLastSkin],[self getCurrentSkin],[self availableSkins],[SkinUtils generateSkinConfigDict]);
+      SKLog(@"======= 皮肤下载成功");
+      [self logSkinInfo];
+      
       if (successBlock) {
           successBlock(@"下载成功");
       }
@@ -249,6 +243,10 @@
   NSMutableDictionary * configDict = [SkinUtils generateSkinConfigDict];
   return [configDict allKeys];
   
+}
+
+- (void)logSkinInfo{
+  SKLog(@"======= 皮肤信息: \n ======= 上一个使用的皮肤:%@ \n ======= 正在使用的皮肤：%@，\n ======= 能够使用的所有皮肤：%@\n ======= 皮肤配置字典：%@",[self getLastSkin],[self getCurrentSkin],[self availableSkins],[SkinUtils generateSkinConfigDict]);
 }
 
 @end

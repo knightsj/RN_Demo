@@ -27,10 +27,10 @@ export default class skinPage extends Component {
         super(props);
         this.state={
             skin:'',
-            bgColor:'yellow',
-            navColor:'blue',
-            image_1:'default',
-            image_2:'default',
+            color_1:'yellow',
+            color_2:'blue',
+            title_before:'default',
+            title_after:'default',
         }
     }
 
@@ -43,6 +43,7 @@ export default class skinPage extends Component {
         //开始监听从iOS端发来的通知
         this.listener = skinModule.addListener("RNChangeSkin",(skinInfo) => this.changeSkin(skinInfo))
     }
+
 
 
     componentDidMount() {
@@ -67,7 +68,7 @@ export default class skinPage extends Component {
         // SkinModule.getColors(["bgColor","navColor"],["color_1","color_2"],(result) =>this.setState(result));
 
         //批量转换:字典
-        SkinModule.getColorsWithDict({"bgColor":"color_1","navColor":"color_2"},(result) =>this.setState(result));
+        // SkinModule.getColorsWithDict({"bgColor":"color_1","navColor":"color_2"},(result) =>this.setState(result));
 
         // ========== 转换颜色 ======== //
         // 单个转换
@@ -79,11 +80,23 @@ export default class skinPage extends Component {
 
 
         //批量转换:字典
-        SkinModule.getImagesDict({"image_1":"title_before","image_2":"title_after"},(result) =>this.setState(result));
+        // SkinModule.getImagesDict({"image_1":"title_before","image_2":"title_after"},(result) =>this.setState(result));
 
-        this.setState({
-            skin:skinInfo.skinName,
-        })
+
+        var colorList=new Array();
+        colorList.push("color_1");
+        colorList.push("color_2");
+
+        var imageList=new Array();
+        imageList.push("title_before");
+        imageList.push("title_after");
+
+        //同时批量转换颜色和图片
+        SkinModule.getColorImageList(colorList,imageList,(result) =>this.setState(result))
+
+        // this.setState({
+        //     skin:skinInfo.skinName,
+        // })
 
     }
 
@@ -107,7 +120,7 @@ export default class skinPage extends Component {
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity onPress={()=>this.changeIntoSkin('pink')}>
+                    <TouchableOpacity onPress={()=>this.changeIntoSkin('purple')}>
                         <Text style={styles.instructions}>
                             Click to change into pink skin!
                         </Text>

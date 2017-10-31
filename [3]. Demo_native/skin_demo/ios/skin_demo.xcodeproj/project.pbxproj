@@ -428,17 +428,6 @@
 		13B07FAE1A68108700A75B9A /* skin_demo */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				CBF22A221F73489F0090951F /* HomeViewController.h */,
-				CBF22A231F73489F0090951F /* HomeViewController.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
-				13B07FB71A68108700A75B9A /* main.m */,
-				CBF22A3E1F7348C10090951F /* SkinViewController.h */,
-				CBF22A3F1F7348C10090951F /* SkinViewController.m */,
 				CB2BDEA91F7818580078B9E9 /* SkinModule.h */,
 				CB2BDEAA1F7818580078B9E9 /* SkinModule.m */,
 				CB42ABE91F7B84E300234E28 /* CacheMudule.h */,
@@ -447,8 +436,9 @@
 				CBBE49571F9B25C900B06BA1 /* SkinUtils.m */,
 				CB9778CB1FA61B6A0046E9DF /* SkinManager.h */,
 				CB9778CC1FA61B6A0046E9DF /* SkinManager.m */,
-				CBD93BDA1FA8BE9B0032614F /* main.storyboard */,
 				CBD93BDC1FA8DA220032614F /* skin.plist */,
+				CBD93BDF1FA8E0ED0032614F /* ViewControllers */,
+				CBD93BDE1FA8E0D30032614F /* other */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -545,6 +535,32 @@
 				5708D6D5DE602D98680A8C2B /* libPods-skin_demo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CBD93BDE1FA8E0D30032614F /* other */ = {
+			isa = PBXGroup;
+			children = (
+				CBD93BDA1FA8BE9B0032614F /* main.storyboard */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				13B07FB71A68108700A75B9A /* main.m */,
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+			);
+			name = other;
+			sourceTree = "<group>";
+		};
+		CBD93BDF1FA8E0ED0032614F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CBF22A221F73489F0090951F /* HomeViewController.h */,
+				CBF22A231F73489F0090951F /* HomeViewController.m */,
+				CBF22A3E1F7348C10090951F /* SkinViewController.h */,
+				CBF22A3F1F7348C10090951F /* SkinViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

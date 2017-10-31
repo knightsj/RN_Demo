@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "SkinUtils.h"
 
+//Log输出
+#ifdef DEBUG
+#define SKLog(...) NSLog(@"%s 第%d行 \n %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define SKLog(...)
+#endif
+
+
 typedef void(^SkinZipDownloadSuccess)(id object);
 typedef void(^SkinZipDownloadProgress)(NSProgress *progress);
 typedef void(^SkinZipDownloadFailure)(NSError *error);
@@ -26,6 +34,13 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock;
 
+
+
+- (void)setCurrentSkin:(NSString *)currentSkin;
+
+- (void)setLastSkin:(NSString *)lastSkin;
+
+
 //获取当前使用的皮肤
 - (NSString *)getCurrentSkin;
 
@@ -34,6 +49,9 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 //获取当前可以使用的所有皮肤
 - (NSArray *)availableSkins;
+
+
+- (void)logSkinInfo;
 
 @end
 
