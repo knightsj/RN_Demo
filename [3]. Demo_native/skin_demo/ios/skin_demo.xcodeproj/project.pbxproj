@@ -36,14 +36,15 @@
 		2DCD954D1E0B4F2C00145EB5 /* skin_demoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* skin_demoTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8C4198288E5C80A6B707E775 /* libPods-skin_demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5708D6D5DE602D98680A8C2B /* libPods-skin_demo.a */; };
 		CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEAA1F7818580078B9E9 /* SkinModule.m */; };
 		CB3394261F79DA0100A8CF99 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3394251F79DA0100A8CF99 /* libz.tbd */; };
 		CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB42ABEA1F7B84E300234E28 /* CacheMudule.m */; };
 		CB9778CD1FA61B6A0046E9DF /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9778CC1FA61B6A0046E9DF /* SkinManager.m */; };
 		CBBE49581F9B25C900B06BA1 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBE49571F9B25C900B06BA1 /* SkinUtils.m */; };
+		CBD93BDB1FA8BE9B0032614F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBD93BDA1FA8BE9B0032614F /* main.storyboard */; };
 		CBF22A241F73489F0090951F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A231F73489F0090951F /* HomeViewController.m */; };
 		CBF22A401F7348C10090951F /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A3F1F7348C10090951F /* SkinViewController.m */; };
-		CBF22A421F7348D20090951F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A411F7348D20090951F /* main.storyboard */; };
 		CBF22A471F738EBA0090951F /* skin.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A461F738EBA0090951F /* skin.plist */; };
 /* End PBXBuildFile section */
 
@@ -261,9 +262,11 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* skin_demo-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "skin_demo-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* skin_demo-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "skin_demo-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5708D6D5DE602D98680A8C2B /* libPods-skin_demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-skin_demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		C8E835F98AC67EAE0E3C085A /* Pods-skin_demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin_demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo.release.xcconfig"; sourceTree = "<group>"; };
 		CB2BDEA91F7818580078B9E9 /* SkinModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = skin_demo/SkinModule.h; sourceTree = "<group>"; };
 		CB2BDEAA1F7818580078B9E9 /* SkinModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = skin_demo/SkinModule.m; sourceTree = "<group>"; };
 		CB3394251F79DA0100A8CF99 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -271,38 +274,15 @@
 		CB42ABEA1F7B84E300234E28 /* CacheMudule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = skin_demo/CacheMudule.m; sourceTree = "<group>"; };
 		CB9778CB1FA61B6A0046E9DF /* SkinManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinManager.h; path = skin_demo/SkinManager.h; sourceTree = "<group>"; };
 		CB9778CC1FA61B6A0046E9DF /* SkinManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = skin_demo/SkinManager.m; sourceTree = "<group>"; };
-		CB9778D01FA61FC30046E9DF /* ZipArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
-		CB9778D21FA61FC30046E9DF /* unzip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		CB9778D31FA61FC30046E9DF /* zip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		CB9778D41FA61FC30046E9DF /* ioapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		CB9778D51FA61FC30046E9DF /* mztools.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		CB9778D61FA61FC30046E9DF /* crypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		CB9778D71FA61FC30046E9DF /* zip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		CB9778D81FA61FC30046E9DF /* unzip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		CB9778D91FA61FC30046E9DF /* mztools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		CB9778DA1FA61FC30046E9DF /* ioapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		CB9778DB1FA61FC30046E9DF /* ZipArchive.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
-		CB9778F11FA621520046E9DF /* AFSecurityPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		CB9778F21FA621520046E9DF /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		CB9778F31FA621520046E9DF /* AFURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		CB9778F41FA621520046E9DF /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		CB9778F51FA621520046E9DF /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		CB9778F61FA621520046E9DF /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		CB9778F71FA621520046E9DF /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		CB9778F81FA621520046E9DF /* AFURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		CB9778F91FA621520046E9DF /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		CB9778FA1FA621520046E9DF /* AFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		CB9778FB1FA621520046E9DF /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		CB9778FC1FA621520046E9DF /* AFSecurityPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		CB9778FD1FA621520046E9DF /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		CBBE49561F9B25C900B06BA1 /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = skin_demo/SkinUtils.h; sourceTree = "<group>"; };
 		CBBE49571F9B25C900B06BA1 /* SkinUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinUtils.m; path = skin_demo/SkinUtils.m; sourceTree = "<group>"; };
+		CBD93BDA1FA8BE9B0032614F /* main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = main.storyboard; sourceTree = "<group>"; };
 		CBF22A221F73489F0090951F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = skin_demo/HomeViewController.h; sourceTree = "<group>"; };
 		CBF22A231F73489F0090951F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = skin_demo/HomeViewController.m; sourceTree = "<group>"; };
 		CBF22A3E1F7348C10090951F /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = skin_demo/SkinViewController.h; sourceTree = "<group>"; };
 		CBF22A3F1F7348C10090951F /* SkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinViewController.m; path = skin_demo/SkinViewController.m; sourceTree = "<group>"; };
-		CBF22A411F7348D20090951F /* main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = main.storyboard; path = skin_demo/main.storyboard; sourceTree = "<group>"; };
 		CBF22A461F738EBA0090951F /* skin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = skin.plist; path = skin_demo/skin.plist; sourceTree = "<group>"; };
+		D994B25D784CBB911464D28F /* Pods-skin_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin_demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +310,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				8C4198288E5C80A6B707E775 /* libPods-skin_demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +398,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0656F0E953AFCE6566957EAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D994B25D784CBB911464D28F /* Pods-skin_demo.debug.xcconfig */,
+				C8E835F98AC67EAE0E3C085A /* Pods-skin_demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,8 +428,6 @@
 		13B07FAE1A68108700A75B9A /* skin_demo */ = {
 			isa = PBXGroup;
 			children = (
-				CB9778F01FA621520046E9DF /* AFNetworking */,
-				CB9778CF1FA61FC30046E9DF /* ZipArchive */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -452,7 +440,6 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				CBF22A3E1F7348C10090951F /* SkinViewController.h */,
 				CBF22A3F1F7348C10090951F /* SkinViewController.m */,
-				CBF22A411F7348D20090951F /* main.storyboard */,
 				CB2BDEA91F7818580078B9E9 /* SkinModule.h */,
 				CB2BDEAA1F7818580078B9E9 /* SkinModule.m */,
 				CB42ABE91F7B84E300234E28 /* CacheMudule.h */,
@@ -461,6 +448,7 @@
 				CBBE49571F9B25C900B06BA1 /* SkinUtils.m */,
 				CB9778CB1FA61B6A0046E9DF /* SkinManager.h */,
 				CB9778CC1FA61B6A0046E9DF /* SkinManager.m */,
+				CBD93BDA1FA8BE9B0032614F /* main.storyboard */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -533,6 +521,7 @@
 				00E356EF1AD99517003FC87E /* skin_demoTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				CB3394241F79DA0000A8CF99 /* Frameworks */,
+				0656F0E953AFCE6566957EAA /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -553,55 +542,9 @@
 			isa = PBXGroup;
 			children = (
 				CB3394251F79DA0100A8CF99 /* libz.tbd */,
+				5708D6D5DE602D98680A8C2B /* libPods-skin_demo.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CB9778CF1FA61FC30046E9DF /* ZipArchive */ = {
-			isa = PBXGroup;
-			children = (
-				CB9778D01FA61FC30046E9DF /* ZipArchive.h */,
-				CB9778D11FA61FC30046E9DF /* minizip */,
-				CB9778DB1FA61FC30046E9DF /* ZipArchive.mm */,
-			);
-			path = ZipArchive;
-			sourceTree = "<group>";
-		};
-		CB9778D11FA61FC30046E9DF /* minizip */ = {
-			isa = PBXGroup;
-			children = (
-				CB9778D21FA61FC30046E9DF /* unzip.c */,
-				CB9778D31FA61FC30046E9DF /* zip.c */,
-				CB9778D41FA61FC30046E9DF /* ioapi.c */,
-				CB9778D51FA61FC30046E9DF /* mztools.c */,
-				CB9778D61FA61FC30046E9DF /* crypt.h */,
-				CB9778D71FA61FC30046E9DF /* zip.h */,
-				CB9778D81FA61FC30046E9DF /* unzip.h */,
-				CB9778D91FA61FC30046E9DF /* mztools.h */,
-				CB9778DA1FA61FC30046E9DF /* ioapi.h */,
-			);
-			path = minizip;
-			sourceTree = "<group>";
-		};
-		CB9778F01FA621520046E9DF /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				CB9778F11FA621520046E9DF /* AFSecurityPolicy.h */,
-				CB9778F21FA621520046E9DF /* AFNetworkReachabilityManager.h */,
-				CB9778F31FA621520046E9DF /* AFURLSessionManager.h */,
-				CB9778F41FA621520046E9DF /* AFURLRequestSerialization.h */,
-				CB9778F51FA621520046E9DF /* AFURLResponseSerialization.m */,
-				CB9778F61FA621520046E9DF /* AFHTTPSessionManager.m */,
-				CB9778F71FA621520046E9DF /* AFURLResponseSerialization.h */,
-				CB9778F81FA621520046E9DF /* AFURLSessionManager.m */,
-				CB9778F91FA621520046E9DF /* AFURLRequestSerialization.m */,
-				CB9778FA1FA621520046E9DF /* AFNetworking.h */,
-				CB9778FB1FA621520046E9DF /* AFNetworkReachabilityManager.m */,
-				CB9778FC1FA621520046E9DF /* AFSecurityPolicy.m */,
-				CB9778FD1FA621520046E9DF /* AFHTTPSessionManager.h */,
-			);
-			name = AFNetworking;
-			path = "../../../../../../Downloads/AFNetworking-master/AFNetworking";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -629,10 +572,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "skin_demo" */;
 			buildPhases = (
+				117A32C36960A394E37A96EB /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				6D7DBF2009E615D34130EAC7 /* [CP] Embed Pods Frameworks */,
+				64E3138513B8E15CF42B791B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -962,8 +908,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				CBF22A471F738EBA0090951F /* skin.plist in Resources */,
-				CBF22A421F7348D20090951F /* main.storyboard in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				CBD93BDB1FA8BE9B0032614F /* main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +945,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		117A32C36960A394E37A96EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-skin_demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1012,6 +976,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		64E3138513B8E15CF42B791B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D7DBF2009E615D34130EAC7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1125,11 +1119,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D994B25D784CBB911464D28F /* Pods-skin_demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = skin_demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1146,10 +1142,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E835F98AC67EAE0E3C085A /* Pods-skin_demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = skin_demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
