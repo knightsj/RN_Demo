@@ -7,15 +7,18 @@
 //
 
 #import "SkinManager.h"
-
 #import "ZipArchive.h"
 
-
+#if __has_include(<AFNetworking/AFNetworking.h>)
+#import <AFNetworking/AFNetworking.h>
+#else
+#import "AFNetworking.h"
+#endif
 
 
 //Log输出
 #ifdef DEBUG
-#define SKLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#define SKLog(...) NSLog(@"%s 第%d行 \n %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
 #define SKLog(...)
 #endif
@@ -97,7 +100,7 @@
     //开始解压缩
     if( [SSZipArchive unzipFileAtPath:zip_path toDestination:folder_path] ){
       
-      SKLog(@"======= zip包下载完成 并解压完毕。\nskin名称：%@：\nzip包地址：%@ \n解压后文件夹位置：%@",skinName,zip_path,folder_path);
+      SKLog(@"======= zip包下载完成 并解压完毕 开始更新皮肤配置文件。\nskin名称：%@：\nzip包地址：%@ \n解压后文件夹位置：%@",skinName,zip_path,folder_path);
 
       [self updateSkinInfoOfSkinName:skinName success:successBlock falure:failureBlock];
 
@@ -120,36 +123,94 @@
                          success:(SkinZipDownloadSuccess)successBlock
                           falure:(SkinZipDownloadFailure)failureBlock{
   
-  //拿到skin之后自动去皮肤包文件夹里查找json文件，获取信息，写入plist文件
-  NSData *jsonData = [NSData dataWithContentsOfFile:[SkinUtils generateSkinColorJSONPathWithSkinName:skinName]];
+  SKLog(@"======= zip包下载完成，解压缩成功 -> 开始更新配置文件");
   
-  NSError *error;
-  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                       options:NSJSONReadingMutableContainers
-                                                         error:&error];
-  if(error) {
-    SKLog(@"======= zip包下载完成，解压缩成功，但是解析skin.plist失败");
-    if (failureBlock) {
-      NSError *error = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
-      failureBlock(error);
+  NSError *error = nil;
+  NSDictionary *dict = nil;
+  
+  //拿到skin之后自动去皮肤包文件夹里查找json文件，获取信息，写入plist文件
+  NSString *colorJSONFilePath = [SkinUtils generateSkinColorJSONPathWithSkinName:skinName];
+  
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  if ([fileManager fileExistsAtPath:colorJSONFilePath]) {
+    SKLog(@"======= 开始更新配置文件 -> 文件color.json存在");
+    NSData *jsonData = [NSData dataWithContentsOfFile:colorJSONFilePath];
+    if (!jsonData) {
+      //color.json 转 NSData失败
+      SKLog(@"======= 开始更新配置文件：文件color.json存在 -> color.json 转 NSData失败");
+      
+      
+      
+    }else {
+      //color.json 转 NSData成功
+      SKLog(@"======= 开始更新配置文件：文件color.json存在 -> color.json 转 NSData成功");
+      dict = [NSJSONSerialization JSONObjectWithData:jsonData
+                                             options:NSJSONReadingMutableContainers
+                                               error:&error];
+      if (error) {
+        SKLog(@"======= 开始更新配置文件：文件color.json存在，color.json 转 NSData成功 -> NSData转 NSDictionary失败");
+      }else {
+        SKLog(@"======= 开始更新配置文件：文件color.json存在，color.json 转 NSData成功 -> NSData转 NSDictionary成功");
+      }
+      
     }
+    
   }
+  else {
+    SKLog(@"======= 开始更新配置文件 -> 文件color.json不存在");
+    dict = [NSDictionary dictionary];
+  }
+  
   
   NSMutableDictionary *skin_info = [dict mutableCopy];
   [skin_info addEntriesFromDictionary:@{@"name":skinName,
                                         @"local_path":[SkinUtils generateSkinFolderPathWithSkinName:skinName]}];
   //更新配置字典
+  SKLog(@"======= 合成新的皮肤的配置字典");
   NSMutableDictionary * configDict = [SkinUtils generateSkinConfigDict];
   [configDict setObject:skin_info forKey:skinName];
   
-  //把更新后的配置字典写入plist文件
-  [configDict writeToFile:[SkinUtils generateSkinConfigFilePath] atomically:YES];
-  
-  if (successBlock) {
-      successBlock(@"下载成功");
+  SKLog(@"======= 将字典转成NSData");
+  NSError *dic_2_data_error = nil;
+  NSData *configData = [NSPropertyListSerialization dataWithPropertyList:configDict
+                                                                  format:NSPropertyListBinaryFormat_v1_0
+                                                                 options:0
+                                                                   error:&dic_2_data_error];
+
+  if(configData && (!dic_2_data_error)){
+    
+    SKLog(@"======= 新皮肤字典转化为NSData成功，将更新后的皮肤设置字典写入skin.plist文件");
+    if ([configData writeToFile:[SkinUtils generateSkinConfigFilePath] atomically:YES]) {
+      SKLog(@"======= 将更新后的皮肤设置字典写入skin.plist文件成功");
+      //设置上一个skin为现在的skin
+      [self setLastSkin:[self getCurrentSkin]];
+      //设置当前的skin为更新的skin
+      [self setCurrentSkin:skinName];
+      SKLog(@"======= 皮肤下载成功: \n ======= 上一个使用的皮肤:%@ \n ======= 正在使用的皮肤：%@，\n ======= 能够使用的所有皮肤：%@\n ======= 皮肤配置字典：%@",[self getLastSkin],[self getCurrentSkin],[self availableSkins],[SkinUtils generateSkinConfigDict]);
+      if (successBlock) {
+          successBlock(@"下载成功");
+      }
+      
+    }else {
+      SKLog(@"======= 下载失败 -> 将更新后的皮肤设置字典写入skin.plist文件失败");
+      if (failureBlock) {
+        NSError *downloadError = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
+        failureBlock(downloadError);
+      }
+    }
+    
+    
+    
+    
+  }else{
+    
+    SKLog(@"======= 下载失败 -> 新皮肤字典转化为Data失败");
+    if (failureBlock) {
+      NSError *downloadError = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
+      failureBlock(downloadError);
+    }
   }
-  
-  
+
 }
 
 - (void)setCurrentSkin:(NSString *)currentSkin{

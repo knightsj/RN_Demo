@@ -43,9 +43,9 @@
 		CB9778CD1FA61B6A0046E9DF /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9778CC1FA61B6A0046E9DF /* SkinManager.m */; };
 		CBBE49581F9B25C900B06BA1 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBE49571F9B25C900B06BA1 /* SkinUtils.m */; };
 		CBD93BDB1FA8BE9B0032614F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBD93BDA1FA8BE9B0032614F /* main.storyboard */; };
+		CBD93BDD1FA8DA220032614F /* skin.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBD93BDC1FA8DA220032614F /* skin.plist */; };
 		CBF22A241F73489F0090951F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A231F73489F0090951F /* HomeViewController.m */; };
 		CBF22A401F7348C10090951F /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF22A3F1F7348C10090951F /* SkinViewController.m */; };
-		CBF22A471F738EBA0090951F /* skin.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBF22A461F738EBA0090951F /* skin.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,11 +277,11 @@
 		CBBE49561F9B25C900B06BA1 /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = skin_demo/SkinUtils.h; sourceTree = "<group>"; };
 		CBBE49571F9B25C900B06BA1 /* SkinUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinUtils.m; path = skin_demo/SkinUtils.m; sourceTree = "<group>"; };
 		CBD93BDA1FA8BE9B0032614F /* main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = main.storyboard; sourceTree = "<group>"; };
+		CBD93BDC1FA8DA220032614F /* skin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = skin.plist; path = skin_demo/skin.plist; sourceTree = "<group>"; };
 		CBF22A221F73489F0090951F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = skin_demo/HomeViewController.h; sourceTree = "<group>"; };
 		CBF22A231F73489F0090951F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = skin_demo/HomeViewController.m; sourceTree = "<group>"; };
 		CBF22A3E1F7348C10090951F /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinViewController.h; path = skin_demo/SkinViewController.h; sourceTree = "<group>"; };
 		CBF22A3F1F7348C10090951F /* SkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinViewController.m; path = skin_demo/SkinViewController.m; sourceTree = "<group>"; };
-		CBF22A461F738EBA0090951F /* skin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = skin.plist; path = skin_demo/skin.plist; sourceTree = "<group>"; };
 		D994B25D784CBB911464D28F /* Pods-skin_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin_demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -434,7 +434,6 @@
 				CBF22A221F73489F0090951F /* HomeViewController.h */,
 				CBF22A231F73489F0090951F /* HomeViewController.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				CBF22A461F738EBA0090951F /* skin.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -449,6 +448,7 @@
 				CB9778CB1FA61B6A0046E9DF /* SkinManager.h */,
 				CB9778CC1FA61B6A0046E9DF /* SkinManager.m */,
 				CBD93BDA1FA8BE9B0032614F /* main.storyboard */,
+				CBD93BDC1FA8DA220032614F /* skin.plist */,
 			);
 			name = skin_demo;
 			sourceTree = "<group>";
@@ -907,7 +907,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				CBF22A471F738EBA0090951F /* skin.plist in Resources */,
+				CBD93BDD1FA8DA220032614F /* skin.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				CBD93BDB1FA8BE9B0032614F /* main.storyboard in Resources */,
 			);

@@ -12,12 +12,13 @@
 
 
 + (NSString *)generateSkinFolderPathWithSkinName:(NSString *)skinName{
-  return [NSString stringWithFormat:@"~/Documents/skin/%@",skinName];
+  return [NSString stringWithFormat:@"%@/skin/%@",[self documentFolderPath],skinName];
 }
 
 
 + (NSString *)generateSkinColorJSONPathWithSkinName:(NSString *)skinName{
-  return [NSString stringWithFormat:@"~/Documents/skin/%@/color.json",skinName];
+  
+  return [NSString stringWithFormat:@"%@/skin/%@/color.json",[self documentFolderPath],skinName];
 }
 
 
@@ -29,10 +30,14 @@
 
 + (NSMutableDictionary *)generateSkinConfigDict{
   
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
-  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateSkinConfigFilePath]];
   return configDict;
 }
 
++ (NSString *)documentFolderPath{
+  NSArray *documentsPathArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentPath = [documentsPathArr lastObject];
+  return documentPath;
+}
 
 @end

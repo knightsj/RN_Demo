@@ -9,14 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SkinUtils.h"
 
-
-#if __has_include(<AFNetworking/AFNetworking.h>)
-#import <AFNetworking/AFNetworking.h>
-#else
-#import "AFNetworking.h"
-#endif
-
-
 typedef void(^SkinZipDownloadSuccess)(id object);
 typedef void(^SkinZipDownloadProgress)(NSProgress *progress);
 typedef void(^SkinZipDownloadFailure)(NSError *error);
@@ -24,21 +16,23 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 @interface SkinManager : NSObject
 
-
+//获取单例
 + (instancetype)sharedManager;
 
+//下载某个皮肤
 - (void)downloadSkin:(NSString *)skinName
                  url:(NSString *)url
              success:(SkinZipDownloadSuccess)successBlock
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock;
 
-- (void)setCurrentSkin:(NSString *)currentSkin;
-- (void)setLastSkin:(NSString *)lastSkin;
-
+//获取当前使用的皮肤
 - (NSString *)getCurrentSkin;
+
+//获取上一个使用的皮肤
 - (NSString *)getLastSkin;
 
+//获取当前可以使用的所有皮肤
 - (NSArray *)availableSkins;
 
 @end

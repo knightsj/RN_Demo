@@ -30,6 +30,14 @@
                                     <action selector="jumpToSkinSettingPage:" destination="uEz-Lm-4lh" eventType="touchUpInside" id="BjQ-1X-9tW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8k-OY-1il">
+                                <rect key="frame" x="138" y="210" width="98" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="download skin"/>
+                                <connections>
+                                    <action selector="downloadSkin:" destination="uEz-Lm-4lh" eventType="touchUpInside" id="ii3-mw-5kq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="UJy-VQ-LUw"/>

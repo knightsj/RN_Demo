@@ -9,7 +9,7 @@
 #import "SkinViewController.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-//#import "SkinManager.h"
+#import "SkinManager.h"
 
 @interface SkinViewController ()
 @end
@@ -19,17 +19,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-//    [[SkinManager sharedManager] downloadSkin:@"pink" url:@"http://oih3a9o4n.bkt.clouddn.com/pink.zip" success:^{
-//
-//    } progress:^(NSProgress *progress) {
-//
-//    } falure:^(NSError *error) {
-//
-//    }];
-//
   
+
 }
 
+- (IBAction)downloadSkin:(UIButton *)sender {
+  
+  [[SkinManager sharedManager] downloadSkin:@"purple" url:@"http://oih3a9o4n.bkt.clouddn.com/purple.zip"  success:^(id object) {
+    
+  } progress:^(NSProgress *progress) {
+    
+  } falure:^(NSError *error) {
+    
+  }];
+  
+}
 
 //点击弹出RN界面
 - (IBAction)jumpToSkinSettingPage:(UIButton *)sender {

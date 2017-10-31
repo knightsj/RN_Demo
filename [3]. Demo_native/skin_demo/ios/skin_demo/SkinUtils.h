@@ -10,16 +10,16 @@
 
 @interface SkinUtils : NSObject
 
-//获取颜色包的路径
+//获取皮肤包的路径
 + (NSString *)generateSkinFolderPathWithSkinName:(NSString *)skinName;
 
-//获取颜色包里的配置文件路径
+//获取皮肤包里的颜色配置文件路径（color.json）
 + (NSString *)generateSkinColorJSONPathWithSkinName:(NSString *)skinName;
 
-//获取皮肤的plist文件路径
+//获取皮肤的plist文件路径(skin.plist)
 + (NSString *)generateSkinConfigFilePath;
 
-//获取皮肤的plist字典
+//获取皮肤的plist字典(skin.plist -> NSDictionary)
 + (NSMutableDictionary *)generateSkinConfigDict;
 
 
