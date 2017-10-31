@@ -28,6 +28,8 @@
 @end
 
 
+
+
 @implementation SkinManager
 
 + (instancetype)sharedManager
@@ -39,6 +41,7 @@
   });
   return _manager;
 }
+
 
 - (void)downloadSkin:(NSString *)skinName
                  url:(NSString *)url
@@ -71,8 +74,6 @@
   NSURLRequest *request = [NSURLRequest requestWithURL:download_url];
 
   //下载Task操作
-
-
   _downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
 
     // 下载进度
@@ -98,10 +99,14 @@
       
       SKLog(@"======= zip包下载完成 并解压完毕。\nskin名称：%@：\nzip包地址：%@ \n解压后文件夹位置：%@",skinName,zip_path,folder_path);
 
-      [self updateSkinInfoOfSkinName:skinName];
+      [self updateSkinInfoOfSkinName:skinName success:successBlock falure:failureBlock];
 
     }else{
       SKLog(@"======= zip包下载完成，但是解压缩失败。\nskin名称：%@ \nzip包位置：%@",skinName, zip_path);
+      if (failureBlock) {
+        NSError *error = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
+        failureBlock(error);
+      }
     }
     
   }];
@@ -109,12 +114,11 @@
   [_downloadTask resume];
 }
 
-//typedef void(^SkinZipDownloadSuccess)();
-//typedef void(^SkinZipDownloadProgress)(NSProgress *progress);
-//typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 //更新skin的plist配置文件
-- (void)updateSkinInfoOfSkinName:(NSString *)skinName{
+- (void)updateSkinInfoOfSkinName:(NSString *)skinName
+                         success:(SkinZipDownloadSuccess)successBlock
+                          falure:(SkinZipDownloadFailure)failureBlock{
   
   //拿到skin之后自动去皮肤包文件夹里查找json文件，获取信息，写入plist文件
   NSData *jsonData = [NSData dataWithContentsOfFile:[SkinUtils generateSkinColorJSONPathWithSkinName:skinName]];
@@ -124,7 +128,11 @@
                                                        options:NSJSONReadingMutableContainers
                                                          error:&error];
   if(error) {
-    //返回失败
+    SKLog(@"======= zip包下载完成，解压缩成功，但是解析skin.plist失败");
+    if (failureBlock) {
+      NSError *error = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
+      failureBlock(error);
+    }
   }
   
   NSMutableDictionary *skin_info = [dict mutableCopy];
@@ -137,15 +145,50 @@
   //把更新后的配置字典写入plist文件
   [configDict writeToFile:[SkinUtils generateSkinConfigFilePath] atomically:YES];
   
+  if (successBlock) {
+      successBlock(@"下载成功");
+  }
   
+  
+}
+
+- (void)setCurrentSkin:(NSString *)currentSkin{
+  
+  [[NSUserDefaults standardUserDefaults] setObject:currentSkin forKey:@"currentSkin"];
+  
+}
+
+- (void)setLastSkin:(NSString *)lastSkin{
+  
+  [[NSUserDefaults standardUserDefaults] setObject:lastSkin forKey:@"lastSkin"];
+  
+}
+
+- (NSString *)getCurrentSkin{
+  
+  NSString *currentSkin = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentSkin"];
+  if (currentSkin.length == 0) {
+     [[NSUserDefaults standardUserDefaults] setObject:@"blue" forKey:@"currentSkin"];
+  }
+  return [[NSUserDefaults standardUserDefaults] objectForKey:@"currentSkin"];
 }
 
 - (NSString *)getLastSkin{
   
-  return _lastSkin;
-  
+  NSString *lastSkin = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSkin"];
+  if (lastSkin.length == 0) {
+    [[NSUserDefaults standardUserDefaults] setObject:@"blue" forKey:@"lastSkin"];
+  }
+  return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastSkin"];
 }
 
+
+- (NSArray *)availableSkins{
+  
+  NSMutableDictionary * configDict = [SkinUtils generateSkinConfigDict];
+  return [configDict allKeys];
+  
+}
 
 @end
 

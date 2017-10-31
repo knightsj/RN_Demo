@@ -10,8 +10,6 @@
 #import "SkinUtils.h"
 
 
-
-
 #if __has_include(<AFNetworking/AFNetworking.h>)
 #import <AFNetworking/AFNetworking.h>
 #else
@@ -19,14 +17,13 @@
 #endif
 
 
-typedef void(^SkinZipDownloadSuccess)();
+typedef void(^SkinZipDownloadSuccess)(id object);
 typedef void(^SkinZipDownloadProgress)(NSProgress *progress);
 typedef void(^SkinZipDownloadFailure)(NSError *error);
 
 
 @interface SkinManager : NSObject
 
-@property (nonatomic, copy) NSString *lastSkin;
 
 + (instancetype)sharedManager;
 
@@ -36,9 +33,13 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock;
 
+- (void)setCurrentSkin:(NSString *)currentSkin;
+- (void)setLastSkin:(NSString *)lastSkin;
+
+- (NSString *)getCurrentSkin;
 - (NSString *)getLastSkin;
 
-//- (NSString *)getCurrentSkin;
+- (NSArray *)availableSkins;
 
 @end
 
