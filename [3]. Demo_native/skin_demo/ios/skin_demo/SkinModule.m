@@ -30,6 +30,17 @@ RCT_EXPORT_MODULE();
   return dispatch_get_main_queue();
 }
 
+//当前是哪个皮肤
+RCT_EXPORT_METHOD(downloadSkin:(NSString *)skinName url:(NSString *)url callback:(RCTResponseSenderBlock)callback){
+  
+  [[SkinManager sharedManager] downloadSkin:skinName url:url success:^(id object) {
+       callback(@[[NSNull null],@"下载成功"]);
+  } progress:nil falure:^(NSError *error) {
+         callback(@[error,@"下载失败"]);
+  }];
+}
+
+
 
 //当前是哪个皮肤
 RCT_EXPORT_METHOD(currentSkinName:(RCTResponseSenderBlock)callback){
@@ -45,7 +56,7 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
     return;
   }
 
-  NSMutableDictionary *dict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *dict = [SkinUtils generateSandboxSkinConfigDict];
   NSArray *keys = [dict allKeys];
   if ([keys containsObject:skinName]) {
     
@@ -73,14 +84,14 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
 
 RCT_EXPORT_METHOD(getColor:(NSString *)stateName color:(NSString*)colorName callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   NSDictionary * dict = [self returnColorStateDictWithStateName:stateName colorName:colorName inConfigureDict:configDict];
   callback(@[dict]);
 }
 
 RCT_EXPORT_METHOD(getColors:(NSArray*)colorNames callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
   NSInteger length = [colorNames count];
   for (NSInteger index = 0; index < length; index ++) {
@@ -92,7 +103,7 @@ RCT_EXPORT_METHOD(getColors:(NSArray*)colorNames callback:(RCTResponseSenderBloc
 RCT_EXPORT_METHOD(getColors:(NSArray *)states color:(NSArray*)colorNames callback:(RCTResponseSenderBlock)callback){
 
   
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   
   if ([states count] == [colorNames count]) {
      NSInteger length = [colorNames count];
@@ -107,7 +118,7 @@ RCT_EXPORT_METHOD(getColors:(NSArray *)states color:(NSArray*)colorNames callbac
 
 RCT_EXPORT_METHOD(getColorsWithDict:(NSDictionary *)stateAndColorNameDict callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   
   NSArray *keys = [stateAndColorNameDict allKeys];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
@@ -125,13 +136,8 @@ RCT_EXPORT_METHOD(getColorsWithDict:(NSDictionary *)stateAndColorNameDict callba
 - (NSDictionary *)returnColorStateDictWithStateName:(NSString *)stateName colorName:(NSString *)colorName inConfigureDict:(NSDictionary *)configDict{
   
   NSString *current_skin = [[SkinManager sharedManager] getCurrentSkin];
-  NSString *colorValue = nil;
-  if (current_skin.length == 0) {
-    SKLog(@"没有设置主题，取当前主题默认色值");
-    colorValue = @"#FB5C89";
-  }
-  
   NSArray *keys = [configDict allKeys];
+  NSString *colorValue = nil;
   
   //找到当前主题的配置
   if ([keys containsObject:current_skin]) {
@@ -165,14 +171,14 @@ RCT_EXPORT_METHOD(getColorsWithDict:(NSDictionary *)stateAndColorNameDict callba
 
 RCT_EXPORT_METHOD(getImage:(NSString *)stateName imageName:(NSString*)imageName callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   NSDictionary *dict = [self returnImageStateDictWithStateName:stateName imageName:imageName inConfigureDict:configDict];
   callback(@[dict]);
 }
 
 RCT_EXPORT_METHOD(getImages:(NSArray *)imageNames callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict =  [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict =  [SkinUtils generateSandboxSkinConfigDict];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
   NSUInteger length = [imageNames count];
   for (NSUInteger index = 0; index < length;index++) {
@@ -185,7 +191,7 @@ RCT_EXPORT_METHOD(getImages:(NSArray *)imageNames callback:(RCTResponseSenderBlo
 
 RCT_EXPORT_METHOD(getImages:(NSArray *)stateNames imageName:(NSArray *)imageNames callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict =  [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict =  [SkinUtils generateSandboxSkinConfigDict];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
   if ([stateNames count] == [imageNames count]) {
     NSUInteger length = [stateNames count];
@@ -200,7 +206,7 @@ RCT_EXPORT_METHOD(getImages:(NSArray *)stateNames imageName:(NSArray *)imageName
 
 RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(RCTResponseSenderBlock)callback){
   
-  NSMutableDictionary *configDict =  [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict =  [SkinUtils generateSandboxSkinConfigDict];
   NSArray *keys = [stateAndColorNameDict allKeys];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
  
@@ -217,10 +223,10 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
 
 - (NSDictionary *)returnImageStateDictWithStateName:(NSString *)stateName imageName:(NSString *)imageName inConfigureDict:(NSDictionary *)configDict{
 
-  NSArray *keys = [configDict allKeys];
   NSString *current_skin = [[SkinManager sharedManager] getCurrentSkin];
+  NSString *skinFolderPath = [SkinUtils generateSkinFolderPathWithSkinName:current_skin];
+  NSArray *keys = [configDict allKeys];
   NSString *imagePath = nil;
-  NSString *skinFolderPath = [self getSkinFolderPathWithSkinName:current_skin];
   
   //找到当前主题的配置
   if ([keys containsObject:current_skin]) {
@@ -230,6 +236,9 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
     NSString *localPath = [currentSkinDict objectForKey:@"local_path"];
     
     if (localPath.length == 0) {
+      
+      SKLog(@"localPath为空，无法获取图片");
+      imagePath = @"";
       
     }else if ([localPath isEqualToString:@"bundle"]){
       SKLog(@"即将获取bundle的皮肤资源");
@@ -243,9 +252,14 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
       
     }else{
       
+      SKLog(@"localPath内容不支持，无法获取图片");
+      imagePath = @"no_image";
     }
     
   }else{
+    
+    SKLog(@"不存在当前要设定的，无法获取图片");
+    imagePath = @"no_image";
     
   }
 
@@ -264,18 +278,21 @@ RCT_EXPORT_METHOD(getColorImageList:(NSArray *)colorList imageList:(NSArray *)im
   
   
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:3];
-  NSMutableDictionary *configDict = [SkinUtils generateSkinConfigDict];
+  NSMutableDictionary *configDict = [SkinUtils generateSandboxSkinConfigDict];
   
-  
-  NSInteger length_1 = [colorList count];
-  for (NSInteger index = 0; index < length_1; index ++) {
-    [dict addEntriesFromDictionary:[self returnColorStateDictWithStateName:colorList[index] colorName:colorList[index] inConfigureDict:configDict]];
+  if ([colorList count]>0) {
+    NSInteger length_1 = [colorList count];
+    for (NSInteger index = 0; index < length_1; index ++) {
+      [dict addEntriesFromDictionary:[self returnColorStateDictWithStateName:colorList[index] colorName:colorList[index] inConfigureDict:configDict]];
+    }
   }
   
-  NSUInteger length_2 = [imageList count];
-  for (NSUInteger index = 0; index < length_2; index++) {
-    
-    [dict addEntriesFromDictionary:[self returnImageStateDictWithStateName:imageList[index] imageName:imageList[index] inConfigureDict:configDict]];
+  if ([imageList count] > 0) {
+    NSUInteger length_2 = [imageList count];
+    for (NSUInteger index = 0; index < length_2; index++) {
+      
+      [dict addEntriesFromDictionary:[self returnImageStateDictWithStateName:imageList[index] imageName:imageList[index] inConfigureDict:configDict]];
+    }
   }
   
   callback(@[dict]);

@@ -17,11 +17,13 @@ import {
 
 } from 'react-native';
 
-
+import NavigationBar from './NavigationBar'
+import ViewUtil from './ViewUtil'
+import BaseComponent from './BaseComponent'
 var SkinModule = NativeModules.SkinModule;
-var skinModule = new NativeEventEmitter(SkinModule)
 
-export default class skinPage extends Component {
+
+export default class skinPage extends BaseComponent {
 
     constructor(props){
         super(props);
@@ -40,11 +42,24 @@ export default class skinPage extends Component {
     }
 
     componentWillMount() {
-        //开始监听从iOS端发来的通知
-        this.listener = skinModule.addListener("RNChangeSkin",(skinInfo) => this.changeSkin(skinInfo))
+        this.updateSkin("");
+        super.componentWillMount();
     }
 
 
+    onBackPress() {
+        this.props.navigator.pop();
+    }
+
+    downloadSkin(skinName,url){
+        SkinModule.downloadSkin(skinName,url,(error,result) =>{
+            if (error){
+                alert(result);
+            }else {
+                alert(result);
+            }
+        });
+    }
 
     componentDidMount() {
 
@@ -57,7 +72,7 @@ export default class skinPage extends Component {
         }
     }
 
-    changeSkin(skinInfo){
+    updateSkin(skinInfo){
 
         // ========== 转换颜色 ========
         // 单个转换
@@ -105,13 +120,20 @@ export default class skinPage extends Component {
         return (
             <View style={styles.container}>
 
-                <View style={[styles.navigationBarStyle,{backgroundColor: this.state.navColor}]}>
-                    <Text style={styles.navTextStyle}>
-                        我是导航栏
-                    </Text>
-                </View>
+                <NavigationBar
+                    title={'皮肤设定页面'}
+                    style={{backgroundColor:this.state.color_2}}
+                    statusBar={{backgroundColor:this.state.color_2}}
+                    leftButton={ViewUtil.getLeftButton(() => this.onBackPress())}
+                />
 
-                <View style={[{flex: 1},{backgroundColor: this.state.bgColor}]}>
+                <View style={[{flex: 1},{backgroundColor: this.state.color_1}]}>
+
+                    <TouchableOpacity onPress={()=>this.downloadSkin('purple','http://oih3a9o4n.bkt.clouddn.com/purple.zip')}>
+                        <Text style={styles.instructions}>
+                            download purple skin!!!!!
+                        </Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>this.changeIntoSkin('blue')}>
                         <Text style={styles.instructions}>
@@ -122,7 +144,7 @@ export default class skinPage extends Component {
 
                     <TouchableOpacity onPress={()=>this.changeIntoSkin('purple')}>
                         <Text style={styles.instructions}>
-                            Click to change into pink skin!
+                            Click to change into purple skin!
                         </Text>
                     </TouchableOpacity>
                     <Text style={styles.instructions}>
@@ -134,11 +156,11 @@ export default class skinPage extends Component {
                         <Text style={styles.instructions}>
                             图片1：
                         </Text>
-                        <Image style={styles.imageStyle} source={{uri: this.state.image_1}}></Image>
+                        <Image style={styles.imageStyle} source={{uri: this.state.title_before}}></Image>
                         <Text style={styles.instructions}>
                             图片2：
                         </Text>
-                        <Image style={styles.imageStyle} source={{uri: this.state.image_2}}></Image>
+                        <Image style={styles.imageStyle} source={{uri: this.state.title_after}}></Image>
                         {/*<Image style={styles.imageStyle} source={{uri: 'blue_title_before'}}></Image>*/}
                         {/*<Image style={styles.imageStyle} source={{uri: 'blue_title_after'}}></Image>*/}
                         {/*<Image style={styles.imageStyle} source={{uri: '~/Documents/skin/red/red/red_title_before'}}></Image>*/}

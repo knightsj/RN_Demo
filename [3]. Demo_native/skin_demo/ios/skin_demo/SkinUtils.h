@@ -16,11 +16,16 @@
 //获取皮肤包里的颜色配置文件路径（color.json）
 + (NSString *)generateSkinColorJSONPathWithSkinName:(NSString *)skinName;
 
-//获取皮肤的plist文件路径(skin.plist)
-+ (NSString *)generateSkinConfigFilePath;
+//获取Bundle中皮肤的plist文件路径(skin.plist)
++ (NSString *)generateBundelSkinConfigFilePath;
+
+//获取沙盒中皮肤的plist文件路径(skin.plist)
++ (NSString *)generateSandboxSkinConfigFilePath;
 
 //获取皮肤的plist字典(skin.plist -> NSDictionary)
-+ (NSMutableDictionary *)generateSkinConfigDict;
++ (NSMutableDictionary *)generateBundleSkinConfigDict;
+
++ (NSMutableDictionary *)generateSandboxSkinConfigDict;
 
 
 @end

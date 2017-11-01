@@ -17,22 +17,30 @@
 
 
 + (NSString *)generateSkinColorJSONPathWithSkinName:(NSString *)skinName{
-  
   return [NSString stringWithFormat:@"%@/skin/%@/color.json",[self documentFolderPath],skinName];
 }
 
-
-+ (NSString *)generateSkinConfigFilePath{
-  
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
-  return filePath;
++ (NSString *)generateBundelSkinConfigFilePath{
+  return [[NSBundle mainBundle] pathForResource:@"skin" ofType:@"plist"];
 }
 
-+ (NSMutableDictionary *)generateSkinConfigDict{
++ (NSString *)generateSandboxSkinConfigFilePath{
+  return [NSString stringWithFormat:@"%@/skin/skin.plist",[self documentFolderPath]];
+}
+
+
++ (NSMutableDictionary *)generateBundleSkinConfigDict{
   
-  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateSkinConfigFilePath]];
+  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateBundelSkinConfigFilePath]];
   return configDict;
 }
+
++ (NSMutableDictionary *)generateSandboxSkinConfigDict{
+  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateSandboxSkinConfigFilePath]];
+  return configDict;
+}
+
+
 
 + (NSString *)documentFolderPath{
   NSArray *documentsPathArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
