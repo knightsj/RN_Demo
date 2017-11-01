@@ -36,8 +36,9 @@
 }
 
 + (NSMutableDictionary *)generateSandboxSkinConfigDict{
-  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateSandboxSkinConfigFilePath]];
-  return configDict;
+//  NSMutableDictionary *configDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self generateSandboxSkinConfigFilePath]];
+  NSDictionary *configDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"skin_config"];
+  return [configDict mutableCopy];
 }
 
 

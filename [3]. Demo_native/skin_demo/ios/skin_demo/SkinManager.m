@@ -41,12 +41,18 @@
   
   self = [super init];
   if (self) {
-    NSString *sanboxSkinConfigFilePath = [SkinUtils generateSandboxSkinConfigFilePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:sanboxSkinConfigFilePath]) {
-      NSDictionary *dict = [SkinUtils generateBundleSkinConfigDict];
-      [dict writeToFile:sanboxSkinConfigFilePath atomically:YES];
-    }    
+//    NSString *sanboxSkinConfigFilePath = [SkinUtils generateSandboxSkinConfigFilePath];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    if (![fileManager fileExistsAtPath:sanboxSkinConfigFilePath]) {
+//      NSDictionary *dict = [SkinUtils generateBundleSkinConfigDict];
+//      [dict writeToFile:sanboxSkinConfigFilePath atomically:YES];
+//    }
+    
+    NSDictionary *skinConfig = [[NSUserDefaults standardUserDefaults] objectForKey:@"skin_config"];
+    if (!skinConfig) {
+       NSDictionary *dict = [SkinUtils generateBundleSkinConfigDict];
+       [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"skin_config"];
+    }
   }
   return self;
 }
@@ -177,26 +183,40 @@
   [configDict setObject:skin_info forKey:skinName];
 
   SKLog(@"======= 新皮肤字典转化为NSData成功，将更新后的皮肤设置字典写入skin.plist文件");
-  if ([configDict writeToFile:[SkinUtils generateSandboxSkinConfigFilePath] atomically:YES]) {
-    SKLog(@"======= 将更新后的皮肤设置字典写入skin.plist文件成功");
-    //设置上一个skin为现在的skin
-    [self setLastSkin:[self getCurrentSkin]];
-    //设置当前的skin为更新的skin
-    [self setCurrentSkin:skinName];
-    SKLog(@"======= 皮肤下载成功");
-    [self logSkinInfo];
-    
-    if (successBlock) {
-        successBlock(@"下载成功");
-    }
-    
-  }else {
-    SKLog(@"======= 下载失败 -> 将更新后的皮肤设置字典写入skin.plist文件失败");
-    if (failureBlock) {
-      NSError *downloadError = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
-      failureBlock(downloadError);
-    }
+  [[NSUserDefaults standardUserDefaults] setObject:[configDict copy] forKey:@"skin_config"];
+
+  SKLog(@"======= 将更新后的皮肤设置字典写入NSUserDefaults成功");
+  //设置上一个skin为现在的skin
+  [self setLastSkin:[self getCurrentSkin]];
+  //设置当前的skin为更新的skin
+  [self setCurrentSkin:skinName];
+  SKLog(@"======= 皮肤下载成功");
+  [self logSkinInfo];
+
+  if (successBlock) {
+      successBlock(@"下载成功");
   }
+  
+//  if ([configDict writeToFile:[SkinUtils generateSandboxSkinConfigFilePath] atomically:YES]) {
+//    SKLog(@"======= 将更新后的皮肤设置字典写入skin.plist文件成功");
+//    //设置上一个skin为现在的skin
+//    [self setLastSkin:[self getCurrentSkin]];
+//    //设置当前的skin为更新的skin
+//    [self setCurrentSkin:skinName];
+//    SKLog(@"======= 皮肤下载成功");
+//    [self logSkinInfo];
+//
+//    if (successBlock) {
+//        successBlock(@"下载成功");
+//    }
+//
+//  }else {
+//    SKLog(@"======= 下载失败 -> 将更新后的皮肤设置字典写入skin.plist文件失败");
+//    if (failureBlock) {
+//      NSError *downloadError = [NSError errorWithDomain:@"下载失败" code:0 userInfo:nil];
+//      failureBlock(downloadError);
+//    }
+//  }
 
 }
 
