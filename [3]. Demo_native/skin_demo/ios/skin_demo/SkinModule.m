@@ -27,7 +27,7 @@ RCT_EXPORT_MODULE();
 }
 
 - (dispatch_queue_t)methodQueue {
-  return dispatch_get_main_queue();
+  return dispatch_get_main_queue(); 
 }
 
 //当前是哪个皮肤
@@ -242,13 +242,13 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
       
     }else if ([localPath isEqualToString:@"bundle"]){
       SKLog(@"即将获取bundle的皮肤资源");
-      imagePath = [NSString stringWithFormat:@"%@_%@",current_skin,imageName];
+      imagePath = [NSString stringWithFormat:@"%@",imageName];
       
       
     }else if ([localPath isEqualToString:skinFolderPath]){
       
       SKLog(@"即将获取沙盒中的皮肤资源");
-      imagePath = [NSString stringWithFormat:@"%@/%@",skinFolderPath,[NSString stringWithFormat:@"%@_%@",current_skin,imageName]];
+      imagePath = [NSString stringWithFormat:@"%@/%@",skinFolderPath,[NSString stringWithFormat:@"%@",imageName]];
       
     }else{
       
