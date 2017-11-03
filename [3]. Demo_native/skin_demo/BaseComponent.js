@@ -19,8 +19,9 @@ export default class BaseComponent extends Component {
 
 
     componentWillMount(){
-        this.listener = skinModule.addListener("RNChangeSkin",(skinName) => this.updateSkin(skinName))
 
+        this.listener = skinModule.addListener("RNChangeSkin",(skin) => this.updateSkin(skin))
+        SkinModule.currentSkin((skin)=>{this.updateSkin(skin)})
     }
 
     componentWillUnmount() {

@@ -30,25 +30,42 @@ RCT_EXPORT_MODULE();
   return dispatch_get_main_queue(); 
 }
 
-//当前是哪个皮肤
-RCT_EXPORT_METHOD(downloadSkin:(NSString *)skinName url:(NSString *)url callback:(RCTResponseSenderBlock)callback){
+//下载某个皮肤: url & skin
+RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url callback:(RCTResponseSenderBlock)callback){
   
-  [[SkinManager sharedManager] downloadSkin:skinName url:url success:^(id object) {
+  [[SkinManager sharedManager] downloadSkin:skin
+                                        url:url
+                                    success:^(id object) {
+                                      
        callback(@[[NSNull null],@"下载成功"]);
   } progress:nil falure:^(NSError *error) {
          callback(@[error,@"下载失败"]);
   }];
 }
 
+//下载某个皮肤
+RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url info:(NSDictionary*)infoDict callback:(RCTResponseSenderBlock)callback){
+  
+  [[SkinManager sharedManager] downloadSkin:skin
+                                        url:url
+                                       info:infoDict
+                                    success:^(id object) {
+                                      
+    callback(@[[NSNull null],@"下载成功"]);
+  } progress:nil falure:^(NSError *error) {
+    callback(@[error,@"下载失败"]);
+  }];
+}
+
 
 
 //当前是哪个皮肤
-RCT_EXPORT_METHOD(currentSkinName:(RCTResponseSenderBlock)callback){
+RCT_EXPORT_METHOD(currentSkin:(RCTResponseSenderBlock)callback){
    callback(@[[NSNull null],[[SkinManager sharedManager] getCurrentSkin]]);
 }
 
 
-//当前是切换皮肤
+//切换皮肤
 RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
   
   //和当前的皮肤一致，则立即返回
@@ -268,11 +285,6 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
   return stateImageDict;
   
 }
-
-- (NSString *)getSkinFolderPathWithSkinName:(NSString *)skinName{
-  return [NSString stringWithFormat:@"~/Documents/skin/%@",skinName];
-}
-
 
 RCT_EXPORT_METHOD(getColorImageList:(NSArray *)colorList imageList:(NSArray *)imageList callback:(RCTResponseSenderBlock)callback){
   

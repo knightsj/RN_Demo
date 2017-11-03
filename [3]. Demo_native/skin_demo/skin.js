@@ -28,7 +28,6 @@ export default class skinPage extends BaseComponent {
     constructor(props){
         super(props);
         this.state={
-            skin:'',
             color_1:'yellow',
             color_2:'blue',
             title_before:'default',
@@ -52,7 +51,8 @@ export default class skinPage extends BaseComponent {
     }
 
     downloadSkin(skinName,url){
-        SkinModule.downloadSkin(skinName,url,(error,result) =>{
+        let info = {"beginData":"20170101"};
+        SkinModule.downloadSkin(skinName,url,info,(error,result) =>{
             if (error){
                 alert(result);
             }else {

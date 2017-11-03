@@ -267,8 +267,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C8E835F98AC67EAE0E3C085A /* Pods-skin_demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skin_demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-skin_demo/Pods-skin_demo.release.xcconfig"; sourceTree = "<group>"; };
-		CB262BDF1FA97A11005CE015 /* CacheMudule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = skin_demo/CacheMudule.m; sourceTree = "<group>"; };
-		CB262BF91FA97A11005CE015 /* CacheMudule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CacheMudule.h; path = skin_demo/CacheMudule.h; sourceTree = "<group>"; };
 		CB2BDEA91F7818580078B9E9 /* SkinModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = skin_demo/SkinModule.h; sourceTree = "<group>"; };
 		CB2BDEAA1F7818580078B9E9 /* SkinModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = skin_demo/SkinModule.m; sourceTree = "<group>"; };
 		CB3394251F79DA0100A8CF99 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -542,8 +540,6 @@
 		CBD93BDE1FA8E0D30032614F /* other */ = {
 			isa = PBXGroup;
 			children = (
-				CB262BF91FA97A11005CE015 /* CacheMudule.h */,
-				CB262BDF1FA97A11005CE015 /* CacheMudule.m */,
 				CBD93BDA1FA8BE9B0032614F /* main.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,

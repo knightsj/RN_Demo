@@ -35,13 +35,20 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock;
 
+//下载皮肤
+- (void)downloadSkin:(NSString *)skinName
+                 url:(NSString *)url
+                info:(NSDictionary *)dict
+             success:(SkinZipDownloadSuccess)successBlock
+            progress:(SkinZipDownloadProgress)progressBlock
+              falure:(SkinZipDownloadFailure)failureBlock;
+
 
 //记录当前的皮肤
 - (void)setCurrentSkin:(NSString *)currentSkin;
 
 //记录上一个皮肤
 - (void)setLastSkin:(NSString *)lastSkin;
-
 
 //获取当前使用的皮肤
 - (NSString *)getCurrentSkin;
@@ -52,7 +59,7 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 //获取当前可以使用的所有皮肤
 - (NSArray *)availableSkins;
 
-//打印skin的信息
+//打印所有可以使用的skin的信息
 - (void)logSkinInfo;
 
 @end
