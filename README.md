@@ -17,7 +17,14 @@ RN调用本地原生的demo
 ### news_app
 一个新闻类app，只有首页和详情页
 
-## [5]. Utils
+##[5]. Utils
+
 工具类集合
 
 
+
+## [6]. Component
+
+### progress
+
+类似proegressHUD的RN组件
