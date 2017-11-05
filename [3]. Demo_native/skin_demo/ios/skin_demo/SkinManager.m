@@ -41,13 +41,6 @@
   
   self = [super init];
   if (self) {
-//    NSString *sanboxSkinConfigFilePath = [SkinUtils generateSandboxSkinConfigFilePath];
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    if (![fileManager fileExistsAtPath:sanboxSkinConfigFilePath]) {
-//      NSDictionary *dict = [SkinUtils generateBundleSkinConfigDict];
-//      [dict writeToFile:sanboxSkinConfigFilePath atomically:YES];
-//    }
-    
     NSDictionary *skinConfig = [[NSUserDefaults standardUserDefaults] objectForKey:@"skin_config"];
     if (!skinConfig) {
        NSDictionary *dict = [SkinUtils generateBundleSkinConfigDict];
@@ -57,6 +50,14 @@
   return self;
 }
 
+- (BOOL)containsSkin:(NSString *)skin{
+  NSArray *skins = [self availableSkins];
+  if ([skins containsObject:skin]) {
+    return YES;
+  }else {
+    return NO;
+  }
+}
 
 - (void)downloadSkin:(NSString *)skin
                  url:(NSString *)url
@@ -84,15 +85,20 @@
   NSURL *download_url = [NSURL URLWithString:url];
   
   //zip file url
-  NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *zip_path = [cachesPath stringByAppendingPathComponent:download_url.lastPathComponent];
-  NSURL *zip_url = [NSURL fileURLWithPath:zip_path];
+//  NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+//  NSString *zip_path = [cachesPath stringByAppendingPathComponent:download_url.lastPathComponent];
+//  NSURL *zip_url = [NSURL fileURLWithPath:zip_path];
+  
   
   //unachive folder url
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentPath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-  NSString *folder_path = [documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"skin/%@",skin]];
+  NSString *folder_path = [documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/Theme/Skin/%@",skin]];
+//  @"~Documents/Caches/Theme/SkinZip/red.zip"
+//  @"~Documents/Caches/Theme/Skin"
   
+  NSString *zip_path = [documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Caches/Theme/SkinZip/%@",download_url.lastPathComponent]];
+  NSURL *zip_url = [NSURL fileURLWithPath:zip_path];
   
   SKLog(@"======= zip包即将下载。\nskin名称：%@ \n下载url：%@ \nzip包下载目标地址：%@",skin,url,zip_path);
   

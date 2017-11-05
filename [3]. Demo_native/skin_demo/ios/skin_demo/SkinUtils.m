@@ -12,12 +12,12 @@
 
 
 + (NSString *)generateSkinFolderPathWithSkinName:(NSString *)skinName{
-  return [NSString stringWithFormat:@"%@/skin/%@",[self documentFolderPath],skinName];
+  return [NSString stringWithFormat:@"%@/Caches/Theme/Skin/%@",[self documentFolderPath],skinName];
 }
 
 
 + (NSString *)generateSkinColorJSONPathWithSkinName:(NSString *)skinName{
-  return [NSString stringWithFormat:@"%@/skin/%@/color.json",[self documentFolderPath],skinName];
+  return [NSString stringWithFormat:@"%@/Caches/Theme/Skin/%@/color.json",[self documentFolderPath],skinName];
 }
 
 + (NSString *)generateBundelSkinConfigFilePath{
