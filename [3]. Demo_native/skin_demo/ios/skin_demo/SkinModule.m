@@ -11,6 +11,10 @@
 
 @implementation SkinModule
 
+- (dispatch_queue_t)methodQueue {
+  return dispatch_get_main_queue();
+}
+
 
 RCT_EXPORT_MODULE();
 
@@ -19,6 +23,7 @@ RCT_EXPORT_MODULE();
   return @[@"RNChangeSkin"];//有几个就写几个
 }
 
+//给RN页面的父组件发送更换皮肤的通知
 - (void)emittChangeSkinEventSkinName:(NSString*)skinName
 {
   SKLog(@"通知RN更换皮肤");
@@ -26,9 +31,6 @@ RCT_EXPORT_MODULE();
                      body:@{@"skinName": skinName}];
 }
 
-- (dispatch_queue_t)methodQueue {
-  return dispatch_get_main_queue(); 
-}
 
 //下载某个皮肤: url & skin
 RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url callback:(RCTResponseSenderBlock)callback){
@@ -43,7 +45,7 @@ RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url callback:(RC
   }];
 }
 
-//下载某个皮肤
+//下载某个皮肤 url & skin & parameter
 RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url info:(NSDictionary*)infoDict callback:(RCTResponseSenderBlock)callback){
   
   [[SkinManager sharedManager] downloadSkin:skin
@@ -61,17 +63,26 @@ RCT_EXPORT_METHOD(downloadSkin:(NSString *)skin url:(NSString *)url info:(NSDict
 
 //当前是哪个皮肤
 RCT_EXPORT_METHOD(currentSkin:(RCTResponseSenderBlock)callback){
-   callback(@[[NSNull null],[[SkinManager sharedManager] getCurrentSkin]]);
+   callback(@[[[SkinManager sharedManager] getCurrentSkin]]);
 }
 
+//是否包含某个皮肤
+RCT_EXPORT_METHOD(containsSkin:(NSString*)skin callback:(RCTResponseSenderBlock)callback){
+  
+  NSString *skinFolderPath = [SkinUtils generateSkinFolderPathWithSkinName:skin];
+  
+  BOOL contains = [[SkinManager sharedManager] containsSkin:skin];
+  NSString *result = nil;
+  if (contains) {
+    result = @"1";
+  }else{
+    result = @"0";
+  }
+  callback(@[result]);
+}
 
 //切换皮肤
-RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
-  
-  //和当前的皮肤一致，则立即返回
-  if ([skinName isEqualToString:[[SkinManager sharedManager] getCurrentSkin]]) {
-    return;
-  }
+RCT_EXPORT_METHOD(changeSkin:(NSString *)skinName callback:(RCTResponseSenderBlock)callback){
 
   NSMutableDictionary *dict = [SkinUtils generateSandboxSkinConfigDict];
   NSArray *keys = [dict allKeys];
@@ -79,6 +90,7 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
     
     //设置上一个皮肤
     [[SkinManager sharedManager] setLastSkin:[[SkinManager sharedManager] getCurrentSkin]];
+    //设置当前皮肤
     [[SkinManager sharedManager] setCurrentSkin:skinName];
     SKLog(@"======= 修改皮肤为：%@",skinName);
     
@@ -90,9 +102,13 @@ RCT_EXPORT_METHOD(changeSkinWithName:(NSString *)skinName){
     
     //给原生换肤
     
+    callback(@[@"1"]);
+    
     
   }else{
     SKLog(@"======= 没有当前皮肤");
+    
+    callback(@[@"0"]);
   }
 }
 
@@ -252,7 +268,7 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
     NSDictionary *currentSkinDict = [configDict objectForKey:current_skin];
     NSString *localPath = [currentSkinDict objectForKey:@"local_path"];
     
-    if (localPath.length == 0) {
+    idfsdfsdfsdf (localPath.length == 0) {
       
       SKLog(@"localPath为空，无法获取图片");
       imagePath = @"";

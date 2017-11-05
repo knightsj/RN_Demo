@@ -19,7 +19,7 @@ export default class BaseComponent extends Component {
 
 
     componentWillMount(){
-
+        //注册通知；收到通知后：调用setState方法，触发子组件的setState
         this.listener = skinModule.addListener("RNChangeSkin",(skin) => this.updateSkin(skin))
         SkinModule.currentSkin((skin)=>{this.updateSkin(skin)})
     }

@@ -28,16 +28,39 @@ export default class skinPage extends BaseComponent {
     constructor(props){
         super(props);
         this.state={
-            color_1:'yellow',
-            color_2:'blue',
-            title_before:'default',
-            title_after:'default',
+            color_1:"red",
+            color_2:"red",
+            title_before:"default",
+            title_after:"default",
         }
     }
 
     //RN触发原生更换皮肤
-    changeIntoSkin(skinName){
-        SkinModule.changeSkinWithName(skinName);
+    changeIntoSkin(skin){
+
+
+        SkinModule.currentSkin((currentSkin)=>{
+            if (skin === currentSkin){
+                return;
+            }
+        })
+
+        SkinModule.containsSkin(skin,(result)=>{
+
+            if (result === "1"){
+                //如果该皮肤已经下载，则直接触发切换操作
+                SkinModule.changeSkin(skin,(code)=>{
+                    if (code === "1"){
+                        alert("切换成功");
+                    }else {
+                        alert("切换失败");
+                    }
+                });
+            }else {
+                //如果该皮肤没有下载，则提示用户下载
+                alert("没有当前皮肤！请下载");
+            }
+        })
     }
 
     componentWillMount() {

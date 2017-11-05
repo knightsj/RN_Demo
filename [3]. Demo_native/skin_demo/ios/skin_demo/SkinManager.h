@@ -28,15 +28,34 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
 + (instancetype)sharedManager;
 
 
-//下载某个皮肤
-- (void)downloadSkin:(NSString *)skinName
+/**
+ *  下载某个皮肤
+ *
+ *  @param skin               皮肤名称或者ID
+ *  @param url                皮肤包zip下载地址
+ *  @param successBlock       success callback
+ *  @param progress           progress callback
+ *  @param failureBlock       failure callback
+ *
+ */
+- (void)downloadSkin:(NSString *)skin
                  url:(NSString *)url
              success:(SkinZipDownloadSuccess)successBlock
             progress:(SkinZipDownloadProgress)progressBlock
               falure:(SkinZipDownloadFailure)failureBlock;
 
-//下载皮肤
-- (void)downloadSkin:(NSString *)skinName
+/**
+ *  下载某个皮肤
+ *
+ *  @param skin               皮肤名称或者ID
+ *  @param url                皮肤包zip下载地址
+ *  @param info               皮肤的其他信息
+ *  @param successBlock       success callback
+ *  @param progress           progress callback
+ *  @param failureBlock       failure callback
+ *
+ */
+- (void)downloadSkin:(NSString *)skin
                  url:(NSString *)url
                 info:(NSDictionary *)dict
              success:(SkinZipDownloadSuccess)successBlock
@@ -44,22 +63,45 @@ typedef void(^SkinZipDownloadFailure)(NSError *error);
               falure:(SkinZipDownloadFailure)failureBlock;
 
 
-//记录当前的皮肤
+/**
+ *  记录当前的皮肤
+ *
+ *  @param currentSkin              当前的皮肤名称或者ID
+ */
 - (void)setCurrentSkin:(NSString *)currentSkin;
 
-//记录上一个皮肤
+
+/**
+ *  记录上一个皮肤
+ *
+ *  @param currentSkin              上一个皮肤名称或者ID
+ */
 - (void)setLastSkin:(NSString *)lastSkin;
 
-//获取当前使用的皮肤
+
+/**
+ *  获取当前使用的皮肤
+ */
 - (NSString *)getCurrentSkin;
 
-//获取上一个使用的皮肤
+/**
+ *  获取上一个使用的皮肤
+ */
 - (NSString *)getLastSkin;
 
-//获取当前可以使用的所有皮肤
-- (NSArray *)availableSkins;
 
-//打印所有可以使用的skin的信息
+/**
+ *  是否包含当前皮肤
+ *
+ *  @param skin              需要查询的皮肤名称或者ID
+ */
+- (BOOL)containsSkin:(NSString *)skin;
+
+
+/**
+ *  打印当前可以使用的所有皮肤的信息
+ *
+ */
 - (void)logSkinInfo;
 
 @end
