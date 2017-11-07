@@ -268,7 +268,7 @@ RCT_EXPORT_METHOD(getImagesDict:(NSDictionary *)stateAndColorNameDict callback:(
     NSDictionary *currentSkinDict = [configDict objectForKey:current_skin];
     NSString *localPath = [currentSkinDict objectForKey:@"local_path"];
     
-    idfsdfsdfsdf (localPath.length == 0) {
+    if(localPath.length == 0) {
       
       SKLog(@"localPath为空，无法获取图片");
       imagePath = @"";
