@@ -40,6 +40,7 @@ const StatusBarShape = {
 };
 
 export default class NavigationBar extends Component {
+
     static propTypes = {
         style: View.propTypes.style,
         titleLayoutStyle:View.propTypes.style,
@@ -62,6 +63,7 @@ export default class NavigationBar extends Component {
         ]),
 
     }
+
     static defaultProps = {
         statusBar: {
             barStyle: 'default',
@@ -79,28 +81,23 @@ export default class NavigationBar extends Component {
             hide: false
         };
     }
-    leftView() {
-        var leftView = this.props.leftButtonTitle ?
-            <Text style={styles.title}>{this.props.leftButtonTitle}</Text> : null;
-        return (
-            <TouchableOpacity
-                onPress={()=>this.onLeftButtonClick()}>
-                <View style={{width: 50, alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-                    {this.props.leftView ? this.props.leftView : leftView}
-                </View>
-            </TouchableOpacity>
-        )
-    }
 
-    onLeftButtonClick() {
-        if (this.props.navigator && this.props.popEnabled)this.props.navigator.pop();
-        if (this.props.onLeftButtonClick)this.props.onLeftButtonClick();
-    }
 
 
     getButtonElement(data = {}, style) {
+
+        var paddingTop = null;
+        var paddingBottom = null;
+        if(this.props.backgroundImageUri){
+            paddingTop = 22;
+            paddingBottom = 0;
+        }else {
+            paddingTop = 0;
+            paddingBottom = 6;
+        }
+
         return (
-            <View style={[styles.navBarButton,{paddingTop:22}]}>
+            <View style={[styles.navBarButton,{paddingTop:paddingTop,paddingBottom:paddingBottom}]}>
                 {(!!data.props) ? data : (
                     <NavBarButton
                         title={data.title}
@@ -113,22 +110,25 @@ export default class NavigationBar extends Component {
     }
 
     render() {
-
+        //背景是个图片
         if(this.props.backgroundImageUri){
 
             //状态栏
             this.statusBar = null;
             //背景图片
-            this.titleView = <View>
+            this.titleView = <View
+                style={{height: Platform.OS === 'ios' ? 64 : 44}}>
                 <Image
                     source={{uri:this.props.backgroundImageUri}}
-                    style={{width:width,height:64,flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',}}
+                    style={{width:width,
+                            height: Platform.OS === 'ios' ? 74 : 44,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between'}}
                 >
                     {this.getButtonElement(this.props.leftButton)}
-                    <Text style={[styles.title,{paddingTop:22,backgroundColor:'transparent'}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
-                    {this.getButtonElement(this.props.rightButton, {marginRight: 8,})}
+                    <Text style={[styles.title,{paddingTop:22,paddingRight:20,backgroundColor:'transparent'}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
+                    {this.getButtonElement(this.props.rightButton, {marginRight: 8})}
                 </Image>
             </View>
 
@@ -140,14 +140,16 @@ export default class NavigationBar extends Component {
                 </View>;
 
         }else {
+            //背景没有图片，只有颜色
+            let bgColor = this.props.style.backgroundColor?this.props.style.backgroundColor:'transparent'
 
             this.statusBar = (!this.props.statusBar.hidden)?
                 <View style={styles.statusBar}>
-                    <StatusBar {...this.props.statusBar} barStyle="light-content" style={[styles.statusBar,{backgroundColor:this.props.style.backgroundColor}]}/>
+                    <StatusBar {...this.props.statusBar} barStyle="light-content" style={[styles.statusBar,{backgroundColor:bgColor}]}/>
                 </View>: null;
 
             this.titleView = this.props.titleView ? this.props.titleView :
-                <Text style={styles.title} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>;
+                <Text style={[styles.title,{paddingBottom:10}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>;
 
             this.content = this.props.hide ? null :
                 <View style={styles.navBar}>
@@ -155,12 +157,9 @@ export default class NavigationBar extends Component {
                     <View style={[styles.navBarTitleContainer,this.props.titleLayoutStyle]}>
                         {this.titleView}
                     </View>
-                    {this.getButtonElement(this.props.rightButton, {marginRight: 8,})}
+                    {this.getButtonElement(this.props.rightButton, {marginRight: 8})}
                 </View>;
         }
-
-
-
         return (
             <View style={[styles.container, this.props.style]}>
                 {this.statusBar}
