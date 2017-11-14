@@ -14,15 +14,27 @@ import {
 
 
 import NavigationBar from './NavigationBar'
+import ViewUtil from './ViewUtil'
 
 export default class demo1 extends Component {
+
+    onBackPress(){
+
+    }
+
+// <NavigationBar
+// backgroundImageUri="navbar"
+// title={'版本信息'}
+// leftButton={ViewUtil.getLeftButton(() => this.onBackPress())}
+// />
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar
-            backgroundImageUri="navbar"
-            title={'版本信息'}
-        />
+
+          <NavigationBar
+              style={{backgroundColor:'red'}}
+              title={'版本信息'}
+          />
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -41,8 +53,6 @@ export default class demo1 extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {

@@ -74,12 +74,52 @@ export default class NavigationBar extends Component {
     }
 
     constructor(props) {
+
         super(props);
+
+        var isIPhoneX = false;
+        var marginBottom = 0;
+        var titlePaddingTop = 22;
+        var navHeight = 76;
+        var imageBgTextPaddingRight = 0;
+
+        if(height === 812){
+            isIPhoneX = true;
+            marginBottom= 16;
+            titlePaddingTop = 54;
+            navHeight = 112;
+
+            if(this.props.leftButton){
+                imageBgTextPaddingRight = 22;
+            }else {
+                imageBgTextPaddingRight = 0;
+            }
+
+        }else{
+            isIPhoneX = false;
+            marginBottom = 8;
+            titlePaddingTop = 26;
+            navHeight = 80;
+
+            if(this.props.leftButton){
+                imageBgTextPaddingRight = 28;
+            }else {
+                imageBgTextPaddingRight = 0;
+            }
+
+        }
+
         this.state = {
-            title: '',
             popEnabled: true,
-            hide: false
+            hide: false,
+            marginBottom:marginBottom,
+            isIPhoneX:isIPhoneX,
+            titlePaddingTop:titlePaddingTop,
+            navHeight:navHeight,
+            imageBgTextPaddingRight:imageBgTextPaddingRight
         };
+
+
     }
 
 
@@ -89,7 +129,7 @@ export default class NavigationBar extends Component {
         var paddingTop = null;
         var paddingBottom = null;
         if(this.props.backgroundImageUri){
-            paddingTop = 22;
+            paddingTop = 28;
             paddingBottom = 0;
         }else {
             paddingTop = 0;
@@ -110,24 +150,27 @@ export default class NavigationBar extends Component {
     }
 
     render() {
+
+
         //背景是个图片
         if(this.props.backgroundImageUri){
+
 
             //状态栏
             this.statusBar = null;
             //背景图片
             this.titleView = <View
-                style={{height: Platform.OS === 'ios' ? 64 : 44}}>
+                style={{height: Platform.OS === 'ios' ? this.state.navHeight : 44}}>
                 <Image
                     source={{uri:this.props.backgroundImageUri}}
                     style={{width:width,
-                            height: Platform.OS === 'ios' ? 74 : 44,
+                            height: Platform.OS === 'ios' ? this.state.navHeight : 44,
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between'}}
                 >
                     {this.getButtonElement(this.props.leftButton)}
-                    <Text style={[styles.title,{paddingTop:22,paddingRight:20,backgroundColor:'transparent'}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
+                    <Text style={[styles.title,{paddingTop:this.state.titlePaddingTop,paddingRight:this.state.imageBgTextPaddingRight,backgroundColor:'transparent',marginLeft: 8}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
                     {this.getButtonElement(this.props.rightButton, {marginRight: 8})}
                 </Image>
             </View>
@@ -160,8 +203,11 @@ export default class NavigationBar extends Component {
                     {this.getButtonElement(this.props.rightButton, {marginRight: 8})}
                 </View>;
         }
+
+
         return (
-            <View style={[styles.container, this.props.style]}>
+
+            <View style={[styles.container, this.props.style,{marginBottom:this.state.marginBottom}]}>
                 {this.statusBar}
                 {this.content}
             </View>
