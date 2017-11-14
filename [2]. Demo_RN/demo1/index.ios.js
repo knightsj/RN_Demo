@@ -27,24 +27,29 @@ export default class demo1 extends Component {
 // title={'版本信息'}
 // leftButton={ViewUtil.getLeftButton(() => this.onBackPress())}
 // />
+
+    // style={{backgroundColor:'red'}}
   render() {
     return (
       <View style={styles.container}>
 
           <NavigationBar
-              style={{backgroundColor:'red'}}
+              backgroundImageUri="navbar"
               title={'版本信息'}
+              leftButton={ViewUtil.getLeftButton(() => this.onBackPress())}
+
           />
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+          <Text style={styles.welcome}>
+              Welcome to React Native!
+          </Text>
+          <Text style={styles.instructions}>
+              To get started, edit index.ios.js
+          </Text>
+          <Text style={styles.instructions}>
+              Press Cmd+R to reload,{'\n'}
+              Cmd+D or shake for dev menu
+          </Text>
+
       </View>
     );
   }

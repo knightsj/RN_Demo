@@ -82,12 +82,27 @@ export default class NavigationBar extends Component {
         var titlePaddingTop = 22;
         var navHeight = 76;
         var imageBgTextPaddingRight = 0;
+        var isImageBg = false;
+        if (this.props.backgroundImageUri){
+            isImageBg = true;
+        }else {
+            isImageBg = false;
+        }
 
         if(height === 812){
+
             isIPhoneX = true;
-            marginBottom= 16;
-            titlePaddingTop = 54;
-            navHeight = 112;
+
+            if(isImageBg){
+                navHeight = 132;
+                titlePaddingTop = 74;
+                marginBottom= 34;
+            }else {
+                navHeight = 300;
+                titlePaddingTop = 54;
+                marginBottom= 16;
+            }
+
 
             if(this.props.leftButton){
                 imageBgTextPaddingRight = 22;
@@ -98,7 +113,13 @@ export default class NavigationBar extends Component {
         }else{
             isIPhoneX = false;
             marginBottom = 8;
-            titlePaddingTop = 26;
+
+            if(isImageBg){
+                titlePaddingTop = 30;
+            }else {
+                titlePaddingTop = 26;
+            }
+
             navHeight = 80;
 
             if(this.props.leftButton){
@@ -123,14 +144,22 @@ export default class NavigationBar extends Component {
     }
 
 
-
     getButtonElement(data = {}, style) {
 
         var paddingTop = null;
         var paddingBottom = null;
         if(this.props.backgroundImageUri){
-            paddingTop = 28;
-            paddingBottom = 0;
+
+            if (this.state.isIPhoneX){
+                paddingTop = 74;
+                paddingBottom = 0;
+
+            }else {
+
+                paddingTop = 30;
+                paddingBottom = 0;
+            }
+
         }else {
             paddingTop = 0;
             paddingBottom = 6;
