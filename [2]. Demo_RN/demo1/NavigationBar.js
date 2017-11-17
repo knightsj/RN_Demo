@@ -81,6 +81,7 @@ export default class NavigationBar extends Component {
         var marginBottom = 0;
         var titlePaddingTop = 22;
         var navHeight = 76;
+        var imageHeight = 0;
         var imageBgTextPaddingRight = 0;
         var isImageBg = false;
         if (this.props.backgroundImageUri){
@@ -95,12 +96,14 @@ export default class NavigationBar extends Component {
 
             if(isImageBg){
                 navHeight = 132;
-                titlePaddingTop = 74;
+                titlePaddingTop = 30;
                 marginBottom= 34;
+                imageHeight = 88;
             }else {
                 navHeight = 300;
                 titlePaddingTop = 54;
                 marginBottom= 16;
+                imageHeight = 0;
             }
 
 
@@ -115,12 +118,14 @@ export default class NavigationBar extends Component {
             marginBottom = 8;
 
             if(isImageBg){
-                titlePaddingTop = 30;
+                imageHeight = 64;
+                titlePaddingTop = 16;
             }else {
                 titlePaddingTop = 26;
+                imageHeight = 0;
             }
 
-            navHeight = 80;
+            navHeight = 64;
 
             if(this.props.leftButton){
                 imageBgTextPaddingRight = 28;
@@ -137,6 +142,7 @@ export default class NavigationBar extends Component {
             isIPhoneX:isIPhoneX,
             titlePaddingTop:titlePaddingTop,
             navHeight:navHeight,
+            imageHeight:imageHeight,
             imageBgTextPaddingRight:imageBgTextPaddingRight
         };
 
@@ -151,12 +157,12 @@ export default class NavigationBar extends Component {
         if(this.props.backgroundImageUri){
 
             if (this.state.isIPhoneX){
-                paddingTop = 74;
+                paddingTop = 36;
                 paddingBottom = 0;
 
             }else {
 
-                paddingTop = 30;
+                paddingTop = 16;
                 paddingBottom = 0;
             }
 
@@ -193,20 +199,24 @@ export default class NavigationBar extends Component {
                 <Image
                     source={{uri:this.props.backgroundImageUri}}
                     style={{width:width,
-                            height: Platform.OS === 'ios' ? this.state.navHeight : 44,
+                            height: Platform.OS === 'ios' ? this.state.imageHeight : 44,
                             flexDirection: 'row',
                             alignItems: 'center',
-                            justifyContent: 'space-between'}}
+                            justifyContent: 'space-between',
+                            resizeMode:Image.resizeMode.stretch,
+
+                    }}
+
                 >
                     {this.getButtonElement(this.props.leftButton)}
-                    <Text style={[styles.title,{paddingTop:this.state.titlePaddingTop,paddingRight:this.state.imageBgTextPaddingRight,backgroundColor:'transparent',marginLeft: 8}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
+                    <Text style={[styles.title,{paddingTop:this.state.titlePaddingTop,paddingRight:this.state.imageBgTextPaddingRight,backgroundColor:'transparent',marginLeft: 8},{fontWeight: 'bold'}]} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>
                     {this.getButtonElement(this.props.rightButton, {marginRight: 8})}
                 </Image>
             </View>
 
             this.content = this.props.hide ? null :
                 <View style={styles.navBar}>
-                    <View style={[styles.navBarTitleContainer,this.props.titleLayoutStyle]}>
+                    <View style={[styles.navImageBarContainer,this.props.titleLayoutStyle]}>
                         {this.titleView}
                     </View>
                 </View>;
@@ -291,11 +301,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
+
         left: 40,
         top: 0,
         right: 40,
         bottom: 0,
     },
+
+    navImageBarContainer:{
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+    },
+
+
+
+
     title: {
         fontSize: 20,
         color: 'white',
