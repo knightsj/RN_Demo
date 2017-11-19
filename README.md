@@ -29,9 +29,6 @@ RN调用本地原生的demo
 一个新闻类app，只有首页和详情页
 
 
-
-
-
 ## [5]. Utils
 
 工具类集合
@@ -49,3 +46,9 @@ RN调用本地原生的demo
 ### 6.2 navigation
 
 导航栏组件
+
+## [7]. native module
+
+### 7.1 cache module
+删除缓存文件夹的module
+

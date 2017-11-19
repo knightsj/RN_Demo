@@ -39,7 +39,6 @@
 		8C4198288E5C80A6B707E775 /* libPods-skin_demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5708D6D5DE602D98680A8C2B /* libPods-skin_demo.a */; };
 		CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2BDEAA1F7818580078B9E9 /* SkinModule.m */; };
 		CB3394261F79DA0100A8CF99 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3394251F79DA0100A8CF99 /* libz.tbd */; };
-		CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */ = {isa = PBXBuildFile; fileRef = CB42ABEA1F7B84E300234E28 /* CacheMudule.m */; };
 		CB9778CD1FA61B6A0046E9DF /* SkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9778CC1FA61B6A0046E9DF /* SkinManager.m */; };
 		CBBE49581F9B25C900B06BA1 /* SkinUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBE49571F9B25C900B06BA1 /* SkinUtils.m */; };
 		CBD93BDB1FA8BE9B0032614F /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBD93BDA1FA8BE9B0032614F /* main.storyboard */; };
@@ -270,8 +269,6 @@
 		CB2BDEA91F7818580078B9E9 /* SkinModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkinModule.h; path = skin_demo/SkinModule.h; sourceTree = "<group>"; };
 		CB2BDEAA1F7818580078B9E9 /* SkinModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkinModule.m; path = skin_demo/SkinModule.m; sourceTree = "<group>"; };
 		CB3394251F79DA0100A8CF99 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		CB42ABE91F7B84E300234E28 /* CacheMudule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheMudule.h; path = skin_demo/CacheMudule.h; sourceTree = "<group>"; };
-		CB42ABEA1F7B84E300234E28 /* CacheMudule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheMudule.m; path = skin_demo/CacheMudule.m; sourceTree = "<group>"; };
 		CB9778CB1FA61B6A0046E9DF /* SkinManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinManager.h; path = skin_demo/SkinManager.h; sourceTree = "<group>"; };
 		CB9778CC1FA61B6A0046E9DF /* SkinManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SkinManager.m; path = skin_demo/SkinManager.m; sourceTree = "<group>"; };
 		CBBE49561F9B25C900B06BA1 /* SkinUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SkinUtils.h; path = skin_demo/SkinUtils.h; sourceTree = "<group>"; };
@@ -430,8 +427,6 @@
 			children = (
 				CB2BDEA91F7818580078B9E9 /* SkinModule.h */,
 				CB2BDEAA1F7818580078B9E9 /* SkinModule.m */,
-				CB42ABE91F7B84E300234E28 /* CacheMudule.h */,
-				CB42ABEA1F7B84E300234E28 /* CacheMudule.m */,
 				CBBE49561F9B25C900B06BA1 /* SkinUtils.h */,
 				CBBE49571F9B25C900B06BA1 /* SkinUtils.m */,
 				CB9778CB1FA61B6A0046E9DF /* SkinManager.h */,
@@ -1039,7 +1034,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9778CD1FA61B6A0046E9DF /* SkinManager.m in Sources */,
-				CB42ABEB1F7B84E300234E28 /* CacheMudule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				CB2BDEAB1F7818580078B9E9 /* SkinModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
