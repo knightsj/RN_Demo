@@ -13,5 +13,8 @@ import {
 } from 'react-native';
 
 import Route from './Route'
+import homePage from './HomePage'
+
 
 AppRegistry.registerComponent('Route', () => Route);
+AppRegistry.registerComponent('homePage', () => homePage);
