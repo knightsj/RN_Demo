@@ -19,8 +19,9 @@ import {
 
 import NavigationBar from './NavigationBar'
 import ViewUtil from './ViewUtil'
-import BaseComponent from './BaseComponent'
-var SkinModule = NativeModules.SkinModule;
+import BaseComponent ,{SkinModule} from './BaseComponent'
+const event = new NativeEventEmitter(SkinModule);
+
 
 
 export default class skinPage extends BaseComponent {
@@ -51,9 +52,9 @@ export default class skinPage extends BaseComponent {
                 //如果该皮肤已经下载，则直接触发切换操作
                 SkinModule.changeSkin(skin,(code)=>{
                     if (code === "1"){
-                        alert("切换成功");
+                        // alert("切换成功");
                     }else {
-                        alert("切换失败");
+                        // alert("切换失败");
                     }
                 });
             }else {
@@ -66,6 +67,7 @@ export default class skinPage extends BaseComponent {
     componentWillMount() {
         this.updateSkin("");
         super.componentWillMount();
+        this.lisener = event.addListener('new',this.show())
     }
 
 
@@ -89,9 +91,13 @@ export default class skinPage extends BaseComponent {
 
     }
 
+    show(){
+        alert('皮肤页面收到消息')
+    }
+
     componentWillUnmount() {
-        if(this.listener){
-            this.listener.remove();
+        if(this.lisener){
+            this.lisener.remove();
         }
     }
 

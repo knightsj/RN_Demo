@@ -11,6 +11,7 @@
 
 @implementation SkinModule
 
+
 - (dispatch_queue_t)methodQueue {
   return dispatch_get_main_queue();
 }
@@ -20,15 +21,25 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents
 {
-  return @[@"RNChangeSkin"];//有几个就写几个
+  return @[@"RNChangeSkin",@"new"];//有几个就写几个
 }
 
 //给RN页面的父组件发送更换皮肤的通知
 - (void)emittChangeSkinEventSkinName:(NSString*)skinName
 {
   SKLog(@"通知RN更换皮肤");
-  [self sendEventWithName:@"RNChangeSkin"
+//  [self sendEventWithName:@"RNChangeSkin"
+//                     body:@{@"skinName": skinName}];
+  
+  [self sendEventWithName:@"new"
                      body:@{@"skinName": skinName}];
+  
+//  [_bridge enqueueJSCall:@"RNChangeSkin"
+//                  method:@"emit"
+//                    args:nil
+//              completion:NULL];
+  
+  
 }
 
 

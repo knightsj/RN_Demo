@@ -24,7 +24,7 @@
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"Route"
+                                                      moduleName:@"skinPage"
                                                initialProperties:nil
                                                    launchOptions:nil];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
@@ -47,23 +47,6 @@
   
 }
 
-//点击弹出RN界面
-- (IBAction)jumpToSkinSettingPage:(UIButton *)sender {
-  
-  NSURL *jsCodeLocation;
-  
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-  
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"Route"
-                                               initialProperties:nil
-                                                   launchOptions:nil];
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-  UIViewController *vc = [[UIViewController alloc] init];
-  vc.view = rootView;
-  [self presentViewController:vc animated:YES completion:nil];
-  
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -14,7 +14,8 @@ import {
 
 import Route from './Route'
 import homePage from './HomePage'
-
+import skinPage from './skin'
 
 AppRegistry.registerComponent('Route', () => Route);
 AppRegistry.registerComponent('homePage', () => homePage);
+AppRegistry.registerComponent('skinPage', () => skinPage);

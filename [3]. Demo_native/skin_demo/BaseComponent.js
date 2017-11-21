@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { NativeAppEventEmitter } from 'react-native';
+
 import {
     BackHandler,
     Dimensions,
@@ -9,7 +11,8 @@ import {
 
 const window = Dimensions.get('window');
 
-var SkinModule = NativeModules.SkinModule;
+export var SkinModule = NativeModules.SkinModule;
+
 var skinModule = new NativeEventEmitter(SkinModule)
 
 export default class BaseComponent extends Component {
@@ -20,7 +23,15 @@ export default class BaseComponent extends Component {
 
     componentWillMount(){
         //注册通知；收到通知后：调用setState方法，触发子组件的setState
-        this.listener = skinModule.addListener("RNChangeSkin",(skin) => this.updateSkin(skin))
+        // this.listener = skinModule.addListener("RNChangeSkin",(skin) => this.updateSkin(skin))
+
+        this.subscription = NativeAppEventEmitter.addListener(
+            'RNChangeSkin',
+            (skininfo) => {
+                this.updateSkin(skininfo)
+            }
+        );
+
         SkinModule.currentSkin((skin)=>{this.updateSkin(skin)})
     }
 
@@ -29,9 +40,11 @@ export default class BaseComponent extends Component {
         if (this.nativeChangeThemListener)
             this.nativeChangeThemListener.remove();
 
-        if(this.listener){
-            this.listener.remove();
-        }
+        // if(this.listener){
+        //     this.listener.remove();
+        // }
+
+        this.subscription.remove();
     }
 
     //返回 ;//return  true 表示返回上一页  false  表示跳出RN

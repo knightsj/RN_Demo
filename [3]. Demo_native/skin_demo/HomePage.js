@@ -15,13 +15,13 @@ import {
     NativeEventEmitter,
     Image
 
+
 } from 'react-native';
 
 import NavigationBar from './NavigationBar'
 import ViewUtil from './ViewUtil'
-import BaseComponent from './BaseComponent'
-var SkinModule = NativeModules.SkinModule;
-
+import BaseComponent ,{SkinModule} from './BaseComponent'
+const event = new NativeEventEmitter(SkinModule);
 
 export default class homePage extends BaseComponent {
 
@@ -51,9 +51,9 @@ export default class homePage extends BaseComponent {
                 //如果该皮肤已经下载，则直接触发切换操作
                 SkinModule.changeSkin(skin,(code)=>{
                     if (code === "1"){
-                        alert("切换成功");
+                        // alert("切换成功");
                     }else {
-                        alert("切换失败");
+                        // alert("切换失败");
                     }
                 });
             }else {
@@ -66,8 +66,13 @@ export default class homePage extends BaseComponent {
     componentWillMount() {
         this.updateSkin("");
         super.componentWillMount();
+
+        this.lisener = event.addListener('new',this.show())
     }
 
+    show(){
+        alert('首页收到消息')
+    }
 
     onBackPress() {
         this.props.navigator.pop();
@@ -84,15 +89,11 @@ export default class homePage extends BaseComponent {
         });
     }
 
-    componentDidMount() {
 
-
-    }
 
     componentWillUnmount() {
-        if(this.listener){
-            this.listener.remove();
-        }
+        this.lisener && this.listener.remove();  //记得remove哦
+        this.lisener = null;
     }
 
     updateSkin(skinInfo){
