@@ -67,7 +67,10 @@ export default class skinPage extends BaseComponent {
     componentWillMount() {
         this.updateSkin("");
         super.componentWillMount();
-        this.lisener = event.addListener('new',this.show())
+        this.lisener = event.addListener('new',
+            (skininfo) => {
+                this.show(skininfo)
+            })
     }
 
 
@@ -93,6 +96,7 @@ export default class skinPage extends BaseComponent {
 
     show(){
         alert('皮肤页面收到消息')
+        this.updateSkin();
     }
 
     componentWillUnmount() {
@@ -242,4 +246,4 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('skinPage', () => skinPage);
+// module.exports = skinPage;

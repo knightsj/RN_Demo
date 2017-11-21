@@ -67,11 +67,15 @@ export default class homePage extends BaseComponent {
         this.updateSkin("");
         super.componentWillMount();
 
-        this.lisener = event.addListener('new',this.show())
+        this.lisener = event.addListener('new',
+            (skininfo) => {
+                this.show(skininfo)
+            })
     }
 
     show(){
         alert('首页收到消息')
+        this.updateSkin();
     }
 
     onBackPress() {
