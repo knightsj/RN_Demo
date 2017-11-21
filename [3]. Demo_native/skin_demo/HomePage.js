@@ -74,7 +74,7 @@ export default class homePage extends BaseComponent {
     }
 
     show(){
-        alert('首页收到消息')
+        // alert('首页收到消息')
         this.updateSkin();
     }
 

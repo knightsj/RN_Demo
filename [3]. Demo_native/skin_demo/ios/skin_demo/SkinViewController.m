@@ -24,7 +24,7 @@
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"Route"
+                                                      moduleName:@"skinPage"
                                                initialProperties:@{@"module_id":@"2"}
                                                    launchOptions:nil];
   
@@ -47,6 +47,11 @@
     
   }];
   
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
 }
 
 

@@ -95,7 +95,7 @@ export default class skinPage extends BaseComponent {
     }
 
     show(){
-        alert('皮肤页面收到消息')
+        // alert('皮肤页面收到消息')
         this.updateSkin();
     }
 

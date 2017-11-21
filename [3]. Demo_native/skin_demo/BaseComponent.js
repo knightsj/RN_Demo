@@ -33,6 +33,8 @@ export default class BaseComponent extends Component {
         );
 
         SkinModule.currentSkin((skin)=>{this.updateSkin(skin)})
+
+        SkinModule.startReceiveNotification("refresh");
     }
 
     componentWillUnmount() {

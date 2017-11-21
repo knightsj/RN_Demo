@@ -28,11 +28,12 @@ RCT_EXPORT_MODULE();
 - (void)emittChangeSkinEventSkinName:(NSString*)skinName
 {
   SKLog(@"通知RN更换皮肤");
-//  [self sendEventWithName:@"RNChangeSkin"
-//                     body:@{@"skinName": skinName}];
-  
-  [self sendEventWithName:@"new"
+  [self sendEventWithName:@"RNChangeSkin"
                      body:@{@"skinName": skinName}];
+  
+//  [self sendEventWithName:@"new"
+//                     body:@{@"skinName": skinName}];
+//
   
 //  [_bridge enqueueJSCall:@"RNChangeSkin"
 //                  method:@"emit"
@@ -40,6 +41,15 @@ RCT_EXPORT_MODULE();
 //              completion:NULL];
   
   
+}
+
+
+RCT_EXPORT_METHOD(startReceiveNotification:(NSString *)name)
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(emittChangeSkinEventSkinName:)
+                                               name:name
+                                             object:nil];
 }
 
 

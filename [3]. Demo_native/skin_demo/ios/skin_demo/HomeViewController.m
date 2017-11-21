@@ -25,13 +25,19 @@
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"Route"
+                                                      moduleName:@"homePage"
                                                initialProperties:@{@"module_id":@"1"}
                                                    launchOptions:nil];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   self.view = rootView;
   
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
