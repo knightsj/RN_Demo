@@ -96,7 +96,7 @@ export default class NavigationBar extends Component {
 
             if(isImageBg){
                 navHeight = 132;
-                titlePaddingTop = 30;
+                titlePaddingTop = 44;
                 marginBottom= 34;
                 imageHeight = 88;
             }else {
@@ -157,7 +157,7 @@ export default class NavigationBar extends Component {
         if(this.props.backgroundImageUri){
 
             if (this.state.isIPhoneX){
-                paddingTop = 36;
+                paddingTop = 44;
                 paddingBottom = 0;
 
             }else {
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
 
 
     title: {
-        fontSize: 20,
+        fontSize: 18,
         color: 'white',
         fontFamily:'Helvetica',
         fontWeight:'100'
